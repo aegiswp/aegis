@@ -30,10 +30,6 @@
 ## Blocks
 
 - [[custom-blocks|Custom Blocks]]
-- [[countdown|Countdown]]
-- [[slider|Slider and Slide]]
-- [[toggle|Toggle and Toggle Content]]
-- [[related-posts|Related Posts]]
 - [[core-video|Core Video]]
 - [[enhanced-core-blocks|Enhanced Core Blocks]]
 - [[block-variations|Block Variations]]
@@ -56,7 +52,7 @@
 
 Plugin-owned docs (not duplicated here):
 
-- [Aegis Plugin docs](../../../plugins/aegis/docs/home.md)
+- [Aegis Dash docs](../../../plugins/aegis-dash/docs/home.md)
 - [Aegis Pro docs](../../../plugins/aegis-pro/docs/home.md)
 
 ## Development

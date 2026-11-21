@@ -25,7 +25,7 @@ declare(strict_types=1);
 		<p class="has-text-align-center" style="font-size:1.125rem;font-style:italic;line-height:1.6"><?php echo esc_html__( '"This theme has completely transformed how we build websites. The block-based approach is intuitive and the results are stunning. Highly recommended for any serious web project."', 'aegis' ); ?></p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:group {"style":{"spacing":{"blockGap":"8px","margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center","verticalAlignment":"center"}} -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxs","margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center","verticalAlignment":"center"}} -->
 		<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--md)">
 			<!-- wp:image {"lightbox":{"enabled":false},"width":"60px","height":"60px","aspectRatio":"1","scale":"cover","sizeSlug":"thumbnail","linkDestination":"none","style":{"border":{"radius":"100%"}}} -->
 			<figure class="wp-block-image size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:60px;height:60px"/></figure>
@@ -59,7 +59,7 @@ declare(strict_types=1);
 		<p class="has-text-align-center" style="font-size:1.125rem;font-style:italic;line-height:1.6"><?php echo esc_html__( '"The performance optimizations are incredible. Our page load times dropped by 40% after switching to this theme. The accessibility features are also top-notch."', 'aegis' ); ?></p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:group {"style":{"spacing":{"blockGap":"8px","margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center","verticalAlignment":"center"}} -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxs","margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center","verticalAlignment":"center"}} -->
 		<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--md)">
 			<!-- wp:image {"lightbox":{"enabled":false},"width":"60px","height":"60px","aspectRatio":"1","scale":"cover","sizeSlug":"thumbnail","linkDestination":"none","style":{"border":{"radius":"100%"}}} -->
 			<figure class="wp-block-image size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:60px;height:60px"/></figure>
@@ -93,7 +93,7 @@ declare(strict_types=1);
 		<p class="has-text-align-center" style="font-size:1.125rem;font-style:italic;line-height:1.6"><?php echo esc_html__( '"Finally, a theme that takes accessibility seriously. Our clients love how inclusive their websites have become. The support team is also fantastic."', 'aegis' ); ?></p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:group {"style":{"spacing":{"blockGap":"8px","margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center","verticalAlignment":"center"}} -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxs","margin":{"top":"var:preset|spacing|md"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center","verticalAlignment":"center"}} -->
 		<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--md)">
 			<!-- wp:image {"lightbox":{"enabled":false},"width":"60px","height":"60px","aspectRatio":"1","scale":"cover","sizeSlug":"thumbnail","linkDestination":"none","style":{"border":{"radius":"100%"}}} -->
 			<figure class="wp-block-image size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:60px;height:60px"/></figure>

@@ -1,12 +1,14 @@
 <?php
+/**
+ * Hook annotation dispatch.
+ *
+ * @package Aegis\Hooks
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for hook annotation dispatch.
 declare( strict_types=1 );
 
-// Declares the namespace for the hook annotation dispatch.
 namespace Aegis\Hooks;
 
-// Imports classes, interfaces, and functions used by the hook annotation dispatch.
 use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;

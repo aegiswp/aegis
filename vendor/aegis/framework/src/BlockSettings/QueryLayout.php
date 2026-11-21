@@ -17,18 +17,12 @@
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file.
 declare( strict_types=1 );
 
-// Declares the namespace for block settings within the Aegis Framework.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used throughout this file.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\InlineAssets\Scriptable;
@@ -115,8 +109,6 @@ class QueryLayout implements Renderable, Scriptable, Styleable {
 	];
 
 	/**
-	 * Constructor.
-	 *
 	 * Registers the `register_block_type_args` filter to inject
 	 * layout attributes into the core/query block.
 	 *
@@ -222,11 +214,9 @@ class QueryLayout implements Renderable, Scriptable, Styleable {
 			return $block_content;
 		}
 
-		// Get existing classes and styles
 		$classes = explode( ' ', $div->getAttribute( 'class' ) );
 		$styles  = CSS::string_to_array( $div->getAttribute( 'style' ) );
 
-		// Add layout class
 		$classes[] = 'aegis-query-layout';
 
 		if ( $has_columns ) {
@@ -246,7 +236,6 @@ class QueryLayout implements Renderable, Scriptable, Styleable {
 			$styles['--aegis-query-columns-desktop'] = (string) $columns_desktop;
 		}
 
-		// Add gap CSS variables
 		if ( ! empty( $row_gap ) ) {
 			$styles['--aegis-query-row-gap'] = CSS::format_custom_property( $row_gap );
 		}
@@ -254,7 +243,6 @@ class QueryLayout implements Renderable, Scriptable, Styleable {
 			$styles['--aegis-query-column-gap'] = CSS::format_custom_property( $column_gap );
 		}
 
-		// Add featured first class
 		if ( $featured_first ) {
 			$classes[] = 'aegis-query-featured-first';
 			$featured_span = $this->sanitize_column_count( $attrs['aegisFeaturedFirstSpan'] ?? 2 );
@@ -264,12 +252,10 @@ class QueryLayout implements Renderable, Scriptable, Styleable {
 			$styles['--aegis-query-featured-span'] = (string) $featured_span;
 		}
 
-		// Add equal height class
 		if ( $equal_height ) {
 			$classes[] = 'aegis-query-equal-height';
 		}
 
-		// Apply classes and styles
 		$div->setAttribute( 'class', implode( ' ', array_unique( $classes ) ) );
 		$div->setAttribute( 'style', CSS::array_to_string( $styles ) );
 

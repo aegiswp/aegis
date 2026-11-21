@@ -11,7 +11,6 @@
  * - Provides `get`, `has`, and `make` methods for service location and creation.
  * - Automatically resolves and injects dependencies using reflection.
  * - Supports conditional loading of services.
- * - Logs errors for debugging purposes.
  *
  * @package    Aegis\Container
  * @since      1.0.0
@@ -19,23 +18,16 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for simple auto-wiring dependency injection container.
 declare( strict_types=1 );
 
-// Declares the namespace for the simple auto-wiring dependency injection container.
 namespace Aegis\Container;
 
-// Imports classes, interfaces, and functions used by the simple auto-wiring dependency injection container.
 use Aegis\Container\Exceptions\ContainerException;
-use Aegis\Utilities\Debug;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionParameter;
-use function class_exists;
-use function is_callable;
 use function is_object;
-use function uniqid;
 
 /**
  * A simple, auto-wiring dependency injection container that implements the PSR-11 standard.
@@ -55,13 +47,6 @@ class Container implements ContainerInterface {
 	private array $instances = [];
 
 	/**
-	 * Stores log entries for debugging and troubleshooting container operations.
-	 *
-	 * @var array<string, array{0: string, 1: mixed|null}>
-	 */
-	private array $log = [];
-
-	/**
 	 * Retrieves a service from the container by its identifier (class name).
 	 * This method adheres to the PSR-11 `get` standard.
 	 *
@@ -74,7 +59,6 @@ class Container implements ContainerInterface {
 	 */
 	public function get( string $id ) {
 		if ( ! $this->has( $id ) ) {
-			$this->log( "Class {$id} not found in container." );
 			throw new ContainerException( "Class {$id} not found in container." );
 		}
 
@@ -120,14 +104,12 @@ class Container implements ContainerInterface {
 		// Use reflection to inspect the class and its dependencies.
 		try {
 			$reflector = new ReflectionClass( $id );
-		} catch ( ReflectionException $e ) {
-			$this->log( "Class {$id} does not exist.", $e );
+		} catch ( ReflectionException ) {
 			return null;
 		}
 
 		// The class must be instantiable (e.g., not an abstract class or interface).
 		if ( ! $reflector->isInstantiable() ) {
-			$this->log( "Class {$id} is not instantiable." );
 			return null;
 		}
 
@@ -139,8 +121,7 @@ class Container implements ContainerInterface {
 			if ( $method->isStatic() ) {
 				try {
 					$condition = (bool) $method->invoke( null );
-				} catch ( ReflectionException $e ) {
-					$this->log( "Cannot invoke condition method for {$id}.", $e );
+				} catch ( ReflectionException ) {
 					return null;
 				}
 			}
@@ -149,11 +130,6 @@ class Container implements ContainerInterface {
 		// If the condition is not met, do not instantiate the service.
 		if ( ! $condition ) {
 			return null;
-		}
-
-		// If a callable factory is registered, invoke it to create the instance.
-		if ( is_callable( $this->instances[ $id ] ) ) {
-			return ( $this->instances[ $id ] )();
 		}
 
 		$constructor = $reflector->getConstructor();
@@ -172,13 +148,11 @@ class Container implements ContainerInterface {
 				// No constructor, create a simple instance.
 				$instance = $reflector->newInstance();
 			}
-		} catch ( ReflectionException | ContainerException $e ) {
-			$this->log( "Cannot instantiate class {$id}.", $e );
+		} catch ( ReflectionException | ContainerException ) {
 			return null;
 		}
 
 		if ( ! is_object( $instance ) ) {
-			$this->log( "Class {$id} could not be instantiated as an object." );
 			return null;
 		}
 
@@ -231,26 +205,5 @@ class Container implements ContainerInterface {
 		}
 
 		return $dependencies;
-	}
-
-	/**
-	 * Logs a message and an optional exception for debugging purposes.
-	 * If debugging is enabled, the log will be output to the browser console.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $message   The message to log.
-	 * @param mixed|null $exception Optional exception or error object to include in the log.
-	 *
-	 * @return void
-	 */
-	private function log( string $message, $exception = null ): void {
-		$id               = uniqid( static::class . '_' );
-		$this->log[ $id ] = [ $message, $exception ];
-
-		// If the Aegis Debug utility is active, send the log to the browser console.
-		if ( class_exists( '\Aegis\Utilities\Debug' ) && Debug::is_enabled() ) {
-			Debug::console_log( $this->log[ $id ] );
-		}
 	}
 }

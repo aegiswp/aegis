@@ -6,7 +6,6 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling query block content
- * - Integrates with utility classes for DOM and CSS
  *
  * Image lazy-load for Query Loop lives in Aegis Pro QueryPerformance when
  * Aegis → Performance → Query Loop Performance is enabled. WordPress still
@@ -18,13 +17,10 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for query block.
 declare( strict_types=1 );
 
-// Declares the namespace for the query block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the query block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;

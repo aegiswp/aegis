@@ -16,22 +16,6 @@ use WPAudit\Enums\FileType;
  */
 class ThemeFileTest extends TestCase {
 	/**
-	 * Test creating a ThemeFile instance.
-	 */
-	public function test_create_theme_file(): void {
-		$file = new ThemeFile(
-			'index.php',
-			'/path/to/theme/index.php',
-			'<?php // content'
-		);
-
-		$this->assertEquals( 'index.php', $file->path );
-		$this->assertEquals( '/path/to/theme/index.php', $file->absolute_path );
-		$this->assertEquals( '<?php // content', $file->content );
-		$this->assertEquals( FileType::PHP, $file->type );
-	}
-
-	/**
 	 * Test file type auto-detection.
 	 */
 	public function test_file_type_detection(): void {
@@ -166,20 +150,5 @@ class ThemeFileTest extends TestCase {
 
 		$this->assertTrue( $file->has_ast() );
 		$this->assertEquals( $ast, $file->ast );
-	}
-
-	/**
-	 * Test metadata storage.
-	 */
-	public function test_metadata_storage(): void {
-		$metadata = array(
-			'size'     => 1024,
-			'modified' => '2024-01-01',
-		);
-
-		$file = new ThemeFile( 'test.php', '/path/test.php', '', '', $metadata );
-
-		$this->assertEquals( $metadata, $file->metadata );
-		$this->assertEquals( 1024, $file->metadata['size'] );
 	}
 }

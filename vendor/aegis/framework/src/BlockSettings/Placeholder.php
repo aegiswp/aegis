@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling placeholder content for blocks
- * - Integrates with the Renderable and Styleable interfaces for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for placeholder block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the placeholder block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the placeholder block setting.
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use Aegis\Dom\CSS;
@@ -96,7 +89,6 @@ class Placeholder implements Renderable, Styleable {
 	 * @return string The block content, potentially replaced with a placeholder.
 	 */
 	public function render( string $block_content, array $block, WP_Block $instance ): string {
-		// --- Bail-out Checks ---
 		// Only run on blocks with "image" in their name.
 		if ( ! Str::contains_any( $block['blockName'] ?? '', 'image' ) ) {
 			return $block_content;
@@ -128,7 +120,6 @@ class Placeholder implements Renderable, Styleable {
 			return $block_content;
 		}
 
-		// --- DOM Preparation ---
 		// If the block content is empty, create a basic figure wrapper.
 		$block_name    = str_replace( 'core/', '', $block['blockName'] ?? '' );
 		$block_content = $block_content ?: "<figure class='wp-block-{$block_name}'></figure>";
@@ -143,7 +134,6 @@ class Placeholder implements Renderable, Styleable {
 			$figure->removeChild( $img );
 		}
 
-		// --- Placeholder Injection and Link Handling ---
 		$classes     = explode( ' ', $figure->getAttribute( 'class' ) );
 		$classes[]   = 'is-placeholder';
 		if ( $block['align'] ?? null ) {
@@ -177,7 +167,6 @@ class Placeholder implements Renderable, Styleable {
 			$figure->appendChild( $placeholder );
 		}
 
-		// --- Style Application ---
 		// This section applies a huge range of style attributes to the placeholder figure.
 		$style            = $attrs['style'] ?? [];
 		$spacing          = $style['spacing'] ?? [];

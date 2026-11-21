@@ -10,7 +10,8 @@ Aegis targets:
 - **Section 508** — U.S. federal accessibility requirements.
 - **WordPress Accessibility Coding Standards** — Theme-specific guidelines from the WordPress project.
 
-> **Important:** The theme provides landmarks, skip links, focus styles, keyboard support for interactive blocks, and reduced-motion hooks. Full WCAG conformance still depends on content created by site editors (alt text, heading hierarchy, link purpose, form labels, contrast of custom colors/media) and on runtime testing with sticky headers, plugins, and real viewports.
+> [!IMPORTANT]
+> The theme provides landmarks, skip links, focus styles, keyboard support for interactive blocks, and reduced-motion hooks. Full WCAG conformance still depends on content created by site editors (alt text, heading hierarchy, link purpose, form labels, contrast of custom colors/media) and on runtime testing with sticky headers, plugins, and real viewports.
 
 ## Semantic HTML
 
@@ -34,7 +35,7 @@ All interactive elements are fully keyboard accessible:
 - **Focus indicators** are visible on all interactive elements (links, buttons, form fields).
 - **Skip links** allow keyboard users to bypass the header and jump to main content.
 - **Dropdown menus** are navigable with arrow keys.
-- **Search dialog** (theme header) and **`aegis/modal`** (companion plugin) trap focus and return it on close.
+- **Search dialog** (theme header) and **`aegis/modal`** (Aegis Dash) trap focus and return it on close. In the search dialog the Close button is reachable with Tab, and closing returns focus to the button that opened it.
 - **Sliders** support keyboard arrow key navigation.
 - **Toggles** (content switcher) respond to click (including the switch track) and Left/Right arrows on the tablist. Pro fade/slide/flip/scale honors `prefers-reduced-motion: reduce` (instant swap). **Accordion List** responds to Enter and Space on each item.
 
@@ -50,6 +51,7 @@ Aegis provides clearly visible focus indicators:
 - Focus styles adapt to both light and dark mode.
 - Focus indicators are never hidden or removed.
 - Custom focus styles on buttons, links, and form controls for enhanced visibility.
+- Text fields, email and other inputs, selects, and textareas show a 2px focus ring, matching buttons and search. Checkboxes and radios keep their own focus style.
 
 ## Color and Contrast
 
@@ -79,10 +81,10 @@ Aegis uses ARIA attributes to enhance screen reader experiences:
 
 | Pattern | ARIA Implementation |
 |---------|---------------------|
-| Navigation | `aria-label` identifying the nav purpose |
+| Navigation | `aria-label` identifying the nav purpose; header and footer menus have unique names ("Main menu", the footer column headings, or "Footer menu N") |
 | Toggles (content switcher) | `role="tablist"` / `tab` / `tabpanel`, `aria-selected`, `aria-controls` / `aria-labelledby`, `aria-hidden` on inactive views |
 | Accordion List | `aria-expanded` on details/summary |
-| Search dialog / plugin Modal | `role="dialog"`, `aria-modal`, accessible name, focus trapping |
+| Search dialog / Aegis Dash Modal | `role="dialog"`, `aria-modal`, accessible name, focus trapping |
 | Tabs | `role="tablist"`, `role="tab"`, `role="tabpanel"` |
 | Sliders | `aria-roledescription`, `aria-label` for controls |
 | Live regions | `aria-live` for dynamic content updates |
@@ -192,7 +194,7 @@ Block and page visibility extras at **Aegis → Conditionals → Accessibility**
 
 On posts, those classes are added to the existing `core/post-content` wrapper. Hook patterns wrap the whole pattern. Turning an extra off skips both the classes and the CSS.
 
-See [Plugin Conditional Logic](../../../../plugins/aegis/docs/features/conditional-logic.md#accessibility-extras).
+See [Aegis Dash Conditional Logic](../../../../plugins/aegis-dash/docs/features/conditional-logic.md#accessibility-extras).
 
 ## Next Steps
 

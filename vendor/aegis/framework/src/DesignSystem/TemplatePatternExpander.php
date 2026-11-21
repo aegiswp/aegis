@@ -15,6 +15,7 @@ declare( strict_types=1 );
 
 namespace Aegis\Framework\DesignSystem;
 
+use Aegis\Utilities\Pattern;
 use WP_Block_Patterns_Registry;
 use WP_Block_Template;
 use WP_REST_Request;
@@ -23,7 +24,6 @@ use function did_action;
 use function preg_match;
 use function realpath;
 use function str_starts_with;
-use function preg_replace_callback;
 
 /**
  * Resolves wp:pattern placeholders in template content to registered pattern markup.
@@ -323,19 +323,22 @@ final class TemplatePatternExpander {
 
 		$registry = WP_Block_Patterns_Registry::get_instance();
 
-		$expanded = preg_replace_callback(
-			'/<!-- wp:pattern \{"slug":"([^"]+)"\}[^\/]*\/-->/',
-			static function ( array $matches ) use ( $registry, $depth, $limit ): string {
-				$pattern = $registry->get_registered( $matches[1] );
+		return Pattern::replace_references(
+			$content,
+			static function ( string $slug, bool $has_extra_attrs, string $match ) use ( $registry, $depth, $limit ): string {
+				// Only slug-only references expand. `preview` and other attributes are
+				// read by nothing in Aegis; blocks that carry them are left as placeholders.
+				if ( $has_extra_attrs ) {
+					return $match;
+				}
+
+				$pattern = $registry->get_registered( $slug );
 				if ( ! $pattern || empty( $pattern['content'] ) ) {
-					return $matches[0];
+					return $match;
 				}
 
 				return self::expand_pattern_content( (string) $pattern['content'], $depth + 1, $limit );
-			},
-			$content
+			}
 		);
-
-		return is_string( $expanded ) ? $expanded : $content;
 	}
 }

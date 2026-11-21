@@ -1,12 +1,14 @@
 <?php
+/**
+ * Debug logging helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for debug logging helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the debug logging helpers.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the debug logging helpers.
 use function add_action;
 use function debug_backtrace;
 use function defined;
@@ -64,7 +66,7 @@ class Debug {
 	 * @return array A list of strings, each representing a file and line number
 	 *               in the call stack.
 	 */
-	public static function stacktrace(): array {
+	private static function stacktrace(): array {
 		$backtrace  = debug_backtrace();
 		$stacktrace = [];
 

@@ -13,6 +13,7 @@ declare( strict_types=1 );
 namespace Aegis\Framework\BlockSettings;
 
 use Aegis\Dom\DOM;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Framework\InlineAssets\Styleable;
@@ -24,7 +25,6 @@ use function add_filter;
 use function array_filter;
 use function array_merge;
 use function array_unique;
-use function class_exists;
 use function esc_attr;
 use function explode;
 use function implode;
@@ -231,8 +231,10 @@ class Visibility implements Renderable, Scriptable, Styleable {
 	 * @param array<string, mixed> $visibility Visibility settings.
 	 */
 	private function should_hide_server_side( array $visibility ): bool {
-		if ( class_exists( '\Aegis\Plugin\Conditionals\Evaluator' ) ) {
-			return ! ( new \Aegis\Plugin\Conditionals\Evaluator() )->should_render_visibility( $visibility );
+		$hide = Companions::get()->should_hide_for_visibility( $visibility );
+
+		if ( null !== $hide ) {
+			return $hide;
 		}
 
 		return self::extra_enabled( 'visibility', 'lockdown' ) && ! empty( $visibility['lockdown'] );
@@ -306,11 +308,7 @@ class Visibility implements Renderable, Scriptable, Styleable {
 	 * Whether a conditionals extra is on (theme-without-plugin treats extras as on).
 	 */
 	private static function extra_enabled( string $group, string $key ): bool {
-		if ( ! class_exists( '\Aegis\Plugin\Conditionals\Settings' ) ) {
-			return true;
-		}
-
-		return \Aegis\Plugin\Conditionals\Settings::is_enabled( $group, $key );
+		return Companions::get()->is_conditionals_extra_enabled( $group, $key );
 	}
 
 	/**

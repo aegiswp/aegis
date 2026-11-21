@@ -16,7 +16,6 @@ use WP_Block_Patterns_Registry;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
 use function class_exists;
-use function function_exists;
 use function get_template_directory;
 use function get_template_directory_uri;
 use function glob;
@@ -168,7 +167,7 @@ final class BlockRegistrar {
 		$scripts = wp_scripts();
 
 		foreach ( $block->view_script_handles ?? array() as $handle ) {
-			if ( ! is_string( $handle ) || $handle === 'splide' || $handle === 'splide-autoscroll' ) {
+			if ( ! is_string( $handle ) || 'splide' === $handle || 'splide-autoscroll' === $handle ) {
 				continue;
 			}
 
@@ -185,7 +184,7 @@ final class BlockRegistrar {
 	}
 
 	/**
-	 * Register theme block types from metadata.
+	 * Register theme block types from the blocks manifest (generated from each block.json).
 	 *
 	 * @return void
 	 */
@@ -193,74 +192,31 @@ final class BlockRegistrar {
 		$blocks_dir = get_template_directory() . '/src/Blocks';
 		$manifest   = $blocks_dir . '/blocks-manifest.php';
 
-		if ( function_exists( 'wp_register_block_metadata_collection' ) && is_readable( $manifest ) ) {
-			wp_register_block_metadata_collection( $blocks_dir, $manifest );
+		if ( ! is_readable( $manifest ) ) {
+			return;
 		}
 
-		self::register_from_glob( $blocks_dir );
-	}
+		wp_register_block_metadata_collection( $blocks_dir, $manifest );
 
-	/**
-	 * Register each block directory that contains block.json.
-	 *
-	 * @param string $blocks_dir Absolute path to src/Blocks.
-	 *
-	 * @return void
-	 */
-	private static function register_from_glob( string $blocks_dir ): void {
-		$registry = WP_Block_Type_Registry::get_instance();
+		$metadata_by_dir = require $manifest;
+		$registry        = WP_Block_Type_Registry::get_instance();
 
-		$block_json_files = glob( $blocks_dir . '/*/block.json' );
+		foreach ( is_array( $metadata_by_dir ) ? $metadata_by_dir : array() as $dir_name => $metadata ) {
+			$name = is_array( $metadata ) ? (string) ( $metadata['name'] ?? '' ) : '';
 
-		foreach ( is_array( $block_json_files ) ? $block_json_files : array() as $block_json ) {
-			$block_dir = dirname( $block_json );
-			$dir_name  = basename( $block_dir );
-
-			if ( ! is_readable( $block_json ) ) {
+			if ( ! str_starts_with( $name, 'aegis/' ) || $registry->is_registered( $name ) ) {
 				continue;
 			}
 
-			$parent_key = self::parent_block_key( $dir_name );
-			$enabled    = $parent_key === '' || ServiceProvider::is_block_enabled( $parent_key );
+			// Child blocks follow their parent's setting; the rest use their own.
+			$parent = is_array( $metadata['parent'] ?? null ) ? (string) reset( $metadata['parent'] ) : $name;
 
-			if ( $parent_key !== '' && ! $enabled ) {
+			if ( ! ServiceProvider::is_block_enabled( str_replace( '-', '_', substr( $parent, strlen( 'aegis/' ) ) ) ) ) {
 				continue;
 			}
 
-			$metadata = wp_json_file_decode( $block_json, array( 'associative' => true ) );
-
-			if ( ! is_array( $metadata ) || empty( $metadata['name'] ) ) {
-				continue;
-			}
-
-			$name = (string) $metadata['name'];
-
-			if ( ! str_starts_with( $name, 'aegis/' ) ) {
-				continue;
-			}
-
-			if ( $registry->is_registered( $name ) ) {
-				continue;
-			}
-
-			register_block_type( $block_dir );
+			register_block_type( $blocks_dir . '/' . $dir_name );
 		}
-	}
-
-	/**
-	 * Map block directory names to parent block setting keys.
-	 *
-	 * @param string $dir_name Block directory basename.
-	 *
-	 * @return string
-	 */
-	private static function parent_block_key( string $dir_name ): string {
-		return match ( $dir_name ) {
-			'slide' => 'slider',
-			'toggle-content' => 'toggle',
-			'related-posts' => 'related_posts',
-			default => $dir_name,
-		};
 	}
 
 	/**
@@ -410,11 +366,11 @@ final class BlockRegistrar {
 			return $context;
 		}
 
-		if ( ! $parent_block instanceof WP_Block || $parent_block->name !== 'aegis/toggle' ) {
+		if ( ! $parent_block instanceof WP_Block || 'aegis/toggle' !== $parent_block->name ) {
 			return $context;
 		}
 
-		$parent_attrs = is_array( $parent_block->attributes ) ? $parent_block->attributes : array();
+		$parent_attrs                 = is_array( $parent_block->attributes ) ? $parent_block->attributes : array();
 		$context['aegis/toggleDomId'] = ToggleId::from_block( $parent_block, $parent_attrs );
 
 		return $context;
@@ -438,7 +394,7 @@ final class BlockRegistrar {
 
 		$handles = $block->editor_script_handles ?? array();
 
-		if ( $handles === array() && is_string( $block->editor_script ) && $block->editor_script !== '' ) {
+		if ( array() === $handles && is_string( $block->editor_script ) && '' !== $block->editor_script ) {
 			$handles = array( $block->editor_script );
 		}
 

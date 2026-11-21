@@ -14,7 +14,7 @@
 <div class="wp-block-group alignfull" style="border-top-color:var(--wp--preset--color--neutral-200);border-top-width:1px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--sm);padding-right:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--sm);padding-left:var(--wp--preset--spacing--xs)">
 	<!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group alignwide">
-		<!-- wp:group {"style":{"spacing":{"blockGap":"4px"}},"layout":{"type":"flex","flexWrap":"nowrap"},"fontSize":"14"} -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxxs"}},"layout":{"type":"flex","flexWrap":"nowrap"},"fontSize":"14"} -->
 		<div class="wp-block-group has-14-font-size">
 			<!-- wp:paragraph {"textColor":"neutral-600"} -->
 			<p class="has-neutral-600-color has-text-color"><?php echo esc_html__( '© Copyright {year}', 'aegis' ); ?></p>

@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling grid block content
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockVariations
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for grid block variation.
 declare( strict_types=1 );
 
-// Declares the namespace for the grid block variation.
 namespace Aegis\Framework\BlockVariations;
 
-// Imports classes, interfaces, and functions used by the grid block variation.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -74,7 +67,6 @@ class Grid implements Renderable {
 			return $block_content;
 		}
 
-		// --- Apply the default style ---
 		$dom = DOM::create( $block_content );
 		$div = DOM::get_element( 'div', $dom );
 

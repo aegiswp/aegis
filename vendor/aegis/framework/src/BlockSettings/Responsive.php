@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for rendering responsive styles and scripts for block content
- * - Integrates with the Renderable, Scriptable, and Styleable interfaces for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for responsive block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the responsive block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the responsive block setting.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\InlineAssets\Scriptable;

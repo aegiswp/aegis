@@ -79,11 +79,13 @@ The category and tag templates are listed in `customTemplates` without post type
 | Page: Checkout Multi-Step | `page-checkout-multi-step.html` | page | `template-page-checkout-multi-step` | Three-step checkout: Shipping → Payment → Review. |
 | Order Confirmation | `order-confirmation.html` | page | `template-order-confirmation` |  |
 | Page: My Account | `page-my-account.html` | page | `template-page-my-account` |  |
-| Page: Wishlist | `page-wishlist.html` | page | `template-page-wishlist` | Needs WooCommerce, TI WooCommerce Wishlist, and the companion plugin wishlist pattern. |
+| Page: Wishlist | `page-wishlist.html` | page | `template-page-wishlist` | Needs WooCommerce, TI WooCommerce Wishlist, and Aegis Dash wishlist pattern. |
 
-> **WooCommerce templates:** Hidden from the Site Editor template picker when WooCommerce is inactive (framework `Templates.php` filter).
+> [!NOTE]
+> **WooCommerce templates.** Hidden from the Site Editor template picker when WooCommerce is inactive (framework `Templates.php` filter).
 
-> **Wishlist template:** Requires WooCommerce, the **Aegis companion plugin**, and [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/). Hidden when TI Wishlist or WooCommerce is inactive. The companion plugin registers the `template-page-wishlist` pattern when dependencies are met. See [[woocommerce-integration#wishlist-ti-woocommerce-wishlist]].
+> [!NOTE]
+> **Wishlist template.** Requires WooCommerce, the **Aegis Dash**, and [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/). Hidden when TI Wishlist or WooCommerce is inactive. The Aegis Dash registers the `template-page-wishlist` pattern when dependencies are met. See [[woocommerce-integration#wishlist-ti-woocommerce-wishlist]].
 
 ## Template Structure
 

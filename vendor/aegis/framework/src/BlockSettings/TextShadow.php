@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for rendering custom text shadow styles for block content
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for textshadow block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the textshadow block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the textshadow block setting.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;

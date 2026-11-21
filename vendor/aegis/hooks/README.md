@@ -14,20 +14,17 @@ composer require aegis/hooks
 
 This library is designed to reduce the boilerplate code required when working with WordPress actions and filters. Instead of manually calling `add_action` or `add_filter`, you can simply annotate your class methods.
 
-### 1. The `Hookable` Interface and `HookAnnotations` Trait
+### 1. Register annotated methods
 
-To make a class's methods hookable, you should implement the `Hookable` interface and use the `HookAnnotations` trait.
+Pass an object (or class name) to `Hook::annotations()`. Every public method whose docblock has a `@hook` tag is attached to that hook.
 
 ```php
-use Aegis\Hooks\Hookable;
-use Aegis\Hooks\HookAnnotations;
+use Aegis\Hooks\Hook;
 
-class MyPlugin implements Hookable {
-    use HookAnnotations;
-
+class MyPlugin {
     public function __construct() {
-        // Call this method to register all annotated hooks.
-        $this->hook_annotations();
+        // Register all annotated hooks.
+        Hook::annotations( $this );
     }
 
     /**
@@ -49,13 +46,12 @@ class MyPlugin implements Hookable {
     }
 }
 
-// Initialize your class
 new MyPlugin();
 ```
 
-### 2. Standalone Usage with the `Hook` Class
+### 2. Standalone usage
 
-If you prefer not to modify your class structure, you can use the static `Hook::annotations()` method directly.
+Any class can be registered without extra boilerplate by calling `Hook::annotations()` directly.
 
 ```php
 use Aegis\Hooks\Hook;

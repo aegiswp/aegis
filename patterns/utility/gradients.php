@@ -24,7 +24,7 @@ setTimeout(()=>{
 }, 1000);
 JS;
 
-$item = <<<HTML
+$item = <<<'HTML'
 <!-- wp:group {"style":{"dimensions":{"minHeight":"80px"},"border":{"radius":"10px"},"position":{"all":"relative"},"overflow":{"all":"hidden"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"},"gradient":"checkerboard","shadowPreset":"xl","onclick":"{on_click_value}"} -->
 <div class="wp-block-group has-checkerboard-gradient-background has-background has-shadow has-xl-shadow" style="border-radius:10px;min-height:80px">
 	<!-- wp:group {"style":{"position":{"all":"absolute"},"top":{"all":"0px"},"right":{"all":"0px"},"bottom":{"all":"0px"},"left":{"all":"0px"},"zIndex":{"all":"0"}},"gradient":"{slug}","layout":{"type":"constrained"}} -->

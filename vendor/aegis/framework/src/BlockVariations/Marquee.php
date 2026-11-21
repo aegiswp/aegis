@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling marquee block content
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockVariations
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for marquee block variation.
 declare( strict_types=1 );
 
-// Declares the namespace for the marquee block variation.
 namespace Aegis\Framework\BlockVariations;
 
-// Imports classes, interfaces, and functions used by the marquee block variation.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -104,7 +97,6 @@ class Marquee implements Renderable {
 			return $block_content;
 		}
 
-		// --- Prepare Styles and Wrapper ---
 		$repeat  = $this->repeat_count( $attrs );
 		$wrap    = DOM::create_element( 'div', $dom ); // The new inner wrapper for the scrolling items.
 		$styles  = $this->normalized_styles( CSS::string_to_array( $first->getAttribute( 'style' ) ) );

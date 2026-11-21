@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling newsletter block content
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockVariations
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for newsletter block variation.
 declare( strict_types=1 );
 
-// Declares the namespace for the newsletter block variation.
 namespace Aegis\Framework\BlockVariations;
 
-// Imports classes, interfaces, and functions used by the newsletter block variation.
 use Aegis\Dom\DOM;
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
@@ -115,7 +108,6 @@ class Newsletter implements Renderable, Scriptable {
 			return $dom->saveHTML();
 		}
 
-		// --- Repurpose the form for JavaScript handling ---
 		// Remove standard form attributes.
 		$form->removeAttribute( 'action' );
 		$form->removeAttribute( 'method' );

@@ -28,10 +28,10 @@ BlockRegistrar::init();
 NavigationFallback::init();
 PatternDependencies::init();
 
-// Ensure payment-icon layout CSS reaches the Site Editor canvas.
-add_action(
-	'after_setup_theme',
-	static function (): void {
-		add_editor_style( 'style.css' );
-	}
-);
+/**
+ * Ensure payment-icon layout CSS reaches the Site Editor canvas.
+ */
+function aegis_add_editor_style(): void {
+	add_editor_style( 'style.css' );
+}
+add_action( 'after_setup_theme', 'aegis_add_editor_style' );

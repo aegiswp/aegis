@@ -10,7 +10,7 @@ Add snippets through a plugin, not a theme's `functions.php`. Code in a plugin s
 
 ### Aegis Code Snippets (recommended)
 
-The free Aegis plugin has a built-in [Code Snippets](../../../../plugins/aegis/docs/features/code-snippets.md) screen:
+Aegis Dash has a built-in [Code Snippets](../../../../plugins/aegis-dash/docs/features/code-snippets.md) screen:
 
 1. Go to **Aegis → Code Snippets → Settings** and turn on **PHP Enabled**.
 2. Add a snippet and choose the **Functions (PHP)** type.
@@ -44,7 +44,7 @@ Activate **My Site Snippets** under **Plugins**, then paste each snippet at the 
 
 ### Update From a Fork or Mirror
 
-`aegis_theme_update_repository` — the GitHub repository (`owner/name`) checked for theme updates. Default: `aegiswp/theme`.
+`aegis_theme_update_repository` — the GitHub repository (`owner/name`) checked for theme updates. Default: `aegiswp/aegis`.
 
 ```php
 add_filter( 'aegis_theme_update_repository', function ( string $repository ): string {
@@ -54,9 +54,9 @@ add_filter( 'aegis_theme_update_repository', function ( string $repository ): st
 
 The repository's latest release must include an `aegis.zip` asset with an `aegis/` folder inside.
 
-### Install the Companion Plugin From a Pinned Release
+### Install Aegis Dash From a Pinned Release
 
-`aegis_companion_package_url` — the zip the companion plugin notice installs. Default: the `aegis.zip` package of the latest plugin release.
+`aegis_companion_package_url` — the zip Aegis Dash notice installs. Default: the `aegis-dash.zip` package of the latest Aegis Dash release.
 
 ```php
 add_filter( 'aegis_companion_package_url', function ( string $package ): string {
@@ -68,23 +68,61 @@ add_filter( 'aegis_companion_package_url', function ( string $package ): string 
 
 ## Dark Mode
 
+These snippets control which color mode the site loads in and whether visitors can switch. Paste them into **Aegis → Code Snippets** (Functions (PHP)) or a site-specific plugin. For how dark mode works for visitors, see [Dark Mode](../using-the-theme/dark-mode.md).
+
+| I want to… | Use |
+|------------|-----|
+| Remove dark mode completely | `aegis_dark_mode` |
+| Always start in light mode | `aegis_default_mode` returning `light` |
+| Always start in dark mode | `aegis_default_mode` returning `dark` |
+| Start in a different mode on some pages | `aegis_default_mode` with a conditional tag |
+| Test a mode without changing anything | The `?dark_mode=true` or `?dark_mode=false` URL parameter |
+
+> [!NOTE]
+> `aegis_default_mode` only sets the **starting** mode. A visitor who picked a mode with the toggle keeps their choice (it is stored in the `aegisDarkMode` cookie).
+
 ### Turn Off Dark Mode
 
-`aegis_dark_mode` — return `false` to remove dark mode from the front end and hide the editor's light/dark preview toggle.
+`aegis_dark_mode`: return `false` to remove dark mode from the front end and hide the editor's light/dark preview toggle. The site then uses only the light palette.
 
 ```php
 add_filter( 'aegis_dark_mode', '__return_false' );
 ```
 
-### Start in Dark Mode
+### Always Start in Light Mode
 
-`aegis_default_mode` — the starting color mode: `light` or `dark`. Visitors who chose a mode keep their choice.
+`aegis_default_mode`: the starting color mode, `light` or `dark`.
+
+```php
+add_filter( 'aegis_default_mode', function ( string $mode, array $global_settings ): string {
+	return 'light';
+}, 10, 2 );
+```
+
+### Always Start in Dark Mode
 
 ```php
 add_filter( 'aegis_default_mode', function ( string $mode, array $global_settings ): string {
 	return 'dark';
 }, 10, 2 );
 ```
+
+### Start in Dark Mode Only on Some Pages
+
+Use a WordPress conditional tag inside the filter. This example starts the front page and the page with the slug `pricing` in dark mode and everything else in light mode.
+
+```php
+add_filter( 'aegis_default_mode', function ( string $mode, array $global_settings ): string {
+	if ( is_front_page() || is_page( 'pricing' ) ) {
+		return 'dark';
+	}
+	return 'light';
+}, 10, 2 );
+```
+
+### Preview Either Mode With a URL
+
+Add `?dark_mode=true` or `?dark_mode=false` to any front-end URL to show that mode for the request, for example `https://example.com/?dark_mode=true`. No code is needed.
 
 ---
 
@@ -371,5 +409,5 @@ add_filter( 'aegis_placeholder_svg', function ( string $svg, string $title ): st
 ## Related
 
 - [Hooks and Filters](hooks-and-filters.md)
-- [Free plugin Code Snippets](../../../../plugins/aegis/docs/reference/code-snippets.md)
+- [Aegis Dash Code Snippets](../../../../plugins/aegis-dash/docs/reference/code-snippets.md)
 - [Pro Code Snippets](../../../../plugins/aegis-pro/docs/reference/code-snippets.md)

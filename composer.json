@@ -1,15 +1,15 @@
 {
-	"name": "aegiswp/theme",
+	"name": "aegiswp/aegis",
 	"description": "Aegis — Native Block Framework for WordPress",
 	"type": "wordpress-theme",
 	"license": "GPL-2.0-or-later",
-	"homepage": "https://github.com/aegiswp/theme",
+	"homepage": "https://github.com/aegiswp/aegis",
 	"support": {
-		"issues": "https://github.com/aegiswp/theme/issues",
-		"source": "https://github.com/aegiswp/theme"
+		"issues": "https://github.com/aegiswp/aegis/issues",
+		"source": "https://github.com/aegiswp/aegis"
 	},
 	"keywords": [
-		"wordpress",
+		"WordPress",
 		"theme",
 		"block-theme"
 	],
@@ -85,10 +85,10 @@
 	"scripts": {
 		"standards:check": "phpcs",
 		"standards:fix": "phpcbf",
-		"analyze": "@standards:check",
 		"lint": "@standards:check",
 		"test": "@test:wpaudit",
 		"test:php": "@test:wpaudit",
+		"test:framework": "phpunit -c phpunit.framework.xml",
 		"test:wpaudit": [
 			"composer install --no-interaction --working-dir=tools/wpaudit",
 			"@php tools/wpaudit/vendor/bin/phpunit -c tools/wpaudit/phpunit.xml"

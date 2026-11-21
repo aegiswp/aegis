@@ -1,6 +1,6 @@
 # Block Patterns
 
-Aegis ships with **232 theme block patterns** in **28 category folders**. Companion **plugin** patterns (Modal starters when Modal is enabled; WooCommerce patterns when WooCommerce is active) and **Pro** premium patterns are documented separately — [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md) · [Pro Patterns](../../../../plugins/aegis-pro/docs/patterns/pro-patterns.md).
+Aegis ships with **230 theme block patterns** in **28 category folders**. Companion **plugin** patterns (Modal starters when Modal is enabled; WooCommerce patterns when WooCommerce is active) and **Pro** premium patterns are documented separately — [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md) · [Pro Patterns](../../../../plugins/aegis-pro/docs/patterns/pro-patterns.md).
 
 ## Understanding Block Patterns
 
@@ -10,7 +10,7 @@ A block pattern is a pre-arranged group of blocks that forms a complete section 
 
 ### From the Block Inserter
 
-![The block inserter's Patterns tab with Aegis pattern categories listed on the left and pattern previews on the right. Numbered callouts: 1 The Patterns tab; 2 Aegis pattern categories. Pick one to see its previews.](../screenshots/inserter-patterns.png)
+![The block inserter's Patterns tab with Aegis pattern categories listed on the left and pattern previews on the right.](../screenshots/inserter-patterns.png)
 
 *Browse Aegis patterns by category in the block inserter.*
 
@@ -70,9 +70,9 @@ Theme patterns live in **28** `patterns/` category folders:
 | Timeline | Chronological content layouts | Company history, roadmaps |
 | Utility | Color palette, gradients, dark mode toggle, search toggle, skip link | Layout utilities |
 
-Related Posts layouts (`blog-related-posts-grid`, `list`, `cards`, `minimal`) are in the **Blog** category. They unregister when **Aegis → Blocks → Related Posts** is implied off. See [Related Posts Block](../blocks/related-posts.md).
+Related Posts layouts (`blog-related-posts-grid`, `list`, `cards`, `minimal`) are in the **Blog** category. They unregister when **Aegis → Blocks → Related Posts** is implied off. See [Related Posts Block](../../../../plugins/aegis-dash/docs/blocks/related-posts.md).
 
-**Modal** patterns (`aegis/modal-*`) are registered by the [Aegis companion plugin](../../../../plugins/aegis/docs/features/plugin-patterns.md) when the Modal block is enabled — they are not theme patterns.
+**Modal** patterns (`aegis/modal-*`) are registered by the [Aegis Dash](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md) when the Modal block is enabled — they are not theme patterns.
 
 ## Customizing Patterns After Insertion
 
@@ -101,33 +101,33 @@ All Aegis patterns are built following these principles:
 
 ## WooCommerce Patterns
 
-WooCommerce **block patterns** (product grids, store headers, checkout/cart template patterns, etc.) need WooCommerce. When WooCommerce is active, the **Aegis companion plugin** registers its store versions of these patterns.
+WooCommerce **block patterns** (product grids, store headers, checkout/cart template patterns, etc.) need WooCommerce. When WooCommerce is active, the **Aegis Dash** registers its store versions of these patterns.
 
 Without WooCommerce, the theme keeps them out of the editor so it never shows "unsupported block" placeholders:
 
 - Header patterns stay available with the cart and account icons removed.
 - Other patterns built on WooCommerce blocks (shop, product, cart, checkout, and order layouts) are hidden.
-- The same applies to patterns that use a block from the Aegis plugin, such as the map in the contact patterns, when the plugin is not active.
+- The same applies to patterns that use a block from the Aegis Dash, such as the map in the contact patterns, when the plugin is not active.
 
 This check runs when the editor loads patterns. On the front end, blocks from inactive plugins render as nothing.
 
-The theme still includes generic **Commerce** and **Product** marketing patterns that use core blocks only (for example category cards, trust badges). Patterns with `wp:woocommerce/*` blocks live in the plugin — see [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md).
+The theme still includes generic **Commerce** and **Product** marketing patterns that use core blocks only (for example category cards, trust badges). Patterns with `wp:woocommerce/*` blocks live in the plugin — see [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md).
 
 | Requirement | Patterns available |
 |-------------|-------------------|
 | Aegis theme only | Generic commerce marketing patterns (core blocks) |
-| Theme + Aegis plugin + WooCommerce | Full WooCommerce block pattern library |
+| Theme + Aegis Dash + WooCommerce | Full WooCommerce block pattern library |
 | Above + TI WooCommerce Wishlist | Wishlist template pattern (`template-page-wishlist`) |
 
 ### Store headers
 
-WC header patterns with mini-cart and customer-account blocks live in the **companion plugin** (`patterns/woocommerce/header/`) and require WooCommerce. The theme's **`header/default`** for `parts/header.html` shows no cart or account icons in the editor when WooCommerce is inactive, and **`header/store-minimal`** for checkout/funnel pages. When WooCommerce is active, the plugin overlays `header-default` with the mini-cart variant.
+WC header patterns with mini-cart and customer-account blocks live in the **Aegis Dash** (`patterns/woocommerce/header/`) and require WooCommerce. The theme's **`header/default`** for `parts/header.html` shows no cart or account icons in the editor when WooCommerce is inactive, and **`header/store-minimal`** for checkout/funnel pages. When WooCommerce is active, the plugin overlays `header-default` with the mini-cart variant.
 
 ## Creating Your Own Patterns
 
 ### Synced Patterns (formerly Reusable Blocks)
 
-![The Create pattern dialog with a name field, a category field, and the Synced toggle switched on.](../screenshots/create-pattern.png)
+![The Add Pattern dialog with a name field, a categories field, and the Synced toggle switched on.](../screenshots/create-pattern.png)
 
 *Save your own blocks as a synced pattern to reuse them across the site.*
 

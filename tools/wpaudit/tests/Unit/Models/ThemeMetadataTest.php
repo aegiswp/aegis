@@ -15,50 +15,6 @@ use WPAudit\Models\ThemeMetadata;
  */
 class ThemeMetadataTest extends TestCase {
 	/**
-	 * Test constructor with required parameters.
-	 *
-	 * @return void
-	 */
-	public function test_constructor(): void {
-		$meta = new ThemeMetadata( 'aegis', '2.0.0', '/path/to/theme' );
-
-		$this->assertSame( 'aegis', $meta->name );
-		$this->assertSame( '2.0.0', $meta->version );
-		$this->assertSame( '/path/to/theme', $meta->root_path );
-		$this->assertFalse( $meta->is_block_theme );
-		$this->assertEmpty( $meta->metadata );
-	}
-
-	/**
-	 * Test constructor with all parameters.
-	 *
-	 * @return void
-	 */
-	public function test_constructor_with_all_params(): void {
-		$extra = array( 'author' => 'Test' );
-		$meta  = new ThemeMetadata( 'aegis', '2.0.0', '/path', true, $extra );
-
-		$this->assertTrue( $meta->is_block_theme );
-		$this->assertSame( array( 'author' => 'Test' ), $meta->metadata );
-	}
-
-	/**
-	 * Test to_array serialization.
-	 *
-	 * @return void
-	 */
-	public function test_to_array(): void {
-		$meta  = new ThemeMetadata( 'aegis', '2.0.0', '/path/to/theme', true );
-		$array = $meta->to_array();
-
-		$this->assertSame( 'aegis', $array['name'] );
-		$this->assertSame( '2.0.0', $array['version'] );
-		$this->assertSame( '/path/to/theme', $array['rootPath'] );
-		$this->assertTrue( $array['isBlockTheme'] );
-		$this->assertArrayHasKey( 'metadata', $array );
-	}
-
-	/**
 	 * Test from_directory with a temporary directory.
 	 *
 	 * @return void

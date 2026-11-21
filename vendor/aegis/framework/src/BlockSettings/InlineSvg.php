@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for embedding SVG content directly into block output
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for inline svg block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the inline svg block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the inline svg block setting.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -135,7 +128,6 @@ class InlineSvg implements Renderable {
 				continue;
 			}
 
-			// Create a new <svg> element in the main document.
 			$imported = DOM::node_to_element( $dom->importNode( $svg_element, true ) );
 			$imported->removeAttribute( 'height' );
 			$imported->removeAttribute( 'width' );
@@ -258,7 +250,6 @@ class InlineSvg implements Renderable {
 			return $block_content;
 		}
 
-		// Create a new <svg> element in the main document.
 		$svg = $dom->importNode( $svg_dom->documentElement, true );
 		if ( ! method_exists( $svg, 'setAttribute' ) ) {
 			return $block_content;

@@ -28,6 +28,7 @@ This document explains each GitHub Actions workflow used by the Aegis WordPress 
 - ✓ PHP linting and PHPCS standards
 - ✓ Composer dependency audit (`composer audit`)
 - ✓ WPAudit unit tests (`tools/wpaudit`)
+- ✓ Framework unit tests (`phpunit.framework.xml`, run with the WPAudit PHPUnit)
 - ✓ theme.json validation
 - ✓ Required theme files (style.css, functions.php, index.php, theme.json)
 
@@ -173,12 +174,12 @@ This document explains each GitHub Actions workflow used by the Aegis WordPress 
 ## Maintenance Workflows
 
 ### 7. **Generate Composer Lock (composer-lock.yml)**
-**Purpose:** Auto-update composer.lock when composer.json changes
-**Triggers:** composer.json changes on main/dev branches
+**Purpose:** Manually regenerate composer.lock (never automatic: `composer update` can alter `vendor/aegis` resolution)
+**Triggers:** Manual only (`workflow_dispatch`); the `confirm` input must be `update`
 **Duration:** ~3-5 minutes
 
 #### What it does:
-- ✓ Runs `composer update --no-install`
+- ✓ Runs `composer update --no-install` only when `confirm` is `update`
 - ✓ Validates composer files with `composer validate --strict`
 - ✓ Auto-commits lock file with `[skip ci]` tag
 
@@ -196,11 +197,10 @@ This document explains each GitHub Actions workflow used by the Aegis WordPress 
 **Duration:** ~5-8 minutes
 
 #### What it checks:
-- ✓ Quick linting (JS, CSS, PHP)
+- ✓ Quick linting (JS, CSS)
 - ✓ Theme build
-- ✓ PHP syntax validation
+- ✓ PHP syntax validation (fails on any lint error; skips vendor, node_modules, tools/scratch)
 - ✓ PHPCS (errors only, not warnings)
-- ✓ PHP Unit tests
 - ✓ WPAudit tests
 
 #### Purpose:
@@ -218,7 +218,7 @@ Warnings are not blockers on dev branch for faster iteration
 
 #### What it does:
 - ✓ Validates tag format (semantic versioning)
-- ✓ Runs full test suite (PHPCS, linting, PHPUnit)
+- ✓ Runs pre-release validation (JS and CSS lint, PHPCS, `composer validate --strict`); no PHPUnit suite
 - ✓ Reinstalls Composer **without** `--dev` and regenerates optimized autoload
 - ✓ Asserts autoload maps do not reference PHPUnit / `myclabs/deep-copy`
 - ✓ Builds installable `aegis.zip` + versioned `aegis-<version>.zip` (rsync + `.distignore`, root folder `aegis/`)
@@ -227,7 +227,7 @@ Warnings are not blockers on dev branch for faster iteration
 - ✓ Includes validation checklist
 
 #### Installable zip vs GitHub “Source code”
-The workflow already packages **`aegis/`** inside `aegis.zip`. GitHub **also** always attaches automatic **Source code (zip/tar.gz)** archives named after the **repository** (`aegiswp/theme` → downloads like `theme-1.0.2.zip`). Those are the raw git tree, not the WordPress theme package. Users who install Source code get a `theme-1.0.2` folder and often a WSOD from incomplete/dev Composer vendor layout. Tell testers: **Assets → `aegis.zip` only.**
+The workflow already packages **`aegis/`** inside `aegis.zip`. GitHub **also** always attaches automatic **Source code (zip/tar.gz)** archives named after the **repository** (`aegiswp/aegis` → downloads like `theme-1.0.2.zip`). Those are the raw git tree, not the WordPress theme package. Users who install Source code get a `theme-1.0.2` folder and often a WSOD from incomplete/dev Composer vendor layout. Tell testers: **Assets → `aegis.zip` only.**
 
 #### If it fails:
 1. Check tag format (must be v1.2.3 or v1.2.3-rc1)

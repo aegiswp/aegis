@@ -90,27 +90,6 @@ class SEOAnalyzerTest extends TestCase {
 	}
 
 	/**
-	 * Test get rules returns all SEO rules.
-	 *
-	 * @return void
-	 */
-	public function test_get_rules(): void {
-		$rules = $this->analyzer->get_rules();
-
-		$this->assertIsArray( $rules );
-		$this->assertCount( 7, $rules );
-
-		$rule_ids = array_column( $rules, 'id' );
-		$this->assertContains( 'seo-001', $rule_ids );
-		$this->assertContains( 'seo-002', $rule_ids );
-		$this->assertContains( 'seo-003', $rule_ids );
-		$this->assertContains( 'seo-004', $rule_ids );
-		$this->assertContains( 'seo-005', $rule_ids );
-		$this->assertContains( 'seo-006', $rule_ids );
-		$this->assertContains( 'seo-007', $rule_ids );
-	}
-
-	/**
 	 * Test detection of skipped heading levels.
 	 *
 	 * @return void

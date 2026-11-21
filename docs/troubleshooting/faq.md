@@ -6,7 +6,7 @@ This page answers common questions about the Aegis theme.
 
 ### What is Aegis?
 
-Aegis is a WordPress Full Site Editing (FSE) block theme built for performance and flexibility. It provides a zero-base loading architecture, 60 style variations, **232 theme block patterns** in 28 category folders (plus companion plugin and Pro patterns), and deep integration with the WordPress Site Editor.
+Aegis is a WordPress Full Site Editing (FSE) block theme built for performance and flexibility. It provides a zero-base loading architecture, 60 style variations, **230 theme block patterns** in 28 category folders (plus Aegis Dash and Pro patterns), and deep integration with the WordPress Site Editor.
 
 ### What does "zero-base loading" mean?
 
@@ -14,25 +14,25 @@ Zero-base loading means the theme loads zero CSS, JavaScript, or font assets by 
 
 ### Is Aegis free?
 
-The Aegis theme is released under the GPL-2.0-or-later license. The companion Aegis Plugin (free) and Aegis Pro (premium) extend the theme with additional blocks and features.
+The Aegis theme is released under the GPL-2.0-or-later license. The companion Aegis Dash (free) and Aegis Pro (premium) extend the theme with additional blocks and features.
 
 ### What is the difference between the theme, plugin, and Pro?
 
 | Product | Includes |
 |---------|----------|
-| **Aegis theme** | Templates, patterns, style variations, design system, six theme blocks (Countdown, Slider, Slide, Toggle, Toggle Content, Related Posts), enhanced **`core/video`**, framework core-block enhancements, WooCommerce templates |
-| **Aegis Plugin** (free) | Map and Modal blocks, admin dashboard, block toggles, snippets, conditionals, integrations, analytics |
+| **Aegis theme** | Templates, patterns, style variations, design system, enhanced **`core/video`** styling, framework core-block enhancements, WooCommerce templates (plus fallback copies of six blocks that Aegis Dash now provides) |
+| **Aegis Dash** (free) | Aegis blocks (Countdown, Slider, Toggle, Related Posts, Map, Modal), admin dashboard, block toggles, snippets, conditionals, integrations, analytics |
 | **Aegis Pro** (premium) | Hook pattern CPT, video/BunnyCDN stack, query conditions, Pro blocks, block extensions, license — requires Aegis theme |
 
-See [Plugin FAQ](../../../../plugins/aegis/docs/troubleshooting/faq.md) · [Pro docs](../../../../plugins/aegis-pro/docs/home.md).
+See [Aegis Dash FAQ](../../../../plugins/aegis-dash/docs/troubleshooting/faq.md) · [Pro docs](../../../../plugins/aegis-pro/docs/home.md).
 
-### Does Aegis work without the companion plugins?
+### Does Aegis work without the Aegis plugins?
 
-Yes. The theme provides templates, patterns, style variations, and theme-registered custom blocks without the plugin. Map, Modal, the Aegis admin menu, analytics, snippets, and integration toggles require the free plugin. Pro features require Aegis Pro.
+Yes. The theme provides templates, patterns and style variations without the plugin. The Aegis blocks, the Aegis admin menu, analytics, snippets, and integration toggles need Aegis Dash. Pro features require Aegis Pro.
 
 ### Why don’t third-party plugins pick up theme styles?
 
-Integration toggles live in the **free plugin** at **Aegis → Integrations**. Framework CSS ships with the theme and loads only when the matching toggle and dependency are active. See [[plugin-integrations]] for the theme CSS inventory, and the [Plugin FAQ](../../../../plugins/aegis/docs/troubleshooting/faq.md) for per-plugin configuration.
+Integration toggles live in the **Aegis Dash** at **Aegis → Integrations**. Framework CSS ships with the theme and loads only when the matching toggle and dependency are active. See [[plugin-integrations]] for the theme CSS inventory, and the [Aegis Dash FAQ](../../../../plugins/aegis-dash/docs/troubleshooting/faq.md) for per-plugin configuration.
 
 ## Requirements
 
@@ -117,7 +117,7 @@ Aegis includes 50 templates: 10 WordPress hierarchy templates, 11 page and post 
 
 ### How many patterns are included?
 
-**232 theme patterns** in 28 category folders. The companion plugin adds Modal starters and WooCommerce patterns (gated on dependencies). Pro adds premium marketing layouts. See [[pattern-reference]] for theme categories, [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md), and [Pro Patterns](../../../../plugins/aegis-pro/docs/patterns/pro-patterns.md).
+**230 theme patterns** in 28 category folders. The Aegis Dash adds Modal starters and WooCommerce patterns (gated on dependencies). Pro adds premium marketing layouts. See [[pattern-reference]] for theme categories, [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md), and [Pro Patterns](../../../../plugins/aegis-pro/docs/patterns/pro-patterns.md).
 
 ### Can I create my own patterns?
 
@@ -133,7 +133,7 @@ The Blank template provides an empty canvas with no header, footer, or wrapper. 
 
 ### What custom blocks does Aegis include?
 
-The theme registers Countdown, Slider, Slide, Toggle, Toggle Content, and Related Posts. Video uses WordPress **`core/video`** (enhanced by the framework and companion plugins). Map and Modal require the [Aegis Plugin](../../../../plugins/aegis/docs/blocks/custom-blocks.md). Block feature toggles are at **Aegis → Blocks**.
+Aegis Dash provides Countdown, Slider, Slide, Toggle, Toggle Content, Related Posts, Map and Modal ([all blocks](../../../../plugins/aegis-dash/docs/blocks/custom-blocks.md)). The theme keeps fallback copies of the first six for now. Video uses WordPress **`core/video`**, enhanced by the framework; the Aegis Video add-on provides the player. Block feature toggles are at **Aegis → Blocks**.
 
 ### Do I need Gutenberg plugin installed?
 
@@ -147,11 +147,11 @@ Yes. Aegis is compatible with third-party block plugins. The theme styles are ap
 
 ### Does Aegis support WooCommerce?
 
-Yes. The theme ships WooCommerce FSE templates. WooCommerce block patterns and multi-step checkout assets come from the free plugin when WooCommerce is active. See [[woocommerce-integration]] and [Plugin WooCommerce Checkout](../../../../plugins/aegis/docs/features/woocommerce-checkout.md).
+Yes. The theme ships WooCommerce FSE templates. WooCommerce block patterns and multi-step checkout assets come from Aegis Dash when WooCommerce is active. See [[woocommerce-integration]] and [Aegis Dash WooCommerce Checkout](../../../../plugins/aegis-dash/docs/features/woocommerce-checkout.md).
 
 ### Why don't I see shop or product patterns in the inserter?
 
-WooCommerce block patterns are registered by the **Aegis companion plugin** only when **WooCommerce is active**. Generic commerce marketing patterns (core blocks only) remain in the theme. See [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md).
+WooCommerce block patterns are registered by the **Aegis Dash** only when **WooCommerce is active**. Generic commerce marketing patterns (core blocks only) remain in the theme. See [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md).
 
 ### Do I need WooCommerce installed for the theme to work?
 
@@ -173,7 +173,7 @@ Yes. Aegis is compatible with all major caching plugins (WP Super Cache, W3 Tota
 
 ### Where do I configure performance toggles?
 
-The theme handles zero-base asset loading — see [Theme Performance](../features/performance.md). Site-wide admin toggles and Query Loop options live in the free plugin ([Performance](../../../../plugins/aegis/docs/features/performance.md)). Pro Query Loop extras: [Query Performance](../../../../plugins/aegis-pro/docs/features/query-performance.md).
+The theme handles zero-base asset loading — see [Theme Performance](../features/performance.md). Site-wide admin toggles and Query Loop options live in Aegis Dash ([Performance](../../../../plugins/aegis-dash/docs/features/performance.md)). Pro Query Loop extras: [Query Performance](../../../../plugins/aegis-pro/docs/features/query-performance.md).
 
 ## Development
 
@@ -183,7 +183,7 @@ Use `wp-env` with Docker. Run `npm run env:start` to start a local WordPress ins
 
 ### How do I build the theme assets?
 
-Run `npm run build` in the theme directory for theme-owned blocks, or `npm run dev` for watch mode. Map, Modal, and admin assets are built in the companion plugin (`wp-content/plugins/aegis`). See [[building-assets]] and [plugin build docs](../../../../plugins/aegis/docs/development/building-assets.md).
+Run `npm run build` in the theme directory for the theme's block copies, or `npm run dev` for watch mode. The Aegis Dash admin app and blocks are built in Aegis Dash (`wp-content/plugins/aegis-dash`). See [[building-assets]] and [plugin build docs](../../../../plugins/aegis-dash/docs/development/building-assets.md).
 
 ### Can I contribute to Aegis?
 
@@ -191,7 +191,7 @@ Yes. Aegis is open source. See [[contributing]] for branch strategy, PR guidelin
 
 ### Where do I report bugs?
 
-Report bugs to Atmostfear Entertainment through the [Aegis documentation site](https://www.atmostfear-entertainment.com/docs/aegis/). Include your WordPress version, PHP version, Aegis version, steps to reproduce, and any error messages.
+Report bugs to Atmostfear Entertainment through the [Aegis documentation site](https://www.atmostfear-entertainment.com/docs/aegis/theme/aegis-theme/). Include your WordPress version, PHP version, Aegis version, steps to reproduce, and any error messages.
 
 ## Accessibility
 
@@ -219,6 +219,7 @@ Aegis supports the latest two versions of Chrome, Firefox, Safari, and Edge. Int
 
 ## Related Pages
 
+- [Getting Support](support.md) — Where to ask for help, free and Pro.
 - [[common-issues]] — Solutions to specific problems.
 - [[requirements]] — System requirements.
 - [[installation]] — Installation guide.

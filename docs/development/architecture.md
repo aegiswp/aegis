@@ -1,14 +1,14 @@
 # Architecture
 
-Technical architecture of the Aegis theme and its relationship to the framework and companion plugins.
+Technical architecture of the Aegis theme and its relationship to the framework and Aegis plugins.
 
 ## Four-Layer Model
 
 | Layer | Location | Responsibility |
 |-------|----------|----------------|
-| **Theme** | `wp-content/themes/aegis` | FSE templates, generic theme patterns (excluding WC/TI block patterns), theme blocks, thin PHP glue |
+| **Theme** | `wp-content/themes/aegis` | FSE templates, generic theme patterns (excluding WC/TI block patterns), fallback copies of the six Aegis blocks (until a later release removes them), thin PHP glue |
 | **Framework** | `vendor/aegis/framework` | Core block enhancements, variations, design system engine, injection hook firing |
-| **Free plugin** | `wp-content/plugins/aegis` | Admin, map/modal, snippets, conditionals, integrations, analytics, **WooCommerce/TI Wishlist block patterns** (gated) |
+| **Aegis Dash** | `wp-content/plugins/aegis-dash` | Admin, the Aegis blocks (Map, Modal, Slider, Toggle, Countdown, Related Posts), snippets, conditionals, integrations, analytics, **WooCommerce/TI Wishlist block patterns** (gated) |
 | **Pro plugin** | `wp-content/plugins/aegis-pro` | Hook pattern CPT, video stack, query pro, license, Pro patterns |
 
 ## Template gating
@@ -19,7 +19,7 @@ FSE **templates** remain in the theme (`templates/` + `theme.json`). WooCommerce
 
 - **PSR-4 autoloading** via Composer — namespace `Aegis\` mapped to `src/` (theme glue + blocks)
 - **Framework bootstrap** — `Aegis::register()` from `vendor/aegis/framework`
-- **Theme services** — `CompanionNotice`, `GitHubUpdater`, `BlockRegistrar` (theme blocks from `blocks-manifest.php`, Related Posts and Slider extras localization, Related Posts pattern gating), `NavigationFallback`, and `PatternDependencies` (hides patterns whose blocks need an inactive plugin, and strips them from headers, when the editor loads patterns), all started in `src/bootstrap.php`
+- **Theme services** — `CompanionNotice`, `GitHubUpdater`, `BlockRegistrar` (fallback copies of the Aegis blocks from `blocks-manifest.php`, registered only when Aegis Dash has not registered them; Related Posts and Slider extras localization, Related Posts pattern gating), `NavigationFallback`, and `PatternDependencies` (hides patterns whose blocks need an inactive plugin, and strips them from headers, when the editor loads patterns), all started in `src/bootstrap.php`
 
 ## Namespace Structure (`src/`)
 
@@ -30,7 +30,7 @@ src/
 ├── NavigationFallback.php     # block_core_navigation_render_fallback: sample menu instead of every page
 ├── PatternDependencies.php    # rest_pre_dispatch (patterns endpoint): hide patterns with blocks from inactive plugins
 ├── Admin/
-│   ├── CompanionNotice.php    # Install companion plugin notice (release zip)
+│   ├── CompanionNotice.php    # Install Aegis Dash notice (release zip)
 │   └── GitHubUpdater.php      # update_themes_github.com: updates from GitHub releases
 └── Blocks/                    # block.json + TSX sources (compiled in place)
     ├── BlockRegistrar.php
@@ -71,23 +71,23 @@ These features are **not** in theme PHP — see plugin docs:
 
 | Feature | Documentation |
 |---------|---------------|
-| Analytics | [Plugin Analytics](../../../../plugins/aegis/docs/features/analytics.md) |
-| Conditionals admin/evaluator | [Conditional Logic](../../../../plugins/aegis/docs/features/conditional-logic.md) |
-| Admin dashboard | [Plugin Architecture](../../../../plugins/aegis/docs/development/architecture.md) |
-| Multi-step checkout | [WooCommerce Checkout](../../../../plugins/aegis/docs/features/woocommerce-checkout.md) |
-| Integrations dashboard | [Integrations Dashboard](../../../../plugins/aegis/docs/features/integrations-dashboard.md) |
+| Analytics | [Aegis Dash Analytics](../../../../plugins/aegis-dash/docs/features/analytics.md) |
+| Conditionals admin/evaluator | [Conditional Logic](../../../../plugins/aegis-dash/docs/features/conditional-logic.md) |
+| Admin dashboard | [Aegis Dash Architecture](../../../../plugins/aegis-dash/docs/development/architecture.md) |
+| Multi-step checkout | [WooCommerce Checkout](../../../../plugins/aegis-dash/docs/features/woocommerce-checkout.md) |
+| Integrations dashboard | [Integrations Dashboard](../../../../plugins/aegis-dash/docs/features/integrations-dashboard.md) |
 | Hook pattern CPT | [Pro Hook Patterns](../../../../plugins/aegis-pro/docs/features/hook-patterns-pro.md) |
-| Map / Modal blocks | [Plugin Custom Blocks](../../../../plugins/aegis/docs/blocks/custom-blocks.md) |
+| Map / Modal blocks | [Aegis Dash Custom Blocks](../../../../plugins/aegis-dash/docs/blocks/custom-blocks.md) |
 
 ## Build Pipeline
 
 Dual build — see [[building-assets]]:
 
-- **Theme:** `npm run build` → compiled assets in `src/Blocks/` (theme-owned blocks)
-- **Plugin:** `npm run build` in `wp-content/plugins/aegis` (map, modal, admin)
+- **Theme:** `npm run build` → compiled assets in `src/Blocks/` (the theme's fallback copies of the six blocks)
+- **Aegis Dash:** `npm run build` in `wp-content/plugins/aegis-dash` (admin app and the six TypeScript blocks; Map and Modal are hand-maintained)
 
 ## Next Steps
 
 - [[file-structure]] — Directory layout
 - [[building-assets]] — Build commands
-- [Plugin Architecture](../../../../plugins/aegis/docs/development/architecture.md)
+- [Aegis Dash Architecture](../../../../plugins/aegis-dash/docs/development/architecture.md)

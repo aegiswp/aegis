@@ -6,7 +6,6 @@
  *
  * Responsibilities:
  * - Checks for Code Block Pro plugin presence and conditionally registers styles
- * - Integrates with the Aegis container and inline assets system
  *
  * @package    Aegis\Framework\Integrations
  * @since      1.0.0
@@ -19,6 +18,8 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use WP_Block_Type_Registry;
@@ -27,8 +28,6 @@ use function class_exists;
 class CodeBlockPro implements Conditional, Styleable {
 
 	/**
-	 * Condition.
-	 *
 	 * Code Block Pro does not define CODE_BLOCK_PRO_VERSION. Prefer the
 	 * plugin helper when the Aegis plugin is loaded.
 	 *
@@ -37,8 +36,10 @@ class CodeBlockPro implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( \Aegis\Plugin\Integrations\CodeBlockPro::class ) ) {
-			return \Aegis\Plugin\Integrations\CodeBlockPro::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_CODE_BLOCK_PRO );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		if ( class_exists( 'CBPRouter' ) ) {

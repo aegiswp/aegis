@@ -6,15 +6,13 @@
  * @since   1.0.0
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for registers aegis icon sets with the wordpress icon library.
 declare( strict_types=1 );
 
-// Declares the namespace for the registers aegis icon sets with the wordpress icon library.
 namespace Aegis\Framework\Icons;
 
-// Imports classes, interfaces, and functions used by the registers aegis icon sets with the wordpress icon library.
-use Aegis\Framework\ServiceProvider;
 use Aegis\Icons\Icon;
+use Aegis\Icons\IconSets;
+use Aegis\Icons\IconSupport;
 use Aegis\Utilities\Str;
 use WP_Icon_Collections_Registry;
 use WP_Icons_Registry;
@@ -29,7 +27,6 @@ use function preg_match;
 use function sprintf;
 use function strtolower;
 use function update_option;
-use function version_compare;
 use function __;
 
 /**
@@ -43,7 +40,7 @@ class Library {
 	 * @hook init 11
 	 */
 	public function register(): void {
-		if ( version_compare( get_bloginfo( 'version' ), '7.1', '<' ) ) {
+		if ( ! IconSupport::core_registry() ) {
 			return;
 		}
 
@@ -51,7 +48,7 @@ class Library {
 			return;
 		}
 
-		if ( ! ServiceProvider::is_block_enabled( 'icon' ) ) {
+		if ( ! IconFeatures::block_enabled() ) {
 			return;
 		}
 
@@ -91,7 +88,7 @@ class Library {
 					continue;
 				}
 
-				if ( $set === 'wordpress' && IconMigrationMapper::is_core_icon( $name ) ) {
+				if ( IconSets::is_wordpress( $set ) && IconSupport::is_core_icon( $name ) ) {
 					continue;
 				}
 
@@ -106,11 +103,11 @@ class Library {
 				wp_register_icon_collection(
 					$set,
 					[
-						'label'       => $this->get_collection_label( $set ),
+						'label'       => IconSets::label( $set ),
 						'description' => sprintf(
 							/* translators: %s: icon set label */
 							__( 'Aegis %s icons.', 'aegis' ),
-							$this->get_collection_label( $set )
+							IconSets::label( $set )
 						),
 					]
 				);
@@ -192,25 +189,4 @@ class Library {
 
 		return $files;
 	}
-
-	/**
-	 * Human-readable collection label.
-	 */
-	private function get_collection_label( string $set ): string {
-		$labels = [
-			'wordpress'         => __( 'Aegis', 'aegis' ),
-			'social'            => __( 'Social', 'aegis' ),
-			'payment'           => __( 'Payment', 'aegis' ),
-			'remixicon'         => __( 'Remix Icon', 'aegis' ),
-			'plugin'            => __( 'Plugins', 'aegis' ),
-			'hand-drawn'        => __( 'Hand Drawn', 'aegis' ),
-			'phosphor-duotone'  => __( 'Phosphor Duotone', 'aegis' ),
-			'heroicons'         => __( 'Heroicons', 'aegis' ),
-			'feather'           => __( 'Feather', 'aegis' ),
-			'brand'             => __( 'Brand', 'aegis' ),
-		];
-
-		return $labels[ $set ] ?? Str::title_case( $set );
-	}
-
 }

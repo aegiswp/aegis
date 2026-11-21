@@ -43,12 +43,20 @@ vendor/**/README.md
 vendor/**/tests/
 vendor/aegis/**/tests/
 
+# Contributor test suite for vendor/aegis/* (phpunit.framework.xml + tests/).
+
+tests/
+phpunit.framework.xml
+
 # Audit tool (standalone, not theme runtime). `tools/` excludes the
 # contributor tree; `vendor/aegis/wpaudit/` is a leftover-path guard.
 
 tools/
 tools/wpaudit/
 vendor/aegis/wpaudit/
+
+# String-extraction copies used only to regenerate the .pot (tools/prepare-translate.js).
+build/I18nScan/
 
 # Vendor dev dependencies (safety net only).
 # Release builds MUST run `composer install --no-dev --optimize-autoloader` first so
@@ -91,10 +99,6 @@ vendor/aegis/**/.phpunit.cache/
 .env
 .env.*
 auth.json
-docker-compose*.yml
-docker-compose*.yaml
-playwright-report/
-test-results/
 
 # Documentation and community files
 
@@ -107,18 +111,10 @@ CONTRIBUTING.md
 CONTRIBUTORS.md
 CODE_OF_CONDUCT.md
 SUBMISSION-NOTES.md
-AGENTS.md
-CLAUDE.md
-STUDIO.md
 
 # Development / test tooling
 
-Makefile
 phpcs.xml
-phpcs.xml.dist
-phpunit.xml
-phpunit.xml.dist
-tests/
 .nyc_output/
 coverage/
 coverage.xml
@@ -149,11 +145,6 @@ src/Blocks/*/*.css.map
 src/Blocks/editor/
 src/types/
 
-# One-off dev/migration scripts (not part of theme runtime)
-
-bin/
-scripts/
-
 # Block source files (only compiled output needed)
 
 src/Blocks/*/index.tsx
@@ -180,10 +171,6 @@ patterns/README.txt
 # Local-only leading-dot pattern drafts (never ship)
 
 patterns/**/.*
-
-# Empty / legacy
-
-config/
 
 # Stray temp/scratch files
 _tmp_*

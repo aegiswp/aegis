@@ -76,7 +76,7 @@ Aegis does not require any plugins to function as a theme. All core functionalit
 
 | Plugin | Purpose |
 |--------|---------|
-| **Aegis Plugin** (free) | Map and Modal blocks, admin dashboard, integrations, snippets, conditionals, analytics — [docs](../../../../plugins/aegis/docs/home.md) |
+| **Aegis Dash** (free) | Aegis blocks (Slider, Toggle, Countdown, Related Posts, Map, Modal), admin dashboard, integrations, snippets, conditionals, analytics — [docs](../../../../plugins/aegis-dash/docs/home.md) |
 | **Aegis Pro** | Hook patterns, video stack, query conditions, Pro blocks — requires Aegis theme — [docs](../../../../plugins/aegis-pro/docs/home.md) |
 
 ### Plugin Requirements (Separate Products)
@@ -84,8 +84,8 @@ Aegis does not require any plugins to function as a theme. All core functionalit
 | Product | WordPress | PHP |
 |---------|-----------|-----|
 | Aegis theme | 7.0+ | 8.1+ |
-| Aegis plugin | 7.0+ (requires Aegis theme 1.0.0+) | 8.1+ |
-| Aegis Pro | 7.0+ (requires Aegis theme 1.0.0+ and the Aegis plugin) | 8.1+ |
+| Aegis Dash | 7.0+ (requires Aegis theme 1.0.0+) | 8.1+ |
+| Aegis Pro | 7.0+ (requires Aegis theme 1.0.0+ and the Aegis Dash) | 8.1+ |
 
 ### Compatible Plugins
 
@@ -93,11 +93,11 @@ Framework styling integrations (when plugin toggles enabled):
 
 - WooCommerce, Fluent Forms, Gravity Forms, LifterLMS, Sensei LMS, Easy Digital Downloads, AffiliateWP, bbPress, Meta Box, Syntax Highlighting Code Block, Code Block Pro
 
-Additional integrations (ACF, SEO plugins, Google Maps, analytics) are configured in the [Aegis plugin Integrations dashboard](../../../../plugins/aegis/docs/features/integrations-dashboard.md).
+Additional integrations (ACF, SEO plugins, Google Maps, analytics) are configured in the [Aegis Dash Integrations dashboard](../../../../plugins/aegis-dash/docs/features/integrations-dashboard.md).
 
 ## Checking Your Environment
 
-![Tools → Site Health → Info with the Server section expanded, showing the PHP version, memory limit, and installed extensions. Numbered callouts: 1 The PHP version your host runs; 2 The memory limit.](../screenshots/site-health-info.png)
+![Tools → Site Health → Info with the Server section expanded, showing the PHP version, memory limit, and installed extensions.](../screenshots/site-health-info.png)
 
 *Site Health → Info shows the PHP and WordPress versions your host provides.*
 

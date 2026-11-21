@@ -7,25 +7,18 @@
  *
  * Responsibilities:
  * - Handles animation-related block settings and rendering
- * - Integrates with Styleable and Scriptable interfaces for asset output
  * - Manages CSS and JS assets for block animations
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for animation block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the animation block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the animation block setting.
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Framework\InlineAssets\Styleable;
@@ -115,7 +108,6 @@ class Animation implements Renderable, Styleable, Scriptable {
 		$classes = array_unique( explode( ' ', $first->getAttribute( 'class' ) ) );
 		$styles  = CSS::string_to_array( $first->getAttribute( 'style' ) );
 
-		// --- Animation Type Handling ---
 		$infinite = ( '-1' === ( $animation['iterationCount'] ?? null ) ) || ( 'infinite' === ( $animation['event'] ?? null ) );
 		unset( $styles['animation-play-state'] );
 
@@ -129,7 +121,6 @@ class Animation implements Renderable, Styleable, Scriptable {
 			$styles['--animation-name'] = esc_attr( $animation['name'] ?? '' );
 		}
 
-		// --- Scroll-triggered Animation Logic ---
 		if ( 'scroll' === ( $animation['event'] ?? '' ) ) {
 			$classes[] = 'animate';
 			$classes[] = 'has-scroll-animation';
@@ -150,7 +141,6 @@ class Animation implements Renderable, Styleable, Scriptable {
 			$first->setAttribute( 'data-offset', esc_attr( $offset ) );
 		}
 
-		// Apply the final classes and styles.
 		if ( $styles ) {
 			$first->setAttribute( 'style', CSS::array_to_string( $styles ) );
 		}

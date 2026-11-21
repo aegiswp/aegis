@@ -6,27 +6,22 @@
  *
  * Responsibilities:
  * - Updates and customizes template hierarchy for search and archive pages
- * - Integrates with the block editor and WordPress template system
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for templates component.
 declare( strict_types=1 );
 
-// Declares the namespace for the templates component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the templates component.
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
+use Aegis\Framework\Integrations\Detect;
 use WP_Block_Template;
 use function array_unshift;
-use function class_exists;
 use function defined;
 use function file_exists;
 use function function_exists;
@@ -112,9 +107,7 @@ class Templates {
 			return $query_result ?? array();
 		}
 
-		$woocommerce = class_exists( \Aegis\Plugin\Integrations\WooCommerce::class )
-			? \Aegis\Plugin\Integrations\WooCommerce::is_plugin_active()
-			: ( class_exists( 'WooCommerce' ) || function_exists( 'WC' ) || defined( 'WC_VERSION' ) );
+		$woocommerce = Companions::get()->integration_active( Companion::INTEGRATION_WOOCOMMERCE ) ?? Detect::woocommerce();
 		$ti_wishlist = defined( 'TINVWL_VERSION' ) || function_exists( 'tinvwl_get_wishlist' );
 		$template    = get_template();
 		$stylesheet  = get_stylesheet();

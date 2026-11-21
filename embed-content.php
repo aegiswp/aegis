@@ -18,13 +18,11 @@
  * @see wp-includes/theme-compat/embed-content.php
  */
 
-// Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 ?>
 <div <?php post_class( 'wp-embed' ); ?>>
 
 	<?php
-	// --- Featured Image (always rectangular / above title) ---
 	$thumbnail_id = 0;
 
 	if ( has_post_thumbnail() ) {
@@ -77,7 +75,6 @@ defined( 'ABSPATH' ) || exit;
 	<div class="wp-embed-excerpt"><?php the_excerpt_embed(); ?></div>
 
 	<?php
-	// --- Primary Term ---
 	$aegis_embed_term = null;
 
 	foreach ( array( 'category', 'post_tag' ) as $aegis_embed_taxonomy ) {
@@ -122,7 +119,6 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 
 	<?php
-	// --- Article Schema.org Structured Data ---
 	$aegis_embed_schema = array(
 		'@context'      => 'https://schema.org',
 		'@type'         => 'Article',

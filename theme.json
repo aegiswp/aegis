@@ -243,7 +243,7 @@
           "slug": "primary-dark-mid",
           "colors": [
             "#09090b",
-            "#71717b"
+            "#71717a"
           ]
         },
         {
@@ -1524,10 +1524,10 @@
       "core/pullquote": {
         "border": {
           "top": {
-            "width": "var(--wp--custom--border--width, 2px)"
+            "width": "var(--wp--custom--border--width)"
           },
           "bottom": {
-            "width": "var(--wp--custom--border--width, 2px)"
+            "width": "var(--wp--custom--border--width)"
           }
         },
         "spacing": {

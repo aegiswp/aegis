@@ -6,7 +6,6 @@
  *
  * Responsibilities:
  * - Checks for Sensei LMS plugin presence and conditionally adds theme support or styles
- * - Integrates with the Aegis container and conditional system
  *
  * @package    Aegis\Framework\Integrations
  * @since      1.0.0
@@ -14,14 +13,13 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for sensei lms integration component.
 declare( strict_types=1 );
 
-// Declares the namespace for the sensei lms integration component.
 namespace Aegis\Framework\Integrations;
 
-// Imports classes, interfaces, and functions used by the sensei lms integration component.
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use WP_Block_Patterns_Registry;
@@ -50,8 +48,10 @@ class SenseiLMS implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( '\Aegis\Plugin\Integrations\SenseiLMS' ) ) {
-			return \Aegis\Plugin\Integrations\SenseiLMS::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_SENSEI_LMS );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return class_exists( '\Sensei_Main' )

@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling columns block content
- * - Integrates with utility classes for DOM and CSS
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for columns block.
 declare( strict_types=1 );
 
-// Declares the namespace for the columns block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the columns block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -66,7 +59,6 @@ class Columns implements Renderable {
 	public function render( string $block_content, array $block, WP_Block $instance ): string {
 		$attrs = $block['attrs'] ?? [];
 
-		// Create a DOM object from the block content.
 		$dom = DOM::create( $block_content );
 		$div = DOM::get_element( 'div', $dom );
 
@@ -95,11 +87,9 @@ class Columns implements Renderable {
 		$div->setAttribute( 'data-columns', $column_count );
 		$styles['--columns'] = $column_count;
 
-		// Apply the updated styles and classes back to the wrapper div.
 		$div->setAttribute( 'style', CSS::array_to_string( $styles ) );
 		$div->setAttribute( 'class', implode( ' ', array_unique( $classes ) ) );
 
-		// Return the modified HTML.
 		return $dom->saveHTML();
 	}
 }

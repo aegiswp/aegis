@@ -1,36 +1,60 @@
 {
 	"package": "theme",
-	"repo": "https://github.com/aegiswp/theme",
+	"repo": "https://github.com/aegiswp/aegis",
 	"repo_root": "..",
 	"branch": "main",
 	"set": {
-		"name": "Theme",
-		"slug": "theme",
+		"name": "Aegis theme",
+		"slug": "aegis-theme",
 		"description": "Install, customize, and extend the Aegis block theme: templates, patterns, style variations, the design system, custom blocks, and features.",
 		"icon": "wordpress/brush",
 		"order": 0,
 		"parent": {
-			"name": "Aegis",
-			"slug": "aegis",
-			"description": "Documentation for the Aegis block theme, its companion plugin, and Aegis Pro.",
-			"icon": "wordpress/shield"
-		}
+			"name": "Themes",
+			"slug": "theme",
+			"description": "The Aegis block theme and its child themes.",
+			"icon": "wordpress/styles",
+			"order": 0,
+			"parent": {
+				"name": "Aegis",
+				"slug": "aegis",
+				"description": "Documentation for the Aegis block theme, the Aegis Dash plugin, and the Aegis add-ons.",
+				"icon": "wordpress/shield"
+			}
+		},
+		"type": "theme",
+		"aliases": [
+			"theme"
+		]
 	},
-	"skip": [ "_sidebar.md", "_footer.md" ],
+	"skip": [
+		"_sidebar.md",
+		"_footer.md"
+	],
 	"external": [
-		{ "match": "plugins/aegis-pro/", "url": "https://www.atmostfear-entertainment.com/docs/aegis/" }
+		{
+			"match": "plugins/aegis-pro/",
+			"url": "https://www.atmostfear-entertainment.com/docs/aegis/theme/aegis-theme/"
+		}
 	],
 	"sections": [
 		{
 			"name": "Getting Started",
 			"icon": "wordpress/home",
 			"docs": [
-				{ "file": "home.md", "title": "Overview", "slug": "overview" },
+				{
+					"file": "home.md",
+					"title": "Overview",
+					"slug": "overview"
+				},
 				"getting-started/installation.md",
 				"getting-started/requirements.md",
 				"getting-started/quick-start-guide.md",
 				"getting-started/updating.md",
-				{ "file": "introduction-inventory.md", "title": "Theme Inventory" }
+				{
+					"file": "introduction-inventory.md",
+					"title": "Theme Inventory"
+				}
 			]
 		},
 		{
@@ -43,6 +67,7 @@
 				"using-the-theme/block-patterns.md",
 				"using-the-theme/style-variations.md",
 				"using-the-theme/global-styles.md",
+				"using-the-theme/block-settings.md",
 				"using-the-theme/dark-mode.md"
 			]
 		},
@@ -64,10 +89,6 @@
 			"icon": "wordpress/block-default",
 			"docs": [
 				"blocks/custom-blocks.md",
-				"blocks/countdown.md",
-				"blocks/slider.md",
-				"blocks/toggle.md",
-				"blocks/related-posts.md",
 				"blocks/core-video.md",
 				"blocks/enhanced-core-blocks.md",
 				"blocks/block-variations.md"
@@ -85,7 +106,10 @@
 				"features/dynamic-template-parts.md",
 				"features/maintenance-mode.md",
 				"features/svg-icons.md",
-				{ "file": "features/image-lightbox.md", "slug": "lightbox" },
+				{
+					"file": "features/image-lightbox.md",
+					"slug": "lightbox"
+				},
 				"features/embed-template.md",
 				"features/navigation-styles.md"
 			]
@@ -95,7 +119,14 @@
 			"icon": "wordpress/help",
 			"docs": [
 				"troubleshooting/common-issues.md",
-				{ "file": "troubleshooting/faq.md", "title": "FAQ" }
+				{
+					"file": "troubleshooting/faq.md",
+					"title": "FAQ"
+				},
+				{
+					"file": "troubleshooting/support.md",
+					"title": "Getting Support"
+				}
 			]
 		},
 		{
@@ -129,7 +160,11 @@
 	],
 	"screenshots": {
 		"features/woocommerce-integration.md": [
-			{ "after": "Wishlist (TI WooCommerce Wishlist)", "alt": "A product card with the wishlist heart button, next to the wishlist page listing saved products.", "caption": "Wishlist buttons and the wishlist page." }
+			{
+				"after": "Wishlist (TI WooCommerce Wishlist)",
+				"alt": "A product card with the wishlist heart button, next to the wishlist page listing saved products.",
+				"caption": "Wishlist buttons and the wishlist page."
+			}
 		]
 	}
 }

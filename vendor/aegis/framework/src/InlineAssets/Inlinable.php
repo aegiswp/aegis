@@ -12,15 +12,10 @@
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for inlinable interface.
 declare( strict_types=1 );
 
-// Declares the namespace for the inlinable interface.
 namespace Aegis\Framework\InlineAssets;
 
 // Declares the Inlinable interface for asset management in the design system.
@@ -74,8 +69,6 @@ interface Inlinable {
 
 	/**
 	 * Enqueue inline assets.
-	 *
-	 * @hook enqueue_block_assets
 	 *
 	 * @return void
 	 */

@@ -6,7 +6,6 @@
  *
  * Responsibilities:
  * - Checks for Fluent Forms plugin presence and conditionally registers styles
- * - Integrates with the Aegis container and inline assets system
  * - Unregisters Fluent Forms plugin patterns when pattern control is active
  *
  * @package    Aegis\Framework\Integrations
@@ -15,14 +14,13 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for fluentforms integration component.
 declare( strict_types=1 );
 
-// Declares the namespace for the fluentforms integration component.
 namespace Aegis\Framework\Integrations;
 
-// Imports classes, interfaces, and functions used by the fluentforms integration component.
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use WP_Block_Patterns_Registry;
@@ -47,8 +45,10 @@ class FluentForms implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( '\\Aegis\\Plugin\\Integrations\\FluentForms' ) ) {
-			return \Aegis\Plugin\Integrations\FluentForms::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_FLUENT_FORMS );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return defined( 'FLUENTFORM' )

@@ -134,7 +134,7 @@ if ( $datetime ) {
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by get_block_wrapper_attributes(). ?>>
 	<div class="aegis-countdown__segments">
 		<?php foreach ( $segments as $index => $segment ) : ?>
-			<?php if ( $index > 0 && $sep_char !== '' ) : ?>
+			<?php if ( $index > 0 && '' !== $sep_char ) : ?>
 				<span class="aegis-countdown__separator" aria-hidden="true"><?php echo esc_html( $sep_char ); ?></span>
 			<?php endif; ?>
 			<div class="aegis-countdown__segment" data-unit="<?php echo esc_attr( $segment['unit'] ); ?>">
@@ -164,8 +164,8 @@ $event_name     = sanitize_text_field( (string) ( $attributes['schemaEventName']
 
 if (
 	$schema_enabled
-	&& $event_name !== ''
-	&& $datetime !== ''
+	&& '' !== $event_name
+	&& '' !== $datetime
 	&& $feature_on( 'countdown_schema' )
 	&& (
 		! class_exists( '\Aegis\Plugin\Settings\Repository' )
@@ -183,18 +183,18 @@ if (
 	$location    = sanitize_text_field( (string) ( $attributes['schemaEventLocation'] ?? '' ) );
 	$event_url   = esc_url_raw( (string) ( $attributes['schemaEventUrl'] ?? '' ) );
 
-	if ( $description !== '' ) {
+	if ( '' !== $description ) {
 		$schema['description'] = $description;
 	}
 
-	if ( $location !== '' ) {
+	if ( '' !== $location ) {
 		$schema['location'] = array(
 			'@type' => 'Place',
 			'name'  => $location,
 		);
 	}
 
-	if ( $event_url !== '' ) {
+	if ( '' !== $event_url ) {
 		$schema['url'] = $event_url;
 	}
 

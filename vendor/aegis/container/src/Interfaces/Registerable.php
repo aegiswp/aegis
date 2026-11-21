@@ -17,13 +17,10 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for registerable interface.
 declare( strict_types=1 );
 
-// Declares the namespace for the registerable interface.
 namespace Aegis\Container\Interfaces;
 
-// Imports classes, interfaces, and functions used by the registerable interface.
 use Aegis\Container\Container;
 
 /**

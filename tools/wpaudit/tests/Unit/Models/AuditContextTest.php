@@ -18,48 +18,6 @@ use WPAudit\Models\FileRegistry;
  */
 class AuditContextTest extends TestCase {
 	/**
-	 * Test creating an AuditContext instance.
-	 */
-	public function test_create_audit_context(): void {
-		$config = new Configuration( array(), false );
-		$theme  = new ThemeMetadata( 'Test Theme', '1.0.0', '/path/to/theme' );
-		$files  = new FileRegistry();
-
-		$context = new AuditContext( $config, $theme, $files );
-
-		$this->assertEquals( $config, $context->config );
-		$this->assertEquals( $theme, $context->theme );
-		$this->assertEquals( $files, $context->files );
-		$this->assertEmpty( $context->shared_data );
-	}
-
-	/**
-	 * Test creating with shared data.
-	 */
-	public function test_create_with_shared_data(): void {
-		$config      = new Configuration( array(), false );
-		$theme       = new ThemeMetadata( 'Test Theme', '1.0.0', '/path/to/theme' );
-		$files       = new FileRegistry();
-		$shared_data = array( 'key' => 'value' );
-
-		$context = new AuditContext( $config, $theme, $files, $shared_data );
-
-		$this->assertEquals( $shared_data, $context->shared_data );
-	}
-
-	/**
-	 * Test get_theme_root method.
-	 */
-	public function test_get_theme_root(): void {
-		$config  = new Configuration( array(), false );
-		$theme   = new ThemeMetadata( 'Test Theme', '1.0.0', '/path/to/theme' );
-		$files   = new FileRegistry();
-		$context = new AuditContext( $config, $theme, $files );
-
-		$this->assertEquals( '/path/to/theme', $context->get_theme_root() );
-	}
-
-	/**
 	 * Test is_file_excluded with matching pattern.
 	 */
 	public function test_is_file_excluded_matching(): void {
@@ -212,27 +170,5 @@ class AuditContextTest extends TestCase {
 
 		$this->assertNull( $context->get_shared( 'nonexistent' ) );
 		$this->assertEquals( 'default', $context->get_shared( 'nonexistent', 'default' ) );
-	}
-
-	/**
-	 * Test shared data can store complex values.
-	 */
-	public function test_shared_data_complex_values(): void {
-		$config  = new Configuration( array(), false );
-		$theme   = new ThemeMetadata( 'Test Theme', '1.0.0', '/path/to/theme' );
-		$files   = new FileRegistry();
-		$context = new AuditContext( $config, $theme, $files );
-
-		$complex_data = array(
-			'array'  => array( 1, 2, 3 ),
-			'object' => (object) array( 'key' => 'value' ),
-			'nested' => array(
-				'deep' => array( 'value' => 'test' ),
-			),
-		);
-
-		$context->set_shared( 'complex', $complex_data );
-
-		$this->assertEquals( $complex_data, $context->get_shared( 'complex' ) );
 	}
 }

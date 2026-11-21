@@ -15,19 +15,15 @@
  * @since   1.0.0
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for companion plugin onboarding notice.
 declare( strict_types=1 );
 
-// Declares the namespace for the companion plugin onboarding notice.
 namespace Aegis\Admin;
 
-// Imports classes, interfaces, and functions used by the companion plugin onboarding notice.
 use function __;
 use function add_action;
 use function add_filter;
 use function add_query_arg;
 use function admin_url;
-use function apply_filters;
 use function check_admin_referer;
 use function check_ajax_referer;
 use function current_user_can;
@@ -58,37 +54,23 @@ use function wp_unslash;
 use function wp_verify_nonce;
 
 /**
- * Prompts administrators to install or activate the Aegis companion plugin.
+ * Prompts administrators to install or activate the Aegis Dash plugin.
  */
 class CompanionNotice {
-
-	/**
-	 * Plugin basename relative to wp-content/plugins.
-	 *
-	 * @var string
-	 */
-	public const PLUGIN_FILE = 'aegis/aegis.php';
-
-	/**
-	 * Plugin directory slug (folder name inside the release zip).
-	 *
-	 * @var string
-	 */
-	public const PLUGIN_SLUG = 'aegis';
 
 	/**
 	 * GitHub releases page, offered as the manual download fallback.
 	 *
 	 * @var string
 	 */
-	public const RELEASES_URL = 'https://github.com/aegiswp/plugin/releases';
+	public const RELEASES_URL = 'https://github.com/aegiswp/aegis-dash/releases';
 
 	/**
 	 * Package URL of the latest release asset; GitHub redirects it to the newest tag.
 	 *
 	 * @var string
 	 */
-	public const PACKAGE_URL = 'https://github.com/aegiswp/plugin/releases/latest/download/aegis.zip';
+	public const PACKAGE_URL = 'https://github.com/aegiswp/aegis-dash/releases/latest/download/aegis-dash.zip';
 
 	/**
 	 * Custom update.php action that installs the plugin from {@see self::PACKAGE_URL}.
@@ -120,16 +102,7 @@ class CompanionNotice {
 	public const WELCOME_ARG = 'aegis_welcome';
 
 	/**
-	 * First plugin version that provides the Slider, Toggle, Countdown and Related Posts blocks.
-	 *
-	 * @var string
-	 */
-	public const BLOCKS_MIN_VERSION = '1.1.0';
-
-	/**
-	 * Register admin hooks for the companion notice.
-	 *
-	 * @return void
+	 * Hooks the notices, the dismiss handlers and the GitHub install action, in the admin only.
 	 */
 	public function init(): void {
 		if ( ! is_admin() ) {
@@ -159,13 +132,13 @@ class CompanionNotice {
 			wp_die( esc_html__( 'Sorry, you are not allowed to install plugins on this site.', 'aegis' ) );
 		}
 
-		check_admin_referer( 'install-plugin_' . self::PLUGIN_SLUG );
+		check_admin_referer( 'install-plugin_' . Companion::PLUGIN_SLUG );
 
 		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 
 		// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited -- Globals read by admin-header.php.
 		global $title, $parent_file, $submenu_file;
-		$title        = __( 'Install Aegis Plugin', 'aegis' );
+		$title        = __( 'Install Aegis Dash', 'aegis' );
 		$parent_file  = 'plugins.php';
 		$submenu_file = 'plugin-install.php';
 		// phpcs:enable
@@ -182,22 +155,13 @@ class CompanionNotice {
 			)
 		);
 
-		/**
-		 * Filters the companion plugin package URL (for example, to pin a release or use a mirror).
-		 *
-		 * @since 1.0.1
-		 *
-		 * @param string $package Package zip URL.
-		 */
-		$package = (string) apply_filters( 'aegis_companion_package_url', self::PACKAGE_URL );
-
-		$result = $upgrader->install( $package );
+		$result = $upgrader->install( self::PACKAGE_URL );
 
 		if ( ! $result || is_wp_error( $result ) ) {
 			?>
 			<div class="wrap">
 				<p>
-					<?php esc_html_e( 'The Aegis plugin could not be installed automatically. Download aegis.zip from the latest release and upload it under Plugins → Add New Plugin → Upload Plugin.', 'aegis' ); ?>
+					<?php esc_html_e( 'Aegis Dash could not be installed automatically. Download aegis-dash.zip from the latest release and upload it under Plugins → Add New Plugin → Upload Plugin.', 'aegis' ); ?>
 				</p>
 				<p>
 					<a href="<?php echo esc_url( self::RELEASES_URL ); ?>" class="button button-primary" target="_blank" rel="noopener noreferrer">
@@ -212,38 +176,16 @@ class CompanionNotice {
 	}
 
 	/**
-	 * Whether the companion plugin is active.
-	 *
-	 * @return bool
-	 */
-	private function is_plugin_active(): bool {
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		return is_plugin_active( self::PLUGIN_FILE );
-	}
-
-	/**
-	 * Whether the companion plugin is installed (present in wp-content/plugins).
-	 *
-	 * @return bool
-	 */
-	private function is_plugin_installed(): bool {
-		return is_readable( WP_PLUGIN_DIR . '/' . self::PLUGIN_FILE );
-	}
-
-	/**
 	 * Whether the notice should be shown to the current user.
 	 *
 	 * @return bool
 	 */
 	private function should_show(): bool {
-		if ( get_template() !== 'aegis' ) {
+		if ( get_template() !== GitHubUpdater::THEME_SLUG ) {
 			return false;
 		}
 
-		if ( $this->is_plugin_active() ) {
+		if ( Companion::is_active() ) {
 			return false;
 		}
 
@@ -309,13 +251,13 @@ class CompanionNotice {
 		}
 
 		$screen = get_current_screen();
-		if ( ! $screen || $screen->id !== 'themes' ) {
+		if ( ! $screen || 'themes' !== $screen->id ) {
 			return;
 		}
 
-		$action_url   = $this->get_action_url();
-		$action_label = $this->get_action_label();
-		$dismiss_url  = wp_nonce_url(
+		$action_url    = $this->get_action_url();
+		$action_label  = $this->get_action_label();
+		$dismiss_url   = wp_nonce_url(
 			add_query_arg( 'aegis-dismiss-companion', '1', admin_url( 'themes.php' ) ),
 			self::DISMISS_NONCE
 		);
@@ -330,7 +272,7 @@ class CompanionNotice {
 				<strong><?php esc_html_e( 'Aegis is almost ready!', 'aegis' ); ?></strong>
 				<?php
 				esc_html_e(
-					'Install the Aegis companion plugin to unlock custom blocks, the settings dashboard, conditionals, hooks, and integrations. The theme works on its own; the plugin adds the full feature set.',
+					'Install the Aegis Dash plugin to unlock custom blocks, the settings dashboard, conditionals, hooks, and integrations. The theme works on its own; the plugin adds the full feature set.',
 					'aegis'
 				);
 				?>
@@ -339,7 +281,7 @@ class CompanionNotice {
 				<?php echo esc_html( $this->get_blocks_message() ); ?>
 			</p>
 			<p>
-				<?php if ( $action_url !== '' ) : ?>
+				<?php if ( '' !== $action_url ) : ?>
 					<a href="<?php echo esc_url( $action_url ); ?>" class="button button-primary">
 						<?php echo esc_html( $action_label ); ?>
 					</a>
@@ -363,8 +305,8 @@ class CompanionNotice {
 	private function get_blocks_message(): string {
 		return sprintf(
 			/* translators: %s: Minimum Aegis plugin version. */
-			__( 'The Aegis blocks (Slider, Toggle, Countdown, Related Posts) are provided by the Aegis plugin version %s or newer.', 'aegis' ),
-			self::BLOCKS_MIN_VERSION
+			__( 'The Aegis blocks (Slider, Toggle, Countdown, Related Posts) are provided by the Aegis Dash plugin version %s or newer.', 'aegis' ),
+			Companion::BLOCKS_MIN_VERSION
 		);
 	}
 
@@ -376,7 +318,7 @@ class CompanionNotice {
 	 * @return void
 	 */
 	public function render_blocks_notice(): void {
-		if ( get_template() !== 'aegis' || ! $this->is_plugin_active() ) {
+		if ( get_template() !== GitHubUpdater::THEME_SLUG || ! Companion::is_active() ) {
 			return;
 		}
 
@@ -389,7 +331,7 @@ class CompanionNotice {
 			return;
 		}
 
-		if ( GitHubUpdater::plugin_requirement_met( self::BLOCKS_MIN_VERSION ) ) {
+		if ( Companion::requirement_met( Companion::BLOCKS_MIN_VERSION ) ) {
 			return;
 		}
 		?>
@@ -416,7 +358,7 @@ class CompanionNotice {
 	 */
 	public function append_welcome_to_install_activate( array $actions, $api, string $plugin_file ): array {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( empty( $_GET[ self::WELCOME_ARG ] ) || $plugin_file !== self::PLUGIN_FILE ) {
+		if ( empty( $_GET[ self::WELCOME_ARG ] ) || Companion::PLUGIN_FILE !== $plugin_file ) {
 			return $actions;
 		}
 
@@ -443,7 +385,7 @@ class CompanionNotice {
 	 * @return string Empty string when the current user lacks the required capability.
 	 */
 	private function get_action_url(): string {
-		if ( $this->is_plugin_installed() ) {
+		if ( Companion::is_installed() ) {
 			if ( ! current_user_can( 'activate_plugins' ) ) {
 				return '';
 			}
@@ -451,13 +393,13 @@ class CompanionNotice {
 			$url = add_query_arg(
 				array(
 					'action'          => 'activate',
-					'plugin'          => self::PLUGIN_FILE,
+					'plugin'          => Companion::PLUGIN_FILE,
 					self::WELCOME_ARG => '1',
 				),
 				self_admin_url( 'plugins.php' )
 			);
 
-			return wp_nonce_url( $url, 'activate-plugin_' . self::PLUGIN_FILE );
+			return wp_nonce_url( $url, 'activate-plugin_' . Companion::PLUGIN_FILE );
 		}
 
 		if ( ! current_user_can( 'install_plugins' ) ) {
@@ -472,7 +414,7 @@ class CompanionNotice {
 			self_admin_url( 'update.php' )
 		);
 
-		return wp_nonce_url( $url, 'install-plugin_' . self::PLUGIN_SLUG );
+		return wp_nonce_url( $url, 'install-plugin_' . Companion::PLUGIN_SLUG );
 	}
 
 	/**
@@ -481,11 +423,11 @@ class CompanionNotice {
 	 * @return string
 	 */
 	private function get_action_label(): string {
-		if ( $this->is_plugin_installed() ) {
-			return __( 'Activate Aegis Plugin', 'aegis' );
+		if ( Companion::is_installed() ) {
+			return __( 'Activate Aegis Dash', 'aegis' );
 		}
 
-		return __( 'Install Aegis Plugin', 'aegis' );
+		return __( 'Install Aegis Dash', 'aegis' );
 	}
 
 	/**
@@ -496,7 +438,7 @@ class CompanionNotice {
 	 * @return void
 	 */
 	public function enqueue_dismiss_script( string $hook_suffix ): void {
-		if ( $hook_suffix !== 'themes.php' || ! $this->should_show() ) {
+		if ( 'themes.php' !== $hook_suffix || ! $this->should_show() ) {
 			return;
 		}
 

@@ -6,26 +6,20 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling list blocks as accordions
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockVariations
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for accordionlist block variation.
 declare( strict_types=1 );
 
-// Declares the namespace for the accordionlist block variation.
 namespace Aegis\Framework\BlockVariations;
 
-// Imports classes, interfaces, and functions used by the accordionlist block variation.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
+use Aegis\Framework\Companions;
 use Aegis\Framework\Interfaces\Renderable;
 use Aegis\Framework\ServiceProvider;
 use DOMElement;
@@ -108,8 +102,7 @@ class AccordionList implements Renderable {
 
 		if (
 			$faq_schema
-			&& class_exists( '\Aegis\Plugin\Settings\Repository' )
-			&& \Aegis\Plugin\Settings\Repository::is_schema_delegated_to_seo( 'faq' )
+			&& Companions::get()->is_schema_delegated_to_seo( 'faq' )
 		) {
 			$faq_schema = false;
 		}

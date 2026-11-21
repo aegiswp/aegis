@@ -1,12 +1,14 @@
 <?php
+/**
+ * Block pattern registration utilities.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for block pattern registration utilities.
 declare( strict_types=1 );
 
-// Declares the namespace for the block pattern registration utilities.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the block pattern registration utilities.
 use function _cleanup_header_comment;
 use function explode;
 use function get_file_data;
@@ -72,22 +74,12 @@ class Pattern {
 		$categories = $pattern['categories'] ?? [];
 
 		foreach ( $categories as $category ) {
-			$category = trim( (string) $category );
-
-			if ( ctype_digit( $category ) ) {
-				$category = 'error-' . $category;
-			}
-
-			if ( in_array( $category, [ 'cta', 'faq' ], true ) ) {
-				$label = strtoupper( $category );
-			} else {
-				$label = ucwords( str_replace( '-', ' ', $category ) );
-			}
+			$category = self::category_slug( trim( (string) $category ) );
 
 			register_block_pattern_category(
 				$category,
 				[
-					'label' => $label,
+					'label' => self::category_label( $category ),
 				]
 			);
 		}
@@ -179,6 +171,93 @@ class Pattern {
 	}
 
 	/**
+	 * Matches a `wp:pattern` block comment that starts with its slug.
+	 *
+	 * Group 1 is the slug, group 2 any further attributes after it (such as
+	 * `,"preview":true`), group 3 anything between the closing brace and `/-->`.
+	 */
+	private const REFERENCE_COMMENT = '/<!-- wp:pattern \{"slug":"([^"]+)"([^}]*)\}([^\/]*)\/-->/';
+
+	/**
+	 * Matches the opening of a `wp:pattern` block comment; group 1 is the slug.
+	 */
+	private const REFERENCE_SLUG = '/<!-- wp:pattern \{"slug":"([^"]+)"/';
+
+	/**
+	 * Registered slug for a pattern: `{first category}-{header slug}`.
+	 *
+	 * @param string[] $categories Categories from the pattern header, in order.
+	 * @param string   $slug       The header `Slug` value.
+	 *
+	 * @return string
+	 */
+	public static function slug_from_headers( array $categories, string $slug ): string {
+		return ( $categories[0] ?? 'common' ) . '-' . $slug;
+	}
+
+	/**
+	 * Category slug to register: numeric names (error pages such as 404) get an `error-` prefix.
+	 *
+	 * @param string $category Category or directory name.
+	 *
+	 * @return string
+	 */
+	public static function category_slug( string $category ): string {
+		return ctype_digit( $category ) ? 'error-' . $category : $category;
+	}
+
+	/**
+	 * Display label for a pattern category slug.
+	 *
+	 * @param string $category Category slug.
+	 *
+	 * @return string
+	 */
+	public static function category_label( string $category ): string {
+		if ( in_array( $category, array( 'cta', 'faq' ), true ) ) {
+			return strtoupper( $category );
+		}
+
+		return ucwords( str_replace( '-', ' ', $category ) );
+	}
+
+	/**
+	 * Unique pattern slugs referenced by `wp:pattern` blocks in markup, in order of appearance.
+	 *
+	 * @param string $content Block markup.
+	 *
+	 * @return string[]
+	 */
+	public static function referenced_slugs( string $content ): array {
+		if ( ! preg_match_all( self::REFERENCE_SLUG, $content, $matches ) ) {
+			return [];
+		}
+
+		return array_values( array_unique( $matches[1] ) );
+	}
+
+	/**
+	 * Replaces each self-closing `wp:pattern` block that starts with a slug.
+	 *
+	 * The callback gets the slug, whether the block has attributes besides the
+	 * slug, and the full match; it returns the replacement markup.
+	 *
+	 * @param string   $content  Block markup.
+	 * @param callable $callback function ( string $slug, bool $has_extra_attrs, string $match ): string.
+	 *
+	 * @return string The new markup, or the original when the replace failed.
+	 */
+	public static function replace_references( string $content, callable $callback ): string {
+		$replaced = preg_replace_callback(
+			self::REFERENCE_COMMENT,
+			static fn( array $m ): string => $callback( $m[1], '' !== $m[2], $m[0] ),
+			$content
+		);
+
+		return is_string( $replaced ) ? $replaced : $content;
+	}
+
+	/**
 	 * Header fields read from pattern files.
 	 *
 	 * @var array<string, string>
@@ -228,7 +307,7 @@ class Pattern {
 			}
 		}
 
-		$slug = ( $categories[0] ?? 'common' ) . '-' . $headers['slug'];
+		$slug = self::slug_from_headers( $categories, (string) $headers['slug'] );
 
 		$pattern = [
 			'slug'        => $slug,

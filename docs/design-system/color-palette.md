@@ -127,7 +127,7 @@ Available color options vary by block but typically include:
 
 To change colors site-wide, use Global Styles:
 
-![Styles → Colors in the Site Editor showing the Aegis palette and the element colors for links, captions, buttons, and headings. Numbered callouts: 1 The Aegis palette; 2 Colors for text, links, headings, captions, and buttons.](../screenshots/global-colors.png)
+![Styles → Colors in the Site Editor showing the Aegis palette and the element colors for links, captions, buttons, and headings.](../screenshots/global-colors.png)
 
 *Change site-wide colors in Styles → Colors.*
 

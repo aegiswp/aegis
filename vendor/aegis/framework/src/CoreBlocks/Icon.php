@@ -6,20 +6,19 @@
  * @since   1.0.0
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for core/icon bridge, gradient mask, and link enhancements.
 declare( strict_types=1 );
 
-// Declares the namespace for the core/icon bridge, gradient mask, and link enhancements.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the core/icon bridge, gradient mask, and link enhancements.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\BlockSettings\Responsive;
+use Aegis\Framework\Icons\IconFeatures;
 use Aegis\Framework\Icons\IconMigrationMapper;
 use Aegis\Framework\Interfaces\Renderable;
 use Aegis\Framework\ServiceProvider;
 use Aegis\Icons\Icon as IconUtility;
+use Aegis\Icons\IconSets;
 use Aegis\Utilities\Block;
 use WP_Block;
 use WP_Block_Supports;
@@ -70,17 +69,19 @@ class Icon implements Renderable {
 
 		$icon = (string) ( $parsed_block['attrs']['icon'] ?? '' );
 
-		if ( $icon === '' || ! str_starts_with( $icon, 'wordpress/' ) ) {
+		$prefix = IconSets::WORDPRESS . '/';
+
+		if ( $icon === '' || ! str_starts_with( $icon, $prefix ) ) {
 			return $parsed_block;
 		}
 
-		$name = substr( $icon, strlen( 'wordpress/' ) );
+		$name = substr( $icon, strlen( $prefix ) );
 
 		if ( $name === '' ) {
 			return $parsed_block;
 		}
 
-		$parsed_block['attrs']['icon'] = IconUtility::to_registry_id( 'wordpress', $name );
+		$parsed_block['attrs']['icon'] = IconUtility::to_registry_id( IconSets::WORDPRESS, $name );
 
 		return $parsed_block;
 	}
@@ -103,11 +104,7 @@ class Icon implements Renderable {
 	 */
 	public function render( string $block_content, array $block, WP_Block $instance ): string {
 		// Bail out on unsupported WordPress versions.
-		if ( version_compare( get_bloginfo( 'version' ), '7.0', '<' ) ) {
-			return $block_content;
-		}
-
-		if ( ! ServiceProvider::is_block_enabled( 'icon' ) ) {
+		if ( ! IconFeatures::active() ) {
 			return $block_content;
 		}
 
@@ -147,7 +144,7 @@ class Icon implements Renderable {
 				return $block_content;
 			}
 
-			$set = 'wordpress';
+			$set = IconSets::WORDPRESS;
 			$parsed = IconUtility::from_registry_id( (string) ( $attrs['icon'] ?? '' ) );
 
 			if ( is_array( $parsed ) && ! empty( $parsed['set'] ) ) {
@@ -530,7 +527,7 @@ class Icon implements Renderable {
 	/**
 	 * Renders a grid of all icons from a set when the all-icons class is present.
 	 */
-	private function render_all_icons( string $set = 'wordpress' ): string {
+	private function render_all_icons( string $set = IconSets::WORDPRESS ): string {
 		$set          = IconUtility::normalize_set_slug( $set );
 		$names        = IconUtility::get_set_icon_names( $set );
 		$inner_blocks = [];

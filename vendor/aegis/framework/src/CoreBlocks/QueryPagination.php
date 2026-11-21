@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling query pagination block content
- * - Integrates with utility classes for DOM and CSS
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for query pagination block.
 declare( strict_types=1 );
 
-// Declares the namespace for the query pagination block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the query pagination block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -80,7 +73,6 @@ class QueryPagination implements Renderable {
 			$styles['border-radius'] = $border_radius;
 		}
 
-		// Write updated styles back to the nav element.
 		$nav->setAttribute( 'style', CSS::array_to_string( $styles ) );
 
 		return $dom->saveHTML();

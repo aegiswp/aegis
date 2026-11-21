@@ -6,7 +6,6 @@
  *
  * Responsibilities:
  * - Checks for LifterLMS plugin presence and conditionally adds theme support
- * - Integrates with the Aegis container and conditional system
  * - Controls LifterLMS block patterns via Aegis Pro pattern control
  * - Registers LifterLMS styling and body classes
  *
@@ -21,6 +20,8 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use WP_Block_Patterns_Registry;
@@ -49,8 +50,10 @@ class LifterLMS implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( '\\Aegis\\Plugin\\Integrations\\LifterLMS' ) ) {
-			return \Aegis\Plugin\Integrations\LifterLMS::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_LIFTERLMS );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return class_exists( 'LifterLMS' )

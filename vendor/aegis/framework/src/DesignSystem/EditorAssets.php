@@ -6,27 +6,23 @@
  *
  * Responsibilities:
  * - Registers and enqueues editor scripts and styles
- * - Integrates with the scripts and styles services for backend delivery
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for editor assets component.
 declare( strict_types=1 );
 
-// Declares the namespace for the editor assets component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the editor assets component.
 use Aegis\Framework\BlockSettings\Responsive;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Framework\InlineAssets\Styles;
+use Aegis\Framework\Integrations\Detect;
 use Aegis\Framework\ServiceProvider;
 use Aegis\Utilities\Debug;
 use function apply_filters;
@@ -35,7 +31,6 @@ use function class_exists;
 use function defined;
 use function esc_url;
 use function file_exists;
-use function function_exists;
 use function get_admin_url;
 use function get_home_url;
 use function is_admin;
@@ -187,7 +182,7 @@ class EditorAssets
 		$this->enqueue_query_enhancements();
 
 		// Enqueue core/icon bridge (picker merge, transforms, link/gradient controls).
-		if ( ServiceProvider::is_block_enabled( 'icon' ) ) {
+		if ( \Aegis\Framework\Icons\IconFeatures::block_enabled() ) {
 			$this->enqueue_icon_block_editor( $handle, $data );
 		}
 
@@ -499,8 +494,8 @@ class EditorAssets
 				}
 				$catalog[ $set ] = [];
 			}
-			if ( ! isset( $catalog['wordpress'] ) ) {
-				$catalog['wordpress'] = [];
+			if ( ! isset( $catalog[ \Aegis\Icons\IconSets::WORDPRESS ] ) ) {
+				$catalog[ \Aegis\Icons\IconSets::WORDPRESS ] = [];
 			}
 		}
 
@@ -509,7 +504,7 @@ class EditorAssets
 			'aegisButtonIcons',
 			[
 				'icons'   => $catalog,
-				'restBase' => '/' . ( defined( 'AEGIS_SLUG' ) ? AEGIS_SLUG : 'aegis' ) . '/v1/icons',
+				'restBase' => \Aegis\Icons\IconRest::PATH,
 			]
 		);
 
@@ -556,9 +551,7 @@ class EditorAssets
 		wp_enqueue_script($handle);
 
 		// Get conditional logic settings from the plugin settings repository.
-		$conditionalLogicSettings = class_exists( '\Aegis\Plugin\Conditionals\Settings' )
-			? \Aegis\Plugin\Conditionals\Settings::get_for_editor()
-			: array();
+		$conditionalLogicSettings = Companions::get()->conditionals_editor_settings();
 
 		// Build dynamic role list from WordPress
 		$wp_roles = wp_roles();
@@ -575,20 +568,18 @@ class EditorAssets
 		$data = $this->scripts->get_data('', true);
 		$data['conditionalLogicSettings'] = $conditionalLogicSettings;
 		$data['userRoles'] = $roles;
-		$data['timezones'] = class_exists( '\Aegis\Plugin\Conditionals\Settings' )
-			? \Aegis\Plugin\Conditionals\Settings::timezone_choices()
-			: array();
-		$data['canManageConditionals'] = class_exists( '\Aegis\Plugin\Conditionals\Capabilities' )
-			? \Aegis\Plugin\Conditionals\Capabilities::current_user_can_manage()
-			: true;
+		$data['timezones'] = Companions::get()->conditionals_timezone_choices();
+		$data['canManageConditionals'] = Companions::get()->current_user_can_manage_conditionals();
 
 		if ( class_exists( '\AegisPro\Conditionals\Presets' ) ) {
-			$data['visibilityPresets'] = \AegisPro\Conditionals\Presets::get_presets_for_editor();
+			$data['visibilityPresets'] = \AegisPro\Conditionals\Presets::get_presets_for_editor( true );
 		}
 
-		if ( class_exists( '\Aegis\Plugin\Integrations\WPFusion' ) ) {
-			$data['wpFusionTags']  = \Aegis\Plugin\Integrations\WPFusion::editor_tags();
-			$data['wpFusionLists'] = \Aegis\Plugin\Integrations\WPFusion::editor_lists();
+		$wp_fusion = Companions::get()->wp_fusion_editor_data();
+
+		if ( null !== $wp_fusion ) {
+			$data['wpFusionTags']  = $wp_fusion['tags'];
+			$data['wpFusionLists'] = $wp_fusion['lists'];
 		}
 
 		if (!empty($data)) {
@@ -700,12 +691,8 @@ class EditorAssets
 			'masonryLayout'      => ServiceProvider::is_block_enabled( 'query_loop_masonry_layout' ),
 			'carouselLayout'     => ServiceProvider::is_block_enabled( 'query_loop_carousel_layout' ),
 			'woocommerce'            => ServiceProvider::is_block_enabled( 'query_loop_woocommerce' ),
-			'woocommerceActive'      => class_exists( \Aegis\Plugin\Integrations\WooCommerce::class )
-				? \Aegis\Plugin\Integrations\WooCommerce::is_plugin_active()
-				: ( class_exists( 'WooCommerce' ) || function_exists( 'WC' ) || defined( 'WC_VERSION' ) ),
-			'woocommerceIntegration' => class_exists( \Aegis\Plugin\Settings\Repository::class )
-				? \Aegis\Plugin\Settings\Repository::is_integration_enabled( 'woocommerce' )
-				: true,
+			'woocommerceActive'      => Companions::get()->integration_active( Companion::INTEGRATION_WOOCOMMERCE ) ?? Detect::woocommerce(),
+			'woocommerceIntegration' => Companions::get()->is_integration_enabled( 'woocommerce' ),
 			'performance'            => ServiceProvider::is_block_enabled( 'query_loop_performance' ),
 		];
 	}

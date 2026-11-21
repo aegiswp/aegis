@@ -17,18 +17,12 @@
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file.
 declare( strict_types=1 );
 
-// Declares the namespace for block settings within the Aegis Framework.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used throughout this file.
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Framework\ServiceProvider;
@@ -243,8 +237,6 @@ class QueryEnhancements implements Scriptable {
 	];
 
 	/**
-	 * Constructor.
-	 *
 	 * Registers the attribute injection filter and the query
 	 * modification filter for the Query Loop block.
 	 *

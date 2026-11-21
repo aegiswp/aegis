@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling post featured image block content
- * - Integrates with utility classes for DOM, CSS, and filter settings
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for post featured image block.
 declare( strict_types=1 );
 
-// Declares the namespace for the post featured image block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the post featured image block.
 use Aegis\Framework\BlockSettings\CssFilter;
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
@@ -96,7 +89,6 @@ class PostFeaturedImage implements Renderable {
 		$figure_classes = explode( ' ', $figure->getAttribute( 'class' ) );
 		$figure_styles  = CSS::string_to_array( $figure->getAttribute( 'style' ) );
 
-		// --- Box Shadow ---
 		// Apply box-shadow presets and custom colors for normal and hover states.
 		$shadow_preset = esc_attr( $attrs['shadowPreset'] ?? '' );
 		if ( $shadow_preset ) {
@@ -124,7 +116,6 @@ class PostFeaturedImage implements Renderable {
 			}
 		}
 
-		// --- Spacing and Border ---
 		// Apply border-radius and margin from block attributes.
 		if ( $border_radius = $attrs['style']['border']['radius'] ?? null ) {
 			$figure_styles['border-radius'] = $border_radius;
@@ -133,7 +124,6 @@ class PostFeaturedImage implements Renderable {
 			$figure_styles = CSS::add_shorthand_property( $figure_styles, 'margin', $margin );
 		}
 
-		// --- CSS Transforms ---
 		// Construct and apply CSS `transform` properties for normal and hover states.
 		$transform       = $attrs['style']['transform'] ?? [];
 		$transform_hover = $attrs['style']['transformHover'] ?? [];
@@ -159,7 +149,6 @@ class PostFeaturedImage implements Renderable {
 			$figure_classes[]                   = 'has-transform';
 		}
 
-		// --- CSS Filters ---
 		// Construct and apply CSS `filter` properties for normal and hover states.
 		$filter       = $attrs['style']['filter'] ?? [];
 		$filter_hover = $attrs['style']['filterHover'] ?? [];
@@ -184,7 +173,6 @@ class PostFeaturedImage implements Renderable {
 			$figure_classes[]                = 'has-filter';
 		}
 
-		// Apply all collected classes and styles back to the <figure> element.
 		$figure->setAttribute( 'class', implode( ' ', array_unique( $figure_classes ) ) );
 		if ( $figure_styles ) {
 			$figure->setAttribute( 'style', CSS::array_to_string( $figure_styles ) );

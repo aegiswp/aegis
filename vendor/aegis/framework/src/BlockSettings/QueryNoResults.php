@@ -20,18 +20,12 @@
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file.
 declare( strict_types=1 );
 
-// Declares the namespace for block settings within the Aegis Framework.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used throughout this file.
 use Aegis\Dom\DOM;
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
@@ -138,8 +132,6 @@ class QueryNoResults implements Renderable, Scriptable, Styleable {
 	];
 
 	/**
-	 * Constructor.
-	 *
 	 * Registers the `register_block_type_args` filter to inject
 	 * no-results attributes into the core/query block.
 	 *
@@ -205,7 +197,6 @@ class QueryNoResults implements Renderable, Scriptable, Styleable {
 
 		$attrs = $block['attrs'] ?? [];
 
-		// Check if no results template is enabled.
 		$enabled = $attrs['aegisNoResultsEnabled'] ?? false;
 
 		if ( ! $enabled ) {
@@ -217,7 +208,6 @@ class QueryNoResults implements Renderable, Scriptable, Styleable {
 			return $block_content;
 		}
 
-		// Get template settings.
 		$message     = $attrs['aegisNoResultsMessage'] ?? '';
 		$template    = $attrs['aegisNoResultsTemplate'] ?? 'default';
 		$icon        = $attrs['aegisNoResultsIcon'] ?? 'search';
@@ -238,7 +228,6 @@ class QueryNoResults implements Renderable, Scriptable, Styleable {
 			$message = esc_html__( 'No posts found matching your criteria.', 'aegis' );
 		}
 
-		// Build no results HTML.
 		$no_results_html = $this->build_no_results_html( $message, $template, $icon, $show_search );
 
 		// Insert no results template into the query block (QNR2: use DOM import instead of appendXML).

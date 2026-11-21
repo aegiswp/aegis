@@ -12,18 +12,12 @@
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for renderable interface.
 declare( strict_types=1 );
 
-// Declares the namespace for the renderable interface.
 namespace Aegis\Framework\Interfaces;
 
-// Imports classes, interfaces, and functions used by the renderable interface.
 use WP_Block;
 
 // Declares the Renderable interface for standardizing renderable objects in the framework.

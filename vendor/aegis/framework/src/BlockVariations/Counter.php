@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling counter block content
- * - Integrates with the Renderable and Scriptable interfaces for block output
  *
  * @package    Aegis\Framework\BlockVariations
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for counter block variation.
 declare( strict_types=1 );
 
-// Declares the namespace for the counter block variation.
 namespace Aegis\Framework\BlockVariations;
 
-// Imports classes, interfaces, and functions used by the counter block variation.
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Dom\DOM;

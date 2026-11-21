@@ -13,7 +13,7 @@
 	<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|xs","bottom":"var:preset|spacing|xs"}}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group alignwide"
 		style="padding-top:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs)">
-		<!-- wp:group {"style":{"spacing":{"blockGap":"4px"},"zIndex":{"all":"0"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"},"onclick":""} -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxxs"},"zIndex":{"all":"0"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"},"onclick":""} -->
 		<div class="wp-block-group">
 			<!-- wp:icon {"icon":"social/aegis","url":"<?php echo esc_url( home_url( '/' ) ); ?>","iconSvgString":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" role=\"img\" aria-labelledby=\"icon-6a2cc03b33068\" data-icon=\"social-aegis\" style=\"min-width:35px;height:35px\" fill=\"currentColor\"><title id=\"icon-6a2cc03b33068\">Aegis Icon</title><path d=\"M10.06 7.75 L12.02 3.87 L13.95 7.72 L16.65 9.29 L12.03 0 L7.34 9.3 L10.06 7.75 Z M18.37 12.72 L18.2 12.36 L15.5 10.79 L17.02 13.68 L20.05 18.61 L12.02 15.17 L3.98 18.62 L6.96 13.68 L8.39 10.81 L5.67 12.39 L5.5 12.71 L0 22.87 L12.01 16.87 L24 22.94 L18.37 12.72 Z\" stroke=\"none\" fill-rule=\"evenodd\"></path></svg>","style":{"dimensions":{"width":"35px"}}} /-->
 		</div>
@@ -56,7 +56,7 @@
 
 				<!-- wp:woocommerce/customer-account {"displayStyle":"icon_only","iconStyle":"line","iconClass":"wc-block-customer-account__account-icon","style":{"typography":{"fontSize":"var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dfont-size\u002d\u002d14)"}}} /-->
 
-				<!-- wp:buttons {"style":{"spacing":{"blockGap":"12px"},"display":{"all":""}},"layout":{"type":"flex","justifyContent":"right","flexWrap":"nowrap","orientation":"horizontal"}} -->
+				<!-- wp:buttons {"style":{"spacing":{"blockGap":"var:preset|spacing|2xs"},"display":{"all":""}},"layout":{"type":"flex","justifyContent":"right","flexWrap":"nowrap","orientation":"horizontal"}} -->
 				<div class="wp-block-buttons">
 					<!-- wp:button {"className":"is-hide-mobile nowrap is-style-fill","style":{"display":{"mobile":"none"},"typography":{"lineHeight":"2"}},"onclick":"","size":"small","iconSet":"WordPress","iconName":"mail","iconSize":"20px","iconPosition":"end","iconSvgString":"\u003csvg xmlns=\u0022http://www.w3.org/2000/svg\u0022 viewBox=\u00220 0 24 24\u0022 role=\u0022img\u0022 aria-labelledby=\u0022icon-header-contact\u0022 data-icon=\u0022wordpress-mail\u0022 width=\u002224\u0022 height=\u002224\u0022 fill=\u0022currentColor\u0022\u003e\u003ctitle id=\u0022icon-header-contact\u0022\u003eMail Icon\u003c/title\u003e\u003cpath d=\u0022M19 5H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM4.5 7c0-.3.2-.5.5-.5h14c.3 0 .5.2.5.5v1.3l-7.6 4.4-7.4-4.3V7zm15 8.6V17c0 .3-.2.5-.5.5H5c-.3 0-.5-.2-.5-.5v-6.9l5.9 3.4 1.5.9 1.5-.9 6.1-3.5v5.6z\u0022\u003e\u003c/path\u003e\u003c/svg\u003e"} -->
 					<div class="wp-block-button is-hide-mobile nowrap is-style-fill"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="line-height:2"><?php echo esc_html__( 'Contact', 'aegis' ); ?></a></div>

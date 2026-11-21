@@ -11,14 +11,14 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations\WooCommerce;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
+use Aegis\Framework\Integrations\Detect;
 use WC_Product;
 use function __;
-use function class_exists;
-use function defined;
 use function esc_html;
-use function function_exists;
 use function is_numeric;
 use function max;
 use function round;
@@ -40,13 +40,13 @@ class SaleBadge implements Conditional, Styleable {
 	];
 
 	public static function condition(): bool {
-		if ( class_exists( \Aegis\Plugin\Integrations\WooCommerce::class ) ) {
-			return \Aegis\Plugin\Integrations\WooCommerce::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_WOOCOMMERCE );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
-		return class_exists( 'WooCommerce' )
-			|| function_exists( 'WC' )
-			|| defined( 'WC_VERSION' );
+		return Detect::woocommerce();
 	}
 
 	/**

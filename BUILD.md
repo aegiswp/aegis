@@ -42,7 +42,6 @@ Compiled block assets in `src/Blocks/` are gitignored; run `npm run build` after
 
 ```bash
 npm run clean             # Remove compiled block assets
-make clean                # npm run clean + remove node_modules/ (Git Bash/WSL)
 ```
 
 ## Plugin Build
@@ -50,14 +49,14 @@ make clean                # npm run clean + remove node_modules/ (Git Bash/WSL)
 Map, Modal, admin UI, and editor extensions are built in the companion plugin:
 
 ```bash
-cd wp-content/plugins/aegis
+cd wp-content/plugins/aegis-dash
 npm run build
 ```
 
-See [`wp-content/plugins/aegis/BUILD.md`](../../plugins/aegis/BUILD.md).
+See [`wp-content/plugins/aegis-dash/BUILD.md`](../../plugins/aegis-dash/BUILD.md).
 
 ## Documentation
 
 - [Theme docs](docs/home.md)
-- [Plugin docs](../../plugins/aegis/docs/home.md)
+- [Plugin docs](../../plugins/aegis-dash/docs/home.md)
 - [Pro docs](../../plugins/aegis-pro/docs/home.md)

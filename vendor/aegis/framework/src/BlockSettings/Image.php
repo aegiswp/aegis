@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Defines and manages image block settings, such as aspect ratio and display options
- * - Integrates with the Scriptable interface for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for image block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the image block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the image block setting.
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use function is_admin;

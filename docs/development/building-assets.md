@@ -1,6 +1,6 @@
 # Building Assets
 
-Aegis uses a **dual build** workflow: the theme compiles theme-owned blocks; the companion plugin compiles Map, Modal, admin, and editor assets.
+Aegis uses a **dual build** workflow: the theme compiles its fallback copies of the six Aegis blocks; Aegis Dash compiles the same blocks and its admin app. Map and Modal are hand-maintained.
 
 ## Theme Build
 
@@ -12,19 +12,19 @@ npm run build             # Theme blocks → src/Blocks/
 npm run dev               # Watch mode
 ```
 
-Output: `src/Blocks/` (countdown, slider, slide, toggle, toggle-content, related-posts).
+Output: `src/Blocks/` (countdown, slider, slide, toggle, toggle-content, related-posts). These are the theme's fallback copies; Aegis Dash provides the same blocks.
 
-Video uses WordPress **`core/video`** — editor assets are built in the companion plugin. See [Plugin Building Assets](../../../../plugins/aegis/docs/development/building-assets.md).
+Video uses WordPress **`core/video`**; the player and its editor assets are built in the Aegis Video add-on. For the Aegis Dash build, see [Aegis Dash Building Assets](../../../../plugins/aegis-dash/docs/development/building-assets.md).
 
 ## Plugin Build
 
 ```bash
-cd wp-content/plugins/aegis
+cd wp-content/plugins/aegis-dash
 npm install
-npm run build             # Admin + video editor (does not compile Map/Modal)
+npm run build             # Admin app + the six TypeScript blocks (does not compile Map/Modal)
 ```
 
-See [Plugin Building Assets](../../../../plugins/aegis/docs/development/building-assets.md).
+See [Aegis Dash Building Assets](../../../../plugins/aegis-dash/docs/development/building-assets.md).
 
 ## Build Toolchain
 
@@ -126,7 +126,7 @@ src/Blocks/
 └── related-posts/
 ```
 
-Video editor assets are built in the companion plugin (`wp-content/plugins/aegis`).
+Video editor assets are built in the Aegis Video add-on.
 
 ## Webpack Configuration
 
@@ -225,7 +225,7 @@ npm run build
 
 ## Translations
 
-The theme catalog is `languages/aegis.pot` (text domain `aegis`). It does **not** include companion plugin strings.
+The theme catalog is `languages/aegis.pot` (text domain `aegis`). It does **not** include Aegis Dash strings.
 
 ```bash
 cd wp-content/themes/aegis
@@ -233,7 +233,7 @@ npm run translate             # Requires `wp` on PATH
 npm run translate:studio      # WordPress Studio
 ```
 
-`prepare-translate.js` copies vendored Icon, Marquee, Newsletter, Accordion, SVG, Visibility, and Query Loop sources into `build/I18nScan` for the scan (`vendor/` is excluded). Bundled `editor.js` is not scanned; live SVG inspector strings come from `svg-editor.js`. WP-CLI scans JavaScript, not TypeScript, so run `npm run build` first if you changed theme block `*.tsx` / `*.ts` sources (for example `src/Blocks/slider/edit.tsx`, `countdown/edit.tsx`, `toggle/index.tsx`, `related-posts/edit.tsx`). Plugin strings belong in `wp-content/plugins/aegis/languages/aegis.pot`. Pro strings belong in `wp-content/plugins/aegis-pro/languages/aegis-pro.pot`. See [Plugin Building Assets](../../../../plugins/aegis/docs/development/building-assets.md#translations) and [[tools]].
+`prepare-translate.js` copies vendored Icon, Marquee, Newsletter, Accordion, SVG, Visibility, and Query Loop sources into `build/I18nScan` for the scan (`vendor/` is excluded). Bundled `editor.js` is not scanned; live SVG inspector strings come from `svg-editor.js`. WP-CLI scans JavaScript, not TypeScript, so run `npm run build` first if you changed theme block `*.tsx` / `*.ts` sources (for example `src/Blocks/slider/edit.tsx`, `countdown/edit.tsx`, `toggle/index.tsx`, `related-posts/edit.tsx`). Plugin strings belong in `wp-content/plugins/aegis-dash/languages/aegis.pot`. Pro strings belong in `wp-content/plugins/aegis-pro/languages/aegis-pro.pot`. See [Aegis Dash Building Assets](../../../../plugins/aegis-dash/docs/development/building-assets.md#translations) and [[tools]].
 
 ## Next Steps
 

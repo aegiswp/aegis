@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling post excerpt block content
- * - Integrates with utility classes for DOM, CSS, and string manipulation
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for post excerpt block.
 declare( strict_types=1 );
 
-// Declares the namespace for the post excerpt block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the post excerpt block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -80,7 +73,6 @@ class PostExcerpt implements Renderable {
 	 * @return string The modified block content, or an empty string in specific contexts.
 	 */
 	public function render( string $block_content, array $block, WP_Block $instance ): string {
-		// --- Conditional Rendering ---
 		// On singular pages, if there is no manually written excerpt, the block should
 		// render nothing to avoid showing the full post content. This does not apply
 		// when inside a Query Loop (post-template).
@@ -91,7 +83,6 @@ class PostExcerpt implements Renderable {
 			return '';
 		}
 
-		// --- DOM Preparation ---
 		$attrs           = $block['attrs'] ?? [];
 		$default_excerpt = $attrs['defaultExcerpt'] ?? '';
 		$dom             = DOM::create( $block_content );
@@ -106,7 +97,6 @@ class PostExcerpt implements Renderable {
 			$dom->appendChild( $div );
 		}
 
-		// --- "Read More" Link Handling ---
 		// If the "Read More" link is explicitly hidden, remove it from the DOM.
 		if ( $attrs['hideReadMore'] ?? false ) {
 			$read_more = DOM::get_elements_by_class_name( 'wp-block-post-excerpt__more-text', $dom )[0] ?? null;
@@ -133,7 +123,6 @@ class PostExcerpt implements Renderable {
 			}
 		}
 
-		// --- Excerpt Content Sourcing and Truncation ---
 		$p                = DOM::get_elements_by_class_name( 'wp-block-post-excerpt__excerpt', $dom )[0] ?? null;
 		$rendered_excerpt = $p->textContent ?? '';
 		$excerpt_length   = $attrs['excerptLength'] ?? apply_filters( 'excerpt_length', 55 );
@@ -148,7 +137,6 @@ class PostExcerpt implements Renderable {
 		$p->textContent = esc_html( $excerpt );
 		$p->nodeValue   = esc_html( wp_trim_words( $p->nodeValue ?? '', $excerpt_length ) );
 
-		// --- Style Application ---
 		$div_classes = explode( ' ', $div->getAttribute( 'class' ) );
 		$styles      = [];
 		$text_color  = $attrs['textColor'] ?? null;

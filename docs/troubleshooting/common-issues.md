@@ -64,7 +64,7 @@ Update WordPress to version 7.0 or later via **Dashboard → Updates**.
 2. Clear all caches (browser, page cache plugin, server cache).
 3. Deactivate and reactivate the theme.
 4. Ensure the theme `patterns/` directory exists and contains PHP files.
-5. For **WooCommerce shop patterns**, install and activate **WooCommerce** and the **Aegis companion plugin**. See [[faq#why-dont-i-see-shop-or-product-patterns-in-the-inserter]].
+5. For **WooCommerce shop patterns**, install and activate **WooCommerce** and the **Aegis Dash**. See [[faq#why-dont-i-see-shop-or-product-patterns-in-the-inserter]].
 6. Check the PHP error log for any pattern registration errors.
 
 ### Site Editor Shows Blank Page
@@ -174,7 +174,7 @@ Update WordPress to version 7.0 or later via **Dashboard → Updates**.
 1. Select the Slider and set **Slides Per Page** to 1, or add more slides than `perPage`.
 2. Confirm arrows and dots are on in the inspector, and that **Aegis → Blocks → Slider** Navigation and Pagination extras are on.
 3. On the front end, confirm `splide.js`, `splide.css`, and the slider view script load.
-4. See [[slider]].
+4. See [Slider and Slide](../../../../plugins/aegis-dash/docs/blocks/slider.md).
 
 ## Display Issues
 
@@ -249,7 +249,7 @@ See [[dark-mode]] for configuration details.
 4. Enable page caching.
 5. Check server response time (TTFB).
 6. See [[performance]] for theme optimization strategies.
-7. Enable plugin toggles at **Aegis → Performance** (oEmbed, dashicons, heartbeat, XML-RPC/head cleanup, embed facades, emoji with Pro) — see [Plugin Performance](../../../../plugins/aegis/docs/features/performance.md).
+7. Enable plugin toggles at **Aegis → Performance** (oEmbed, dashicons, heartbeat, XML-RPC/head cleanup, embed facades, emoji with Pro) — see [Aegis Dash Performance](../../../../plugins/aegis-dash/docs/features/performance.md).
 8. For Query Loops, enable **Query Loop Performance** at **Aegis → Performance**; with Pro, configure per-block options in [Query Performance (Pro)](../../../../plugins/aegis-pro/docs/features/query-performance.md).
 
 ### Assets Loading on Every Page
@@ -294,15 +294,15 @@ See [[dark-mode]] for configuration details.
 
 ### Wishlist Page Empty
 
-**Symptom:** The wishlist page shows no products, displays `[ti_wishlisttable]` as plain text, or is blank.
+**Symptom:** The wishlist page shows no products, displays `[ti_wishlistsview]` as plain text, or is blank.
 
-**Cause:** The TI WooCommerce Wishlist plugin is missing, inactive, WooCommerce or the Aegis companion plugin is inactive, or the page is not using the Wishlist template.
+**Cause:** The TI WooCommerce Wishlist plugin is missing, inactive, WooCommerce or the Aegis Dash is inactive, or the page is not using the Wishlist template.
 
 **Solution:**
 
-1. Install and activate **WooCommerce**, the **Aegis companion plugin**, and [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/).
+1. Install and activate **WooCommerce**, the **Aegis Dash**, and [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/).
 2. Edit the wishlist page and confirm **Template** is set to **Wishlist** (visible only when dependencies are active).
-3. The Wishlist FSE template loads the companion plugin's `template-page-wishlist` pattern, which includes the `[ti_wishlisttable]` shortcode.
+3. The Wishlist FSE template loads Aegis Dash's `template-page-wishlist` pattern, which includes the `[ti_wishlistsview]` shortcode.
 4. Clear page and object caches, then reload the page while logged in as a customer who has saved items.
 
 See [[woocommerce-integration#wishlist-ti-woocommerce-wishlist]] for full setup steps.
@@ -311,13 +311,13 @@ See [[woocommerce-integration#wishlist-ti-woocommerce-wishlist]] for full setup 
 
 **Symptom:** WooCommerce block patterns (cart, checkout, product grids, store headers) do not appear in the pattern inserter.
 
-**Cause:** WooCommerce block patterns are registered by the **Aegis companion plugin** only when **WooCommerce is active**.
+**Cause:** WooCommerce block patterns are registered by the **Aegis Dash** only when **WooCommerce is active**.
 
 **Solution:**
 
-1. Install and activate **WooCommerce** and the **Aegis companion plugin**.
+1. Install and activate **WooCommerce** and the **Aegis Dash**.
 2. Confirm WooCommerce block templates are enabled.
-3. See [[faq#why-dont-i-see-shop-or-product-patterns-in-the-inserter]] and [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md).
+3. See [[faq#why-dont-i-see-shop-or-product-patterns-in-the-inserter]] and [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md).
 
 ## Plugin Conflicts
 
@@ -328,7 +328,7 @@ When you suspect a plugin conflict:
 1. Deactivate all plugins.
 2. Check if the issue resolves.
 3. Reactivate plugins one by one to identify the conflict.
-4. Report the conflict, with details, through the [Aegis documentation site](https://www.atmostfear-entertainment.com/docs/aegis/).
+4. Report the conflict, with details, through [Getting Support](support.md).
 
 ### Common Conflicting Plugin Types
 
@@ -344,9 +344,9 @@ See [[updating]] for detailed update troubleshooting, including failed updates a
 
 If your issue is not listed here:
 
-1. Search the [Aegis documentation](https://www.atmostfear-entertainment.com/docs/aegis/) for similar reports.
+1. Search the [Aegis documentation](https://www.atmostfear-entertainment.com/docs/aegis/theme/aegis-theme/) for similar reports.
 2. Check the [[faq]] for additional answers.
-3. Report the issue with:
+3. Ask for help through [Getting Support](support.md): the [community forum](https://www.atmostfear-entertainment.com/community/) for free users, or a [support ticket](https://www.atmostfear-entertainment.com/account/support-tickets/) with Aegis Pro. Include:
    - WordPress version
    - PHP version
    - Aegis version
@@ -356,8 +356,9 @@ If your issue is not listed here:
 
 ## Related Pages
 
+- [Getting Support](support.md) — Where to ask for help, free and Pro.
 - [[faq]] — Frequently asked questions.
 - [[updating]] — Update troubleshooting.
 - [[requirements]] — Verify system requirements.
 - [[performance]] — Theme performance optimization.
-- [Plugin Performance](../../../../plugins/aegis/docs/features/performance.md) — Site-wide and Query Loop toggles.
+- [Aegis Dash Performance](../../../../plugins/aegis-dash/docs/features/performance.md) — Site-wide and Query Loop toggles.

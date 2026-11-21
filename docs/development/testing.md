@@ -181,10 +181,10 @@ Run this matrix before raising `Tested up to` to 7.1. Do **not** remove Aegis br
 | Core responsive style states | Edit Group/Columns/Image/Heading/Button with viewport styles; confirm front-end CSS |
 | Aegis Display / visibility | Toggle hide-on-mobile, display/order/width; confirm Landscape/Tablet buttons still work |
 | Iframed editor | Post Editor + Site Editor: Global Styles, overlays, icons, Aegis inspector panels |
-| React 19 experiment | Enable Gutenberg `gutenberg-react-19`; open theme blocks and companion plugin admin/editor UIs; watch console |
+| React 19 experiment | Enable Gutenberg `gutenberg-react-19`; open theme blocks and Aegis Dash admin/editor UIs; watch console |
 | Regression baseline | Spot-check the same flows on WordPress 7.0 |
 
-Static scan (theme + Aegis plugin sources): no `__next40pxDefaultSize` or `useResizeCanvas` usage found. Vendored map libraries in Aegis Pro may still reference legacy React APIs — retest those screens under the React 19 experiment and update upstream packages when available.
+Static scan (theme + Aegis Dash sources): no `__next40pxDefaultSize` or `useResizeCanvas` usage found. Vendored map libraries in Aegis Pro may still reference legacy React APIs — retest those screens under the React 19 experiment and update upstream packages when available.
 
 ## Next Steps
 

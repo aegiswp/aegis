@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Converts custom gradients to conic gradients
- * - Integrates with the styles service for frontend delivery
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for conic gradient component.
 declare( strict_types=1 );
 
-// Declares the namespace for the conic gradient component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the conic gradient component.
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use Aegis\Dom\CSS;

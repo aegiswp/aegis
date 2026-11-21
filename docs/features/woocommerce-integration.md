@@ -1,13 +1,13 @@
 # WooCommerce Integration
 
-Aegis provides WooCommerce **FSE templates** in the theme. Multi-step checkout assets and WooCommerce **block patterns** are owned by the free companion plugin when WooCommerce is active — see [Plugin WooCommerce Checkout](../../../../plugins/aegis/docs/features/woocommerce-checkout.md) and [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md).
+Aegis provides WooCommerce **FSE templates** in the theme. Multi-step checkout assets and WooCommerce **block patterns** are owned by the free Aegis Dash when WooCommerce is active — see [Aegis Dash WooCommerce Checkout](../../../../plugins/aegis-dash/docs/features/woocommerce-checkout.md) and [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md).
 
 ## Requirements
 
 - WooCommerce 8.0 or later.
 - WordPress 7.0 or later.
 - WooCommerce block-based templates enabled (default in current versions).
-- **Aegis companion plugin** (free) for WooCommerce **block patterns** in the inserter (shop headers, product grids, template patterns).
+- **Aegis Dash** (free) for WooCommerce **block patterns** in the inserter (shop headers, product grids, template patterns).
 - **TI WooCommerce Wishlist** (optional) for the Wishlist template and wishlist pattern — see [Wishlist (TI WooCommerce Wishlist)](#wishlist-ti-woocommerce-wishlist).
 
 ## WooCommerce Templates
@@ -29,21 +29,21 @@ Aegis includes dedicated WooCommerce templates that replace the default WooComme
 | Multi-Step Checkout | `page-checkout-multi-step.html` | Enhanced multi-step checkout flow. |
 | Order Confirmation | `order-confirmation.html` | Thank-you page after purchase. |
 | My Account | `page-my-account.html` | Customer account dashboard. |
-| Wishlist | `page-wishlist.html` | Customer product wishlist (requires TI WooCommerce Wishlist + companion plugin pattern). |
+| Wishlist | `page-wishlist.html` | Customer product wishlist (requires TI WooCommerce Wishlist + Aegis Dash pattern). |
 
-## WooCommerce Block Patterns (Companion Plugin)
+## WooCommerce Block Patterns (Aegis Dash)
 
-Block patterns that contain `wp:woocommerce/*` blocks (product grids, store headers, cart/checkout template patterns, etc.) are registered by the **Aegis companion plugin** from `wp-content/plugins/aegis/patterns/woocommerce/` **only when WooCommerce is active**. This prevents missing-block errors in the Site Editor when WooCommerce is not installed.
+Block patterns that contain `wp:woocommerce/*` blocks (product grids, store headers, cart/checkout template patterns, etc.) are registered by the **Aegis Dash** from `wp-content/plugins/aegis-dash/patterns/woocommerce/` **only when WooCommerce is active**. This prevents missing-block errors in the Site Editor when WooCommerce is not installed.
 
 Generic commerce **marketing** patterns without WooCommerce blocks (for example trust badges, shipping info) remain in the theme `patterns/commerce/` directory.
 
-See [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md).
+See [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md).
 
 ## Multi-Step Checkout
 
-The theme ships the **Multi-Step Checkout** FSE template (`page-checkout-multi-step.html`). Assign it in the Site Editor; checkout CSS/JS and integration gating are documented in the free plugin: [WooCommerce Checkout](../../../../plugins/aegis/docs/features/woocommerce-checkout.md).
+The theme ships the **Multi-Step Checkout** FSE template (`page-checkout-multi-step.html`). Assign it in the Site Editor; checkout CSS/JS and integration gating are documented in Aegis Dash: [WooCommerce Checkout](../../../../plugins/aegis-dash/docs/features/woocommerce-checkout.md).
 
-![The Aegis multi-step checkout on the front end with Shipping, Payment, and Review step indicators, the contact and billing fields, and the order summary on the right. Numbered callouts: 1 Step indicators: Shipping, Payment, and Review; 2 Fields for the current step; 3 Order summary.](../screenshots/checkout.png)
+![The Aegis multi-step checkout on the front end with Shipping, Payment, and Review step indicators, the contact and billing fields, and the order summary on the right.](../screenshots/checkout.png)
 
 *The multi-step checkout.*
 
@@ -100,7 +100,7 @@ The **Wishlist** template (`page-wishlist.html`) provides a styled layout for sa
 
 - The free [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/) plugin
 - **WooCommerce** active
-- The **Aegis companion plugin** (registers the `template-page-wishlist` pattern when both WooCommerce and TI Wishlist are active)
+- The **Aegis Dash** (registers the `template-page-wishlist` pattern when both WooCommerce and TI Wishlist are active)
 
 The wishlist template is **hidden from the template picker** when TI Wishlist or WooCommerce is inactive.
 
@@ -112,15 +112,19 @@ The wishlist template is **hidden from the template picker** when TI Wishlist or
 4. Publish the page.
 5. Optional: add a link to the page in your header navigation or account menu.
 
-The template pattern renders the `[ti_wishlisttable]` shortcode, which displays the customer's saved products. The **Continue Shopping** button links to the WooCommerce shop page when WooCommerce is active.
+![The Wishlist page on the front end with the Wishlist template: the page title, the Default wishlist heading, and a table of saved products with image, price, date added, stock status, and an Add to Cart button.](../screenshots/wishlist.png)
+
+*The Wishlist template showing a saved product.*
+
+The template pattern renders the `[ti_wishlistsview]` shortcode, which displays the customer's saved products. The **Continue Shopping** button links to the WooCommerce shop page when WooCommerce is active.
 
 ### Shortcode
 
 | Shortcode | Purpose |
 |-----------|---------|
-| `[ti_wishlisttable]` | Displays the wishlist table on the wishlist page. |
+| `[ti_wishlistsview]` | Displays the wishlist table on the wishlist page. |
 
-If you customize the template in the Site Editor, keep the Shortcode block with `[ti_wishlisttable]` in the main content area.
+If you customize the template in the Site Editor, keep the Shortcode block with `[ti_wishlistsview]` in the main content area.
 
 ### Wishlist Troubleshooting
 
@@ -128,7 +132,7 @@ If you customize the template in the Site Editor, keep the Shortcode block with 
 
 - Confirm **TI WooCommerce Wishlist** is installed and activated.
 - Verify the page uses the **Wishlist** template (not the default Page template).
-- Ensure the Shortcode block contains `[ti_wishlisttable]` exactly.
+- Ensure the Shortcode block contains `[ti_wishlistsview]` exactly.
 - Clear page and object caches after installing the plugin.
 
 **Add to wishlist button missing on product pages**

@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
 
       - name: Reject forbidden paths
         run: |
@@ -33,7 +33,7 @@ jobs:
           fi
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -57,7 +57,7 @@ jobs:
           npm run lint:pkg-json
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
           php-version: '8.3'
           extensions: mbstring, intl, dom, curl, json, libxml, xml, xmlwriter
@@ -84,6 +84,10 @@ jobs:
           composer install --no-interaction --no-progress --working-dir=tools/wpaudit
           tools/wpaudit/vendor/bin/phpunit -c tools/wpaudit/phpunit.xml
 
+      # Framework characterization tests reuse the WPAudit PHPUnit (the theme's composer has no phpunit).
+      - name: Framework unit tests
+        run: php tools/wpaudit/vendor/bin/phpunit -c phpunit.framework.xml
+
   theme-validation:
     name: Theme Validation
     runs-on: ubuntu-latest
@@ -91,10 +95,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'

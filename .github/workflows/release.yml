@@ -7,6 +7,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -36,10 +39,10 @@ jobs:
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
       - name: Checkout Code
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -54,7 +57,7 @@ jobs:
         run: npm run build
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
           php-version: '8.3'
           tools: composer
@@ -168,7 +171,7 @@ jobs:
           echo "checksum_path=${THEME_SLUG}.zip.sha256" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release (Draft)
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
         with:
           name: Aegis ${{ env.RELEASE_TAG }} — install from Assets (aegis.zip)
           files: |
@@ -182,7 +185,7 @@ jobs:
             > **Install for WordPress:** under **Assets**, download **`aegis.zip`** (or `aegis-${{ env.VERSION }}.zip`).
             > Upload via **Appearance → Themes → Add New → Upload Theme**.
             >
-            > Do **not** use GitHub **Source code (zip/tar.gz)**. Those archives are named `theme-…` because this repository is `aegiswp/theme`, and they are the development tree — not an installable theme package.
+            > Do **not** use GitHub **Source code (zip/tar.gz)**. Those archives are named `theme-…` because this repository is `aegiswp/aegis`, and they are the development tree — not an installable theme package.
 
             ## Release Information
             **Tag**: ${{ env.RELEASE_TAG }}

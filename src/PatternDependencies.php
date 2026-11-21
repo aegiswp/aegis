@@ -29,11 +29,8 @@ use function array_diff_key;
 use function array_flip;
 use function array_keys;
 use function array_unique;
-use function get_stylesheet;
 use function get_stylesheet_directory;
-use function get_template;
 use function get_template_directory;
-use function in_array;
 use function preg_match_all;
 use function preg_quote;
 use function preg_replace;
@@ -50,16 +47,7 @@ use function wp_normalize_path;
 final class PatternDependencies {
 
 	/**
-	 * Pattern slug prefixes whose missing blocks are removed instead of the pattern.
-	 *
-	 * @var string[]
-	 */
-	private const STRIP_PREFIXES = array( 'header-' );
-
-	/**
-	 * Registers the hooks.
-	 *
-	 * @return void
+	 * Hooks the patterns endpoint filter.
 	 */
 	public static function init(): void {
 		add_filter( 'rest_pre_dispatch', array( self::class, 'before_patterns_request' ), 10, 3 );
@@ -86,7 +74,7 @@ final class PatternDependencies {
 	 *
 	 * @return void
 	 */
-	public static function filter_patterns(): void {
+	private static function filter_patterns(): void {
 		static $done = false;
 
 		// AJAX and cron requests never serve patterns to the editor, and some
@@ -98,21 +86,13 @@ final class PatternDependencies {
 
 		$patterns = WP_Block_Patterns_Registry::get_instance();
 		$blocks   = WP_Block_Type_Registry::get_instance();
-		$dirs     = array_unique(
-			array(
-				wp_normalize_path( get_template_directory() ) . '/',
-				wp_normalize_path( get_stylesheet_directory() ) . '/',
-			)
-		);
-
-		$themes = array( get_template(), get_stylesheet() );
+		$parent   = wp_normalize_path( get_template_directory() ) . '/';
+		$child    = wp_normalize_path( get_stylesheet_directory() ) . '/';
 
 		foreach ( $patterns->get_all_registered() as $pattern ) {
-			$file     = wp_normalize_path( (string) ( $pattern['filePath'] ?? '' ) );
-			$is_theme = in_array( (string) ( $pattern['theme'] ?? '' ), $themes, true )
-				|| ( '' !== $file && self::in_dirs( $file, $dirs ) );
+			$file = wp_normalize_path( (string) ( $pattern['filePath'] ?? '' ) );
 
-			if ( ! $is_theme ) {
+			if ( ! str_starts_with( $file, $parent ) && ! str_starts_with( $file, $child ) ) {
 				continue;
 			}
 
@@ -126,7 +106,8 @@ final class PatternDependencies {
 			$name = (string) $pattern['name'];
 			$patterns->unregister( $name );
 
-			if ( ! self::is_strippable( $name ) ) {
+			// Header patterns keep their layout: only the missing blocks are removed.
+			if ( ! str_starts_with( $name, 'header-' ) ) {
 				continue;
 			}
 
@@ -141,39 +122,6 @@ final class PatternDependencies {
 
 			register_block_pattern( $name, $properties );
 		}
-	}
-
-	/**
-	 * Whether a file lives in one of the theme directories.
-	 *
-	 * @param string   $file File path.
-	 * @param string[] $dirs Theme directories with trailing slashes.
-	 * @return bool
-	 */
-	private static function in_dirs( string $file, array $dirs ): bool {
-		foreach ( $dirs as $dir ) {
-			if ( str_starts_with( $file, $dir ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Whether missing blocks are removed from this pattern instead of hiding it.
-	 *
-	 * @param string $name Pattern name.
-	 * @return bool
-	 */
-	private static function is_strippable( string $name ): bool {
-		foreach ( self::STRIP_PREFIXES as $prefix ) {
-			if ( str_starts_with( $name, $prefix ) ) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	/**

@@ -28,7 +28,7 @@ use function wp_unique_id;
 final class ToggleId {
 
 	/**
-	 * Builds the toggle ID from a block instance.
+	 * Builds a toggle ID from a block instance, falling back to its rendered inner HTML.
 	 *
 	 * @param WP_Block|null        $block          Block instance, if available.
 	 * @param array<string, mixed> $attributes     Block attributes.
@@ -40,7 +40,7 @@ final class ToggleId {
 
 		if ( $block instanceof WP_Block && isset( $block->parsed_block['innerBlocks'] ) && is_array( $block->parsed_block['innerBlocks'] ) ) {
 			$inner = serialize_blocks( $block->parsed_block['innerBlocks'] );
-		} elseif ( $rendered_inner !== '' ) {
+		} elseif ( '' !== $rendered_inner ) {
 			$inner = $rendered_inner;
 		}
 
@@ -48,7 +48,7 @@ final class ToggleId {
 	}
 
 	/**
-	 * Builds the toggle ID from block attributes.
+	 * Builds a toggle ID from block attributes and the serialized inner blocks.
 	 *
 	 * @param array<string, mixed> $attributes   Block attributes.
 	 * @param string               $inner_source Serialized inner blocks, hashed when there is no anchor or instance ID.
@@ -59,18 +59,18 @@ final class ToggleId {
 		$instance = isset( $attributes['instanceId'] ) && is_string( $attributes['instanceId'] ) ? $attributes['instanceId'] : '';
 		$id       = '';
 
-		if ( $anchor !== '' ) {
+		if ( '' !== $anchor ) {
 			$id = 'aegis-toggle-' . sanitize_title( $anchor );
-		} elseif ( $instance !== '' ) {
+		} elseif ( '' !== $instance ) {
 			$safe = preg_replace( '/[^A-Za-z0-9_-]/', '', $instance );
-			$id   = is_string( $safe ) && $safe !== '' ? 'aegis-toggle-' . $safe : '';
+			$id   = is_string( $safe ) && '' !== $safe ? 'aegis-toggle-' . $safe : '';
 		} else {
 			$json = wp_json_encode( $attributes );
 			$hash = md5( ( is_string( $json ) ? $json : '' ) . $inner_source );
 			$id   = 'aegis-toggle-' . substr( $hash, 0, 12 );
 		}
 
-		if ( $id === '' || $id === 'aegis-toggle-' ) {
+		if ( '' === $id || 'aegis-toggle-' === $id ) {
 			$id = 'aegis-toggle-' . wp_unique_id();
 		}
 

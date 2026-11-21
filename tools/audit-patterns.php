@@ -10,6 +10,8 @@
 
 declare( strict_types=1 );
 
+use Aegis\Utilities\Pattern;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 1 );
 }
@@ -24,7 +26,6 @@ function aegis_audit_pattern_files(): array {
 	$files = [];
 	$roots = [
 		get_template_directory() . '/patterns',
-		WP_PLUGIN_DIR . '/aegis/patterns',
 		WP_PLUGIN_DIR . '/aegis-pro/patterns',
 	];
 
@@ -41,10 +42,6 @@ function aegis_audit_pattern_files(): array {
 				if ( str_starts_with( $basename, '.' ) ) {
 					continue;
 				}
-				// Internal marketing patterns — not part of the public theme inventory.
-				if ( str_contains( $file->getPathname(), DIRECTORY_SEPARATOR . 'patterns' . DIRECTORY_SEPARATOR . 'custom' . DIRECTORY_SEPARATOR ) ) {
-					continue;
-				}
 				$files[] = $file->getPathname();
 			}
 		}
@@ -55,7 +52,7 @@ function aegis_audit_pattern_files(): array {
 
 /**
  * @param string $file Pattern PHP file.
- * @return array{slug: string, category: string}|null
+ * @return array{slug: string, category: string, categories: list<string>}|null
  */
 function aegis_audit_parse_pattern_header( string $file ): ?array {
 	$head = file_get_contents( $file, false, null, 0, 2048 );
@@ -68,11 +65,12 @@ function aegis_audit_parse_pattern_header( string $file ): ?array {
 	if ( ! preg_match( '/\* Categories:\s*([^\r\n]+)/', $head, $cat_m ) ) {
 		return null;
 	}
-	$category = trim( explode( ',', $cat_m[1] )[0] );
+	$categories = array_values( array_filter( array_map( 'trim', explode( ',', $cat_m[1] ) ), 'strlen' ) );
 
 	return [
-		'slug'     => trim( $slug_m[1] ),
-		'category' => $category,
+		'slug'       => trim( $slug_m[1] ),
+		'category'   => $categories[0] ?? '',
+		'categories' => $categories,
 	];
 }
 
@@ -88,7 +86,7 @@ function aegis_audit_build_expected_registry( array $files ): array {
 		if ( null === $parsed ) {
 			continue;
 		}
-		$registered = $parsed['category'] . '-' . $parsed['slug'];
+		$registered = Pattern::slug_from_headers( $parsed['categories'], $parsed['slug'] );
 		$registry[ $registered ] ??= [];
 		$registry[ $registered ][] = $file;
 	}
@@ -97,7 +95,7 @@ function aegis_audit_build_expected_registry( array $files ): array {
 }
 
 /**
- * Theme Woo-free `header-default` plus the plugin mini-cart overlay share a slug on purpose.
+ * A plugin may ship a pattern under a theme slug on purpose (Woo overlay, Pro utility patterns); one theme file plus one plugin file is allowed.
  *
  * @param list<string> $sources Pattern file paths for one registered slug.
  */
@@ -114,7 +112,7 @@ function aegis_audit_is_commerce_overlay( array $sources ): bool {
 		if ( str_contains( $normalized, '/themes/aegis/patterns/' ) ) {
 			$theme = true;
 		}
-		if ( str_contains( $normalized, '/plugins/aegis/patterns/woocommerce/' ) ) {
+		if ( str_contains( $normalized, '/plugins/' ) ) {
 			$plugin = true;
 		}
 	}
@@ -127,10 +125,7 @@ function aegis_audit_is_commerce_overlay( array $sources ): bool {
  * @return list<string>
  */
 function aegis_audit_extract_pattern_slugs( string $content ): array {
-	if ( ! preg_match_all( '/<!-- wp:pattern \{"slug":"([^"]+)"/', $content, $matches ) ) {
-		return [];
-	}
-	return array_unique( $matches[1] );
+	return Pattern::referenced_slugs( $content );
 }
 
 /**
@@ -145,6 +140,8 @@ function aegis_audit_extract_block_names( string $content ): array {
 }
 
 $pattern_files = aegis_audit_pattern_files();
+// Pattern partials hold block markup that pattern files include; scan them like pattern files.
+$partial_files = glob( get_template_directory() . '/src/PatternPartials/*.php' ) ?: [];
 $expected      = aegis_audit_build_expected_registry( $pattern_files );
 
 foreach ( $expected as $slug => $sources ) {
@@ -153,13 +150,17 @@ foreach ( $expected as $slug => $sources ) {
 	}
 }
 
-$legacy = [ 'agencify', 'codeify', 'saasify', 'launchify', 'blockify.local', '/themes/codeify/', '/themes/agencify/' ];
+$theme_patterns = str_replace( '\\', '/', get_template_directory() . '/patterns/' );
 
-foreach ( $pattern_files as $file ) {
+foreach ( array_merge( $pattern_files, $partial_files ) as $file ) {
 	$content = (string) file_get_contents( $file );
-	foreach ( $legacy as $needle ) {
-		if ( str_contains( $content, $needle ) ) {
-			$warnings[] = "legacy reference '$needle' in $file";
+
+	// The directory is the category in the editor, so a theme pattern's first header category must match it.
+	if ( str_starts_with( str_replace( '\\', '/', $file ), $theme_patterns ) ) {
+		$parsed = aegis_audit_parse_pattern_header( $file );
+		$dir    = basename( dirname( $file ) );
+		if ( null !== $parsed && Pattern::category_slug( $dir ) !== $parsed['category'] ) {
+			$errors[] = "header category '{$parsed['category']}' does not match directory '$dir' in $file";
 		}
 	}
 	if ( str_contains( $content, 'wp:aegis/google-map' ) ) {
@@ -173,7 +174,8 @@ foreach ( $pattern_files as $file ) {
 $consumers = array_merge(
 	glob( get_template_directory() . '/templates/*.html' ) ?: [],
 	glob( get_template_directory() . '/parts/*.html' ) ?: [],
-	$pattern_files
+	$pattern_files,
+	$partial_files
 );
 
 $registry = WP_Block_Patterns_Registry::get_instance();

@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling navigation block content
- * - Integrates with utility classes for DOM, CSS, and inline assets
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for navigation block.
 declare( strict_types=1 );
 
-// Declares the namespace for the navigation block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the navigation block.
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Framework\InlineAssets\Styleable;
@@ -95,7 +88,6 @@ class Navigation implements Renderable, Scriptable, Styleable {
 		$attrs        = $block['attrs'] ?? [];
 		$overlay_menu = $attrs['overlayMenu'] ?? $attrs['icon'] ?? true;
 
-		// --- CSS Filter and Backdrop Filter ---
 		$filter = $attrs['style']['filter'] ?? null;
 		if ( ! empty( $filter ) ) {
 			$filter_value = '';
@@ -115,7 +107,6 @@ class Navigation implements Renderable, Scriptable, Styleable {
 			DOM::add_classes( $nav, $classes );
 		}
 
-		// --- Overlay Menu Background Color ---
 		if ( $overlay_menu ) {
 			$overlay_background_color = $attrs['overlayBackgroundColor'] ?? $attrs['customOverlayBackgroundColor'] ?? '';
 			$global_settings          = wp_get_global_settings();
@@ -140,7 +131,6 @@ class Navigation implements Renderable, Scriptable, Styleable {
 			}
 		}
 
-		// --- Custom Spacing ---
 		$spacing = $attrs['style']['spacing'] ?? null;
 		if ( $spacing ) {
 			$padding = $spacing['padding'] ?? null;
@@ -167,7 +157,6 @@ class Navigation implements Renderable, Scriptable, Styleable {
 
 		DOM::add_styles( $nav, $styles );
 
-		// --- Submenu Toggle DOM Correction ---
 		// Find all submenu toggle buttons and move the label span inside the button
 		// for better accessibility and easier styling.
 		$buttons = DOM::get_elements_by_class_name( 'wp-block-navigation-submenu__toggle', $dom );

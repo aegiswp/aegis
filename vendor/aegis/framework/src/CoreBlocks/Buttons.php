@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling button group block content
- * - Integrates with utility classes for DOM and CSS
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for buttons block.
 declare( strict_types=1 );
 
-// Declares the namespace for the buttons block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the buttons block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -65,7 +58,6 @@ class Buttons implements Renderable {
 
 		// Only modify the block if there are custom margin or padding values.
 		if ( $margin || $padding ) {
-			// Create a DOM object from the block content.
 			$dom = DOM::create( $block_content );
 			$div = DOM::get_element( 'div', $dom );
 
@@ -77,7 +69,6 @@ class Buttons implements Renderable {
 
 				$div->setAttribute( 'style', CSS::array_to_string( $styles ) );
 
-				// Save the modified HTML back to the block_content variable.
 				$block_content = $dom->saveHTML();
 			}
 		}

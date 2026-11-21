@@ -38,7 +38,7 @@ Every layer uses one color token, `--wp--custom--box-shadow--color`. It is set i
 
 ### Applying a Shadow to a Block
 
-![The Border & Shadow panel of a Group block with the shadow presets open, and the card in the canvas showing the selected shadow.](../screenshots/shadow.png)
+![The Shadow panel of a selected block with the Default, Hover, and Text tabs and the X, Y, blur, spread, color, and inset controls.](../screenshots/shadow.png)
 
 *Pick a shadow preset in the Border & Shadow panel.*
 

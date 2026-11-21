@@ -16,9 +16,10 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
-use function class_exists;
 use function defined;
 use function function_exists;
 use function is_array;
@@ -28,8 +29,6 @@ use function wp_get_global_settings;
 class SyntaxHighlightingCodeBlock implements Conditional, Styleable {
 
 	/**
-	 * Condition.
-	 *
 	 * Prefer the plugin helper when the Aegis plugin is loaded.
 	 *
 	 * @since 1.0.0
@@ -37,8 +36,10 @@ class SyntaxHighlightingCodeBlock implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( \Aegis\Plugin\Integrations\SyntaxHighlighting::class ) ) {
-			return \Aegis\Plugin\Integrations\SyntaxHighlighting::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_SYNTAX_HIGHLIGHT );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return defined( 'Syntax_Highlighting_Code_Block\\PLUGIN_VERSION' )

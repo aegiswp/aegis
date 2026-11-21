@@ -19,16 +19,16 @@ Metadata (file header)
 Use a PHPDoc-style block at the top of each file. Common keys in this theme:
 
   Title          Human-readable name in the inserter (required for discovery).
-  Slug           Unique ID. Use `aegis/something` for theme-scoped slugs, or a
-                 filename-style slug (e.g. `disclaimer-beta`) to match
-                 `metadata.patternName` in the block JSON where applicable.
-  Categories     Comma-separated slugs: `header`, `footer`, `blog`, `notice`,
-                 `utility`, `commerce`, etc. Must match `patterns` in
-                 `theme.json` or WordPress default categories.
+  Slug           Local name only (e.g. `split`). The registered slug is
+                 `{category}-{slug}` (e.g. `hero-split`); use that registered
+                 slug in templates, parts and nested `wp:pattern` blocks.
+  Categories     Comma-separated category slugs (`header`, `footer`, `blog`,
+                 `notice`, `utility`, `commerce`, etc.). They must be registered
+                 pattern categories (WordPress core or registered in PHP).
   Description    Short help text in the pattern directory UI (optional).
   Keywords       Comma-separated terms for search (optional).
   Block Types    e.g. `core/template-part/header` — limits suggestions (optional).
-  Inserter       `no` — hide from the inserter (utility / internal patterns).
+  Inserter       `false` — hide from the inserter (utility / internal patterns).
   Viewport Width Pixel width for the pattern preview frame (optional).
 
 The authoritative reference for all supported properties is the Block Editor
@@ -51,8 +51,8 @@ Conventions in Aegis
 • Remove `queryId` and unnecessary block IDs from saved markup when possible.
 • For images in patterns, prefer `get_template_directory_uri()` in PHP-driven
   attributes so assets survive theme path changes.
-• Utility patterns that should not appear in the inserter: set `Inserter: no`
-  and consider a `hidden-` file name prefix (see the main theme README / handbook).
+• Utility patterns that should not appear in the inserter: set `Inserter: false`
+  (see `patterns/hidden/`). No file name prefix is needed.
 • Leading-dot filenames (e.g. `.draft.php`) are localhost-only drafts: gitignored,
   never committed, never documented, never included in theme zips or downloads.
 • Accessibility: one page-level `<h1>` (use `<h2>+` for section/slider titles);

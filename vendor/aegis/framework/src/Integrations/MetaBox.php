@@ -22,19 +22,16 @@
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file.
 declare( strict_types=1 );
 
-// Declares the namespace for plugin integrations within the Aegis Framework.
 namespace Aegis\Framework\Integrations;
 
 // Imports interfaces, classes, and functions used throughout this file.
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use Aegis\Framework\ServiceProvider;
@@ -86,8 +83,10 @@ class MetaBox implements Conditional, Styleable {
 	 * @return bool True when Meta Box is active.
 	 */
 	public static function condition(): bool {
-		if ( class_exists( \Aegis\Plugin\Integrations\MetaBox::class ) ) {
-			return \Aegis\Plugin\Integrations\MetaBox::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_META_BOX );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return class_exists( 'RWMB_Loader' ) || function_exists( 'rwmb_meta' );

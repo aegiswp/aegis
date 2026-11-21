@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-use Aegis\Utilities\Str;
+use Aegis\Utilities\Pattern;
 
 $all_categories = glob( get_stylesheet_directory() . '/patterns/*', GLOB_ONLYDIR );
 $categories     = array();
-$excluded       = array( 'page', 'template' );
+$excluded       = array( 'pages', 'hidden', 'template' );
 
 foreach ( $all_categories as $category ) {
 	$slug = basename( $category );
@@ -39,11 +39,7 @@ foreach ( $all_categories as $category ) {
 		<?php
 		foreach ( $categories as $category ) :
 
-			$title = Str::title_case( basename( $category ) );
-
-			if ( in_array( basename( $category ), array( 'cta', 'faq' ), true ) ) {
-				$title = strtoupper( $title );
-			}
+			$title = Pattern::category_label( basename( $category ) );
 
 			?>
 
@@ -76,11 +72,7 @@ foreach ( $all_categories as $category ) {
 		<h2 class="wp-block-heading alignwide has-text-align-wide has-20-font-size"
 			style="margin-top:0;margin-right:0;margin-bottom:0;margin-left:0;padding-top:var(--wp--preset--spacing--xl)">
 			<?php
-			$title = Str::title_case( basename( $category ) );
-
-			if ( in_array( basename( $category ), array( 'cta', 'faq' ), true ) ) {
-				$title = strtoupper( $title );
-			}
+			$title = Pattern::category_label( basename( $category ) );
 
 			?>
 			<?php echo esc_html( $title ); ?>

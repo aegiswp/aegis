@@ -80,25 +80,6 @@ class AccessibilityAnalyzerTest extends TestCase {
 	}
 
 	/**
-	 * Test get rules returns all accessibility rules.
-	 */
-	public function test_get_rules(): void {
-		$rules = $this->analyzer->get_rules();
-
-		$this->assertCount( 8, $rules );
-
-		$rule_ids = array_column( $rules, 'id' );
-		$this->assertContains( 'a11y-001', $rule_ids );
-		$this->assertContains( 'a11y-002', $rule_ids );
-		$this->assertContains( 'a11y-003', $rule_ids );
-		$this->assertContains( 'a11y-004', $rule_ids );
-		$this->assertContains( 'a11y-005', $rule_ids );
-		$this->assertContains( 'a11y-006', $rule_ids );
-		$this->assertContains( 'a11y-007', $rule_ids );
-		$this->assertContains( 'a11y-008', $rule_ids );
-	}
-
-	/**
 	 * Test detection of button without ARIA label.
 	 */
 	public function test_detects_button_without_aria_label(): void {

@@ -1,13 +1,14 @@
 <?php
+/**
+ * String utility helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for string utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the string utility helpers.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the string utility helpers.
-use function _deprecated_function;
 use function capital_P_dangit;
 use function esc_html;
 use function implode;
@@ -20,7 +21,6 @@ use function strlen;
 use function strpos;
 use function trim;
 use function ucwords;
-use const DIRECTORY_SEPARATOR;
 use const PHP_EOL;
 
 /**
@@ -51,26 +51,6 @@ class Str {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Checks if a string contains all of the given substrings.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $haystack The string to search within.
-	 * @param string ...$needles A variable number of substrings to search for.
-	 *
-	 * @return bool True if all of the needles are found, false otherwise.
-	 */
-	public static function contains_all( string $haystack, ...$needles ): bool {
-		foreach ( $needles as $needle ) {
-			if ( ! str_contains( $haystack, $needle ) ) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	/**
@@ -201,25 +181,6 @@ class Str {
 	}
 
 	/**
-	 * Converts kebab-case string to camelCase.
-	 *
-	 * @deprecated Use `Str::to_camel_case` instead.
-	 *
-	 * @param string $string kebab-case string to convert.
-	 *
-	 * @return string
-	 */
-	public static function kebab_to_camel( string $string ): string {
-		_deprecated_function(
-			__METHOD__,
-			'1.0.0',
-			static::class . '::to_camel_case'
-		);
-
-		return static::to_camel_case( $string );
-	}
-
-	/**
 	 * Converts a string with hyphens or underscores to camelCase.
 	 *
 	 * @since 1.0.0
@@ -241,21 +202,6 @@ class Str {
 				)
 			)
 		);
-	}
-
-	/**
-	 * Ensures a string starts with a single slash.
-	 *
-	 * Removes any existing leading slashes and then adds a single one.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $string The string to modify.
-	 *
-	 * @return string The modified string with a leading slash.
-	 */
-	public static function leadingslashit( string $string ): string {
-		return DIRECTORY_SEPARATOR . self::unleadingslashit( $string );
 	}
 
 	/**

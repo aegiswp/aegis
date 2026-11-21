@@ -7,7 +7,6 @@
  * Responsibilities:
  * - Checks for Ninja Forms plugin presence and conditionally registers styles
  * - Dequeues default Ninja Forms CSS so theme tokens and design rules apply
- * - Integrates with the Aegis container and conditional system
  *
  * @package    Aegis\Framework\Integrations
  * @since      1.0.0
@@ -20,6 +19,8 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use function add_action;
@@ -39,8 +40,10 @@ class NinjaForms implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( '\\Aegis\\Plugin\\Integrations\\NinjaForms' ) ) {
-			return \Aegis\Plugin\Integrations\NinjaForms::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_NINJA_FORMS );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return class_exists( 'Ninja_Forms' )

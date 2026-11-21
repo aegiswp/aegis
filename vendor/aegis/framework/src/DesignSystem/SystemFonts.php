@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Adds system font stacks to the theme JSON configuration
- * - Integrates with the block editor and theme typography settings
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for system fonts component.
 declare( strict_types=1 );
 
-// Declares the namespace for the system fonts component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the system fonts component.
 use function apply_filters;
 use function array_merge;
 use function get_template_directory;

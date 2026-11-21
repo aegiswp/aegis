@@ -28,7 +28,7 @@
 			<!-- wp:post-template {"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":null}} -->
 			<!-- wp:post-featured-image {"isLink":true,"style":{"aspectRatio":{"all":"16/9"},"objectFit":{"all":"cover"},"objectPosition":{"all":"center"},"height":{"all":"100%"},"width":{"all":"100%"}}} /-->
 
-			<!-- wp:group {"metadata":{"name":"Desktop"},"style":{"spacing":{"blockGap":{"top":"4px","left":"4px"},"margin":{"top":"0","bottom":"var:preset|spacing|xs"},"padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"display":{"mobile":"none"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left","orientation":"horizontal"}} -->
+			<!-- wp:group {"metadata":{"name":"Desktop"},"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xxxs","left":"var:preset|spacing|xxxs"},"margin":{"top":"0","bottom":"var:preset|spacing|xs"},"padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"display":{"mobile":"none"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left","orientation":"horizontal"}} -->
 			<div class="wp-block-group"
 				style="margin-top:0;margin-bottom:var(--wp--preset--spacing--xs);padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
 				<!-- wp:post-terms {"term":"category","className":"is-style-default","style":{"typography":{"textDecoration":"none"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"fontSize":"12"} /-->
@@ -41,7 +41,7 @@
 			</div>
 			<!-- /wp:group -->
 
-			<!-- wp:group {"metadata":{"name":"Mobile"},"style":{"spacing":{"blockGap":{"top":"4px","left":"4px"},"margin":{"top":"0","bottom":"var:preset|spacing|xs"},"padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"display":{"desktop":"none"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left","orientation":"horizontal"}} -->
+			<!-- wp:group {"metadata":{"name":"Mobile"},"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|xxxs","left":"var:preset|spacing|xxxs"},"margin":{"top":"0","bottom":"var:preset|spacing|xs"},"padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"display":{"desktop":"none"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left","orientation":"horizontal"}} -->
 			<div class="wp-block-group"
 				style="margin-top:0;margin-bottom:var(--wp--preset--spacing--xs);padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
 				<!-- wp:post-date {"metadata":{"bindings":{"datetime":{"source":"core/post-data","args":{"field":"date"}}}},"style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"fontSize":"12"} /-->

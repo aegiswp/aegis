@@ -7,19 +7,19 @@ namespace Composer\Autoload;
 class ComposerStaticInitbb2b041c8729e310010fb8540dd43d49
 {
     public static $files = array (
-        '0b885bfb05ddaf7f1ca487c8180f0373' => __DIR__ . '/../..' . '/src/bootstrap.php',
+        '233f60bcaa3b1429db339740d03c5271' => __DIR__ . '/../..' . '/src/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'e' =>
+        'e' => 
         array (
             'enshrined\\svgSanitize\\' => 22,
         ),
-        'P' =>
+        'P' => 
         array (
             'Psr\\Container\\' => 14,
         ),
-        'A' =>
+        'A' => 
         array (
             'Aegis\\Utilities\\' => 16,
             'Aegis\\Icons\\' => 12,
@@ -32,39 +32,39 @@ class ComposerStaticInitbb2b041c8729e310010fb8540dd43d49
     );
 
     public static $prefixDirsPsr4 = array (
-        'enshrined\\svgSanitize\\' =>
+        'enshrined\\svgSanitize\\' => 
         array (
             0 => __DIR__ . '/..' . '/enshrined/svg-sanitize/src',
         ),
-        'Psr\\Container\\' =>
+        'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Aegis\\Utilities\\' =>
+        'Aegis\\Utilities\\' => 
         array (
             0 => __DIR__ . '/..' . '/aegis/utilities/src',
         ),
-        'Aegis\\Icons\\' =>
+        'Aegis\\Icons\\' => 
         array (
             0 => __DIR__ . '/..' . '/aegis/icons/src',
         ),
-        'Aegis\\Hooks\\' =>
+        'Aegis\\Hooks\\' => 
         array (
             0 => __DIR__ . '/..' . '/aegis/hooks/src',
         ),
-        'Aegis\\Framework\\' =>
+        'Aegis\\Framework\\' => 
         array (
             0 => __DIR__ . '/..' . '/aegis/framework/src',
         ),
-        'Aegis\\Dom\\' =>
+        'Aegis\\Dom\\' => 
         array (
             0 => __DIR__ . '/..' . '/aegis/dom/src',
         ),
-        'Aegis\\Container\\' =>
+        'Aegis\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/aegis/container/src',
         ),
-        'Aegis\\' =>
+        'Aegis\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -72,15 +72,14 @@ class ComposerStaticInitbb2b041c8729e310010fb8540dd43d49
 
     public static $classMap = array (
         'Aegis' => __DIR__ . '/..' . '/aegis/framework/src/Aegis.php',
+        'Aegis\\Admin\\Companion' => __DIR__ . '/../..' . '/src/Admin/Companion.php',
         'Aegis\\Admin\\CompanionNotice' => __DIR__ . '/../..' . '/src/Admin/CompanionNotice.php',
         'Aegis\\Admin\\GitHubUpdater' => __DIR__ . '/../..' . '/src/Admin/GitHubUpdater.php',
         'Aegis\\Blocks\\BlockRegistrar' => __DIR__ . '/../..' . '/src/Blocks/BlockRegistrar.php',
         'Aegis\\Blocks\\RelatedPostsQuery' => __DIR__ . '/../..' . '/src/Blocks/RelatedPostsQuery.php',
         'Aegis\\Blocks\\ToggleId' => __DIR__ . '/../..' . '/src/Blocks/ToggleId.php',
         'Aegis\\Container\\Container' => __DIR__ . '/..' . '/aegis/container/src/Container.php',
-        'Aegis\\Container\\ContainerFactory' => __DIR__ . '/..' . '/aegis/container/src/ContainerFactory.php',
         'Aegis\\Container\\Exceptions\\ContainerException' => __DIR__ . '/..' . '/aegis/container/src/Exceptions/ContainerException.php',
-        'Aegis\\Container\\Exceptions\\NotFoundException' => __DIR__ . '/..' . '/aegis/container/src/Exceptions/NotFoundException.php',
         'Aegis\\Container\\Interfaces\\Conditional' => __DIR__ . '/..' . '/aegis/container/src/Interfaces/Conditional.php',
         'Aegis\\Container\\Interfaces\\Registerable' => __DIR__ . '/..' . '/aegis/container/src/Interfaces/Registerable.php',
         'Aegis\\Dom\\CSS' => __DIR__ . '/..' . '/aegis/dom/src/CSS.php',
@@ -114,6 +113,8 @@ class ComposerStaticInitbb2b041c8729e310010fb8540dd43d49
         'Aegis\\Framework\\BlockVariations\\Marquee' => __DIR__ . '/..' . '/aegis/framework/src/BlockVariations/Marquee.php',
         'Aegis\\Framework\\BlockVariations\\Newsletter' => __DIR__ . '/..' . '/aegis/framework/src/BlockVariations/Newsletter.php',
         'Aegis\\Framework\\BlockVariations\\Svg' => __DIR__ . '/..' . '/aegis/framework/src/BlockVariations/Svg.php',
+        'Aegis\\Framework\\Companion' => __DIR__ . '/..' . '/aegis/framework/src/Companion.php',
+        'Aegis\\Framework\\Companions' => __DIR__ . '/..' . '/aegis/framework/src/Companions.php',
         'Aegis\\Framework\\CoreBlocks\\Button' => __DIR__ . '/..' . '/aegis/framework/src/CoreBlocks/Button.php',
         'Aegis\\Framework\\CoreBlocks\\Buttons' => __DIR__ . '/..' . '/aegis/framework/src/CoreBlocks/Buttons.php',
         'Aegis\\Framework\\CoreBlocks\\Calendar' => __DIR__ . '/..' . '/aegis/framework/src/CoreBlocks/Calendar.php',
@@ -181,6 +182,7 @@ class ComposerStaticInitbb2b041c8729e310010fb8540dd43d49
         'Aegis\\Framework\\DesignSystem\\TemplatePatternExpander' => __DIR__ . '/..' . '/aegis/framework/src/DesignSystem/TemplatePatternExpander.php',
         'Aegis\\Framework\\DesignSystem\\Templates' => __DIR__ . '/..' . '/aegis/framework/src/DesignSystem/Templates.php',
         'Aegis\\Framework\\Icons\\IconCli' => __DIR__ . '/..' . '/aegis/framework/src/Icons/IconCli.php',
+        'Aegis\\Framework\\Icons\\IconFeatures' => __DIR__ . '/..' . '/aegis/framework/src/Icons/IconFeatures.php',
         'Aegis\\Framework\\Icons\\IconMigrationMapper' => __DIR__ . '/..' . '/aegis/framework/src/Icons/IconMigrationMapper.php',
         'Aegis\\Framework\\Icons\\Library' => __DIR__ . '/..' . '/aegis/framework/src/Icons/Library.php',
         'Aegis\\Framework\\Icons\\RestIconsList' => __DIR__ . '/..' . '/aegis/framework/src/Icons/RestIconsList.php',
@@ -196,6 +198,7 @@ class ComposerStaticInitbb2b041c8729e310010fb8540dd43d49
         'Aegis\\Framework\\Integrations\\BunnyCDN' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/BunnyCDN.php',
         'Aegis\\Framework\\Integrations\\CoAuthorsPlus' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/CoAuthorsPlus.php',
         'Aegis\\Framework\\Integrations\\CodeBlockPro' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/CodeBlockPro.php',
+        'Aegis\\Framework\\Integrations\\Detect' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/Detect.php',
         'Aegis\\Framework\\Integrations\\EasyDigitalDownloads' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/EasyDigitalDownloads.php',
         'Aegis\\Framework\\Integrations\\FluentBooking' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/FluentBooking.php',
         'Aegis\\Framework\\Integrations\\FluentForms' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/FluentForms.php',
@@ -212,20 +215,21 @@ class ComposerStaticInitbb2b041c8729e310010fb8540dd43d49
         'Aegis\\Framework\\Integrations\\WooCommerce\\ProductGalleryLightbox' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/WooCommerce/ProductGalleryLightbox.php',
         'Aegis\\Framework\\Integrations\\WooCommerce\\SaleBadge' => __DIR__ . '/..' . '/aegis/framework/src/Integrations/WooCommerce/SaleBadge.php',
         'Aegis\\Framework\\Interfaces\\Renderable' => __DIR__ . '/..' . '/aegis/framework/src/Interfaces/Renderable.php',
+        'Aegis\\Framework\\NullCompanion' => __DIR__ . '/..' . '/aegis/framework/src/NullCompanion.php',
         'Aegis\\Framework\\ServiceProvider' => __DIR__ . '/..' . '/aegis/framework/src/ServiceProvider.php',
         'Aegis\\Framework\\Traits\\InjectionPoints' => __DIR__ . '/..' . '/aegis/framework/src/Traits/InjectionPoints.php',
         'Aegis\\Hooks\\Hook' => __DIR__ . '/..' . '/aegis/hooks/src/Hook.php',
-        'Aegis\\Hooks\\HookAnnotations' => __DIR__ . '/..' . '/aegis/hooks/src/HookAnnotations.php',
-        'Aegis\\Hooks\\Hookable' => __DIR__ . '/..' . '/aegis/hooks/src/Hookable.php',
         'Aegis\\Icons\\Icon' => __DIR__ . '/..' . '/aegis/icons/src/Icon.php',
+        'Aegis\\Icons\\IconRegistryId' => __DIR__ . '/..' . '/aegis/icons/src/IconRegistryId.php',
+        'Aegis\\Icons\\IconRest' => __DIR__ . '/..' . '/aegis/icons/src/IconRest.php',
+        'Aegis\\Icons\\IconSanitizer' => __DIR__ . '/..' . '/aegis/icons/src/IconSanitizer.php',
+        'Aegis\\Icons\\IconSets' => __DIR__ . '/..' . '/aegis/icons/src/IconSets.php',
+        'Aegis\\Icons\\IconSupport' => __DIR__ . '/..' . '/aegis/icons/src/IconSupport.php',
         'Aegis\\NavigationFallback' => __DIR__ . '/../..' . '/src/NavigationFallback.php',
         'Aegis\\PatternDependencies' => __DIR__ . '/../..' . '/src/PatternDependencies.php',
-        'Aegis\\Utilities\\Arr' => __DIR__ . '/..' . '/aegis/utilities/src/Arr.php',
         'Aegis\\Utilities\\Block' => __DIR__ . '/..' . '/aegis/utilities/src/Block.php',
         'Aegis\\Utilities\\Color' => __DIR__ . '/..' . '/aegis/utilities/src/Color.php',
         'Aegis\\Utilities\\Data' => __DIR__ . '/..' . '/aegis/utilities/src/Data.php',
-        'Aegis\\Utilities\\DataAwareInterface' => __DIR__ . '/..' . '/aegis/utilities/src/DataAwareInterface.php',
-        'Aegis\\Utilities\\DataTrait' => __DIR__ . '/..' . '/aegis/utilities/src/DataTrait.php',
         'Aegis\\Utilities\\Debug' => __DIR__ . '/..' . '/aegis/utilities/src/Debug.php',
         'Aegis\\Utilities\\I18n' => __DIR__ . '/..' . '/aegis/utilities/src/I18n.php',
         'Aegis\\Utilities\\JSON' => __DIR__ . '/..' . '/aegis/utilities/src/JSON.php',

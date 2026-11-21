@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling heading block content
- * - Integrates with utility classes for DOM, CSS, and string manipulation
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for heading block.
 declare( strict_types=1 );
 
-// Declares the namespace for the heading block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the heading block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -79,7 +72,6 @@ class Heading implements Renderable {
 			return $block_content;
 		}
 
-		// --- Class and Style application ---
 		$classes = explode( ' ', $heading->getAttribute( 'class' ) );
 		if ( ! in_array( 'wp-block-heading', $classes, true ) ) {
 			$classes[] = 'wp-block-heading';
@@ -98,7 +90,6 @@ class Heading implements Renderable {
 			$heading->setAttribute( 'style', CSS::array_to_string( $styles ) );
 		}
 
-		// --- Automatic ID Generation ---
 		// If the heading does not have an ID, create one from its text content.
 		// This is useful for creating anchor links and for accessibility.
 		if ( ! $heading->getAttribute( 'id' ) ) {
@@ -120,7 +111,6 @@ class Heading implements Renderable {
 			$heading->removeAttribute( 'style' );
 		}
 
-		// --- Search Results Heading Enhancement ---
 		// On search pages, replace the generic "Search Results" H1 with a more descriptive title.
 		$search_query = get_search_query();
 		$default      = esc_html__( 'Search Results', 'aegis' );

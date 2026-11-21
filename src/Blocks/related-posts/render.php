@@ -23,8 +23,8 @@ if ( ! $is_editor_preview && ( ! is_singular() || is_front_page() ) ) {
 	return '';
 }
 
-$posts_per_page     = (int) ( $attributes['postsPerPage'] ?? 3 );
-$columns            = max( 1, min( 4, (int) ( $attributes['columns'] ?? 3 ) ) );
+$posts_per_page = (int) ( $attributes['postsPerPage'] ?? 3 );
+$columns        = max( 1, min( 4, (int) ( $attributes['columns'] ?? 3 ) ) );
 // Always fetch enough posts to fill the requested columns.
 $posts_per_page     = max( $posts_per_page, $columns );
 $show_image         = (bool) ( $attributes['showFeaturedImage'] ?? true );
@@ -86,11 +86,10 @@ if ( RelatedPostsQuery::is_public_post( $current_post_id ) ) {
 	);
 } elseif ( $is_editor_preview ) {
 	$related_query = RelatedPostsQuery::latest(
-		$posts_per_page,
-		'post',
 		array(
-			'orderBy' => $order_by,
-			'order'   => $order,
+			'postsPerPage' => $posts_per_page,
+			'orderBy'      => $order_by,
+			'order'        => $order,
 		)
 	);
 } else {

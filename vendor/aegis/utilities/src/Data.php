@@ -1,12 +1,14 @@
 <?php
+/**
+ * Data object helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for data object helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the data object helpers.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the data object helpers.
 use WP_Theme;
 use function basename;
 use function dirname;
@@ -83,6 +85,9 @@ class Data {
 	 * @param string $file The absolute path to the main plugin or theme file.
 	 */
 	public function __construct( string $file ) {
+		// Windows `__FILE__` uses backslashes; WordPress and the checks below use '/'.
+		$file = Path::normalize( $file );
+
 		// Populate metadata from a plugin file path.
 		if ( str_contains( $file, 'content/plugins' ) ) {
 			if ( ! function_exists( 'get_plugin_data' ) ) {
@@ -114,7 +119,6 @@ class Data {
 			$instances[ $file ] = new self( $file );
 		}
 
-		// Return the existing or newly created instance.
 		return $instances[ $file ];
 	}
 
@@ -158,8 +162,8 @@ class Data {
 		$this->dir         = trailingslashit( $theme->get_template_directory() );
 		$this->url         = trailingslashit( $theme->get_template_directory_uri() );
 		$this->slug        = $theme->get_template();
-		$this->file        = $this->dir . DIRECTORY_SEPARATOR . $this->slug . '.php';
-		$this->basename    = basename( $this->dir ) . DIRECTORY_SEPARATOR . basename( $this->file );
+		$this->file        = $this->dir . $this->slug . '.php';
+		$this->basename    = basename( $this->dir ) . '/' . basename( $this->file );
 		// Map theme header fields to object properties.
 		$this->name        = $theme->get( 'Name' );
 		$this->description = $theme->get( 'Description' );

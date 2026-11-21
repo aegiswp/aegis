@@ -35,15 +35,15 @@ declare(strict_types=1);
 				<figure class="wp-block-image aligncenter size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:120px;height:120px"/></figure>
 				<!-- /wp:image -->
 
-				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-				<h3 class="wp-block-heading has-text-align-center" style="margin-top:8px;margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'John Smith', 'aegis' ); ?></h3>
+				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+				<h3 class="wp-block-heading has-text-align-center" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'John Smith', 'aegis' ); ?></h3>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.875rem"},"spacing":{"margin":{"top":"0"}}},"textColor":"neutral-500"} -->
 				<p class="has-text-align-center has-neutral-500-color has-text-color" style="margin-top:0;font-size:0.875rem"><?php echo esc_html__( 'CEO & Founder', 'aegis' ); ?></p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"8px"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
+				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xxs"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
 				<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only">
 					<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
 					<!-- wp:social-link {"url":"#","service":"x"} /-->
@@ -60,15 +60,15 @@ declare(strict_types=1);
 				<figure class="wp-block-image aligncenter size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:120px;height:120px"/></figure>
 				<!-- /wp:image -->
 
-				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-				<h3 class="wp-block-heading has-text-align-center" style="margin-top:8px;margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'Sarah Johnson', 'aegis' ); ?></h3>
+				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+				<h3 class="wp-block-heading has-text-align-center" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'Sarah Johnson', 'aegis' ); ?></h3>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.875rem"},"spacing":{"margin":{"top":"0"}}},"textColor":"neutral-500"} -->
 				<p class="has-text-align-center has-neutral-500-color has-text-color" style="margin-top:0;font-size:0.875rem"><?php echo esc_html__( 'Creative Director', 'aegis' ); ?></p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"8px"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
+				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xxs"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
 				<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only">
 					<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
 					<!-- wp:social-link {"url":"#","service":"dribbble"} /-->
@@ -85,15 +85,15 @@ declare(strict_types=1);
 				<figure class="wp-block-image aligncenter size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:120px;height:120px"/></figure>
 				<!-- /wp:image -->
 
-				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-				<h3 class="wp-block-heading has-text-align-center" style="margin-top:8px;margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'Michael Chen', 'aegis' ); ?></h3>
+				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+				<h3 class="wp-block-heading has-text-align-center" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'Michael Chen', 'aegis' ); ?></h3>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.875rem"},"spacing":{"margin":{"top":"0"}}},"textColor":"neutral-500"} -->
 				<p class="has-text-align-center has-neutral-500-color has-text-color" style="margin-top:0;font-size:0.875rem"><?php echo esc_html__( 'Lead Developer', 'aegis' ); ?></p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"8px"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
+				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xxs"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
 				<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only">
 					<!-- wp:social-link {"url":"#","service":"github"} /-->
 					<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
@@ -110,15 +110,15 @@ declare(strict_types=1);
 				<figure class="wp-block-image aligncenter size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:120px;height:120px"/></figure>
 				<!-- /wp:image -->
 
-				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-				<h3 class="wp-block-heading has-text-align-center" style="margin-top:8px;margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'Emily Rodriguez', 'aegis' ); ?></h3>
+				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+				<h3 class="wp-block-heading has-text-align-center" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'Emily Rodriguez', 'aegis' ); ?></h3>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.875rem"},"spacing":{"margin":{"top":"0"}}},"textColor":"neutral-500"} -->
 				<p class="has-text-align-center has-neutral-500-color has-text-color" style="margin-top:0;font-size:0.875rem"><?php echo esc_html__( 'UX Designer', 'aegis' ); ?></p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"8px"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
+				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xxs"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
 				<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only">
 					<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
 					<!-- wp:social-link {"url":"#","service":"behance"} /-->
@@ -135,15 +135,15 @@ declare(strict_types=1);
 				<figure class="wp-block-image aligncenter size-thumbnail is-resized has-custom-border" style="border-radius:100%"><img alt="" style="border-radius:100%;aspect-ratio:1;object-fit:cover;width:120px;height:120px"/></figure>
 				<!-- /wp:image -->
 
-				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-				<h3 class="wp-block-heading has-text-align-center" style="margin-top:8px;margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'David Kim', 'aegis' ); ?></h3>
+				<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.125rem"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+				<h3 class="wp-block-heading has-text-align-center" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:1.125rem"><?php echo esc_html__( 'David Kim', 'aegis' ); ?></h3>
 				<!-- /wp:heading -->
 
 				<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.875rem"},"spacing":{"margin":{"top":"0"}}},"textColor":"neutral-500"} -->
 				<p class="has-text-align-center has-neutral-500-color has-text-color" style="margin-top:0;font-size:0.875rem"><?php echo esc_html__( 'Marketing Lead', 'aegis' ); ?></p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"8px"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
+				<!-- wp:social-links {"iconColor":"neutral-500","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|xxs"}}},"className":"is-style-logos-only","layout":{"type":"flex","justifyContent":"center"}} -->
 				<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only">
 					<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
 					<!-- wp:social-link {"url":"#","service":"x"} /-->

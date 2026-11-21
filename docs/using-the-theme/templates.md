@@ -49,7 +49,7 @@ To modify the structure of a template:
 
 ### Creating a Custom Template
 
-![The Add template dialog in the Site Editor showing template types such as Author Archives, Category Archives, Tag Archives, and Custom template. Numbered callouts: 1 Template types: author, category, and tag archives, and more; 2 Custom template: apply it to any post or page.](../screenshots/add-template.png)
+![The Add template dialog in the Site Editor showing template types such as Pages, Author Archives, Category Archives, Tag Archives, and Custom template. Numbered callouts: 1 Template types: pages, author, category, and tag archives, and more; 2 Custom template: apply it to any post or page.](../screenshots/add-template.png)
 
 *Create a custom template from Templates → Add New Template.*
 
@@ -98,7 +98,7 @@ The multi-step checkout template (`page-checkout-multi-step.html`) splits the ch
 2. **Payment** — Payment method and billing details.
 3. **Review** — Order summary and confirmation.
 
-This template requires WooCommerce to be active and **Aegis → Integrations → E-commerce → WooCommerce** on. Checkout CSS/JS live in the companion plugin and load on this template (or when the page contains `aegis-checkout-multi-step` markup). See [WooCommerce Checkout](../../../../plugins/aegis/docs/features/woocommerce-checkout.md).
+This template requires WooCommerce to be active and **Aegis → Integrations → E-commerce → WooCommerce** on. Checkout CSS/JS live in Aegis Dash and load on this template (or when the page contains `aegis-checkout-multi-step` markup). See [WooCommerce Checkout](../../../../plugins/aegis-dash/docs/features/woocommerce-checkout.md).
 
 ### Product Templates
 
@@ -106,12 +106,12 @@ WooCommerce templates are hidden from the template list when WooCommerce is inac
 
 ### Wishlist Page
 
-The **Wishlist** template requires **WooCommerce**, the **Aegis companion plugin**, and [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/):
+The **Wishlist** template requires **WooCommerce**, the **Aegis Dash**, and [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/):
 
-1. Install and activate **WooCommerce**, the **Aegis plugin**, and **TI WooCommerce Wishlist**.
+1. Install and activate **WooCommerce**, the **Aegis Dash**, and **TI WooCommerce Wishlist**.
 2. Create a new page (for example, **Wishlist**).
 3. In the page sidebar, set **Template** to **Wishlist** (visible only when dependencies are active).
-4. Publish the page — the template loads the companion plugin's `template-page-wishlist` pattern with the `[ti_wishlisttable]` shortcode.
+4. Publish the page — the template loads Aegis Dash's `template-page-wishlist` pattern with the `[ti_wishlisttable]` shortcode.
 5. Link to the page from your navigation or My Account area as needed.
 
 See [[woocommerce-integration#wishlist-ti-woocommerce-wishlist]] for shortcode details and troubleshooting.

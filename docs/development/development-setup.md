@@ -183,7 +183,7 @@ A typical development session:
 
 1. **Start the environment:** `npm run env:start`
 2. **Start the theme watcher:** `npm run dev` (in `wp-content/themes/aegis`)
-3. **Plugin changes:** run `npm run dev` or `npm run build` in `wp-content/plugins/aegis` when editing map/modal/admin assets
+3. **Plugin changes:** run `npm run dev` or `npm run build` in `wp-content/plugins/aegis-dash` when editing map/modal/admin assets
 4. **Open the site:** http://localhost:8888
 4. **Make changes** to source files.
 5. **View changes** in the browser (auto-refreshed by the watcher).
@@ -208,11 +208,11 @@ Recommended extensions:
 - Set the WordPress source as an include path for autocompletion.
 - Configure PHPCS with the WordPress coding standards.
 
-## Companion Plugins (Optional)
+## Aegis plugins (Optional)
 
 To develop with the full Aegis ecosystem:
 
-Place the free plugin source in `wp-content/plugins/aegis` and, if you have access, the Pro source in `wp-content/plugins/aegis-pro`.
+Place Aegis Dash source in `wp-content/plugins/aegis-dash` and, if you have access, the Pro source in `wp-content/plugins/aegis-pro`.
 
 Then add them to `.wp-env.json`:
 

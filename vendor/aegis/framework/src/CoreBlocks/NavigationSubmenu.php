@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling navigation submenu block content
- * - Integrates with utility classes for DOM and CSS
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for navigation submenu block.
 declare( strict_types=1 );
 
-// Declares the namespace for the navigation submenu block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the navigation submenu block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -76,7 +69,6 @@ class NavigationSubmenu implements Renderable {
 		$color   = $style['color'] ?? [];
 		$styles  = [];
 
-		// --- Color Properties ---
 		// Set background color from either a custom value or a theme preset.
 		if ( isset( $color['background'] ) ) {
 			$styles['--wp--custom--submenu--background'] = $color['background'];
@@ -93,7 +85,6 @@ class NavigationSubmenu implements Renderable {
 			$styles['--wp--custom--submenu--color'] = 'var(--wp--preset--color--' . _wp_to_kebab_case( (string) $attrs['textColor'] ) . ')';
 		}
 
-		// --- Spacing Properties ---
 		// Consolidate padding values into a single variable.
 		$padding_shorthand = implode( ' ', [
 			$padding['top'] ?? 0,
@@ -122,13 +113,11 @@ class NavigationSubmenu implements Renderable {
 			$styles['--wp--custom--submenu--gap'] = CSS::format_custom_property( $block_gap );
 		}
 
-		// --- Apply Styles to DOM ---
 		$submenu = DOM::get_element( 'ul', $dom );
 		if ( ! $submenu ) {
 			return $block_content;
 		}
 
-		// Append new styles to any existing inline styles.
 		$submenu_style = $submenu->getAttribute( 'style' );
 		$css           = $submenu_style ? $submenu_style . ';' : '';
 		foreach ( $styles as $property => $value ) {

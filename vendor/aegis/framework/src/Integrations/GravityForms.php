@@ -6,25 +6,20 @@
  *
  * Responsibilities:
  * - Checks for Gravity Forms plugin presence and conditionally registers styles
- * - Integrates with the Aegis container and inline assets system
  *
  * @package    Aegis\Framework\Integrations
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for gravityforms integration component.
 declare( strict_types=1 );
 
-// Declares the namespace for the gravityforms integration component.
 namespace Aegis\Framework\Integrations;
 
-// Imports classes, interfaces, and functions used by the gravityforms integration component.
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use function add_filter;
@@ -42,8 +37,10 @@ class GravityForms implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( '\\Aegis\\Plugin\\Integrations\\GravityForms' ) ) {
-			return \Aegis\Plugin\Integrations\GravityForms::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_GRAVITY_FORMS );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return class_exists( 'GFForms' )

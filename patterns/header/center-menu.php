@@ -13,14 +13,14 @@
 <!-- wp:group {"metadata":{"categories":["header"],"patternName":"center-menu","name":"Header Center Menu"},"align":"full","className":"is-style-default","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"right":"var:preset|spacing|xs","left":"var:preset|spacing|xs","top":"var:preset|spacing|xxs","bottom":"var:preset|spacing|xs"}},"position":{"all":""},"overflow":{"all":"visible"},"display":{"mobile":"","all":""},"top":{"all":""},"right":{"all":""},"bottom":{"all":""},"left":{"all":""},"zIndex":{"all":"99"},"width":{"all":"100%"}},"layout":{"type":"constrained","orientation":"horizontal"}} -->
 <div class="wp-block-group alignfull is-style-default"
 	style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--xxs);padding-right:var(--wp--preset--spacing--xs);padding-bottom:var(--wp--preset--spacing--xs);padding-left:var(--wp--preset--spacing--xs)">
-	<!-- wp:group {"align":"wide","className":"is-style-default","style":{"spacing":{"padding":{"top":"4px","bottom":"4px"}},"position":{"all":"relative"}},"layout":{"type":"default"}} -->
-	<div class="wp-block-group alignwide is-style-default" style="padding-top:4px;padding-bottom:4px">
+	<!-- wp:group {"align":"wide","className":"is-style-default","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxxs","bottom":"var:preset|spacing|xxxs"}},"position":{"all":"relative"}},"layout":{"type":"default"}} -->
+	<div class="wp-block-group alignwide is-style-default" style="padding-top:var(--wp--preset--spacing--xxxs);padding-bottom:var(--wp--preset--spacing--xxxs)">
 		<!-- wp:columns {"verticalAlignment":"center","isStackedOnMobile":false,"align":"wide","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|xs"}},"position":{"all":"relative"},"zIndex":{"all":"1"}}} -->
 		<div class="wp-block-columns alignwide are-vertically-aligned-center is-not-stacked-on-mobile"
 			style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--xs)">
 			<!-- wp:column {"verticalAlignment":"center","width":"10%"} -->
 			<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:10%">
-				<!-- wp:group {"style":{"spacing":{"blockGap":"4px"},"zIndex":{"all":"0"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"},"onclick":""} -->
+				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxxs"},"zIndex":{"all":"0"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"},"onclick":""} -->
 				<div class="wp-block-group">
 					<!-- wp:icon {"icon":"social/aegis","url":"<?php echo esc_url( home_url( '/' ) ); ?>","iconSvgString":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" role=\"img\" aria-labelledby=\"icon-6a2cc03b37e88\" data-icon=\"social-aegis\" style=\"min-width:50px;height:50px\" fill=\"currentColor\"><title id=\"icon-6a2cc03b37e88\">Aegis Icon</title><path d=\"M10.06 7.75 L12.02 3.87 L13.95 7.72 L16.65 9.29 L12.03 0 L7.34 9.3 L10.06 7.75 Z M18.37 12.72 L18.2 12.36 L15.5 10.79 L17.02 13.68 L20.05 18.61 L12.02 15.17 L3.98 18.62 L6.96 13.68 L8.39 10.81 L5.67 12.39 L5.5 12.71 L0 22.87 L12.01 16.87 L24 22.94 L18.37 12.72 Z\" stroke=\"none\" fill-rule=\"evenodd\"></path></svg>","style":{"dimensions":{"width":"50px"}}} /-->
 </div>

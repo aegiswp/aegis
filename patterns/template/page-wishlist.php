@@ -6,6 +6,7 @@
  * Template Types: page-wishlist
  * Inserter: false
  */
+$shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop' );
 ?>
 
 <!-- wp:template-part {"slug":"header","tagName":"header","className":"site-header"} /-->
@@ -27,7 +28,7 @@
 	<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|md","bottom":"var:preset|spacing|lg"}}},"layout":{"type":"constrained"}} -->
 	<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--md);padding-bottom:var(--wp--preset--spacing--lg)">
 		<!-- wp:shortcode -->
-		[ti_wishlisttable]
+		[ti_wishlistsview]
 		<!-- /wp:shortcode -->
 	</div>
 	<!-- /wp:group -->
@@ -37,7 +38,7 @@
 		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 		<div class="wp-block-buttons">
 			<!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo esc_html__( 'Continue Shopping', 'aegis' ); ?></a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( $shop_url ); ?>"><?php echo esc_html__( 'Continue Shopping', 'aegis' ); ?></a></div>
 <!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->

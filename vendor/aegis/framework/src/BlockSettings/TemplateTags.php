@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for replacing template tags with dynamic values in block output
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for templatetags block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the templatetags block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the templatetags block setting.
 use Aegis\Framework\Interfaces\Renderable;
 use Aegis\Utilities\Str;
 use WP_Block;
@@ -140,7 +133,6 @@ class TemplateTags implements Renderable {
 	 * @return string The block content with template tags replaced.
 	 */
 	public function render( string $block_content, array $block, WP_Block $instance ): string {
-		// --- Pre-checks ---
 		// Only run on blocks that are likely to contain text content.
 		$block_name        = $block['blockName'] ?? '';
 		$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
@@ -158,7 +150,6 @@ class TemplateTags implements Renderable {
 			return $block_content;
 		}
 
-		// --- Tag Replacement ---
 		// Tags are replaced after save-time kses, so each value is escaped for
 		// the context it lands in: text nodes get the viewer's data, attributes
 		// only get data that is already public, URL attributes are limited to

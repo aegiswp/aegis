@@ -7,7 +7,6 @@
  * Responsibilities:
  * - Checks for bbPress plugin presence and conditionally adds theme compatibility
  * - Registers Aegis forum styles and dequeues bbPress default CSS
- * - Integrates with the Aegis container and conditional system
  *
  * @package    Aegis\Framework\Integrations
  * @since      1.0.0

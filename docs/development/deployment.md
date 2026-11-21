@@ -27,7 +27,7 @@ Aegis follows semantic versioning (SemVer):
 9. **Automated build** — The tag starts the release workflow (`release.yml`), which builds and uploads the package (see below).
 10. **Publish** — Review the draft release on GitHub and publish it. Sites update only after the release is published.
 
-The companion plugin is released separately from its own repository.
+The Aegis Dash is released separately from its own repository.
 
 ### The Release Workflow (`release.yml`)
 
@@ -43,6 +43,16 @@ Pushing a `v*` tag runs **Release Aegis Theme**:
 8. Creates a **draft** GitHub release with both files attached and generated release notes.
 
 The theme's GitHub updater installs the `aegis.zip` asset from the latest **published** release, so a draft is never offered to sites. Keep the asset name `aegis.zip` and the `aegis/` root folder: the updater and the upload installer both rely on them. See [[updating]].
+
+### Holding a release until Aegis Dash is ready
+
+If a theme release needs a newer Aegis Dash, add a line like this to the release notes before publishing:
+
+```text
+Requires Aegis Dash: 1.1.0
+```
+
+Sites whose Aegis Dash is missing, inactive or older than that version are not offered the update, and an admin notice explains why. The updater reads the running plugin's version, so it does not matter what the plugin folder is called.  is accepted as well.
 
 ### Building a Release Package Locally
 
@@ -67,7 +77,7 @@ zip -r aegis.zip aegis
 
 - `node_modules/`, `tests/`, `.git/`, and CI configuration
 - `docs/`, `tools/`, `build/`, `languages/`, and `LICENSE`
-- Build configuration (`package.json`, `webpack.config.js`, `composer.json`, `phpcs.xml`, `phpunit.xml`)
+- Build configuration (`package.json`, `webpack.config.js`, `composer.json`, `phpcs.xml`)
 - TypeScript and SCSS sources and source maps in `src/Blocks/`
 - Development-only Composer packages in `vendor/`
 
@@ -99,7 +109,8 @@ git checkout v1.0.0  # specific release tag
 composer install --no-dev --optimize-autoloader
 ```
 
-> **Note:** Running `npm run build` on the server is not recommended. Always deploy pre-built assets.
+> [!NOTE]
+> Running `npm run build` on the server is not recommended. Always deploy pre-built assets.
 
 ### Deployment via CI/CD
 
@@ -125,7 +136,7 @@ deploy:
 | `assets/` (fonts, icons, images) | `.git/`, CI configuration |
 | `parts/` | `build/`, `tools/`, `docs/` |
 | `patterns/` | `webpack.config.js`, `eslint.config.cjs`, `tsconfig.json` |
-| `styles/` | `phpunit.xml`, `phpcs.xml` |
+| `styles/` | `phpcs.xml` |
 | `templates/` | `composer.json`, `composer.lock`, `package.json` |
 | `theme.json`, `style.css`, `functions.php`, `index.php`, `embed-content.php`, `screenshot.png`, `readme.txt` | `.wp-env.json`, `.editorconfig` |
 

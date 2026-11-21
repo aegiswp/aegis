@@ -10,6 +10,7 @@ declare( strict_types=1 );
 
 namespace Aegis\Framework\DesignSystem;
 
+use Aegis\Utilities\Pattern;
 use WP_Block_Patterns_Registry;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -23,7 +24,6 @@ use function get_template_directory;
 use function glob;
 use function is_array;
 use function is_readable;
-use function preg_match_all;
 
 /**
  * Trims hidden pattern content from block-patterns REST responses.
@@ -81,9 +81,7 @@ final class BlockPatternsRest {
 				}
 
 				$content = (string) file_get_contents( $file );
-				if ( preg_match_all( '/<!-- wp:pattern \{"slug":"([^"]+)"/', $content, $matches ) ) {
-					$slugs = array_merge( $slugs, $matches[1] );
-				}
+				$slugs   = array_merge( $slugs, Pattern::referenced_slugs( $content ) );
 			}
 		}
 
@@ -114,11 +112,9 @@ final class BlockPatternsRest {
 				continue;
 			}
 
-			if ( preg_match_all( '/<!-- wp:pattern \{"slug":"([^"]+)"/', (string) $pattern['content'], $matches ) ) {
-				foreach ( $matches[1] as $nested ) {
-					if ( ! isset( $seen[ $nested ] ) ) {
-						$queue[] = $nested;
-					}
+			foreach ( Pattern::referenced_slugs( (string) $pattern['content'] ) as $nested ) {
+				if ( ! isset( $seen[ $nested ] ) ) {
+					$queue[] = $nested;
 				}
 			}
 		}

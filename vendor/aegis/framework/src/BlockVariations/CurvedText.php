@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling curved text block content
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockVariations
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for curvedtext block variation.
 declare( strict_types=1 );
 
-// Declares the namespace for the curvedtext block variation.
 namespace Aegis\Framework\BlockVariations;
 
-// Imports classes, interfaces, and functions used by the curvedtext block variation.
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
 use WP_Block;

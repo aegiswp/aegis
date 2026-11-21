@@ -116,7 +116,7 @@ The skip-to-content link is injected **after** the header template part is rende
 
 ## Feature Toggles
 
-With the companion plugin active, **Aegis → Blocks → Icon** gates extras on `core/icon` (it does not register a second icon block):
+With Aegis Dash active, **Aegis → Blocks → Icon** gates extras on `core/icon` (it does not register a second icon block):
 
 | Toggle | Effect |
 |--------|--------|
@@ -188,5 +188,5 @@ The WordPress **Social Icons** block (`core/social-links`) is separate from the 
 - [[enhanced-core-blocks]] — Other core block enhancements.
 - [[accessibility]] — Skip links and labeling.
 - [[dark-mode]] — Color tokens icons inherit.
-- [Plugin Block Variations](../../../../plugins/aegis/docs/blocks/block-variations.md) — Icon feature toggles.
+- [Aegis Dash Block Variations](../../../../plugins/aegis-dash/docs/blocks/block-variations.md) — Icon feature toggles.
 - [Pro Fonts and Icons](../../../../plugins/aegis-pro/docs/features/fonts-and-icons.md) — Extra collections.

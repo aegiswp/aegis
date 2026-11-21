@@ -98,7 +98,7 @@ Aegis supports WordPress native image optimization:
 
 ### Video Facades
 
-The Video block uses a facade pattern:
+With the Aegis Video add-on active, the Video block uses a facade pattern:
 
 1. A lightweight thumbnail image is displayed initially.
 2. The video player (iframe or native) loads only when the user clicks play.
@@ -201,7 +201,7 @@ When building custom pages or templates:
 
 ## Next Steps
 
-- [Plugin Performance](../../../../plugins/aegis/docs/features/performance.md) — Free site-wide toggles (oEmbed, dashicons, heartbeat, head/API cleanup, embed facades) and Pro emoji / Query Loop Performance. With Pro active, the theme defers emoji stripping to that toggle; free-plugin and standalone theme installs keep zero-base frontend emoji removal. Standalone theme enables embed facades by default; with the free plugin they default off until toggled.
+- [Aegis Dash Performance](../../../../plugins/aegis-dash/docs/features/performance.md) — Free site-wide toggles (oEmbed, dashicons, heartbeat, head/API cleanup, embed facades) and Pro emoji / Query Loop Performance. With Pro active, the theme defers emoji stripping to that toggle; free-plugin and standalone theme installs keep zero-base frontend emoji removal. Standalone theme enables embed facades by default; with Aegis Dash they default off until toggled.
 - [[testing]] — Running performance tests
 - [[building-assets]] — Understanding the build process.
 - [[deployment]] — Production deployment considerations.

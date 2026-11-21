@@ -6,24 +6,19 @@
  *
  * Responsibilities:
  * - Registers and manages default and custom block patterns
- * - Integrates with the block editor and theme patterns directory
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for patterns component.
 declare( strict_types=1 );
 
-// Declares the namespace for the patterns component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the patterns component.
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\Interfaces\Renderable;
 use Aegis\Utilities\Debug;
 use Aegis\Utilities\Pattern;
@@ -34,7 +29,6 @@ use function array_diff_key;
 use function array_intersect_key;
 use function array_unique;
 use function basename;
-use function class_exists;
 use function defined;
 use function esc_html;
 use function render_block;
@@ -120,9 +114,7 @@ class Patterns implements Renderable {
 			$category = basename( $dir );
 
 			// PHP casts numeric directory names (e.g. patterns/404/) to int array keys.
-			if ( ctype_digit( $category ) ) {
-				$category = 'error-' . $category;
-			}
+			$category = Pattern::category_slug( $category );
 
 			foreach ( $files as $file ) {
 				$pattern = basename( $file, '.php' );
@@ -146,16 +138,10 @@ class Patterns implements Renderable {
 
 			if ( ! array_key_exists( $category, $registered_categories ) ) {
 
-				if ( in_array( $category, [ 'cta', 'faq' ], true ) ) {
-					$label = strtoupper( $category );
-				} else {
-					$label = ucwords( str_replace( '-', ' ', $category ) );
-				}
-
 				register_block_pattern_category(
 					$category,
 					[
-						'label' => $label,
+						'label' => Pattern::category_label( $category ),
 					]
 				);
 
@@ -491,11 +477,7 @@ HTML;
 		}
 
 		// Without the companion plugin there is no overlay — keep the theme pattern.
-		if ( ! class_exists( \Aegis\Plugin\Integrations\WooCommerce::class ) ) {
-			return false;
-		}
-
-		if ( ! \Aegis\Plugin\Integrations\WooCommerce::is_plugin_active() ) {
+		if ( true !== Companions::get()->integration_active( Companion::INTEGRATION_WOOCOMMERCE ) ) {
 			return false;
 		}
 

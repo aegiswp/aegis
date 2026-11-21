@@ -3,7 +3,7 @@
  * GitHub Theme Updater
  *
  * Offers Aegis updates from the latest GitHub release through WordPress core's
- * native update flow. The theme declares `Update URI: https://github.com/aegiswp/theme`
+ * native update flow. The theme declares `Update URI: https://github.com/aegiswp/aegis`
  * in style.css, so core skips WordPress.org for it and asks the
  * `update_themes_github.com` filter instead. Core then compares versions and
  * shows the usual "Update now" links, Dashboard → Updates entry, and the
@@ -13,18 +13,14 @@
  * @since   1.0.1
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for the GitHub theme updater.
 declare( strict_types=1 );
 
-// Declares the namespace for the GitHub theme updater.
 namespace Aegis\Admin;
 
-// Imports functions used by the GitHub theme updater.
 use function __;
 use function add_action;
 use function add_filter;
 use function admin_url;
-use function apply_filters;
 use function bloginfo;
 use function current_user_can;
 use function delete_site_transient;
@@ -34,13 +30,10 @@ use function esc_html_e;
 use function esc_url;
 use function function_exists;
 use function get_current_screen;
-use function get_file_data;
 use function get_site_transient;
 use function home_url;
 use function in_array;
 use function is_array;
-use function is_plugin_active;
-use function is_readable;
 use function is_wp_error;
 use function preg_match_all;
 use function version_compare;
@@ -73,7 +66,7 @@ class GitHubUpdater {
 	 *
 	 * @var string
 	 */
-	public const REPOSITORY = 'aegiswp/theme';
+	public const REPOSITORY = 'aegiswp/aegis';
 
 	/**
 	 * Release asset installed on update. Its top-level folder must be "aegis/".
@@ -94,14 +87,14 @@ class GitHubUpdater {
 	 *
 	 * @var int
 	 */
-	public const CACHE_TTL = 6 * HOUR_IN_SECONDS;
+	private const CACHE_TTL = 6 * HOUR_IN_SECONDS;
 
 	/**
 	 * Seconds to cache a failed lookup, so GitHub's unauthenticated rate limit is respected.
 	 *
 	 * @var int
 	 */
-	public const ERROR_TTL = 30 * MINUTE_IN_SECONDS;
+	private const ERROR_TTL = 30 * MINUTE_IN_SECONDS;
 
 	/**
 	 * AJAX action that renders release notes for the "View version details" popup.
@@ -111,15 +104,6 @@ class GitHubUpdater {
 	public const NOTES_ACTION = 'aegis_theme_release_notes';
 
 	/**
-	 * Companion plugin basename checked by the update hold.
-	 *
-	 * @var string
-	 */
-	public const PLUGIN_FILE = 'aegis/aegis.php';
-
-	/**
-	 * Register update hooks.
-	 *
 	 * Runs on every request (not only admin): core also checks for updates from cron.
 	 *
 	 * @return void
@@ -134,7 +118,7 @@ class GitHubUpdater {
 	/**
 	 * Plugin version a release requires, read from its notes.
 	 *
-	 * Matches a line such as `Requires Aegis plugin: 1.1.0` (case-insensitive;
+	 * Matches a line such as `Requires Aegis Dash: 1.1.0` or `Requires Aegis plugin: 1.1.0` (case-insensitive;
 	 * tolerates list markers, quotes, headings, bold, italics and code ticks).
 	 * When several lines match, the highest version wins.
 	 *
@@ -145,7 +129,7 @@ class GitHubUpdater {
 	public static function parse_required_plugin_version( string $notes ): ?string {
 		$matches = array();
 
-		if ( ! preg_match_all( '/^[\s>*_`#+-]*Requires\s+Aegis\s+plugin[\s*_`]*:[\s*_`]*v?(\d+\.\d+(?:\.\d+)?)(?![\d.]*\d)/im', $notes, $matches ) ) {
+		if ( ! preg_match_all( '/^[\s>*_`#+-]*Requires\s+Aegis\s+(?:plugin|Dash)[\s*_`]*:[\s*_`]*v?(\d+\.\d+(?:\.\d+)?)(?![\d.]*\d)/im', $notes, $matches ) ) {
 			return null;
 		}
 
@@ -158,36 +142,6 @@ class GitHubUpdater {
 		}
 
 		return $highest;
-	}
-
-	/**
-	 * Whether the Aegis plugin is installed, active and at least the given version.
-	 *
-	 * Reads the plugin header directly, so it works without the plugin loaded.
-	 *
-	 * @param string $required Minimum plugin version.
-	 *
-	 * @return bool
-	 */
-	public static function plugin_requirement_met( string $required ): bool {
-		$file = WP_PLUGIN_DIR . '/' . self::PLUGIN_FILE;
-
-		if ( ! is_readable( $file ) ) {
-			return false;
-		}
-
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		if ( ! is_plugin_active( self::PLUGIN_FILE ) ) {
-			return false;
-		}
-
-		$data      = get_file_data( $file, array( 'Version' => 'Version' ) );
-		$installed = (string) ( $data['Version'] ?? '' );
-
-		return '' !== $installed && version_compare( $installed, $required, '>=' );
 	}
 
 	/**
@@ -216,7 +170,7 @@ class GitHubUpdater {
 
 		$required = self::parse_required_plugin_version( (string) ( $cached['notes'] ?? '' ) );
 
-		if ( null === $required || self::plugin_requirement_met( $required ) ) {
+		if ( null === $required || Companion::requirement_met( $required ) ) {
 			return;
 		}
 		?>
@@ -226,7 +180,7 @@ class GitHubUpdater {
 				echo esc_html(
 					sprintf(
 						/* translators: 1: Required Aegis plugin version, 2: Aegis theme version that is waiting. */
-						__( 'Update the Aegis plugin to %1$s before updating the theme. Aegis theme %2$s is waiting for it and will be offered once the plugin is installed, active and up to date.', 'aegis' ),
+						__( 'Update the Aegis Dash plugin to %1$s before updating the theme. Aegis theme %2$s is waiting for it and will be offered once the plugin is installed, active and up to date.', 'aegis' ),
 						$required,
 						(string) $cached['version']
 					)
@@ -263,7 +217,7 @@ class GitHubUpdater {
 		// Hold releases that need a newer Aegis plugin until it is installed, active and new enough.
 		$required = self::parse_required_plugin_version( $release['notes'] );
 
-		if ( null !== $required && ! self::plugin_requirement_met( $required ) ) {
+		if ( null !== $required && ! Companion::requirement_met( $required ) ) {
 			return $update;
 		}
 
@@ -280,7 +234,7 @@ class GitHubUpdater {
 	 *
 	 * "Check again" on Dashboard → Updates (force-check) bypasses the cache.
 	 *
-	 * @return array{version: string, package: string, url: string, name: string, notes: string, published: string}|null
+	 * @return array{version: string, package: string, url: string, name: string, notes: string}|null
 	 */
 	public function get_release(): ?array {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only cache bypass, mirrors core's force-check.
@@ -301,20 +255,11 @@ class GitHubUpdater {
 	/**
 	 * Query GitHub for the latest non-draft, non-prerelease release with the theme asset.
 	 *
-	 * @return array{version: string, package: string, url: string, name: string, notes: string, published: string}|null
+	 * @return array{version: string, package: string, url: string, name: string, notes: string}|null
 	 */
 	private function fetch_release(): ?array {
-		/**
-		 * Filters the GitHub repository the theme updates from.
-		 *
-		 * @since 1.0.1
-		 *
-		 * @param string $repository Repository in owner/name form.
-		 */
-		$repository = (string) apply_filters( 'aegis_theme_update_repository', self::REPOSITORY );
-
 		$response = wp_remote_get(
-			'https://api.github.com/repos/' . $repository . '/releases/latest',
+			'https://api.github.com/repos/' . self::REPOSITORY . '/releases/latest',
 			array(
 				'timeout' => 10,
 				'headers' => array(
@@ -355,12 +300,11 @@ class GitHubUpdater {
 		}
 
 		return array(
-			'version'   => $version,
-			'package'   => $package,
-			'url'       => (string) ( $data['html_url'] ?? '' ),
-			'name'      => (string) ( $data['name'] ?? $data['tag_name'] ?? '' ),
-			'notes'     => (string) ( $data['body'] ?? '' ),
-			'published' => (string) ( $data['published_at'] ?? '' ),
+			'version' => $version,
+			'package' => $package,
+			'url'     => (string) ( $data['html_url'] ?? '' ),
+			'name'    => (string) ( $data['name'] ?? $data['tag_name'] ?? '' ),
+			'notes'   => (string) ( $data['body'] ?? '' ),
 		);
 	}
 

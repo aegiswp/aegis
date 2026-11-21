@@ -133,28 +133,28 @@ All sizes use `clamp(min, vw, max)` for fluid scaling. Slugs are the **pixel val
 
 | Slug | Max | Min | CSS variable |
 |------|-----|-----|-------------|
-| `8` | 8px | 7px | `--wp--preset--font-size--8` |
-| `10` | 10px | 9px | `--wp--preset--font-size--10` |
-| `12` | 12px | 11px | `--wp--preset--font-size--12` |
-| `14` | 14px | 13px | `--wp--preset--font-size--14` |
-| `16` | 16px | 15px | `--wp--preset--font-size--16` |
-| `18` | 18px | 17px | `--wp--preset--font-size--18` |
-| `20` | 20px | 19px | `--wp--preset--font-size--20` |
-| `22` | 22px | 20px | `--wp--preset--font-size--22` |
-| `24` | 24px | 22px | `--wp--preset--font-size--24` |
-| `28` | 28px | 24px | `--wp--preset--font-size--28` |
-| `32` | 32px | 28px | `--wp--preset--font-size--32` |
-| `36` | 36px | 32px | `--wp--preset--font-size--36` |
-| `40` | 40px | 36px | `--wp--preset--font-size--40` |
-| `44` | 44px | 40px | `--wp--preset--font-size--44` |
-| `48` | 48px | 40px | `--wp--preset--font-size--48` |
-| `52` | 52px | 44px | `--wp--preset--font-size--52` |
-| `60` | 60px | 48px | `--wp--preset--font-size--60` |
-| `64` | 64px | 52px | `--wp--preset--font-size--64` |
-| `72` | 72px | 56px | `--wp--preset--font-size--72` |
-| `80` | 80px | 64px | `--wp--preset--font-size--80` |
-| `88` | 88px | 72px | `--wp--preset--font-size--88` |
-| `96` | 96px | 80px | `--wp--preset--font-size--96` |
+| `8` | 8px | fixed | 7px | `--wp--preset--font-size--8` |
+| `10` | 10px | fixed | 9px | `--wp--preset--font-size--10` |
+| `12` | 12px | fixed | 11px | `--wp--preset--font-size--12` |
+| `14` | 14px | fixed | 13px | `--wp--preset--font-size--14` |
+| `16` | 16px | fixed | 15px | `--wp--preset--font-size--16` |
+| `18` | 18px | fixed | 17px | `--wp--preset--font-size--18` |
+| `20` | 20px | fixed | 19px | `--wp--preset--font-size--20` |
+| `22` | 22px | fixed | 20px | `--wp--preset--font-size--22` |
+| `24` | 24px | fixed | 22px | `--wp--preset--font-size--24` |
+| `28` | 28px | fixed | 24px | `--wp--preset--font-size--28` |
+| `32` | 32px | fixed | 28px | `--wp--preset--font-size--32` |
+| `36` | 36px | fixed | 32px | `--wp--preset--font-size--36` |
+| `40` | 40px | fixed | 36px | `--wp--preset--font-size--40` |
+| `44` | 44px | fixed | 40px | `--wp--preset--font-size--44` |
+| `48` | 48px | fixed | 40px | `--wp--preset--font-size--48` |
+| `52` | 52px | fixed | 44px | `--wp--preset--font-size--52` |
+| `60` | 60px | fixed | 48px | `--wp--preset--font-size--60` |
+| `64` | 64px | fixed | 52px | `--wp--preset--font-size--64` |
+| `72` | 72px | fixed | 56px | `--wp--preset--font-size--72` |
+| `80` | 80px | fixed | 64px | `--wp--preset--font-size--80` |
+| `88` | 88px | fixed | 72px | `--wp--preset--font-size--88` |
+| `96` | 96px | fixed | 80px | `--wp--preset--font-size--96` |
 
 ### Font Weights
 
@@ -176,21 +176,21 @@ Matches Tailwind naming exactly (all lowercase).
 
 ## Spacing Scale
 
-Based on Tailwind's 4px base unit. All values are fixed pixels (not coupled to font-size tokens). Slugs follow a T-shirt naming convention.
+Based on Tailwind's 4px base unit. `xxxs` to `xs` are fixed pixels; `sm` and up are fluid `clamp()` values that scale between a minimum and the desktop size shown below. None are coupled to font-size tokens. Slugs follow a T-shirt naming convention.
 
-| Slug | Size | Tailwind equivalent |
-|------|------|-------------------|
-| `xxxs` | 4px | `1` (4px) |
-| `xxs` | 8px | `2` (8px) |
-| `2xs` | 12px | `3` (12px) |
-| `xs` | 16px | `4` (16px) |
-| `sm` | 24px | `6` (24px) |
-| `md` | 32px | `8` (32px) |
-| `ml` | 40px | `10` (40px) |
-| `lg` | 48px | `12` (48px) |
-| `xl` | 64px | `16` (64px) |
-| `xll` | 80px | `20` (80px) |
-| `xxl` | 96px | `24` (96px) |
+| Slug | Size (desktop) | Fluid minimum | Tailwind equivalent |
+|------|------|------|-------------------|
+| `xxxs` | 4px | fixed | `1` (4px) |
+| `xxs` | 8px | fixed | `2` (8px) |
+| `2xs` | 12px | fixed | `3` (12px) |
+| `xs` | 16px | fixed | `4` (16px) |
+| `sm` | 24px | 20px | `6` (24px) |
+| `md` | 32px | 24px | `8` (32px) |
+| `ml` | 40px | 24px | `10` (40px) |
+| `lg` | 48px | 24px | `12` (48px) |
+| `xl` | 64px | 40px | `16` (64px) |
+| `xll` | 80px | 48px | `20` (80px) |
+| `xxl` | 96px | 56px | `24` (96px) |
 
 CSS variable pattern: `--wp--preset--spacing--{slug}`
 

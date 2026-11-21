@@ -2,10 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - Unreleased
+## [Unreleased]
+
+## [1.1.0] - 2026-11-20
 
 ### Added
 
@@ -15,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The image lightbox is off by default (`settings.lightbox.enabled` is `false` in `theme.json`). Turn it on per image in the editor.
 - **Blocks move to the Aegis plugin**: Slider, Slide, Toggle, Toggle Content, Countdown and Related Posts are now provided by the Aegis plugin 1.1.0 or newer when it is active. The theme still contains the blocks and registers each one only if the plugin has not; with the plugin providing them, the theme's duplicate Slider and Related Posts patterns are hidden. Existing content is unchanged. The next theme release removes the blocks from the theme.
+- **Repository and companion plugin renamed.** The theme repository is now `aegiswp/aegis` and the companion plugin is Aegis Dash (`aegiswp/aegis-dash`, folder `aegis-dash/`). The onboarding notice installs Aegis Dash from `aegis-dash.zip`. The update hold reads the running plugin's version when the plugin is loaded, so it no longer depends on the plugin's folder name, and release notes may say `Requires Aegis Dash: X.Y.Z` as well as `Requires Aegis plugin: X.Y.Z`.
 - **Update hold**: the GitHub updater does not offer a release whose notes contain `Requires Aegis plugin: X.Y.Z` until the Aegis plugin is installed, active and at least that version, and shows an admin notice explaining the wait.
 - Companion plugin notice mentions that the Aegis blocks need plugin 1.1.0 or newer, and warns when the active plugin is older.
 - **Store Footer Default**: the © and · in the copyright line display correctly (the file was saved in the wrong text encoding).
@@ -22,9 +25,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Event section patterns add horizontal `lg` padding on full-width groups so wide columns are not flush to the viewport edges.
 - Tested up to WordPress 7.1.4.
 - Related Posts Display and Style Variant inspector controls use Aegis Audio–style visual card pickers (preview glyphs, selected border) instead of toggles and a button group.
+- **The framework no longer depends on plugin class names.** It used to check for Aegis Dash classes (`\Aegis\Plugin\...`) directly; it now asks a `Companion` (`Aegis\Framework\Companion`) resolved through the new `aegis_framework_companion` filter. Aegis Dash 1.1.0 answers it; with no companion, the framework behaves as before on a site without the plugin. Plugins that want to supply settings or integration detection return a `Companion` from that filter, added when the plugin file loads.
+- Pattern markup that was copied between files is now shared through PHP partials (`aegis_pattern_partial()` in `src/helpers.php`, partials in `src/PatternPartials/`): the product archive, taxonomy and search templates, and the Cinema event sections. Rendered output is unchanged, every pattern keeps its slug, and a child theme can override a partial.
+- Raw 4, 8, 12 and 16px spacing in 21 patterns uses the matching `xxxs`, `xxs`, `2xs` and `xs` spacing presets. The values are identical.
+- The icons package is split into focused classes (set discovery, WordPress icon support, registry ids, the REST route and sanitising). `Icon` keeps every public method, the `aegis_icon_sets` filter and the `aegis/v1/icons` route, and the output is unchanged.
+- The framework drops code nothing used (the container factory and log, `Hookable`, `HookAnnotations`, `Arr`, the data trait and interface, and several unused helper methods) and shares one WooCommerce-active check.
+- Developer tooling: `npm run dev` regenerates the blocks manifest like `build`; the duplicate `start`, `test:php` and `composer analyze` scripts are gone; the translate scripts share one vendor file list and fail when the POT is missing; the pattern audit checks that a pattern's first category matches its folder and scans the pattern partials; `composer test:framework` runs a new framework test suite.
 
 ### Removed
 
+- The `aegis_theme_update_repository` and `aegis_companion_package_url` filters, which nothing used. The updater and the companion install use the Aegis GitHub repositories directly.
+- The one-off `migrate:video` script and the empty root PHPUnit suite; the Makefile (every target only forwarded to npm or Composer).
 - The theme's own Video block player (script, stylesheet and settings). The Aegis Video add-on provides the player; the standard WordPress player is used without it.
 - Latest Posts Carousel pattern (`slider-latest-posts`). It uses the Pro Query Loop carousel, so it now ships with Aegis Pro (`patterns/aegis/slider/latest-posts.php`).
 - Integrations icon set (`assets/icons/integrations/`). No longer needed.
@@ -35,6 +46,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- On Windows hosts the theme text domain and package paths are recognised, so translations load (backslash and forward-slash paths are treated the same).
+- The `primary-dark-mid` duotone preset used `#71717b`, one digit off the primary-500 colour; it now uses `#71717a`.
+- `templates/search-product.html` closes its block comment.
+- Pullquote border width no longer carries a fallback that could never apply.
+- The Wishlist page template shows the wishlist. It used the shortcode `[ti_wishlisttable]`, which TI WooCommerce Wishlist does not register, so the page printed that text as plain words. The pattern now uses `[ti_wishlistsview]`, and its **Continue Shopping** button goes to the shop page instead of the home page.
 - Child themes that ship `patterns/header/default.php` keep registering `header-default` when WooCommerce is active. Only the parent theme header is left to the companion plugin mini-cart overlay.
 - Slider arrows and dots stay visible on dark hero media in light mode. Overlay controls use white (with a drop shadow); multi-page / `is-arrows-outside` controls still use Neutral 950 so they contrast with the page surface in both modes.
 - Slider multi-slide layouts (`perPage` > 1) render full-width slides on the front end when Block Gap uses a spacing preset (`var:preset|spacing|…`). The gap is now resolved to a CSS custom property before Splide initializes, matching the editor preview.
@@ -45,7 +61,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Countdown block date picker matches the post Publish schedule picker (site 12/24-hour format, week start, and day/month/year order). Inspector time/AM–PM row alignment matches Publish; editor canvas shows a live countdown preview like the front end.
 - Related Posts Columns control redistributes posts across the grid (and raises post count when needed) instead of leaving empty adjacent columns.
 - Payment icons (`payment/*`) render as theme-adaptive mono marks in the block editor and on the front end. Core icon kses is bypassed via Aegis-sanitized REST content and front-end re-render from disk.
-
 - Author archives include the site header, main landmark, and footer, matching the other archive templates, and show the author name as the page heading.
 - Related Posts queries at most 12 posts per block on the server, the same range as the editor control. A post with a larger saved value no longer loads that many.
 - The icons REST route only caches real icon sets. Requests for unknown set names no longer create cache entries in the database.
@@ -56,17 +71,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Block editor Inset control uses the stable `BoxControl` when the editor provides it.
 - Countdown block editor passes a typed date order to the date picker (no change in behavior).
 - Text fields, email and other inputs, selects, and textareas show a 2px focus ring for keyboard users, matching buttons and search. Before, the framework removed the outline and only the 1px border changed. Checkboxes and radios keep their own focus style.
-
-### Security
-
-- Template tags (`{post_title}`, custom fields, and the rest) are escaped for where they appear. Links and image sources only accept allowed URL protocols, so a tag can no longer produce a `javascript:` link. Tags inside `style`, `srcset`, and `on*` attributes are left as-is.
-- Template tags in HTML attributes only show data from publicly viewable posts. Private post titles, excerpts, and custom fields that only the current viewer can read still appear in text, but are no longer placed into links or image URLs that a post author chose.
-- Template tags in `onclick` handlers are escaped with `esc_js()`, so a value cannot end the JS string it sits in.
-- Inline SVG icons converted from a CSS mask are passed through the SVG sanitizer before they are added to the page.
-- The SVG sanitizer outputs nothing if its sanitizer library is missing, instead of returning the SVG unchanged.
-- The block editor's template lookup only reads template and template part files by plain name, and only inside the theme's `templates/` and `parts/` folders. Before, a crafted request could ask it to read an `.html` file elsewhere on the server.
-- Icon names are treated as file names. Names with path characters or `..` no longer resolve, and an icon file must sit inside its icon set's folder. Before, a block with a crafted icon name could render any readable `.svg` file.
-- Developer scripts in `tools/` refuse to run unless started from the command line. They are not part of the release zip, but could previously be triggered by opening their address in a browser on a development copy.
 
 ## [1.0.2] - 2026-10-26
 
@@ -124,7 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Theme updates from GitHub releases through WordPress's native update screens. `style.css` declares `Update URI: https://github.com/aegiswp/theme`, and `GitHubUpdater` answers core's `update_themes_github.com` check with the latest release's `aegis.zip`, so new versions appear in Dashboard → Updates and on the Themes screen with "update now", auto-updates, and release notes. The repository is filterable via `aegis_theme_update_repository`.
+- Theme updates from GitHub releases through WordPress's native update screens. `style.css` declares `Update URI: https://github.com/aegiswp/aegis`, and `GitHubUpdater` answers core's `update_themes_github.com` check with the latest release's `aegis.zip`, so new versions appear in Dashboard → Updates and on the Themes screen with "update now", auto-updates, and release notes. The repository is filterable via `aegis_theme_update_repository`.
 - Editor light/dark preview toggle: a top-bar button beside Settings and Styles (and "Preview in dark/light mode" in the View menu) switches the editor canvas between light and dark using the same tokens as the front end. The choice is saved per user; the WordPress interface itself is unchanged. Available in the post and Site Editor, and skipped when dark mode is disabled.
 - Audio block styling in `theme.json`: a card with the Neutral 100 background, the theme border radius, and inner padding. The player fills the card and can shrink below core's 300px minimum on narrow screens, and the caption sits inside the card. Supporting CSS loads only on pages with an Audio block.
 - Sticky site header: the header template part stays fixed at the top while scrolling, below the admin bar on desktop and at the very top on phones, with an opaque Neutral 0 background. Controlled by `settings.custom.header` in `theme.json` (`position`, `top`, `zIndex`, `background`).
@@ -136,7 +140,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed admin and docs labels **Image Compare** → **Compare** and **Image Lightbox** → **Lightbox** (block names and settings keys unchanged).
 - bbPress framework styles: circular avatars, content-scale type, theme form fields, grid topic rows, WordPress-style breadcrumbs, Subscribe/Favorite alignment, My Account–style member layout.
 - Empty footer Navigation blocks no longer fall back to listing every page (`NavigationFallback` + footer pattern sample links).
-- Companion plugin notice now installs the Aegis plugin from the latest GitHub release (`aegiswp/plugin`) instead of WordPress.org, where it isn't listed. If installation fails, the notice links to the releases page for a manual download. The package URL is filterable via `aegis_companion_package_url`.
+- Companion plugin notice now installs the Aegis plugin from the latest GitHub release (`aegiswp/aegis-dash`) instead of WordPress.org, where it isn't listed. If installation fails, the notice links to the releases page for a manual download. The package URL is filterable via `aegis_companion_package_url`.
 - Default header: the People button is now a **Contact** button with a mail icon that links to the site's `/contact/` page (hidden on phones), and the comment-author avatar button is removed.
 - Home page hero: the **Read Docs** button is now **Get Plugin**, linking to the Aegis plugin download page, and the release badge above the heading is removed.
 - Theme screenshot (`screenshot.png`, 1200×900) updated to show the new Home page: the sticky header with the Contact button, the Get Plugin hero, and the three-image layout.
@@ -213,4 +217,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0-alpha.1] - 2023-10-13
 
 - Alpha 1 Release
-

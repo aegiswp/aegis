@@ -40,7 +40,7 @@ Return the original `$slug` (or a non-string / empty value) to leave the part un
 
 ## Examples
 
-Add these through a plugin: a **Functions (PHP)** snippet in [Aegis → Code Snippets](../../../../plugins/aegis/docs/features/code-snippets.md) or a site-specific plugin. See [Where to Put Snippets](../reference/code-snippets.md#where-to-put-snippets). Create the matching `parts/*.html` files first.
+Add these through a plugin: a **Functions (PHP)** snippet in [Aegis → Code Snippets](../../../../plugins/aegis-dash/docs/features/code-snippets.md) or a site-specific plugin. See [Where to Put Snippets](../reference/code-snippets.md#where-to-put-snippets). Create the matching `parts/*.html` files first.
 
 ### Category-based sidebar on single posts
 

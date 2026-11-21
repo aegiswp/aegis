@@ -6,15 +6,13 @@
  * @since   1.0.0
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for merges aegis icon library into wp/v2/icons rest responses for the editor.
 declare( strict_types=1 );
 
-// Declares the namespace for the merges aegis icon library into wp/v2/icons rest responses for the editor.
 namespace Aegis\Framework\Icons;
 
-// Imports classes, interfaces, and functions used by the merges aegis icon library into wp/v2/icons rest responses for the editor.
-use Aegis\Framework\ServiceProvider;
 use Aegis\Icons\Icon;
+use Aegis\Icons\IconRest;
+use Aegis\Icons\IconSupport;
 use WP_REST_Request;
 use WP_REST_Response;
 use function function_exists;
@@ -32,7 +30,7 @@ class RestIconsMerge {
 	 * @hook after_setup_theme
 	 */
 	public function register_rest_route(): void {
-		if ( ! ServiceProvider::is_block_enabled( 'icon' ) || ! ServiceProvider::is_block_enabled( 'icon_rest_api' ) ) {
+		if ( ! IconFeatures::rest_enabled() ) {
 			return;
 		}
 
@@ -51,19 +49,15 @@ class RestIconsMerge {
 		unset( $server );
 
 		// Bail when icons endpoint preconditions are not met.
-		if ( version_compare( get_bloginfo( 'version' ), '7.1', '>=' ) && function_exists( 'wp_register_icon' ) ) {
+		if ( IconSupport::core_registry() && function_exists( 'wp_register_icon' ) ) {
 			return $response;
 		}
 
-		if ( version_compare( get_bloginfo( 'version' ), '7.0', '<' ) ) {
+		if ( ! IconSupport::available() ) {
 			return $response;
 		}
 
-		if ( ! ServiceProvider::is_block_enabled( 'icon' ) ) {
-			return $response;
-		}
-
-		if ( ! ServiceProvider::is_block_enabled( 'icon_rest_api' ) ) {
+		if ( ! IconFeatures::rest_enabled() ) {
 			return $response;
 		}
 
@@ -86,7 +80,7 @@ class RestIconsMerge {
 		$search = strtolower( (string) $request->get_param( 'search' ) );
 
 		// Full SVGs for WP 7.0 wp/v2/icons merge only (skipped on 7.1+ above).
-		$full_request = new WP_REST_Request( 'GET', '/aegis/v1/icons' );
+		$full_request = new WP_REST_Request( 'GET', IconRest::PATH );
 		$full_request->set_param( 'full', true );
 		$icon_map = Icon::get_icon_data( $full_request );
 
@@ -121,7 +115,6 @@ class RestIconsMerge {
 			}
 		}
 
-		// Write merged icon data back to the response.
 		$response->set_data( $data );
 
 		return $response;

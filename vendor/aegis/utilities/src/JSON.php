@@ -1,12 +1,14 @@
 <?php
+/**
+ * JSON utility helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for json utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the json utility helpers.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the json utility helpers.
 use function _wp_to_kebab_case;
 use function is_array;
 use function str_replace;

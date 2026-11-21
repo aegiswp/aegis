@@ -15,7 +15,7 @@
 	<!-- wp:group {"metadata":{"categories":["footer"],"patternName":"minimal"},"align":"wide","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|md","right":"0","bottom":"var:preset|spacing|md","left":"0"}}},"fontSize":"14","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group alignwide has-14-font-size"
 		style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--md);padding-right:0;padding-bottom:var(--wp--preset--spacing--md);padding-left:0">
-		<!-- wp:group {"style":{"spacing":{"blockGap":"4px","margin":{"top":"0","bottom":"0"}},"zIndex":{"all":"0"}},"layout":{"type":"flex","flexWrap":"nowrap"},"onclick":""} -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxxs","margin":{"top":"0","bottom":"0"}},"zIndex":{"all":"0"}},"layout":{"type":"flex","flexWrap":"nowrap"},"onclick":""} -->
 		<div class="wp-block-group" style="margin-top:0;margin-bottom:0">
 			<!-- wp:icon {"icon":"social/aegis","url":"<?php echo esc_url( home_url( '/' ) ); ?>","iconSvgString":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" role=\"img\" aria-labelledby=\"icon-6a2cc03b343f0\" data-icon=\"social-aegis\" style=\"min-width:30px;height:30px\" fill=\"currentColor\"><title id=\"icon-6a2cc03b343f0\">Aegis Icon</title><path d=\"M10.06 7.75 L12.02 3.87 L13.95 7.72 L16.65 9.29 L12.03 0 L7.34 9.3 L10.06 7.75 Z M18.37 12.72 L18.2 12.36 L15.5 10.79 L17.02 13.68 L20.05 18.61 L12.02 15.17 L3.98 18.62 L6.96 13.68 L8.39 10.81 L5.67 12.39 L5.5 12.71 L0 22.87 L12.01 16.87 L24 22.94 L18.37 12.72 Z\" stroke=\"none\" fill-rule=\"evenodd\"></path></svg>","style":{"dimensions":{"width":"30px"}}} /-->
 </div>
@@ -23,7 +23,7 @@
 
 		<!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 		<div class="wp-block-group alignwide">
-			<!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"4px","margin":{"top":"0","bottom":"0"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}} -->
+			<!-- wp:group {"align":"wide","style":{"spacing":{"blockGap":"var:preset|spacing|xxxs","margin":{"top":"0","bottom":"0"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"left"}} -->
 			<div class="wp-block-group alignwide" style="margin-top:0;margin-bottom:0">
 				<!-- wp:paragraph {"align":"center"} -->
 				<p class="aligncenter has-text-align-center aligncenter"><?php echo esc_html__( '© Copyright {year}', 'aegis' ); ?></p>

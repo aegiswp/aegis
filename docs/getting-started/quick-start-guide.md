@@ -10,7 +10,7 @@ If you have not already activated Aegis, navigate to **Appearance → Themes** i
 
 Aegis is a Full Site Editing (FSE) theme. All customization happens through the WordPress Site Editor:
 
-![The Site Editor opened from Appearance → Editor, with Identity, Styles, Pages, Navigation, Patterns, and Templates in the left sidebar and a preview of the site on the right. Numbered callouts: 1 Navigation menus; 2 Global styles and style variations; 3 Pages; 4 Templates and template parts; 5 Patterns.](../screenshots/site-editor.png)
+![The Site Editor opened from Appearance → Editor, with Identity, Styles, Pages, Navigation, Patterns, and Templates in the left sidebar and a preview of the site on the right.](../screenshots/site-editor.png)
 
 *Appearance → Editor opens the Site Editor.*
 
@@ -24,7 +24,7 @@ For a detailed overview of the Site Editor interface, see [[site-editor]].
 
 Aegis ships with 60 style variations that change your entire site appearance with one click:
 
-![The Styles panel in the Site Editor with Browse styles open, showing the grid of Aegis color variations with one selected. Numbered callouts: 1 The selected variation; 2 Save keeps the variation.](../screenshots/browse-styles.png)
+![The Styles panel in the Site Editor with Browse styles open, showing the grid of Aegis color variations with one selected.](../screenshots/browse-styles.png)
 
 *Browse styles lists every Aegis style variation.*
 
@@ -79,7 +79,7 @@ You can also manage navigation menus under **Appearance → Editor → Navigatio
 
 Fine-tune your site design beyond style variations:
 
-![The Styles panel showing Typography, Colors, Background, Shadows, Layout, and Blocks, with a preview card of the active variation at the top. Numbered callouts: 1 Typography; 2 Colors; 3 Background, Shadows, Layout, and Blocks below.](../screenshots/styles-panel.png)
+![The Styles panel showing Typography, Colors, Background, Shadows, Layout, and Blocks, with a preview card of the active variation at the top.](../screenshots/styles-panel.png)
 
 *Global Styles control site-wide typography, colors, and layout.*
 
@@ -100,18 +100,18 @@ Aegis includes built-in dark mode support:
 
 See [[dark-mode]] for configuration details.
 
-## Step 8: Install Companion Plugins (Optional)
+## Step 8: Install Aegis plugins (Optional)
 
-Enhance Aegis with companion plugins:
+Enhance Aegis with Aegis plugins:
 
-- **Aegis Plugin** (free) — Map and Modal blocks, admin dashboard, integrations, snippets, conditionals, analytics. See [docs](../../../../plugins/aegis/docs/getting-started/installation.md).
+- **Aegis Dash** (free) — Aegis blocks (Slider, Toggle, Countdown, Related Posts, Map, Modal), admin dashboard, integrations, snippets, conditionals, analytics. See [docs](../../../../plugins/aegis-dash/docs/getting-started/installation.md).
 - **Aegis Pro** — Hook patterns, video stack, query conditions, Pro blocks. Requires Aegis theme. See [docs](../../../../plugins/aegis-pro/docs/getting-started/installation.md).
 
 After installing the plugin, open **Aegis → Dashboard** to configure blocks and integrations.
 
 ## Building a Page with Patterns
 
-Aegis includes **232 theme block patterns** in **28 category folders** (plus companion plugin and Pro patterns). Here is a typical workflow for assembling a page:
+Aegis includes **230 theme block patterns** in **28 category folders** (plus Aegis Dash and Pro patterns). Here is a typical workflow for assembling a page:
 
 1. **Start with a Hero pattern** — Choose from the Hero category for your page header.
 2. **Add Feature sections** — Showcase your services or capabilities.

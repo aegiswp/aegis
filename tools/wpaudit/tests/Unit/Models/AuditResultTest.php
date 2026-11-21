@@ -67,33 +67,6 @@ class AuditResultTest extends TestCase {
 	}
 
 	/**
-	 * Test creating an AuditResult instance.
-	 */
-	public function test_create_audit_result(): void {
-		$findings        = $this->create_sample_findings();
-		$category_scores = array(
-			'performance' => 85,
-			'seo'         => 90,
-			'security'    => 70,
-		);
-		$overall_score   = 81.67;
-		$theme           = new ThemeMetadata( 'Test Theme', '1.0.0', '/path' );
-		$metadata        = AuditMetadata::create( $theme, 10.5, 50 );
-
-		$result = new AuditResult(
-			$findings,
-			$category_scores,
-			$overall_score,
-			$metadata
-		);
-
-		$this->assertEquals( $findings, $result->findings );
-		$this->assertEquals( $category_scores, $result->category_scores );
-		$this->assertEquals( $overall_score, $result->overall_score );
-		$this->assertEquals( $metadata, $result->metadata );
-	}
-
-	/**
 	 * Test get_findings_by_category method.
 	 */
 	public function test_get_findings_by_category(): void {

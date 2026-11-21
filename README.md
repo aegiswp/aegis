@@ -7,10 +7,10 @@ Welcome to the Aegis Theme development repository.
 
 ## Status
 
-[![CI](https://github.com/aegiswp/theme/actions/workflows/ci.yml/badge.svg)](https://github.com/aegiswp/theme/actions/workflows/ci.yml)
-[![Accessibility](https://github.com/aegiswp/theme/actions/workflows/accessibility.yml/badge.svg)](https://github.com/aegiswp/theme/actions/workflows/accessibility.yml)
-[![Spelling](https://github.com/aegiswp/theme/actions/workflows/spelling.yml/badge.svg)](https://github.com/aegiswp/theme/actions/workflows/spelling.yml)
-[![Release](https://github.com/aegiswp/theme/actions/workflows/release.yml/badge.svg)](https://github.com/aegiswp/theme/actions/workflows/release.yml)
+[![CI](https://github.com/aegiswp/aegis/actions/workflows/ci.yml/badge.svg)](https://github.com/aegiswp/aegis/actions/workflows/ci.yml)
+[![Accessibility](https://github.com/aegiswp/aegis/actions/workflows/accessibility.yml/badge.svg)](https://github.com/aegiswp/aegis/actions/workflows/accessibility.yml)
+[![Spelling](https://github.com/aegiswp/aegis/actions/workflows/spelling.yml/badge.svg)](https://github.com/aegiswp/aegis/actions/workflows/spelling.yml)
+[![Release](https://github.com/aegiswp/aegis/actions/workflows/release.yml/badge.svg)](https://github.com/aegiswp/aegis/actions/workflows/release.yml)
 
 ##### Table of Contents
 
@@ -326,7 +326,7 @@ Aegis is a comprehensive Full Site Editing (FSE) theme that extends the capabili
 
 **Advanced Text Formats**: Extended text formatting options including clear formatting, underline, gradient text, dynamic font sizes, and more. These formatting tools provide fine-grained control over typography and text presentation.
 
-**Pattern Library**: Comprehensive collection of 232 block patterns organized across 28 category folders including author pages, blog layouts, commerce templates, contact forms, CTAs, FAQs, features, footers, headers, heroes, page layouts, portfolios, pricing, testimonials, and utility patterns (Modal starters live in the companion plugin). All patterns are designed for performance and accessibility.
+**Pattern Library**: Comprehensive collection of 230 block patterns organized across 28 category folders including author pages, blog layouts, commerce templates, contact forms, CTAs, FAQs, features, footers, headers, heroes, page layouts, portfolios, pricing, testimonials, and utility patterns (Modal starters live in the companion plugin). All patterns are designed for performance and accessibility.
 
 ### Enhanced Core Blocks
 
@@ -382,10 +382,10 @@ Aegis extends the following WordPress core blocks with additional functionality,
 | Toggle | `aegis/toggle` | Theme |
 | Toggle Content | `aegis/toggle-content` | Theme |
 | Related Posts | `aegis/related-posts` | Theme |
-| Map | `aegis/map` | [Aegis Plugin](../../plugins/aegis/docs/blocks/custom-blocks.md) |
-| Modal | `aegis/modal` | [Aegis Plugin](../../plugins/aegis/docs/blocks/modals.md) |
+| Map | `aegis/map` | [Aegis Plugin](../../plugins/aegis-dash/docs/blocks/custom-blocks.md) |
+| Modal | `aegis/modal` | [Aegis Plugin](../../plugins/aegis-dash/docs/blocks/modals.md) |
 
-Documentation: [Theme docs](docs/blocks/custom-blocks.md) · [Plugin docs](../../plugins/aegis/docs/home.md) · [Pro docs](../../plugins/aegis-pro/docs/home.md)
+Documentation: [Theme docs](https://www.atmostfear-entertainment.com/docs/aegis/theme/aegis-theme/) · [Aegis Dash docs](https://www.atmostfear-entertainment.com/docs/aegis/plugin/aegis-dash/)
 
 ### Block Variations
 
@@ -403,7 +403,7 @@ Aegis includes the following custom block variations that extend WordPress core 
 
 ### Plugin Integrations
 
-Framework styling applies when integrations are enabled in the **Aegis plugin** dashboard. Full toggle list and SEO delegation: [Integrations Dashboard](../../plugins/aegis/docs/features/integrations-dashboard.md). Theme framework CSS covers WooCommerce, Fluent Forms, Fluent Booking, Gravity Forms, Ninja Forms, LearnDash, LifterLMS, Sensei, EDD, AffiliateWP, bbPress, Meta Box, Syntax Highlighting Code Block, and Code Block Pro when toggled on.
+Framework styling applies when integrations are enabled in the **Aegis plugin** dashboard. Full toggle list and SEO delegation: [Integrations Dashboard](../../plugins/aegis-dash/docs/features/integrations-dashboard.md). Theme framework CSS covers WooCommerce, Fluent Forms, Fluent Booking, Gravity Forms, Ninja Forms, LearnDash, LifterLMS, Sensei, EDD, AffiliateWP, bbPress, Meta Box, Syntax Highlighting Code Block, and Code Block Pro when toggled on.
 
 | Plugin | Category | Notes |
 |--------|----------|-------|
@@ -442,13 +442,13 @@ Framework styling applies when integrations are enabled in the **Aegis plugin** 
 
 ### Developer Tools & Framework
 
-**Custom Block Collection**: The theme registers six custom blocks — Countdown, Slider, Slide, Toggle, Toggle Content, and Related Posts. Video uses enhanced **`core/video`**. Map and Modal require the [Aegis companion plugin](../../plugins/aegis/docs/blocks/custom-blocks.md), which requires the Aegis theme.
+**Custom Block Collection**: The theme registers six custom blocks — Countdown, Slider, Slide, Toggle, Toggle Content, and Related Posts. Video uses enhanced **`core/video`**. Map and Modal require the [Aegis companion plugin](../../plugins/aegis-dash/docs/blocks/custom-blocks.md), which requires the Aegis theme.
 
-**Analytics**: Configured in the companion plugin at **Aegis → Connectors** (one tab per provider). See [plugin analytics docs](../../plugins/aegis/docs/features/analytics.md) · [Plugin Wiki](https://github.com/aegiswp/plugin/wiki).
+**Analytics**: Configured in the companion plugin at **Aegis → Connectors** (one tab per provider). See [plugin analytics docs](../../plugins/aegis-dash/docs/features/analytics.md) · [Aegis Dash docs](https://www.atmostfear-entertainment.com/docs/aegis/plugin/aegis-dash/).
 
 **Hook Patterns**: Framework fires injection hooks on template parts and content. Hook pattern CPT management requires [Aegis Pro](../../plugins/aegis-pro/docs/features/hook-patterns-pro.md).
 
-**Conditional Logic**: Block visibility and admin settings are in the [Aegis plugin](../../plugins/aegis/docs/features/conditional-logic.md) · [Plugin Wiki](https://github.com/aegiswp/plugin/wiki).
+**Conditional Logic**: Block visibility and admin settings are in the [Aegis plugin](../../plugins/aegis-dash/docs/features/conditional-logic.md) · [Aegis Dash docs](https://www.atmostfear-entertainment.com/docs/aegis/plugin/aegis-dash/).
 
 **Framework Architecture**: Built on the Aegis Framework (`vendor/aegis/framework`) with ServiceProvider pattern. Provides a robust foundation for theme development and extensibility.
 
@@ -579,7 +579,7 @@ By adhering to these practices, you can make your development process more strea
 To get started with Aegis development:
 
 1. Set up a [WordPress instance locally](#deploying-wordpress-locally).
-2. Download [Aegis](https://github.com/aegiswp/theme/releases/).
+2. Download [Aegis](https://github.com/aegiswp/aegis/releases/).
 3. Unzip and upload the theme into your `/wp-content/themes/` directory.
 
 If you find setting up WordPress locally overwhelming, consider using [wp-env](https://developer.wordpress.org/block-editor/getting-started/devenv/), [Local](https://localwp.com/), or [DevKinsta](https://kinsta.com/devkinsta/).
@@ -587,14 +587,14 @@ If you find setting up WordPress locally overwhelming, consider using [wp-env](h
 
 #### Requirements
 
-- [Aegis](https://github.com/aegiswp/theme/releases/)
+- [Aegis](https://github.com/aegiswp/aegis/releases/)
 - [WordPress 7.0+](https://wordpress.org/download/) (tested up to 7.1.4)
 - PHP **8.1+** (Node **22.13+** and npm **10+** for building blocks and running wp-env; see `package.json` `engines` and `.nvmrc`)
 - License: [GPLv2](https://www.gnu.org/licenses/gpl-2.0.html) or later.
 
 #### Release version
 
-The theme release number is the single value defined in three places: `style.css` (`Version`), `package.json` (`version`), and `composer.json` (`version`). When you cut a release, update all three to match (for example `1.0.0`).
+The theme release number is defined in two places: `style.css` (`Version`) and `package.json` (`version`). `composer.json` has no version key. When you cut a release, update both to match (for example `1.0.0`).
 
 PHP dependencies are pinned by **`composer.lock`**. After cloning, run **`composer install`** in the theme directory. Run **`composer update`** only when you intend to change dependency revisions, then re-test and commit an updated lockfile. If Composer reports an SSL or certificate error when using GitHub, fix your system or PHP CA bundle (see the [Composer doc on local issuers](https://getcomposer.org/local-issuer)).
 
@@ -609,7 +609,7 @@ PHP dependencies are pinned by **`composer.lock`**. After cloning, run **`compos
 > Some features may require the latest WordPress version or the [Gutenberg plugin](https://wordpress.org/plugins/gutenberg/) for full functionality.
 
 
-Some Aegis features and/or [pull requests](https://github.com/aegiswp/theme/pulls) may require the [Gutenberg plugin](https://wordpress.org/plugins/gutenberg/) trunk and will be described or tagged accordingly.
+Some Aegis features and/or [pull requests](https://github.com/aegiswp/aegis/pulls) may require the [Gutenberg plugin](https://wordpress.org/plugins/gutenberg/) trunk and will be described or tagged accordingly.
 
 To optionally run tests locally, it will also be required:
 
@@ -628,10 +628,8 @@ Install dev tooling from the theme directory: `npm install` and `composer instal
 
 - `composer run standards:check` — PHPCS using `phpcs.xml` ([WordPress Coding Standards](https://developer.wordpress.org/coding-standards/)). To scan one file: `composer run standards:check -- path/to/file.php`
 - `composer run standards:fix` — PHPCBF auto-fix
-- `composer run analyze` — alias for `standards:check`
 - `composer run lint` — alias for `standards:check`
-- `composer run test`, `composer run test:php`, or `npm run test:php` — WPAudit PHPUnit suite in `tools/wpaudit` (same as CI)
-- `composer run test:wpaudit` — explicit alias for the WPAudit suite
+- `composer run test` (or `test:php` / `test:wpaudit`, which CI calls) or `npm test` — WPAudit PHPUnit suite in `tools/wpaudit` (same as CI)
 
 
 ### Local development (wp-env)
@@ -650,7 +648,7 @@ Default site URL: **http://localhost:8888** (set `port` in `.wp-env.json` or `WP
 
 **Ongoing work**
 
-- `npm run dev` or `npm start` — webpack watch for `src/Blocks` and related build entries
+- `npm run dev` — generates the blocks manifest, then runs the webpack watch for `src/Blocks` and related build entries
 - `npm run env:cli -- plugin list` — run [WP-CLI](https://developer.wordpress.org/cli/commands/) inside the container (prefix is `wp`; anything after `env:cli --` is passed to `wp`)
 - `npm run env:restart` — `wp-env stop` then `wp-env start` after you change environment config
 - `npm run env:stop` — stop containers
@@ -719,11 +717,11 @@ Contributing to the Aegis theme or any other open-source project can be a reward
 
 By adhering to these tips and best practices, you will be making a valuable contribution to the project and fostering a healthy, collaborative community.
 
-Before contributing, please read the contributors' [Code of Conduct](https://github.com/aegiswp/theme/blob/main/CODE_OF_CONDUCT.md) and [Contributing](https://github.com/aegiswp/theme/blob/main/CONTRIBUTING.md) for information about how to open bug reports, contribute patches, test changes, write documentation, or get involved in any way you can.
+Before contributing, please read the contributors' [Code of Conduct](https://github.com/aegiswp/aegis/blob/main/CODE_OF_CONDUCT.md) and [Contributing](https://github.com/aegiswp/aegis/blob/main/CONTRIBUTING.md) for information about how to open bug reports, contribute patches, test changes, write documentation, or get involved in any way you can.
 
-If after reading you still wish to contribute with code, the list of [open issues](https://github.com/aegiswp/theme/issues) is a superb place to start scrutinising for tasks. However, [pull requests](https://github.com/aegiswp/theme/pulls) are preferred when linked to an existing issue.
+If after reading you still wish to contribute with code, the list of [open issues](https://github.com/aegiswp/aegis/issues) is a superb place to start scrutinising for tasks. However, [pull requests](https://github.com/aegiswp/aegis/pulls) are preferred when linked to an existing issue.
 
-Be advised that contributing is not just for developers. We welcome anyone willing to contribute with code, [testing](#getting-started), triage, discussion, designing while building patterns and templates, making Aegis more accessible, etcetera. So please, feel free to look through [open issues](https://github.com/aegiswp/theme/issues), and join wherever you feel most comfortable.
+Be advised that contributing is not just for developers. We welcome anyone willing to contribute with code, [testing](#getting-started), triage, discussion, designing while building patterns and templates, making Aegis more accessible, etcetera. So please, feel free to look through [open issues](https://github.com/aegiswp/aegis/issues), and join wherever you feel most comfortable.
 
 
 ## Development
@@ -734,7 +732,7 @@ Avoid building custom PHP or JavaScript workarounds for functionality already pr
 
 Theme-owned blocks require `npm run build` in the theme; Map, Modal, and admin assets are built in the companion plugin. See [BUILD.md](BUILD.md).
 
-If you have [contributed](CONTRIBUTORS.md) to Aegis, you will receive proper credit. We update [CONTRIBUTORS.md](CONTRIBUTORS.md) periodically. If we have missed anyone, please open a [pull request](https://github.com/aegiswp/theme/pulls) or [issue](https://github.com/aegiswp/theme/issues).
+If you have [contributed](CONTRIBUTORS.md) to Aegis, you will receive proper credit. We update [CONTRIBUTORS.md](CONTRIBUTORS.md) periodically. If we have missed anyone, please open a [pull request](https://github.com/aegiswp/aegis/pulls) or [issue](https://github.com/aegiswp/aegis/issues).
 
 ## Technical Architecture
 
@@ -803,4 +801,4 @@ Payment mono and mono-outline icons (`payment/{name}`, `payment/{name}-outline`)
 
 ## Suggestions?
 
-To propose improvements to this repository, please open an [issue](https://github.com/aegiswp/theme/issues) or [pull request](https://github.com/aegiswp/theme/pulls).
+To propose improvements to this repository, please open an [issue](https://github.com/aegiswp/aegis/issues) or [pull request](https://github.com/aegiswp/aegis/pulls).

@@ -6,13 +6,10 @@
  * @since   1.0.0
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for wp-cli: migrate legacy image icon blocks to core/icon.
 declare( strict_types=1 );
 
-// Declares the namespace for the wp-cli: migrate legacy image icon blocks to core/icon.
 namespace Aegis\Framework\Icons;
 
-// Imports classes, interfaces, and functions used by the wp-cli: migrate legacy image icon blocks to core/icon.
 use WP_CLI;
 use function is_array;
 use function str_contains;

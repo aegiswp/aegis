@@ -6,21 +6,15 @@
  *
  * Responsibilities:
  * - Ensures implementing classes provide a method for registering styles
- * - Integrates with the Aegis inline assets system
  *
  * @package    Aegis\Framework\InlineAssets
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for styleable interface.
 declare( strict_types=1 );
 
-// Declares the namespace for the styleable interface.
 namespace Aegis\Framework\InlineAssets;
 
 // Declares the Styleable interface for style registration in the design system.

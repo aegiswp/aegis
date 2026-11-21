@@ -48,11 +48,7 @@ final class RelatedPostsQuery {
 			return null;
 		}
 
-		$posts_per_page    = (int) ( $options['postsPerPage'] ?? 3 );
-		$taxonomy_source   = (string) ( $options['taxonomySource'] ?? 'auto' );
-		$fallback_behavior = (string) ( $options['fallbackBehavior'] ?? 'latest' );
-
-		$query_args = self::build_args( $post_id, $post_type, $posts_per_page, $taxonomy_source, $options );
+		$query_args = self::build_args( $post_id, $post_type, $options );
 		$query_args = apply_filters( 'aegis_related_posts_query', $query_args, $post_id, $filter_context );
 
 		$related_query = new WP_Query( $query_args );
@@ -61,7 +57,7 @@ final class RelatedPostsQuery {
 			return $related_query;
 		}
 
-		if ( 'hide' === $fallback_behavior ) {
+		if ( 'hide' === (string) ( $options['fallbackBehavior'] ?? 'latest' ) ) {
 			return null;
 		}
 
@@ -76,16 +72,14 @@ final class RelatedPostsQuery {
 	/**
 	 * Latest posts for editor preview when there is no public post context.
 	 *
-	 * @param int                  $posts_per_page Posts to fetch.
-	 * @param string               $post_type      Post type slug.
-	 * @param array<string, mixed> $options        Query options (orderBy, order).
+	 * @param array<string, mixed> $options Query options (postsPerPage, postType, orderBy, order).
 	 *
 	 * @return WP_Query|null Null when no posts should display.
 	 */
-	public static function latest( int $posts_per_page, string $post_type = 'post', array $options = array() ): ?WP_Query {
+	public static function latest( array $options = array() ): ?WP_Query {
 		$query_args = array(
-			'post_type'           => $post_type,
-			'posts_per_page'      => max( 1, min( self::MAX_POSTS, $posts_per_page ) ),
+			'post_type'           => (string) ( $options['postType'] ?? 'post' ),
+			'posts_per_page'      => self::posts_per_page( $options ),
 			'ignore_sticky_posts' => true,
 			'no_found_rows'       => true,
 		);
@@ -124,18 +118,17 @@ final class RelatedPostsQuery {
 	/**
 	 * Build base query arguments.
 	 *
-	 * @param int                  $post_id         Post ID.
-	 * @param string               $post_type       Post type slug.
-	 * @param int                  $posts_per_page  Posts to fetch.
-	 * @param string               $taxonomy_source auto|category|post_tag|author.
-	 * @param array<string, mixed> $options         Query options (orderBy, order).
+	 * @param int                  $post_id   Post ID.
+	 * @param string               $post_type Post type slug.
+	 * @param array<string, mixed> $options   Query options (postsPerPage, taxonomySource auto|category|post_tag|author, orderBy, order).
 	 *
 	 * @return array<string, mixed>
 	 */
-	public static function build_args( int $post_id, string $post_type, int $posts_per_page, string $taxonomy_source, array $options = array() ): array {
-		$query_args = array(
+	private static function build_args( int $post_id, string $post_type, array $options ): array {
+		$taxonomy_source = (string) ( $options['taxonomySource'] ?? 'auto' );
+		$query_args      = array(
 			'post_type'           => $post_type,
-			'posts_per_page'      => max( 1, min( self::MAX_POSTS, $posts_per_page ) ),
+			'posts_per_page'      => self::posts_per_page( $options ),
 			'post__not_in'        => array( $post_id ),
 			'ignore_sticky_posts' => true,
 			'no_found_rows'       => true,
@@ -163,7 +156,18 @@ final class RelatedPostsQuery {
 	}
 
 	/**
-	 * Apply orderby/order from block options.
+	 * Posts to fetch, clamped to 1..MAX_POSTS.
+	 *
+	 * @param array<string, mixed> $options Query options.
+	 *
+	 * @return int
+	 */
+	private static function posts_per_page( array $options ): int {
+		return max( 1, min( self::MAX_POSTS, (int) ( $options['postsPerPage'] ?? 3 ) ) );
+	}
+
+	/**
+	 * Applies the block's order settings to the query arguments.
 	 *
 	 * @param array<string, mixed> $query_args Query arguments.
 	 * @param array<string, mixed> $options    Block query options.

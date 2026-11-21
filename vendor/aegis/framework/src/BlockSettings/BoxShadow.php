@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the rendering of custom box shadow styles for block content
- * - Integrates with the Renderable and Styleable interfaces for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for box shadow block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the box shadow block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the box shadow block setting.
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use Aegis\Dom\CSS;
@@ -76,7 +69,6 @@ class BoxShadow implements Renderable, Styleable {
 		$shadow_preset = $attrs['shadowPreset'] ?? null;
 		$hover_preset  = $attrs['shadowPresetHover'] ?? null;
 
-		// --- Preset Class Application ---
 		if ( $shadow_preset ) {
 			// Special handling for blocks like core/button where the shadow should
 			// be applied to a nested element, not the main wrapper.
@@ -117,7 +109,6 @@ class BoxShadow implements Renderable, Styleable {
 			}
 		}
 
-		// --- Custom Shadow CSS Variable Application ---
 		$custom_shadow = $attrs['style']['boxShadow'] ?? null;
 		if ( ! $custom_shadow ) {
 			return $block_content;

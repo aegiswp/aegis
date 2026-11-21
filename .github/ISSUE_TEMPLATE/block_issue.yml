@@ -12,7 +12,7 @@ body:
 
         Theme-registered blocks: Countdown, Related Posts, Slider, Slide, Toggle, and Toggle Content.
 
-        **For general bugs** not specific to a block, use the [Bug Report](https://github.com/aegiswp/theme/issues/new?template=bug_report.yml) template instead.
+        **For general bugs** not specific to a block, use the [Bug Report](https://github.com/aegiswp/aegis/issues/new?template=bug_report.yml) template instead.
         **For `core/video`**, use Bug Report and select "core/video (enhanced)". Aegis does not register `aegis/video`.
 
   - type: dropdown

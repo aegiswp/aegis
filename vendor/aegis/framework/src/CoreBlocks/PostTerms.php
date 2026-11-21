@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling post terms block content
- * - Integrates with utility classes for DOM, CSS, and WordPress taxonomy helpers
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for post terms block.
 declare( strict_types=1 );
 
-// Declares the namespace for the post terms block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the post terms block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -81,7 +74,6 @@ class PostTerms implements Renderable {
 	public function render( string $block_content, array $block, WP_Block $instance ): string {
 		$attrs = $block['attrs'] ?? [];
 
-		// --- Initial Minor Fixes ---
 		// Apply flexbox alignment classes if specified.
 		if ( $attrs['align'] ?? null ) {
 			$dom = DOM::create( $block_content );
@@ -119,7 +111,6 @@ class PostTerms implements Renderable {
 			}
 		}
 
-		// --- Full Block Re-render Logic ---
 		// If the block content is empty OR the "Show All" attribute is checked,
 		// ignore the default rendering and build the term list from scratch.
 		$show_all = $attrs['showAll'] ?? false;
@@ -217,7 +208,6 @@ class PostTerms implements Renderable {
 			$block_content = $dom->saveHTML();
 		}
 
-		// --- Final Style Application on the Resulting HTML ---
 		$dom   = DOM::create( $block_content );
 		$first = DOM::get_element( '*', $dom ); // The main wrapper, either a div or ul.
 		if ( $first ) {

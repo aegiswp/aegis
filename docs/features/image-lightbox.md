@@ -2,7 +2,7 @@
 
 Aegis enhances the WordPress **Image** block lightbox (`core/image` with **Expand on click**). The lightbox itself is Core. Toggles at **Aegis → Blocks → Lightbox** add extras on top.
 
-`theme.json` enables lightbox support (`settings.lightbox.enabled`). Editors still turn **Expand on click** on per image (or via Global Styles for the Image block).
+The lightbox is **off by default**: `theme.json` sets `settings.lightbox.enabled` to `false`. Turn **Expand on click** on for an individual image in the editor, or switch the Lightbox on for the Image block in Global Styles to enable it for every image.
 
 The overlay scrim and close/prev/next controls follow the active color scheme (light or dark) using `--wp--custom--body--background` and `--wp--custom--body--color`. Changing the site background or text color in the Site Editor updates those tokens. Core bakes a light-mode hex into the overlay HTML; Aegis overrides it so dark mode is not stuck on the light surface.
 
@@ -10,9 +10,9 @@ Image captions stay on the figure in the content. They are not shown in the ligh
 
 ## Feature Toggles
 
-Features are off by default when the companion plugin is active. Enable All on the Lightbox section, or turn on individual extras:
+Features are off by default when Aegis Dash is active. Enable All on the Lightbox section, or turn on individual extras:
 
-![Aegis → Blocks with the Image section open, showing the lightbox feature toggles.](../screenshots/blocks-lightbox.png)
+![Aegis → Blocks with the Lightbox section open, showing the four lightbox feature toggles.](../screenshots/blocks-lightbox.png)
 
 *Lightbox toggles in Aegis → Blocks.*
 
@@ -35,7 +35,7 @@ Slider lightbox (`slider_lightbox`) is a separate Pro feature on the Slider bloc
 
 WordPress already groups images inside a **Gallery** block (Core sets `galleryId` and `data-wp-interactive="core/gallery"` on the gallery wrapper). Aegis grouping also covers lightbox images that share a Group (including Row and Stack layouts) or Column parent when Gallery Navigation, Swipe, or Thumbnails is on. Those wrappers get the same Core gallery interactivity context so prev/next, keyboard, and touch swipe work. Images in separate columns stay separate sets — use a Gallery block to group a row of images across columns.
 
-![The lightbox open on the front end over a dimmed page, with previous and next arrows to move through a gallery. Numbered callouts: 1 Previous image in the gallery; 2 Next image; 3 Close.](../screenshots/lightbox.png)
+![The lightbox open on the front end over a dimmed page, with previous and next arrows to move through a gallery.](../screenshots/lightbox.png)
 
 *Images in the same gallery open as one group.*
 
@@ -43,4 +43,4 @@ WordPress already groups images inside a **Gallery** block (Core sets `galleryId
 
 - [[enhanced-core-blocks]] — Other Image block enhancements.
 - [[svg-icons]] — Icons use `core/icon`, not Image.
-- [Plugin Custom Blocks](../../../../plugins/aegis/docs/blocks/custom-blocks.md) — Block feature toggles.
+- [Aegis Dash Custom Blocks](../../../../plugins/aegis-dash/docs/blocks/custom-blocks.md) — Block feature toggles.

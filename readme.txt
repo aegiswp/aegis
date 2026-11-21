@@ -9,14 +9,14 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Aegis is a WordPress block theme and design-system framework built on systematic design tokens: structured colour scales, fluid typography, and constraint-based spacing for visual consistency across patterns and templates. It ships self-hosted Lexend and JetBrains Mono fonts, compiled custom blocks, 232 patterns for blog, commerce, events, portfolio, and contact, plus WooCommerce templates, dark/light mode, RTL support, and an accessibility-ready foundation aimed at WCAG 2.2 Level AA (full conformance still depends on site content).
+Aegis is a WordPress block theme and design-system framework built on systematic design tokens: structured colour scales, fluid typography, and constraint-based spacing for visual consistency across patterns and templates. It ships self-hosted Lexend and JetBrains Mono fonts, compiled custom blocks, 230 patterns for blog, commerce, events, portfolio, and contact, plus WooCommerce templates, dark/light mode, RTL support, and an accessibility-ready foundation aimed at WCAG 2.2 Level AA (full conformance still depends on site content).
 
 == Installation ==
 
 1. Upload the theme folder to `/wp-content/themes/` or install the zip via **Appearance → Themes → Add New → Upload Theme**.
 2. Activate **Aegis** under **Appearance → Themes**.
 3. Open **Appearance → Editor** to customize templates, template parts, and global styles.
-4. Optional: install the free Aegis companion plugin for Map/Modal, the Integrations dashboard (including **Community → bbPress** and **SEO**), and admin settings. WooCommerce templates apply when WooCommerce is active.
+4. Optional: install the free Aegis Dash plugin for the Aegis blocks (Slider, Toggle, Countdown, Related Posts, Map, Modal), the Integrations dashboard (including **Community → bbPress** and **SEO**), and admin settings. WooCommerce templates apply when WooCommerce is active.
 
 == Frequently Asked Questions ==
 
@@ -50,27 +50,29 @@ Yes. Templates with a header get an injected skip link. The Blank template has n
 
 == Changelog ==
 
-= 1.1.0 - Unreleased =
-* Changed: The Slider, Toggle, Countdown and Related Posts blocks are provided by the Aegis plugin 1.1.0 or newer when it is active; the theme registers them only if the plugin has not, and hides its duplicate Slider and Related Posts patterns.
-* Changed: The GitHub updater holds back any release whose notes say "Requires Aegis plugin: X.Y.Z" until the plugin is installed, active and new enough, with an admin notice.
-* Security: Template tags are escaped for where they appear (no javascript: links, no private post data in link or image URLs, escaped inside onclick handlers); inline SVG masks are sanitized; the SVG sanitizer outputs nothing if its library is missing.
-* Fixed: Author archives include the site header, main landmark, and footer.
-* Fixed: Blank template shows its skip-to-content link.
-* Fixed: Form fields show a 2px keyboard focus ring.
+= 1.1.0 - 2026-11-20 =
 * Added: Payment icon set (payment/* mono and payment/*-outline mono-outline) from svg-credit-card-payment-icons; store footers and Payment Icons use *-outline.
-* Fixed: Child themes that ship patterns/header/default.php keep header-default when WooCommerce is active; only the parent header is left to the plugin overlay.
-* Fixed: Multi-slide Slider layouts keep the editor per-page count on the front end when Block Gap uses a spacing preset.
-* Fixed: Slider arrows and dots remain visible on dark hero slides in light mode.
+* Changed: The theme framework asks Aegis Dash for integration and block settings through a companion interface and the aegis_framework_companion filter, instead of looking for Dash classes by name.
+* Changed: Pattern markup copied between files is shared through PHP partials. Output and registered pattern slugs are unchanged.
+* Changed: The Slider, Toggle, Countdown and Related Posts blocks are provided by Aegis Dash 1.1.0 or newer when it is active; the theme registers them only if the plugin has not, and hides its duplicate Slider and Related Posts patterns.
+* Changed: The GitHub updater holds back any release whose notes say "Requires Aegis Dash: X.Y.Z" (or "Requires Aegis plugin: X.Y.Z") until Aegis Dash is installed, active and new enough, with an admin notice.
 * Removed: Integrations icon set; no longer needed.
 * Removed: Theme payment and payment-brand folders under assets/icons/; payment packs live in the icons package.
 * Removed: Slater and Payrexx payment logo packs.
-* Removed: Duplicate theme Contact Form Map patterns; keep companion plugin copies when Map is enabled.
+* Removed: Duplicate theme Contact Form Map patterns; keep the Aegis Dash copies when Map is enabled.
 * Removed: Latest Posts Carousel pattern; it ships with Aegis Pro (Query Loop carousel).
+* Fixed: The primary-dark-mid duotone preset uses the primary-500 colour, and the product search template closes its block comment.
+* Fixed: Author archives include the site header, main landmark, and footer.
+* Fixed: Blank template shows its skip-to-content link.
+* Fixed: Form fields show a 2px keyboard focus ring.
+* Fixed: Child themes that ship patterns/header/default.php keep header-default when WooCommerce is active; only the parent header is left to the plugin overlay.
+* Fixed: Multi-slide Slider layouts keep the editor per-page count on the front end when Block Gap uses a spacing preset.
+* Fixed: Slider arrows and dots remain visible on dark hero slides in light mode.
 
 = 1.0.2 - 2026-10-26 =
 * Added: Navigation blocks with the is-drilldown class use the same slide-through submenus as the mobile menu, including a Back button.
 * Added: Books Slider and Latest Posts Carousel patterns.
-* Changed: The Home page hero shows Open Editor and Read Docs buttons again. Read Docs links to the Aegis docs on atmostfear-entertainment.com.
+* Changed: The Home page hero shows Open Editor and Read Docs buttons again. Read Docs links to the documentation site at atmostfear-entertainment.com.
 * Changed: Patterns load only when used, and pattern headers and icon lists are cached, so pages load much faster.
 * Changed: Template tags print public post fields only, and Query Loop blocks ignore private meta keys unless a filter allows them.
 * Changed: The onclick block setting and unrestricted Additional Styles are kept only for users who can post unfiltered HTML.

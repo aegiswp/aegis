@@ -127,7 +127,7 @@ Dark mode in Aegis is designed to keep default token pairings at **WCAG 2.2 AA**
 
 Editor-chosen colors and media overlays still need a contrast check. See [[accessibility]].
 
-To hide a block, post, or hook pattern in light or dark mode, use **Aegis → Conditionals → Accessibility → Color Scheme**. Those rules follow the same `is-style-*` / `default-mode-*` classes as the visitor toggle. See [Plugin Conditional Logic](../../../../plugins/aegis/docs/features/conditional-logic.md#accessibility-extras).
+To hide a block, post, or hook pattern in light or dark mode, use **Aegis → Conditionals → Accessibility → Color Scheme**. Those rules follow the same `is-style-*` / `default-mode-*` classes as the visitor toggle. See [Aegis Dash Conditional Logic](../../../../plugins/aegis-dash/docs/features/conditional-logic.md#accessibility-extras).
 
 ## Per-Section Dark Mode
 
@@ -187,6 +187,7 @@ No JavaScript framework or library is required. The visitor toggle is a few line
 
 ## Next Steps
 
+- [Dark Mode snippets](../reference/code-snippets.md#dark-mode) — Copy-paste snippets to turn dark mode off, or choose the default mode for the whole site or for some pages.
 - [[color-palette]] — Understand the full color system and its light/dark mappings.
 - [[style-variations]] — See how variations look in both modes.
 - [[global-styles]] — Customize colors for light and dark modes.

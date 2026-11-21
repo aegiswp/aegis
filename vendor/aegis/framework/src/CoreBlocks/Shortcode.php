@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and cleaning up shortcode block content
- * - Integrates with utility classes for string manipulation and WordPress helpers
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for shortcode block.
 declare( strict_types=1 );
 
-// Declares the namespace for the shortcode block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the shortcode block.
 use Aegis\Framework\Interfaces\Renderable;
 use WP_Block;
 use function str_replace;

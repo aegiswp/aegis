@@ -10,7 +10,7 @@ Before installing Aegis, ensure your environment meets the [[requirements]].
 
 ### Method 1: Upload via WordPress Admin
 
-![Appearance → Themes → Add New Theme with the Upload Theme panel open, aegis.zip chosen in the file field, and the Install Now button.](../screenshots/theme-upload.png)
+![Appearance → Themes → Add New Theme with the Upload Theme panel open, the Choose File button, and the Install Now button.](../screenshots/theme-upload.png)
 
 *Uploading aegis.zip from Appearance → Themes → Add New Theme.*
 
@@ -39,7 +39,7 @@ Before installing Aegis, ensure your environment meets the [[requirements]].
 If your project uses Composer for dependency management, you can install Aegis as a package:
 
 ```bash
-composer require aegiswp/theme
+composer require aegiswp/aegis
 ```
 
 Ensure the theme is placed in the correct `wp-content/themes/aegis` directory.
@@ -67,13 +67,14 @@ If you installed Aegis from a release package, the `vendor/` directory is alread
 composer install --no-dev
 ```
 
-> **Important:** Deploying the theme without the `vendor/` directory will cause a fatal error when WordPress attempts to load the theme.
+> [!WARNING]
+> Deploying the theme without the `vendor/` directory will cause a fatal error when WordPress attempts to load the theme.
 
 ### Verify Activation
 
 After activating Aegis:
 
-![Appearance → Themes with Aegis listed first as the active theme.](../screenshots/themes-active.png)
+![Appearance → Themes with Aegis as the active theme.](../screenshots/themes-active.png)
 
 *Aegis listed as the active theme.*
 
@@ -81,25 +82,25 @@ After activating Aegis:
 2. Navigate to **Appearance → Editor** to access the Site Editor.
 3. Check that block patterns are available in the block inserter.
 
-### Optional: Install Companion Plugins
+### Optional: Install Aegis plugins
 
-The theme works standalone (templates, patterns, theme blocks). For Map, Modal, the Aegis admin dashboard, integrations (including **Community → bbPress** and **SEO**), snippets, conditionals, and analytics, install the companion plugins:
+The theme works standalone for templates, patterns and style variations. For the Aegis blocks (Slider, Toggle, Countdown, Related Posts, Map, Modal), the Aegis admin dashboard, integrations (including **Community → bbPress** and **SEO**), snippets, conditionals, and analytics, install Aegis Dash:
 
-![The Aegis companion notice on Appearance → Themes recommending the free Aegis plugin, with the Activate Aegis Plugin button (Install and Activate when the plugin is not installed yet). Numbered callouts: 1 Installs and activates the free Aegis plugin.](../screenshots/companion-notice.png)
+![The Aegis companion notice on Appearance → Themes recommending Aegis Dash, with the Activate Aegis Dash button (Install and Activate when the plugin is not installed yet). Numbered callouts: 1 Installs and activates Aegis Dash.](../screenshots/companion-notice.png)
 
-*The theme suggests its companion plugin after activation.*
+*The theme suggests Aegis Dash after activation.*
 
-- **Aegis Plugin** (free) — [docs](../../../../plugins/aegis/docs/getting-started/installation.md)
-- **Aegis Pro** — Coming soon. Requires the Aegis theme; [docs](../../../../plugins/aegis-pro/docs/getting-started/installation.md)
+- **Aegis Dash** (free) — [docs](../../../../plugins/aegis-dash/docs/getting-started/installation.md)
+- **Aegis Pro** — Coming soon. Requires the Aegis theme and Aegis Dash; [docs](../../../../plugins/aegis-pro/docs/getting-started/installation.md)
 
-#### Installing the Companion Plugin From the Theme Notice
+#### Installing Aegis Dash From the Theme Notice
 
-While the companion plugin is inactive, **Appearance → Themes** shows an admin notice to administrators who can install plugins.
+While Aegis Dash is inactive, **Appearance → Themes** shows an admin notice to administrators who can install plugins.
 
-- If the plugin is not installed, **Install** downloads and installs the `aegis.zip` package of the latest plugin release. The plugin is not hosted on WordPress.org.
+- If the plugin is not installed, **Install** downloads and installs the `aegis-dash.zip` package of the latest Aegis Dash release. The plugin is not hosted on WordPress.org.
 - If the plugin is installed but inactive, **Activate** turns it on.
 - After install or activation, you land on the Aegis dashboard.
-- If the automatic install fails, the notice links to the plugin releases page. Download `aegis.zip` there and upload it under **Plugins → Add New Plugin → Upload Plugin**.
+- If the automatic install fails, the notice links to the plugin releases page. Download `aegis-dash.zip` there and upload it under **Plugins → Add New Plugin → Upload Plugin**.
 - Dismissing the notice hides it for your user account.
 
 Developers can pin a release or use a mirror with the `aegis_companion_package_url` filter. See [Hooks and Filters](../reference/hooks-and-filters.md#theme-filters).
@@ -109,5 +110,5 @@ Developers can pin a release or use a mirror with the `aegis_companion_package_u
 - [[quick-start-guide]] — Learn how to start building with Aegis.
 - [[site-editor]] — Explore the Full Site Editing experience.
 - [[block-patterns]] — Discover the available patterns for rapid page building.
-- [Aegis Plugin docs](../../../../plugins/aegis/docs/home.md) — Map, Modal, admin, integrations.
+- [Aegis Dash docs](../../../../plugins/aegis-dash/docs/home.md) — Map, Modal, admin, integrations.
 - [Aegis Pro docs](../../../../plugins/aegis-pro/docs/home.md) — Video, query, Pro blocks.

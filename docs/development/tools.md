@@ -21,15 +21,13 @@ npm run translate   # prepare-translate.js + wp i18n make-pot + finish-translate
 
 On WordPress Studio sites, use `npm run translate:studio` instead of `npm run translate`. The prepare step copies Icon library PHP/JS, Marquee editor JS, Newsletter PHP/JS, Accordion PHP, SVG editor JS/PHP, Visibility editor JS, and Query Loop PHP/JS into `build/` so those vendor strings are included even though `vendor/` is excluded from the scan. Bundled `editor.js` is not copied; SVG inspector strings come from `svg-editor.js`. Run `npm run build` first if you changed theme block TypeScript (`*.tsx` / `*.ts`); WP-CLI scans the compiled JavaScript.
 
-Companion plugin strings are **not** in this catalog. Generate `wp-content/plugins/aegis/languages/aegis.pot` from the plugin (`npm run translate` or `npm run translate:studio` in `wp-content/plugins/aegis`). Pro uses `wp-content/plugins/aegis-pro/languages/aegis-pro.pot`.
+Aegis Dash strings are **not** in this catalog. Generate `wp-content/plugins/aegis-dash/languages/aegis.pot` from the plugin (`npm run translate` or `npm run translate:studio` in `wp-content/plugins/aegis-dash`). Pro uses `wp-content/plugins/aegis-pro/languages/aegis-pro.pot`.
 
 ## audit-patterns.php
 
-Validates pattern slugs, block references, and template cross-links across the theme, companion plugin, and Pro pattern trees.
+Validates pattern slugs, block references, and template cross-links across the theme, Aegis Dash, and Pro pattern trees.
 
 ```bash
-make audit-patterns
-# or
 npm run audit-patterns
 # WordPress Studio:
 npm run audit-patterns:studio
@@ -38,24 +36,12 @@ npm run audit-patterns:studio
 **Scanned directories:**
 
 - `wp-content/themes/aegis/patterns/`
-- `wp-content/plugins/aegis/patterns/`
+- `wp-content/plugins/aegis-dash/patterns/`
 - `wp-content/plugins/aegis-pro/patterns/`
 
 **Checks:** duplicate slugs, missing pattern references in templates, unregistered blocks, `theme.json` custom template file existence.
 
 **Expected baseline (without WooCommerce active):** WooCommerce block warnings marked optional; Pro blocks error when Pro is inactive. Re-run after doc or pattern changes.
-
-## migrate-aegis-video.php
-
-Converts legacy **`aegis/video`** block markup to **`core/video`** in post content.
-
-```bash
-npm run migrate:video
-# WordPress Studio:
-npm run migrate:video:studio
-```
-
-Review affected pages in the Site Editor after running. See [Updating](../getting-started/updating.md#aegisvideo--corevideo).
 
 ## migrate-icons (WP-CLI)
 

@@ -93,7 +93,7 @@ The default border style is `solid`. Other CSS border styles are available throu
 
 ### Adding a Border to a Block
 
-![The Border & Shadow panel of a Group block with border width, color, and radius set, and the bordered block visible in the canvas.](../screenshots/border.png)
+![The Border & Shadow panel of a Group block with border width and radius set, and the bordered block visible in the canvas.](../screenshots/border.png)
 
 *Add a border and radius from the Border & Shadow panel.*
 

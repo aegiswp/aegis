@@ -2,25 +2,46 @@
 
 This page lists every block pattern the theme registers from `patterns/`. It is generated from the pattern file headers (`Title`, `Slug`, `Categories`, `Inserter`).
 
-WooCommerce block patterns (`wp:woocommerce/*`) and the TI Wishlist template pattern are **not** theme-owned. They register from the [Aegis companion plugin](../../../../plugins/aegis/docs/features/plugin-patterns.md) when WooCommerce (and TI Wishlist, for wishlist) are active. Modal starter patterns also live in the companion plugin. Premium layouts live in [Aegis Pro](../../../../plugins/aegis-pro/docs/patterns/pro-patterns.md).
+WooCommerce block patterns (`wp:woocommerce/*`) and the TI Wishlist template pattern are **not** theme-owned. They register from the [Aegis Dash](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md) when WooCommerce (and TI Wishlist, for wishlist) are active. Modal starter patterns also live in Aegis Dash. Premium layouts live in [Aegis Pro](../../../../plugins/aegis-pro/docs/patterns/pro-patterns.md).
 
-The theme ships **231 registered block patterns** in **28 category folders**. 52 of them are kept out of the inserter: the 48 `template` patterns, the 3 `hidden` patterns, and `utility-patterns`.
+The theme ships **230 registered block patterns** in **28 category folders**. 52 of them are kept out of the inserter: the 48 `template` patterns, the 3 `hidden` patterns, and `utility-patterns`.
 
 ## How Patterns Are Registered
 
-The framework (`vendor/aegis/framework/src/DesignSystem/Patterns.php`) registers every `*.php` file in each folder of `patterns/`. Files whose names start with a dot are skipped. Since 1.0.2 it reads only the file header (`Pattern::register_from_file()`) and registers the pattern with its `filePath`, so WordPress runs the file only when the pattern's content is used. Headers are cached; see [Performance](../features/performance.md#pattern-and-icon-loading).
+The framework registers every `*.php` file in each folder of `patterns/`. The code lives in `vendor/aegis/framework/src/DesignSystem/Patterns.php`. Files whose names start with a dot are skipped.
 
-- **Category:** the folder name. Labels are the folder name in title case, with `cta` and `faq` shown as CTA and FAQ.
-- **Slug:** the first category plus the file's `Slug` header, joined with a hyphen. For example, `patterns/hero/split.php` with `Slug: split` registers as `hero-split`. Use this slug in `<!-- wp:pattern {"slug":"hero-split"} /-->`.
-- **Inserter:** a pattern is hidden from the inserter when its header says `Inserter: false` or its category is `hidden`.
-- When WooCommerce and the companion plugin are both active, the plugin's mini-cart header replaces the theme's `header-default`.
-- The four `blog-related-posts-*` patterns are removed when the theme Related Posts block is not registered. See [Related Posts](../blocks/related-posts.md).
+### Loading
 
-Plugins can add folders with the `aegis_pattern_dirs` filter, or change the list with `aegis_patterns`. See [Hooks and Filters](hooks-and-filters.md).
+Since 1.0.2 the framework reads only the file header (`Pattern::register_from_file()`) and registers the pattern with its `filePath`. WordPress runs the file only when the pattern's content is used. Headers are cached; see [Performance](../features/performance.md#pattern-and-icon-loading).
+
+### Names and Visibility
+
+| Property | How it is set | Example |
+|----------|---------------|---------|
+| Category | The folder name. Labels are the folder name in title case, with `cta` and `faq` shown as CTA and FAQ. | `patterns/hero/` is **Hero** |
+| Slug | The first category plus the file's `Slug` header, joined with a hyphen. | `patterns/hero/split.php` with `Slug: split` registers as `hero-split` |
+| Inserter | Hidden when the header says `Inserter: false`, or when the category is `hidden`. | A `template` pattern |
+
+Use the slug to place a pattern in a template or page:
+
+```html
+<!-- wp:pattern {"slug":"hero-split"} /-->
+```
+
+### Patterns Removed or Replaced
+
+| When | What happens |
+|------|--------------|
+| WooCommerce and Aegis Dash are both active | The plugin's mini-cart header replaces the theme's `header-default`. |
+| The theme Related Posts block is not registered | The four `blog-related-posts-*` patterns are removed. See [Related Posts](../../../../plugins/aegis-dash/docs/blocks/related-posts.md). |
+
+### Adding Your Own Folders
+
+Plugins can add pattern folders with the `aegis_pattern_dirs` filter, or change the whole list with `aegis_patterns`. See [Hooks and Filters](hooks-and-filters.md).
 
 ## Pattern Categories
 
-![The block inserter's pattern categories list showing the Aegis categories such as About, Blog, Commerce, CTA, Event, FAQ, and Hero. Numbered callouts: 1 Aegis categories such as About, Blog, Commerce, CTA, Event, FAQ, and Hero.](../screenshots/pattern-categories.png)
+![The block inserter's pattern categories list showing the Aegis categories such as About, Blog, Commerce, CTA, Event, FAQ, and Hero.](../screenshots/pattern-categories.png)
 
 *Aegis pattern categories in the block inserter.*
 
@@ -49,7 +70,7 @@ Folder `patterns/author/` · 6 patterns
 
 ### Blog
 
-Folder `patterns/blog/` · 16 patterns
+Folder `patterns/blog/` · 17 patterns
 
 | Pattern | Slug | File | Inserter |
 | --- | --- | --- | --- |
@@ -61,6 +82,7 @@ Folder `patterns/blog/` · 16 patterns
 | Grid Masonry | `blog-grid-masonry` | `grid-masonry.php` | Yes |
 | Latest Posts | `blog-latest-posts` | `latest-posts.php` | Yes |
 | Minimal | `blog-minimal` | `minimal.php` | Yes |
+| Overlay Cards | `blog-overlay-cards` | `overlay-cards.php` | Yes |
 | Related Posts: Cards | `blog-related-posts-cards` | `related-posts-cards.php` | Yes |
 | Related Posts: Grid | `blog-related-posts-grid` | `related-posts-grid.php` | Yes |
 | Related Posts: List | `blog-related-posts-list` | `related-posts-list.php` | Yes |
@@ -89,7 +111,7 @@ Folder `patterns/commerce/` · 8 patterns
 
 Folder `patterns/contact/` · 3 patterns
 
-Map contact layouts (`aegis/form-map`, `aegis/form-map-overlay`) live in the companion plugin and register when the Map block is enabled.
+Map contact layouts (`aegis/form-map`, `aegis/form-map-overlay`) live in Aegis Dash and register when the Map block is enabled.
 
 | Pattern | Slug | File | Inserter |
 | --- | --- | --- | --- |
@@ -462,7 +484,7 @@ Patterns marked **No** in the Inserter column do not appear there. Templates and
 ## Related Pages
 
 - [[block-patterns]] — Detailed guide on using and customizing patterns.
-- [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md) — WooCommerce and wishlist block patterns (companion plugin, gated).
+- [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md) — WooCommerce and wishlist block patterns (Aegis Dash, gated).
 - [Pro Patterns](../../../../plugins/aegis-pro/docs/patterns/pro-patterns.md) — Premium marketing layouts.
 - [[templates]] — How patterns are used within templates.
 - [[style-variations]] — How patterns adapt to different style variations.

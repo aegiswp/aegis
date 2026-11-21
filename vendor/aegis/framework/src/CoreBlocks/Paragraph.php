@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling paragraph block content
- * - Integrates with utility classes for DOM and CSS
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for paragraph block.
 declare( strict_types=1 );
 
-// Declares the namespace for the paragraph block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the paragraph block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -80,7 +73,6 @@ class Paragraph implements Renderable {
 			] )
 		);
 
-		// Apply custom margin and padding from block attributes.
 		$p_styles = CSS::string_to_array( $p->getAttribute( 'style' ) );
 		$padding  = $block['attrs']['style']['spacing']['padding'] ?? '';
 		$margin   = $block['attrs']['style']['spacing']['margin'] ?? '';

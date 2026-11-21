@@ -9,9 +9,9 @@ body:
     attributes:
       value: |
         **Need help or have a question?**
-        Before opening a support request, please check our [Documentation](https://github.com/aegiswp/theme/wiki) and [Discussions](https://github.com/aegiswp/theme/discussions).
+        Before opening a support request, please check our [Documentation](https://www.atmostfear-entertainment.com/docs/aegis/theme/aegis-theme/).
 
-        **For bugs**, use the [Bug Report](https://github.com/aegiswp/theme/issues/new?template=bug_report.yml) template instead.
+        **For bugs**, use the [Bug Report](https://github.com/aegiswp/aegis/issues/new?template=bug_report.yml) template instead.
 
   - type: textarea
     id: help
@@ -25,7 +25,7 @@ body:
     id: steps
     attributes:
       label: Steps you have tried
-      description: Describe what you have already tried or researched (e.g., "I checked the Wiki and tried disabling plugins").
+      description: Describe what you have already tried or researched (e.g., "I checked the documentation and tried disabling plugins").
     validations:
       required: false
 

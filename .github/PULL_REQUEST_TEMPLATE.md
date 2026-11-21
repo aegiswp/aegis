@@ -120,7 +120,7 @@ Include any setup required, and the steps to reproduce the behavior.
 ### Final Checks
 - [ ] I have performed a self-review of my own code
 - [ ] I have checked that all automated tests pass
-- [ ] I have read the [CONTRIBUTING.md](https://github.com/aegiswp/theme/blob/main/CONTRIBUTING.md) file
+- [ ] I have read the [CONTRIBUTING.md](https://github.com/aegiswp/aegis/blob/main/CONTRIBUTING.md) file
 - [ ] CI/CD workflows (ci.yml, accessibility.yml, wordpress-compat.yml, lighthouse-ci.yml, spelling.yml) are passing
 - [ ] If `theme.json` changed, theme-json-validation.yml is passing
 

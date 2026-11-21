@@ -41,6 +41,7 @@ The behavior comes from `settings.custom.header` in `theme.json`:
 | `background` | `var(--wp--preset--color--neutral-0)` | `--wp--custom--header--background` |
 | `scrollPadding` | `0px` | `--wp--custom--header--scroll-padding` |
 
+> [!NOTE]
 > **Changed in 1.0.2.** Aegis 1.0.1 made the header sticky by default. Version 1.0.2 restored the scrolling header.
 
 #### Make the Header Sticky
@@ -155,7 +156,7 @@ To remove a sidebar from a template, delete the Template Part block referencing 
 
 You can create additional template parts for specialized needs:
 
-![The Create template part dialog with a name field and the area choice of Header, Footer, or General. Numbered callouts: 1 Name the template part; 2 Area: Header, Footer, or General.](../screenshots/create-template-part.png)
+![The Add Template Part dialog with a name field and the area choice of General, Header, Footer, or Navigation Overlay. Numbered callouts: 1 Name the template part; 2 Area: General, Header, Footer, or Navigation Overlay.](../screenshots/create-template-part.png)
 
 *Create a template part and choose the area it belongs to.*
 

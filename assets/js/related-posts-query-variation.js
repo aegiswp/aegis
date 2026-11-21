@@ -5,8 +5,9 @@
  *
  * Runs after the framework editor script registers the variation.
  *
- * @package Aegis
+ * @package
  * @since   1.0.3
+ * @param {Object} wp WordPress global.
  */
 ( function ( wp ) {
 	'use strict';
@@ -16,7 +17,7 @@
 
 	try {
 		unregisterBlockVariation( 'core/query', VARIATION_NAME );
-	} catch ( e ) {
+	} catch {
 		// Variation may already be absent on some builds.
 	}
 } )( window.wp );

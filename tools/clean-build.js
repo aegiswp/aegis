@@ -2,7 +2,7 @@
  * Remove webpack/build artifacts (cross-platform).
  *
  * Usage: node tools/clean-build.js
- * For a full reset including node_modules, use: make clean
+ * For a full reset, also delete node_modules/
  */
 
 const fs = require( 'fs' );

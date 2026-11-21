@@ -6,13 +6,12 @@
  * @since   1.0.0
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for registers extended attributes on core/icon.
 declare( strict_types=1 );
 
-// Declares the namespace for the registers extended attributes on core/icon.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the registers extended attributes on core/icon.
+use Aegis\Icons\IconSupport;
+
 use function array_merge;
 
 /**
@@ -51,7 +50,7 @@ class IconBlockAttributes {
 	 */
 	public function __construct() {
 		// Skip registration when core/icon is unavailable.
-		if ( version_compare( get_bloginfo( 'version' ), '7.0', '<' ) ) {
+		if ( ! IconSupport::available() ) {
 			return;
 		}
 

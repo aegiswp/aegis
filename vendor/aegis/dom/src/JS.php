@@ -1,12 +1,14 @@
 <?php
+/**
+ * JavaScript utility helpers.
+ *
+ * @package Aegis\Dom
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for javascript utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the javascript utility helpers.
 namespace Aegis\Dom;
 
-// Imports classes, interfaces, and functions used by the javascript utility helpers.
 use function apply_filters;
 use function preg_replace;
 use function rtrim;

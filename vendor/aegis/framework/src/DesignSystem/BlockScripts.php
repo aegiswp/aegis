@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Registers and loads JavaScript files for individual blocks
- * - Integrates with the scripts service and WordPress script APIs
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for block scripts component.
 declare( strict_types=1 );
 
-// Declares the namespace for the block scripts component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the block scripts component.
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Utilities\Debug;
 use function str_contains;

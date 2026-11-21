@@ -24,14 +24,12 @@ namespace Aegis\Framework\Integrations;
 
 // Framework interfaces.
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 
-// WordPress classes.
 use WP_Block;
 
-// WordPress functions — explicitly imported for static analysis in strict namespaced PHP.
-use function class_exists;
 use function function_exists;
 use function get_the_ID;
 use function get_avatar;
@@ -77,7 +75,7 @@ class CoAuthorsPlus implements Conditional, Styleable {
 	 * @return bool True when Co-Authors Plus is active and the plugin is not.
 	 */
 	public static function condition(): bool {
-		if ( class_exists( '\\Aegis\\Plugin\\CoAuthors\\CoAuthorsPlus' ) ) {
+		if ( Companions::get()->owns_co_authors_plus() ) {
 			return false;
 		}
 

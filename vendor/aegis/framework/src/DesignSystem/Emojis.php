@@ -18,6 +18,8 @@ declare( strict_types=1 );
 
 namespace Aegis\Framework\DesignSystem;
 
+use Aegis\Framework\Companions;
+
 /**
  * Frontend emoji script/style removal.
  */
@@ -26,7 +28,7 @@ class Emojis {
 	/**
 	 * Removes WordPress emoji detection scripts and styles on the frontend.
 	 *
-	 * With Aegis Pro active, ownership moves to Aegis → Performance → Remove Emoji Scripts.
+	 * With Aegis Dash active, ownership moves to Aegis → Performance → Remove Emoji Scripts.
 	 * Standalone theme and free-plugin installs keep zero-base frontend removal.
 	 *
 	 * @since 1.0.0
@@ -36,8 +38,8 @@ class Emojis {
 	 * @return void
 	 */
 	public function remove_emoji_script(): void {
-		// Pro owns the full strip (frontend + admin) via the Performance toggle.
-		if ( defined( 'AEGIS_PRO_VERSION' ) ) {
+		// Aegis Dash owns the full strip (frontend + admin) via the Performance toggle.
+		if ( Companions::get()->owns_emoji_removal() ) {
 			return;
 		}
 

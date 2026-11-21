@@ -4,17 +4,17 @@ Welcome to the official documentation for the Aegis WordPress theme. Aegis is a 
 
 ## About Aegis
 
-The theme provides 50 templates, 230 patterns, 60 style variations, and six theme-registered custom blocks (Countdown, Slider, Slide, Toggle, Toggle Content, Related Posts). Video uses WordPress **`core/video`**, enhanced by the Aegis framework (see [[enhanced-core-blocks]]). The **Aegis framework** (`vendor/aegis/framework`) enhances 37 core blocks and registers block variations.
+The theme provides 50 templates, 230 patterns, 60 style variations, and, through the Aegis Dash plugin, the Countdown, Slider, Toggle and Related Posts blocks. Video uses WordPress **`core/video`**, enhanced by the Aegis framework (see [[enhanced-core-blocks]]). The **Aegis framework** (`vendor/aegis/framework`) enhances 37 core blocks and registers block variations.
 
-![A site using the Aegis theme in its default style: the header with logo and navigation, a hero section with a large heading, and a grid of feature cards below. Numbered callouts: 1 Header with the logo and navigation; 2 A hero section with a heading and buttons.](screenshots/aegis-default.png)
+![A site using the Aegis theme in its default style: the header with logo and navigation, a hero section with a large heading, and a grid of feature cards below.](screenshots/aegis-default.png)
 
 *The Aegis theme in its default style variation.*
 
-Companion products extend the theme (documented separately):
+Aegis plugins extend the theme (documented in their own Doc Sets):
 
 | Product | Docs |
 |---------|------|
-| **Aegis Plugin** (free) | [Plugin docs](../../../plugins/aegis/docs/home.md) |
+| **Aegis Dash** (free) | [Aegis Dash docs](../../../plugins/aegis-dash/docs/home.md) |
 | **Aegis Pro** (coming soon) | [Pro docs](../../../plugins/aegis-pro/docs/home.md) |
 | **Aegis Ads** | [Ads docs](../../../plugins/aegis-ads/docs/home.md) |
 
@@ -45,13 +45,13 @@ Companion products extend the theme (documented separately):
 ### Blocks
 
 - [[custom-blocks]] — Theme-registered blocks (index)
-- [[countdown]], [[slider]], [[toggle]], [[related-posts]], [[core-video]]
+- [Countdown](../../../plugins/aegis-dash/docs/blocks/countdown.md), [Slider and Slide](../../../plugins/aegis-dash/docs/blocks/slider.md), [Toggle and Toggle Content](../../../plugins/aegis-dash/docs/blocks/toggle.md), [Related Posts](../../../plugins/aegis-dash/docs/blocks/related-posts.md), [[core-video]]
 - [[enhanced-core-blocks]] — Framework core block enhancements
-- [[block-variations]] — Framework variations (feature toggles live in the free plugin)
+- [[block-variations]] — Framework variations (feature toggles live in Aegis Dash)
 
 ### Features
 
-- [[woocommerce-integration]] — WooCommerce FSE templates (theme); patterns/checkout extras → free plugin
+- [[woocommerce-integration]] — WooCommerce FSE templates (theme); patterns/checkout extras → Aegis Dash
 - [[plugin-integrations]] — Framework integration styling shipped with the theme
 - [[hook-patterns]] — Injection hooks fired by framework (CPT management → Pro)
 - [[dynamic-template-parts]] — Contextually swap header, footer, or sidebar at render time

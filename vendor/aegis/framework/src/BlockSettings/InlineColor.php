@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for applying inline color styles to block output
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for inline color block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the inline color block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the inline color block setting.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -113,7 +106,6 @@ class InlineColor implements Renderable {
 			}
 		}
 
-		// Return the potentially modified HTML.
 		return $dom->saveHTML();
 	}
 }

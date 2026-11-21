@@ -16,6 +16,8 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use function class_exists;
@@ -27,8 +29,6 @@ use function wp_dequeue_style;
 class AffiliateWP implements Conditional, Styleable {
 
 	/**
-	 * Condition.
-	 *
 	 * Prefer the plugin helper when the Aegis plugin is loaded.
 	 *
 	 * @since 1.0.0
@@ -36,8 +36,10 @@ class AffiliateWP implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( \Aegis\Plugin\Integrations\AffiliateWP::class ) ) {
-			return \Aegis\Plugin\Integrations\AffiliateWP::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_AFFILIATEWP );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return class_exists( 'Affiliate_WP' )

@@ -12,15 +12,10 @@
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for aegis singleton loader.
 declare( strict_types=1 );
 
-// Imports classes, interfaces, and functions used by the aegis singleton loader.
 use Aegis\Container\Container;
 use Aegis\Framework\ServiceProvider;
 

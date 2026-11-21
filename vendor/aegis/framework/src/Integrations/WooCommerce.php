@@ -6,7 +6,6 @@
  *
  * Responsibilities:
  * - Checks for WooCommerce plugin presence and conditionally registers hooks
- * - Integrates with the Aegis container and hook system
  *
  * @package    Aegis\Framework\Integrations
  * @since      1.0.0
@@ -14,20 +13,17 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for woocommerce integration component.
 declare( strict_types=1 );
 
-// Declares the namespace for the woocommerce integration component.
 namespace Aegis\Framework\Integrations;
 
-// Imports classes, interfaces, and functions used by the woocommerce integration component.
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use WP_Block_Patterns_Registry;
 use WP_REST_Request;
-use function class_exists;
 use function defined;
 use function esc_html;
-use function function_exists;
 use function get_option;
 use function is_array;
 use function is_string;
@@ -47,13 +43,13 @@ class WooCommerce implements Conditional {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( \Aegis\Plugin\Integrations\WooCommerce::class ) ) {
-			return \Aegis\Plugin\Integrations\WooCommerce::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_WOOCOMMERCE );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
-		return class_exists( 'WooCommerce' )
-			|| function_exists( 'WC' )
-			|| defined( 'WC_VERSION' );
+		return Detect::woocommerce();
 	}
 
 	/**

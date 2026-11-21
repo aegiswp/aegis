@@ -41,7 +41,7 @@ if ( $feature_on( 'toggle_buttons' ) ) {
 	$enabled_styles[] = 'buttons';
 }
 
-if ( $enabled_styles === array() ) {
+if ( array() === $enabled_styles ) {
 	$enabled_styles[] = 'switch';
 }
 
@@ -72,14 +72,14 @@ if ( ! in_array( $alignment, $allowed_align, true ) ) {
 	$alignment = 'center';
 }
 
-$initial_content    = $initial_content === 'b' ? 'b' : 'a';
+$initial_content    = 'b' === $initial_content ? 'b' : 'a';
 $animation_duration = absint( $animation_duration );
 
-if ( $primary_label === '' ) {
+if ( '' === $primary_label ) {
 	$primary_label = __( 'First', 'aegis' );
 }
 
-if ( $secondary_label === '' ) {
+if ( '' === $secondary_label ) {
 	$secondary_label = __( 'Second', 'aegis' );
 }
 
@@ -89,8 +89,8 @@ $toggle_id = \Aegis\Blocks\ToggleId::from_block(
 	is_string( $content ) ? $content : ''
 );
 
-$a_active = $initial_content === 'a';
-$b_active = $initial_content === 'b';
+$a_active = 'a' === $initial_content;
+$b_active = 'b' === $initial_content;
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
@@ -129,10 +129,10 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		>
 			<?php echo wp_kses_post( $primary_label ); ?>
 		</button>
-		<?php if ( $switch_style === 'switch' ) : ?>
+		<?php if ( 'switch' === $switch_style ) : ?>
 			<span class="aegis-toggle__track" aria-hidden="true"><span class="aegis-toggle__thumb"></span></span>
 		<?php endif; ?>
-		<?php if ( $switch_style === 'pill' ) : ?>
+		<?php if ( 'pill' === $switch_style ) : ?>
 			<span class="aegis-toggle__indicator" aria-hidden="true"></span>
 		<?php endif; ?>
 		<button

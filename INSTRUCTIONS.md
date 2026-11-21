@@ -35,7 +35,7 @@ Before starting development, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/aegiswp/theme.git
+git clone https://github.com/aegiswp/aegis.git
 cd theme
 ```
 
@@ -124,10 +124,10 @@ npm run build
 Map, Modal, admin, and editor assets are built in the companion plugin:
 
 ```bash
-cd wp-content/plugins/aegis && npm run build
+cd wp-content/plugins/aegis-dash && npm run build
 ```
 
-See [BUILD.md](BUILD.md) and [plugin BUILD.md](../../plugins/aegis/BUILD.md).
+See [BUILD.md](BUILD.md) and [plugin BUILD.md](../../plugins/aegis-dash/BUILD.md).
 
 ### Development Build
 ```bash
@@ -137,8 +137,6 @@ npm run build:dev  # Unminified output with readable source maps (--mode=develop
 ### Watch Mode
 ```bash
 npm run dev
-# or
-npm run start
 ```
 
 This watches for changes in `src/` and rebuilds automatically.
@@ -173,8 +171,6 @@ npm run lint
 ```bash
 composer run standards:check
 # or
-composer run analyze
-# or
 composer run lint
 ```
 
@@ -194,11 +190,7 @@ composer run standards:check -- path/to/file.php
 ```bash
 composer run test
 # or
-composer run test:php
-# or
-npm run test:php
-# or
-composer run test:wpaudit
+npm test
 ```
 
 This runs the Aegis WPAudit PHPUnit suite in `tools/wpaudit` (same as CI).
@@ -242,7 +234,6 @@ This runs the Aegis WPAudit PHPUnit suite in `tools/wpaudit` (same as CI).
 1. Update version in:
    - `style.css` (Version)
    - `package.json` (version)
-   - `composer.json` (version)
 
 2. Update CHANGELOG.md
 
@@ -257,7 +248,7 @@ This runs the Aegis WPAudit PHPUnit suite in `tools/wpaudit` (same as CI).
    ```bash
    npm run translate              # Theme: languages/aegis.pot
    ```
-   In `wp-content/plugins/aegis`, run `npm run translate` (or `translate:studio`) for the plugin POT. Pro has `languages/aegis-pro.pot`.
+   In `wp-content/plugins/aegis-dash`, run `npm run translate` (or `translate:studio`) for the plugin POT. Pro has `languages/aegis-pro.pot`.
 
 6. Test thoroughly
 
@@ -294,7 +285,7 @@ Set custom port in `.wp-env.json` or use `WP_ENV_PORT` environment variable.
 
 #### Build Failures
 - Clear node_modules: `rm -rf node_modules && npm install`
-- Clear build cache: `npm run clean` (or `make clean` for a full reset including `node_modules`)
+- Clear build cache: `npm run clean` (delete `node_modules/` as well for a full reset)
 
 #### Theme Activation Issues
 - Ensure all dependencies are installed

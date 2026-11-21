@@ -41,7 +41,7 @@ if ( ! function_exists( 'aegis_slider_apply_lazy_load' ) ) {
 
 				if ( $image_count <= $preload_count ) {
 					if ( ! str_contains( $attrs, 'loading=' ) ) {
-						$loading = $image_count === 1 ? 'loading="eager" fetchpriority="high"' : 'loading="eager"';
+						$loading = 1 === $image_count ? 'loading="eager" fetchpriority="high"' : 'loading="eager"';
 						return '<img' . $attrs . ' ' . $loading . '>';
 					}
 
@@ -62,7 +62,6 @@ if ( ! function_exists( 'aegis_slider_apply_lazy_load' ) ) {
 	}
 }
 
-// Extract attributes with defaults.
 $type           = $attributes['type'] ?? 'slider';
 $per_page       = $attributes['perPage'] ?? 1;
 $per_move       = $attributes['perMove'] ?? 1;
@@ -77,15 +76,15 @@ $interval       = $attributes['interval'] ?? 5000;
 $direction      = $attributes['direction'] ?? 'ltr';
 $height         = $attributes['height'] ?? '';
 $breakpoints    = $attributes['breakpoints'] ?? true;
-$gap_raw = $attributes['style']['spacing']['blockGap'] ?? '0';
-$gap     = is_array( $gap_raw ) ? ( $gap_raw['left'] ?? $gap_raw['horizontal'] ?? '0' ) : $gap_raw;
-$gap     = is_string( $gap ) ? $gap : '0';
+$gap_raw        = $attributes['style']['spacing']['blockGap'] ?? '0';
+$gap            = is_array( $gap_raw ) ? ( $gap_raw['left'] ?? $gap_raw['horizontal'] ?? '0' ) : $gap_raw;
+$gap            = is_string( $gap ) ? $gap : '0';
 
 // Splide needs a real CSS length. Convert WP preset tokens
 // (`var:preset|spacing|md`) to `var(--wp--preset--spacing--md)`.
-if ( $gap !== '' && $gap !== '0' && class_exists( '\Aegis\DOM\CSS' ) ) {
+if ( '' !== $gap && '0' !== $gap && class_exists( '\Aegis\DOM\CSS' ) ) {
 	$resolved = \Aegis\DOM\CSS::format_custom_property( $gap );
-	$gap      = is_string( $resolved ) && $resolved !== '' ? $resolved : $gap;
+	$gap      = is_string( $resolved ) && '' !== $resolved ? $resolved : $gap;
 }
 
 $extra_on = static function ( string $key ): bool {
@@ -116,11 +115,11 @@ if ( ! $extra_on( 'slider_responsive' ) ) {
 	$breakpoints = false;
 }
 
-if ( $type === 'fade' && ! $extra_on( 'slider_fade' ) ) {
+if ( 'fade' === $type && ! $extra_on( 'slider_fade' ) ) {
 	$type = 'slider';
 }
 
-if ( $type === 'fade' ) {
+if ( 'fade' === $type ) {
 	$per_page = 1;
 }
 
@@ -132,7 +131,7 @@ if ( $extra_on( 'slider_lightbox' ) ) {
 }
 
 // Keep slide images non-interactive unless slider lightbox is explicitly on.
-if ( ! $lightbox && $content !== '' ) {
+if ( ! $lightbox && '' !== $content ) {
 	$content = (string) preg_replace(
 		'/\sdata-wp-interactive="core\/image"/',
 		'',
@@ -171,7 +170,7 @@ if ( $extra_on( 'slider_lazy_load' ) ) {
 	}
 }
 
-if ( $lazy_load && $content !== '' ) {
+if ( $lazy_load && '' !== $content ) {
 	$content = aegis_slider_apply_lazy_load( $content, $lazy_preload );
 }
 

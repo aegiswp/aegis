@@ -8,7 +8,21 @@ Decorative icons use the WordPress **Icon** block (`core/icon`). There is no Ima
 - Aegis `Icons\Library` (`init` priority 11) registers remaining custom sets with `wp_register_icon_collection()` / `wp_register_icon()` when WP ≥ 7.1, `wp_register_icon` exists, and **Aegis → Blocks → Icon** is enabled.
 - IDs are `{collection}/{name}` (one slash). WordPress-provided icons use `core/{name}`. Custom sets use the folder slug (`social/facebook`, `remixicon/home-line`, leftover Gutenberg-only `wordpress/{name}`).
 - Aegis does not ship SVG copies of icons that already exist in the Core library. `Aegis\Icons\Icon::get_svg( 'wordpress', $name )` falls back to `wp_get_icon( 'core/' . $name )` when the file was removed.
-- Legacy saved IDs `aegis/{set}/{name}` are parsed by `IconMigrationMapper::from_registry_id()`.
+- Legacy saved IDs `aegis/{set}/{name}` are parsed by `Aegis\Icons\Icon::from_registry_id()` (implemented in `Aegis\Icons\IconRegistryId`).
+
+## Code map
+
+The icons package (`vendor/aegis/icons/src`) owns the icon knowledge; `Aegis\Framework\Icons` and `CoreBlocks\Icon` call it.
+
+| Class | Owns |
+|-------|------|
+| `Aegis\Icons\Icon` | Public facade: `get_svg()`, `get_placeholder()`, and thin delegates for everything below. Same static methods as before. |
+| `IconSets` | Set discovery (bundled, parent, child folders, the `aegis_icon_sets` filter), the default set slug `wordpress`, eager/lazy catalog rules, set labels, icon names. |
+| `IconRegistryId` | Building and parsing `core/{name}`, `{set}/{name}` and legacy `aegis/{set}/{name}` ids. |
+| `IconSupport` | The WordPress version gates (`available()` for 7.0+, `core_registry()` for 7.1+) and the core icon manifest reader. |
+| `IconRest` | The `aegis/v1/icons` route, its arguments and the response data. |
+| `IconSanitizer` | SVG sanitising. |
+| `Aegis\Framework\Icons\IconFeatures` | The Aegis → Blocks toggles for the Icon block and its REST endpoint. |
 
 ## Collections
 
@@ -30,7 +44,7 @@ Pro directories are merged via `Aegis\Icons\Icon::FILTER` in `plugins/aegis-pro/
 ## Front end
 
 - `CoreBlocks\Icon` (`render_block` priority 11) re-renders non-`core` library icons from disk so kses does not strip `stroke` / `opacity` on outline sets.
-- SVG utility `Aegis\Icons\Icon::apply_theme_color()` maps literal black fills to `currentColor` for dark/light mode.
+- `Aegis\Icons\Icon::get_svg()` (through its private `apply_theme_color()`) maps literal black fills to `currentColor` for dark/light mode.
 - `public/css/core-blocks/icon.css` uses `currentColor`, preserves `fill="none"` + stroke, and sets `height: auto` with `aspect-ratio: 1`.
 
 ## Skip link vs template parts
@@ -39,7 +53,7 @@ Pro directories are merged via `Aegis\Icons\Icon::FILTER` in `plugins/aegis-pro/
 
 ## REST and editor extras
 
-- `aegis/v1/icons` remains for the button/tab picker (`RestIconsMerge::register_rest_route()`).
+- `aegis/v1/icons` remains for the button/tab picker. `RestIconsMerge::register_rest_route()` registers it when the Icon and REST API blocks are on; the route itself (`IconRest::REST_NAMESPACE`, `IconRest::ROUTE`, `IconRest::PATH`) is owned by the icons package.
 - Default `GET` returns a **catalog**: small sets include SVG bodies; large Pro packs are empty stubs. Load one pack with `?set=phosphor-duotone`. List slugs with `?sets=1`. Legacy full dump: `?full=1` (WP 7.0 merge only).
 - `icons-rest-editor.js` lazy-loads `?set=` when the selected button/tab changes packs, and normalizes `WordPress` → `wordpress`.
 - `RestIconsList` (WP 7.1+) replaces the callback of the `GET /wp/v2/icons` and `GET /wp/v2/icons/{collection}` list routes through `rest_endpoints`. Core's `get_items()` loads and sanitizes every registered SVG before filtering, which is about 5,800 files with the Aegis sets. `RestIconsList` filters by collection and search first and loads only the matches. Each collection's sanitized SVGs are cached in the `aegis_icon_content_{collection}` option (not autoloaded). The cache key covers the icon names and paths, the mtimes of their folders, and the theme version. Content still comes from `WP_Icons_Registry::get_registered_icon()`, and icon fields from the core controller's `prepare_item_for_response()`, so permissions, arguments, and the response shape match core.

@@ -1,21 +1,23 @@
 <?php
+/**
+ * Path utility helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for path utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the path utility helpers.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the path utility helpers.
 use function array_slice;
 use function content_url;
 use function dirname;
 use function explode;
 use function implode;
 use function trailingslashit;
+use function str_replace;
 use function trim;
 use function untrailingslashit;
-use const DIRECTORY_SEPARATOR;
 
 /**
  * Path utility class for handling file and URL paths within a WordPress context.
@@ -26,6 +28,23 @@ use const DIRECTORY_SEPARATOR;
  * @since 1.0.0
  */
 class Path {
+
+	/**
+	 * Converts backslashes to forward slashes.
+	 *
+	 * WordPress hands out forward-slash paths even on Windows, while `__FILE__`
+	 * and `__DIR__` use backslashes there. Every method below accepts either
+	 * style and works on the normalised form.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $path A file system path in either style.
+	 *
+	 * @return string The path with forward slashes only.
+	 */
+	public static function normalize( string $path ): string {
+		return str_replace( '\\', '/', $path );
+	}
 
 	/**
 	 * Constructs a package's directory path from the project and package directories.
@@ -40,9 +59,9 @@ class Path {
 	public static function get_package_dir( string $project_dir, string $package_dir ): string {
 		return trailingslashit(
 			implode(
-				'/', // DIRECTORY_SEPARATOR breaks in Windows.
+				'/',
 				[
-					untrailingslashit( $project_dir ),
+					untrailingslashit( static::normalize( $project_dir ) ),
 					static::get_segment( $package_dir, -3 ),
 				]
 			)
@@ -79,7 +98,7 @@ class Path {
 	 * @return string The project's root directory path.
 	 */
 	public static function get_project_dir( string $package_dir ): string {
-		return trailingslashit( dirname( $package_dir, 3 ) );
+		return trailingslashit( dirname( static::normalize( $package_dir ), 3 ) );
 	}
 
 	/**
@@ -108,10 +127,10 @@ class Path {
 	 */
 	public static function get_segment( string $path, int $number, bool $wrap = false ): string {
 		// Split the path into segments.
-		$segments  = explode( DIRECTORY_SEPARATOR, trim( $path, DIRECTORY_SEPARATOR ) );
+		$segments  = explode( '/', trim( static::normalize( $path ), '/' ) );
 		// Extract the requested number of segments from the start or end.
 		$extracted = $number > 0 ? array_slice( $segments, 0, $number ) : array_slice( $segments, $number );
-		$slash     = $wrap ? '/' : ''; // DIRECTORY_SEPARATOR breaks in Windows.
+		$slash     = $wrap ? '/' : '';
 
 		// Rejoin segments with optional leading and trailing slashes.
 		return $slash . implode( '/', $extracted ) . $slash;

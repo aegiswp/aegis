@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling post author block content
- * - Integrates with utility classes for DOM and CSS
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for post author block.
 declare( strict_types=1 );
 
-// Declares the namespace for the post author block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the post author block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
@@ -71,7 +64,6 @@ class PostAuthor implements Renderable {
 
 		$style = $div->getAttribute( 'style' );
 
-		// Apply custom border styles from block attributes.
 		if ( $block['attrs']['style']['border'] ?? null ) {
 			$styles['border-width']  = $block['attrs']['style']['border']['width'] ?? null;
 			$styles['border-style']  = $block['attrs']['style']['border']['style'] ?? null;
@@ -85,7 +77,6 @@ class PostAuthor implements Renderable {
 			$styles['--wp--style--block-gap'] = CSS::format_custom_property( $gap );
 		}
 
-		// Append new styles to any existing inline styles.
 		$div->setAttribute(
 			'style',
 			( $style ? $style . ';' : '' ) . CSS::array_to_string( $styles )

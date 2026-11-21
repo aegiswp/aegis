@@ -36,7 +36,7 @@ Each block below has a class in `vendor/aegis/framework/src/CoreBlocks/` that fi
 | Icon | WordPress Icon library (`core/{name}`) plus Aegis collections (`social/{name}`, Pro sets). Custom SVG, gradients, gallery, and `currentColor` for dark mode — see [[svg-icons]] |
 | Cover | Fallback placeholder image, custom padding, and z-index control through a CSS custom property |
 | Audio | Styled as a card in `theme.json`: Neutral 100 background, the theme border radius, and `xs` inner padding. The player fills the card and can shrink below core's 300px minimum, so it fits narrow columns and phones. The caption sits inside the card at caption size, without the default caption padding. Overrides that need more than `theme.json` live in `vendor/aegis/framework/public/css/core-blocks/audio.css`, which loads only when an Audio block is on the page (and in the editor). Margin and padding are adjustable per block under **Dimensions** |
-| Video | Moves the background color to a custom property and loads the Aegis video player assets once per request — see [[core-video]] for plugin and Pro enhancements |
+| Video | Enables responsive embeds and styles the video block and the standard WordPress player (`video.css`). The Aegis player comes from the Aegis Video add-on — see [[core-video]] |
 
 ### Layout Blocks
 
@@ -74,7 +74,7 @@ Each block below has a class in `vendor/aegis/framework/src/CoreBlocks/` that fi
 | Post Author | Custom border and spacing; the name wrapper becomes a `<span>` |
 | Post Comments Form | Configurable title heading tag (`aegis_comments_form_title_tag`) and the context `core/comments` needs |
 | Post Template | Grid or flex layout and spacing for each Query Loop item |
-| Query | Responsive columns, gaps, featured-first, equal-height, no-results — gated at **Aegis → Blocks → Query Loop**. See [Plugin Query Loop](../../../../plugins/aegis/docs/blocks/query-loop.md). |
+| Query | Responsive columns, gaps, featured-first, equal-height, no-results — gated at **Aegis → Blocks → Query Loop**. See [Aegis Dash Query Loop](../../../../plugins/aegis-dash/docs/blocks/query-loop.md). |
 | Query Pagination | Merges margin, padding, and border radius into the pagination `<nav>` |
 | Query Title | Renders the posts page title on the blog index (and a placeholder in the editor) when WordPress outputs none |
 | Calendar | Moves color classes from the `<table>` to the wrapper so padding and margins display |
@@ -168,7 +168,7 @@ Keep both systems. Prefer Core for ordinary style changes; use Aegis for visibil
 
 ### Breadcrumbs
 
-`core/breadcrumbs` receives theme.json styles and the `breadcrumbs.css` stylesheet (also applied when `.rank-math-breadcrumb`, `.seopress-breadcrumbs`, `#breadcrumbs`, or `.yoast-breadcrumbs` markup is present; separators styled via Rank Math `.separator` and SEOPress `.breadcrumb-sep`; Yoast current crumb via `.breadcrumb_last` without a forced flex wrapper). WooCommerce Store Breadcrumbs (`woocommerce/breadcrumbs`) use `woocommerce-breadcrumbs.css` and wrap the delimiter in `.aegis-breadcrumb-separator`, same as classic Woo breadcrumbs. See [[woocommerce-integration#breadcrumbs]] and [SEO Schema Delegation](../../../../plugins/aegis/docs/features/seo-schema-delegation.md).
+`core/breadcrumbs` receives theme.json styles and the `breadcrumbs.css` stylesheet (also applied when `.rank-math-breadcrumb`, `.seopress-breadcrumbs`, `#breadcrumbs`, or `.yoast-breadcrumbs` markup is present; separators styled via Rank Math `.separator` and SEOPress `.breadcrumb-sep`; Yoast current crumb via `.breadcrumb_last` without a forced flex wrapper). WooCommerce Store Breadcrumbs (`woocommerce/breadcrumbs`) use `woocommerce-breadcrumbs.css` and wrap the delimiter in `.aegis-breadcrumb-separator`, same as classic Woo breadcrumbs. See [[woocommerce-integration#breadcrumbs]] and [SEO Schema Delegation](../../../../plugins/aegis-dash/docs/features/seo-schema-delegation.md).
 
 ## Accessibility
 

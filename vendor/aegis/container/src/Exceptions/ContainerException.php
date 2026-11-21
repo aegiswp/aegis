@@ -16,13 +16,10 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for container exception.
 declare( strict_types=1 );
 
-// Declares the namespace for the container exception.
 namespace Aegis\Container\Exceptions;
 
-// Imports classes, interfaces, and functions used by the container exception.
 use Exception;
 use Psr\Container\ContainerExceptionInterface;
 

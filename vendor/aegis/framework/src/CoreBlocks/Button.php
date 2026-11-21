@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling button block content
- * - Integrates with utility classes for DOM, CSS, and JavaScript
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for button block.
 declare( strict_types=1 );
 
-// Declares the namespace for the button block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the button block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Dom\JS;
@@ -113,18 +106,15 @@ class Button implements Renderable {
 		$attrs      = $block['attrs'] ?? [];
 		$class_name = $attrs['className'] ?? '';
 
-		// Create a DOM object from the block content for manipulation.
 		$dom = DOM::create( $block_content );
 		$div = DOM::get_element( 'div', $dom );
 
-		// Ensure the main wrapper div exists.
 		if ( ! $div ) {
 			$div = DOM::create_element( 'div', $dom );
 			$div->setAttribute( 'class', 'wp-block-button ' . $class_name );
 			$dom->appendChild( $div );
 		}
 
-		// Ensure the anchor/link element exists.
 		$link = DOM::get_element( 'a', $div );
 		if ( ! $link ) {
 			$link = DOM::create_element( 'a', $dom );
@@ -159,7 +149,6 @@ class Button implements Renderable {
 		$div_classes = DOM::get_classes( $div );
 		$div_styles  = DOM::get_styles( $div );
 
-		// Apply custom border styles from block attributes.
 		if ( isset( $attrs['style']['border'] ) || isset( $attrs['borderColor'] ) ) {
 			$global_settings = wp_get_global_settings();
 
@@ -184,7 +173,6 @@ class Button implements Renderable {
 			}
 		}
 
-		// Add size-specific classes.
 		$size = esc_attr( $attrs['size'] ?? 'medium' );
 		if ( in_array( $size, [ 'small', 'large' ] ) ) {
 			$div_classes[] = "is-style-$size";
@@ -200,7 +188,6 @@ class Button implements Renderable {
 			$link_styles = CSS::add_shorthand_property( $link_styles, 'padding', $padding );
 		}
 
-		// Apply all collected classes and styles back to the DOM elements.
 		DOM::add_classes( $link, $link_classes );
 		DOM::add_styles( $link, $link_styles );
 		DOM::add_classes( $div, $div_classes );
@@ -220,7 +207,6 @@ class Button implements Renderable {
 			DOM::set_link_target( $link, (string) ( $attrs['linkTarget'] ?? '' ), (string) ( $attrs['rel'] ?? '' ) );
 		}
 
-		// Apply aria-label for accessibility.
 		$aria_label = $attrs['ariaLabel'] ?? null;
 		if ( $aria_label ) {
 			$link->setAttribute( 'aria-label', esc_html( $aria_label ) );
@@ -275,7 +261,6 @@ class Button implements Renderable {
 		$div   = DOM::get_element( 'div', $dom );
 		$attrs = $block['attrs'] ?? [];
 
-		// Ensure the main wrapper div exists.
 		if ( ! $div ) {
 			$div   = DOM::create_element( 'div', $dom );
 			$class = esc_attr( $attrs['className'] ?? '' );

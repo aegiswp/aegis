@@ -16,10 +16,8 @@
  * @link       https://github.com/aegiswp/theme
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for conditional interface.
 declare( strict_types=1 );
 
-// Declares the namespace for the conditional interface.
 namespace Aegis\Container\Interfaces;
 
 /**

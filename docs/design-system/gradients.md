@@ -20,7 +20,7 @@ Aegis includes 31 gradient presets for backgrounds, overlays, and decorative ele
 
 Cover blocks accept a gradient as their overlay. The scrim and vignette presets below are made for this.
 
-![A Cover block with a photo and a gradient overlay, with the Overlay picker open on the Gradient tab showing the Aegis presets.](../screenshots/cover-gradient.png)
+![A Cover block with a gradient overlay, with the Overlay picker open on the Gradient tab showing the Aegis presets.](../screenshots/cover-gradient.png)
 
 *Gradient overlays keep text readable on Cover images.*
 

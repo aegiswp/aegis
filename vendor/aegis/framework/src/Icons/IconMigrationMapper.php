@@ -6,23 +6,21 @@
  * @since   1.0.0
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for maps legacy core/image icon block attributes to core/icon.
 declare( strict_types=1 );
 
-// Declares the namespace for the maps legacy core/image icon block attributes to core/icon.
 namespace Aegis\Framework\Icons;
 
-// Imports classes, interfaces, and functions used by the maps legacy core/image icon block attributes to core/icon.
 use Aegis\Icons\Icon;
+use Aegis\Icons\IconRegistryId;
+use Aegis\Icons\IconSets;
+use Aegis\Icons\IconSupport;
 use function array_filter;
-use function defined;
 use function explode;
 use function file_get_contents;
 use function implode;
 use function in_array;
 use function is_array;
 use function is_dir;
-use function is_readable;
 use function is_string;
 use function json_decode;
 use function preg_match;
@@ -43,13 +41,6 @@ use function usort;
  * Single source of truth for icon block migration (PHP CLI + editor transform rules).
  */
 class IconMigrationMapper {
-
-	/**
-	 * Cached core icon slugs from manifest.
-	 *
-	 * @var array<string, true>|null
-	 */
-	private static ?array $core_slugs = null;
 
 	/**
 	 * Whether legacy image block attrs represent an icon variation.
@@ -79,7 +70,7 @@ class IconMigrationMapper {
 	 */
 	public static function map_image_icon_to_core_icon( array $attrs ): array {
 		[ $set, $name ] = self::resolve_set_and_name( $attrs );
-		$icon           = $name !== '' ? self::resolve_icon_id( $set, $name ) : '';
+		$icon           = $name !== '' ? Icon::to_registry_id( $set, $name ) : '';
 
 		$mapped = [];
 
@@ -157,13 +148,6 @@ class IconMigrationMapper {
 	}
 
 	/**
-	 * Resolves icon registry id from set + name.
-	 */
-	public static function resolve_icon_id( string $set, string $name ): string {
-		return Icon::to_registry_id( $set, $name );
-	}
-
-	/**
 	 * Rewrites `wordpress/{core-slug}` ids to `core/{slug}` so WP 7.1 can resolve them.
 	 */
 	public static function normalize_icon_ids_in_content( string $content ): string {
@@ -180,7 +164,7 @@ class IconMigrationMapper {
 					return $matches[0];
 				}
 
-				return '"icon":"' . Icon::to_registry_id( 'wordpress', $name ) . '"';
+				return '"icon":"' . Icon::to_registry_id( IconSets::WORDPRESS, $name ) . '"';
 			},
 			$content
 		);
@@ -284,7 +268,7 @@ class IconMigrationMapper {
 				$key   = strtolower( $label );
 
 				if ( $icon !== '' && ! str_ends_with( $icon, '/' ) && $key !== '' && ! isset( $map[ $key ] ) ) {
-					$entry = [ 'icon' => Icon::to_registry_id( ...self::split_icon_id( $icon ) ) ];
+					$entry = [ 'icon' => IconRegistryId::canonical( $icon ) ];
 
 					if ( $width !== '' ) {
 						$entry['width'] = $width;
@@ -307,47 +291,8 @@ class IconMigrationMapper {
 	 */
 	public static function get_rules_for_editor(): array {
 		return [
-			'coreManifestSlugs' => array_keys( self::get_core_slugs() ),
+			'coreManifestSlugs' => array_keys( IconSupport::core_slugs() ),
 		];
-	}
-
-	public static function is_core_icon( string $slug ): bool {
-		return self::core_slug_exists( strtolower( $slug ) );
-	}
-
-	/**
-	 * @return array<string, true>
-	 */
-	private static function get_core_slugs(): array {
-		if ( self::$core_slugs !== null ) {
-			return self::$core_slugs;
-		}
-
-		self::$core_slugs = [];
-
-		if ( ! defined( 'ABSPATH' ) || ! defined( 'WPINC' ) ) {
-			return self::$core_slugs;
-		}
-
-		$manifest = ABSPATH . WPINC . '/assets/icon-library-manifest.php';
-
-		if ( is_readable( $manifest ) ) {
-			$collection = include $manifest;
-
-			if ( is_array( $collection ) ) {
-				foreach ( array_keys( $collection ) as $slug ) {
-					self::$core_slugs[ (string) $slug ] = true;
-				}
-			}
-		}
-
-		return self::$core_slugs;
-	}
-
-	private static function core_slug_exists( string $slug ): bool {
-		$slugs = self::get_core_slugs();
-
-		return isset( $slugs[ $slug ] );
 	}
 
 	/**
@@ -456,7 +401,7 @@ class IconMigrationMapper {
 		}
 
 		if ( $set === '' ) {
-			$set = 'wordpress';
+			$set = IconSets::WORDPRESS;
 		}
 
 		return [ $set, $name ];
@@ -471,7 +416,7 @@ class IconMigrationMapper {
 				$slug = strtolower( trim( (string) preg_replace( '/[^a-z0-9]+/i', '-', (string) $title_match[1] ), '-' ) );
 				$slug = preg_replace( '/-icon$/', '', $slug ) ?? $slug;
 
-				return $slug !== '' ? [ 'set' => 'wordpress', 'name' => $slug ] : null;
+				return $slug !== '' ? [ 'set' => IconSets::WORDPRESS, 'name' => $slug ] : null;
 			}
 
 			return null;
@@ -504,7 +449,7 @@ class IconMigrationMapper {
 			return [ 'set' => $parts[0], 'name' => $parts[1] ];
 		}
 
-		return [ 'set' => 'wordpress', 'name' => $data_icon ];
+		return [ 'set' => IconSets::WORDPRESS, 'name' => $data_icon ];
 	}
 
 	private static function extract_following_label( string $after ): string {
@@ -533,19 +478,6 @@ class IconMigrationMapper {
 		$text = html_entity_decode( strip_tags( $html ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 
 		return trim( preg_replace( '/\s+/', ' ', $text ) ?? $text );
-	}
-
-	/**
-	 * @return array{0: string, 1: string}
-	 */
-	private static function split_icon_id( string $icon ): array {
-		$parsed = Icon::from_registry_id( $icon );
-
-		if ( $parsed === null ) {
-			return [ 'wordpress', '' ];
-		}
-
-		return [ (string) $parsed['set'], (string) $parsed['name'] ];
 	}
 
 	private static function find_json_object_end( string $content, int $json_start ): ?int {

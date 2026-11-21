@@ -52,6 +52,7 @@ Optional. Place a `.wpauditrc.json` in the theme root to override defaults (that
 use WPAudit\ConfigurationManager;
 use WPAudit\Models\ThemeMetadata;
 use WPAudit\Models\FileRegistry;
+use WPAudit\Models\ThemeFile;
 use WPAudit\Models\AuditContext;
 use WPAudit\Analyzers\PerformanceAnalyzer;
 use WPAudit\Analyzers\SEOAnalyzer;
@@ -64,16 +65,19 @@ $theme    = ThemeMetadata::from_directory( '/path/to/theme' );
 $registry = new FileRegistry();
 $context  = new AuditContext( $config, $theme, $registry );
 
+$registry->add( new ThemeFile( 'index.php', '/path/to/theme/index.php', file_get_contents( '/path/to/theme/index.php' ) ) );
+
 $analyzers = [
     new PerformanceAnalyzer(),
     new SEOAnalyzer(),
     new AccessibilityAnalyzer(),
 ];
 
+$findings = [];
 foreach ( $registry->get_all() as $file ) {
     foreach ( $analyzers as $analyzer ) {
         if ( $analyzer->can_analyze( $file ) ) {
-            $findings = $analyzer->analyze( $file, $context );
+            $findings = array_merge( $findings, $analyzer->analyze( $file, $context ) );
         }
     }
 }
@@ -81,13 +85,14 @@ foreach ( $registry->get_all() as $file ) {
 
 ## Rule Catalog
 
+Severity is the default declared in each analyzer's `$rules` array. A few rules raise or lower it for specific variants (for example `seo-007` is Low for an empty `alt`).
+
 ### Performance (`perf-*`)
 
 | Rule | Description | Severity |
 |------|-------------|----------|
 | `perf-001` | Missing lazy loading on images | High |
 | `perf-002` | Scripts without defer/async attributes | Medium |
-| `perf-003` | Inline critical CSS missing | Medium |
 | `perf-004` | Unoptimized database queries (missing caching) | High |
 | `perf-005` | Large uncompressed assets (>100KB) | Medium |
 | `perf-006` | Missing resource hints (preload, prefetch) | Low |
@@ -98,11 +103,11 @@ foreach ( $registry->get_all() as $file ) {
 |------|-------------|----------|
 | `seo-001` | Improper heading hierarchy (skipped levels) | Medium |
 | `seo-002` | Missing or duplicate title tag | High |
-| `seo-003` | Missing meta description | High |
-| `seo-004` | Missing Open Graph meta tags | Medium |
+| `seo-003` | Missing meta description | Medium |
+| `seo-004` | Missing Open Graph meta tags | Low |
 | `seo-005` | Invalid or missing Schema.org markup | Low |
 | `seo-006` | Missing canonical URL tag | Medium |
-| `seo-007` | Images without alt attributes (SEO impact) | Medium |
+| `seo-007` | Images without alt attributes (SEO impact) | High |
 
 ### Accessibility (`a11y-*`)
 

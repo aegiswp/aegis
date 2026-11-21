@@ -1,12 +1,14 @@
 <?php
+/**
+ * CSS utility helpers.
+ *
+ * @package Aegis\Dom
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for css utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the css utility helpers.
 namespace Aegis\Dom;
 
-// Imports classes, interfaces, and functions used by the css utility helpers.
 use function array_key_last;
 use function array_merge;
 use function count;

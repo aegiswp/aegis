@@ -9,8 +9,8 @@ body:
       value: |
         **Thank you for helping us improve the Aegis WordPress Block Theme.**
 
-        **For accessibility barriers**, use the [Accessibility Report](https://github.com/aegiswp/theme/issues/new?template=accessibility_report.yml) template.
-        **For bugs in a specific custom block**, use the [Block Issue](https://github.com/aegiswp/theme/issues/new?template=block_issue.yml) template.
+        **For accessibility barriers**, use the [Accessibility Report](https://github.com/aegiswp/aegis/issues/new?template=accessibility_report.yml) template.
+        **For bugs in a specific custom block**, use the [Block Issue](https://github.com/aegiswp/aegis/issues/new?template=block_issue.yml) template.
 
   - type: textarea
     id: description

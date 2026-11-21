@@ -135,3 +135,6 @@ _tmp_*
 
 # Internal marketing patterns (live site only, never in the repository)
 /patterns/custom/
+
+# Documentation stays on disk only, never in the repository
+/docs/

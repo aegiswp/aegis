@@ -6,27 +6,21 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling search block content
- * - Integrates with utility classes for DOM, CSS, icons, and string helpers
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for search block.
 declare( strict_types=1 );
 
-// Declares the namespace for the search block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the search block.
 use Aegis\Dom\CSS;
 use Aegis\Dom\DOM;
 use Aegis\Icons\Icon;
+use Aegis\Icons\IconSets;
 use Aegis\Framework\Interfaces\Renderable;
 use Aegis\Utilities\Str;
 use WP_Block;
@@ -177,7 +171,6 @@ class Search implements Renderable {
 			$input_styles['background-color'] = CSS::format_custom_property( $input_background );
 		}
 
-		// Write computed input styles and classes back to the DOM.
 		if ( $input_styles ) {
 			$input_styles['height'] = 'auto';
 
@@ -231,7 +224,7 @@ class Search implements Renderable {
 
 		// Insert a search icon when the button is hidden or positioned outside.
 		if ( $show_icon ) {
-			$svg_dom = DOM::create( Icon::get_svg( 'wordpress', 'search' ) );
+			$svg_dom = DOM::create( Icon::get_svg( IconSets::WORDPRESS, 'search' ) );
 			$svg     = DOM::get_element( 'svg', $svg_dom );
 
 			if ( ! $svg ) {

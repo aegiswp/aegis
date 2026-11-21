@@ -9,13 +9,13 @@
     "Framework",
     "Block Theme"
   ],
-  "homepage": "https://github.com/aegiswp/theme#readme",
+  "homepage": "https://github.com/aegiswp/aegis#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aegiswp/theme.git"
+    "url": "git+https://github.com/aegiswp/aegis.git"
   },
   "bugs": {
-    "url": "https://github.com/aegiswp/theme/issues"
+    "url": "https://github.com/aegiswp/aegis/issues"
   },
   "engines": {
     "node": ">=22.13.0",
@@ -70,8 +70,7 @@
   "scripts": {
     "build": "wp-scripts build --webpack-copy-php && php tools/generate-blocks-manifest.php",
     "build:dev": "wp-scripts build --mode=development --webpack-copy-php && php tools/generate-blocks-manifest.php",
-    "dev": "wp-scripts start --webpack-copy-php",
-    "start": "wp-scripts start --webpack-copy-php",
+    "dev": "php tools/generate-blocks-manifest.php && wp-scripts start --webpack-copy-php",
     "env:start": "wp-env start",
     "env:stop": "wp-env stop",
     "env:restart": "wp-env stop && wp-env start",
@@ -86,15 +85,12 @@
     "lint:php": "composer run standards:check",
     "format": "wp-scripts format",
     "test": "composer test:php",
-    "test:php": "composer test:php",
     "test:a11y": "pa11y-ci --config .pa11yci.json",
     "test:a11y:env": "pa11y-ci --config .pa11yci.json http://localhost:8888/",
     "test:a11y:ci": "pa11y-ci --config .pa11yci.ci.json --threshold 0",
     "clean": "node tools/clean-build.js",
     "audit-patterns": "wp eval-file tools/audit-patterns.php",
     "audit-patterns:studio": "studio wp eval-file tools/audit-patterns.php",
-    "migrate:video": "wp eval-file tools/migrate-aegis-video.php",
-    "migrate:video:studio": "studio wp eval-file tools/migrate-aegis-video.php",
     "translate": "node tools/prepare-translate.js && wp i18n make-pot . languages/aegis.pot --domain=aegis --skip-block-json --skip-theme-json --exclude=node_modules,vendor,.git,dist,.wp-env && node tools/finish-translate.js",
     "translate:studio": "node tools/prepare-translate.js && studio wp --path ../../.. i18n make-pot wp-content/themes/aegis wp-content/themes/aegis/languages/aegis.pot --domain=aegis --skip-block-json --skip-theme-json --exclude=node_modules,vendor,.git,dist,.wp-env && node tools/finish-translate.js"
   }

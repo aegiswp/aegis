@@ -11,16 +11,16 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations\WooCommerce;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
+use Aegis\Framework\Integrations\Detect;
 use function __;
-use function class_exists;
-use function defined;
 use function esc_attr;
 use function esc_html__;
-use function function_exists;
 use function remove_theme_support;
 use function str_contains;
 use function wp_dequeue_script;
@@ -48,13 +48,13 @@ class ProductGalleryLightbox implements Conditional, Scriptable, Styleable {
 	private const TRIGGER_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path fill="currentColor" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z"/></svg>';
 
 	public static function condition(): bool {
-		if ( class_exists( \Aegis\Plugin\Integrations\WooCommerce::class ) ) {
-			return \Aegis\Plugin\Integrations\WooCommerce::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_WOOCOMMERCE );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
-		return class_exists( 'WooCommerce' )
-			|| function_exists( 'WC' )
-			|| defined( 'WC_VERSION' );
+		return Detect::woocommerce();
 	}
 
 	/**

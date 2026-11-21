@@ -23,7 +23,7 @@ The stylesheet header describes Aegis as a native block framework: full-site edi
 
 What the theme actually ships is a bit more specific. Three variable fonts are bundled and declared in `theme.json` (Lexend, Lexend Deca, and JetBrains), so they are not loaded from Google Fonts. The framework loads its CSS and JavaScript only when a block on the page needs them. `style.css` still contains a few rules of its own: linked-heading hover color, hidden gravatar captions, wide and full alignment inside post content, and payment-icon layout.
 
-`readme.txt` is the public summary: a token-based block theme with color, type, and spacing scales, compiled custom blocks, a large pattern library, WooCommerce templates, dark and light mode, RTL, and an accessibility-ready foundation. This inventory counts the files: 50 templates and 229 patterns.
+`readme.txt` is the public summary: a token-based block theme with color, type, and spacing scales, compiled custom blocks, a large pattern library, WooCommerce templates, dark and light mode, RTL, and an accessibility-ready foundation. This inventory counts the files: 50 templates and 230 patterns.
 
 Directory tags in `style.css`: accessibility-ready, block-patterns, block-styles, blog, custom-colors, custom-logo, custom-menu, e-commerce, editor-style, featured-images, footer-widgets, full-site-editing, full-width-template, grid-layout, one-column, portfolio, rtl-language-support, sticky-post, style-variations, template-editing, threaded-comments, three-columns, translation-ready, two-columns, wide-blocks.
 
@@ -109,7 +109,7 @@ Eight presets: None, XX Small, X Small, Small, Medium, Large, X Large, XX Large.
 
 60 variations in `styles/`. Each file sets `title` to the name below. Mood notes are the theme's own labels from the style-variation reference. Every variation keeps its own dark mapping when dark mode is on.
 
-![The grid of Aegis color variations in the Site Editor Styles panel, with dark, warm, and cool palettes side by side. Numbered callouts: 1 Aegis color variations: dark, warm, and cool palettes side by side.](screenshots/style-variations.png)
+![The grid of Aegis color variations in the Site Editor Styles panel, with dark, warm, and cool palettes side by side.](screenshots/style-variations.png)
 
 *A selection of the 60 Aegis style variations.*
 
@@ -234,7 +234,7 @@ Template parts, in `parts/`: Header (`header`), Footer (`footer`), Sidebar (`sid
 
 ### Shop
 
-These files are in the theme. They apply when WooCommerce is active, and the framework hides them from the template picker when WooCommerce is inactive. Wishlist also expects the TI WooCommerce Wishlist plugin and the companion plugin's wishlist pattern. The multi-step checkout template is the theme's; extra checkout assets from the companion plugin load only when that integration is on.
+These files are in the theme. They apply when WooCommerce is active, and the framework hides them from the template picker when WooCommerce is inactive. Wishlist also expects the TI WooCommerce Wishlist plugin and Aegis Dash's wishlist pattern. The multi-step checkout template is the theme's; extra checkout assets from Aegis Dash load only when that integration is on.
 
 | Template | File |
 | --- | --- |
@@ -256,11 +256,11 @@ These files are in the theme. They apply when WooCommerce is active, and the fra
 | Page: My Account | `page-my-account.html` |
 | Page: Wishlist | `page-wishlist.html` |
 
-Shop styling that also ships in the theme framework, and applies with WooCommerce: breadcrumb styling (including the Store Breadcrumb delimiter), the sale badge, and the product-gallery lightbox. WooCommerce block patterns that use `wp:woocommerce/*` are registered by the companion plugin, not by these theme files.
+Shop styling that also ships in the theme framework, and applies with WooCommerce: breadcrumb styling (including the Store Breadcrumb delimiter), the sale badge, and the product-gallery lightbox. WooCommerce block patterns that use `wp:woocommerce/*` are registered by Aegis Dash, not by these theme files.
 
 ## Patterns
 
-`patterns/` contains **231 registered patterns** in 28 folders. The registrar loads `*.php` in each folder and skips files whose names start with a dot. 52 files set `Inserter: false`: all 48 in `template`, the 3 in `hidden`, and `utility/patterns.php`. Patterns in the `hidden` category are also kept out of the inserter by the pattern loader. Modal starters are owned by the companion plugin, not this tree.
+`patterns/` contains **230 registered patterns** in 28 folders. The registrar loads `*.php` in each folder and skips files whose names start with a dot. 52 files set `Inserter: false`: all 48 in `template`, the 3 in `hidden`, and `utility/patterns.php`. Patterns in the `hidden` category are also kept out of the inserter by the pattern loader. Modal starters are owned by Aegis Dash, not this tree.
 
 Inserter category labels match the folder name, with `cta` and `faq` shown as CTA and FAQ. Registered slugs are the category plus the file's `Slug` header, for example `hero-split`. The full slug list is in the [Pattern Reference](reference/pattern-reference.md).
 
@@ -325,7 +325,7 @@ Inserter category labels match the folder name, with `cta` and `faq` shown as CT
 | Contact Icons | Contact information with icons. |
 | Contact Two Column | A two-column contact section with form and info. |
 
-Contact Form Map and Contact Form Map Overlay ship in the companion plugin (`aegis/form-map`, `aegis/form-map-overlay`) when the Map block is enabled.
+Contact Form Map and Contact Form Map Overlay ship in Aegis Dash (`aegis/form-map`, `aegis/form-map-overlay`) when the Map block is enabled.
 
 ### cta (7)
 
@@ -635,9 +635,9 @@ Contact Form Map and Contact Form Map Overlay ship in the companion plugin (`aeg
 | Skip to Content | Accessibility link that allows keyboard users to skip navigation and jump directly to main content. |
 | Utility Search Toggle | — |
 
-## Theme blocks
+## Block copies in the theme
 
-Registered by the theme from `src/Blocks/`. They work without the companion plugin.
+These six blocks are provided by Aegis Dash 1.1.0 and newer. Theme 1.1.0 still contains a copy in `src/Blocks/` and registers it only while Aegis Dash is not providing the block, so they keep working without the plugin for now. A later theme release removes the copies.
 
 | Block | Name | What it is |
 | --- | --- | --- |
@@ -668,7 +668,7 @@ Registered by the bundled framework on core blocks:
 
 Decorative icons use the Icon block, not the SVG image variation.
 
-The companion plugin can turn variations off at Aegis → Blocks. That screen is not part of the theme.
+The Aegis Dash can turn variations off at Aegis → Blocks. That screen is not part of the theme.
 
 ## Block styles
 
@@ -816,11 +816,11 @@ Notable pieces a post can name without going into plugin extras:
 
 ## Third-party styling that ships in the theme
 
-Stylesheets in the bundled framework. They apply when that plugin is present. This list is names only. It does not describe those plugins, and it does not describe the companion plugin's Integrations screen.
+Stylesheets in the bundled framework. They apply when that plugin is present. This list is names only. It does not describe those plugins, and it does not describe Aegis Dash's Integrations screen.
 
 WooCommerce, Easy Digital Downloads, AffiliateWP, Fluent Forms, Fluent Booking, Gravity Forms, Ninja Forms, LearnDash, LifterLMS, Sensei, bbPress, Meta Box, Code Block Pro, Syntax Highlighting Code Block.
 
-Co-Authors Plus is also detected for author hooks. BunnyCDN styling is tied to the companion plugin connector, so it is not a standalone theme feature.
+Co-Authors Plus is also detected for author hooks. BunnyCDN styling is tied to Aegis Dash connector, so it is not a standalone theme feature.
 
 ## Developer appendix
 

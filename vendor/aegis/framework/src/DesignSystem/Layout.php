@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Adjusts layout size units for the editor
- * - Integrates with the block editor and theme JSON
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for layout component.
 declare( strict_types=1 );
 
-// Declares the namespace for the layout component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the layout component.
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use function array_merge;

@@ -222,7 +222,7 @@ Typical updates:
 
 Translations are managed through WordPress.org or direct contributions:
 
-1. Generate a fresh theme `.pot` file: `npm run translate`. Plugin strings: `npm run translate` in `wp-content/plugins/aegis`. Pro: regenerate `languages/aegis-pro.pot`.
+1. Generate a fresh theme `.pot` file: `npm run translate`. Plugin strings: `npm run translate` in `wp-content/plugins/aegis-dash`. Pro: regenerate `languages/aegis-pro.pot`.
 2. Create a `.po` file for your locale.
 3. Submit the translation via PR or the WordPress translation platform.
 
@@ -230,7 +230,7 @@ Translations are managed through WordPress.org or direct contributions:
 
 When reporting bugs:
 
-1. Search existing bug reports first. Send new reports to Atmostfear Entertainment through the [Aegis documentation site](https://www.atmostfear-entertainment.com/docs/aegis/).
+1. Search existing bug reports first. Send new reports to Atmostfear Entertainment through [Getting Support](../troubleshooting/support.md): the [community forum](https://www.atmostfear-entertainment.com/community/) for free users, or a [support ticket](https://www.atmostfear-entertainment.com/account/support-tickets/) for Pro.
 2. Include:
    - WordPress version.
    - PHP version.

@@ -7,7 +7,6 @@
  * Responsibilities:
  * - Checks for FluentBooking plugin presence and conditionally registers styles
  * - Unregisters Fluent Booking block patterns when pattern removal is enabled
- * - Integrates with the Aegis container and inline assets system
  *
  * @package    Aegis\Framework\Integrations
  * @since      1.0.0
@@ -20,6 +19,8 @@ declare( strict_types=1 );
 namespace Aegis\Framework\Integrations;
 
 use Aegis\Container\Interfaces\Conditional;
+use Aegis\Framework\Companion;
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use WP_Block_Patterns_Registry;
@@ -42,8 +43,10 @@ class FluentBooking implements Conditional, Styleable {
 	 * @return bool
 	 */
 	public static function condition(): bool {
-		if ( class_exists( '\\Aegis\\Plugin\\Integrations\\FluentBooking' ) ) {
-			return \Aegis\Plugin\Integrations\FluentBooking::is_plugin_active();
+		$active = Companions::get()->integration_active( Companion::INTEGRATION_FLUENT_BOOKING );
+
+		if ( null !== $active ) {
+			return $active;
 		}
 
 		return defined( 'FLUENT_BOOKING_VERSION' ) || class_exists( 'FluentBooking\\App\\App' );

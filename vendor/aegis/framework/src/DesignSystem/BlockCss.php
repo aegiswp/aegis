@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Registers and loads CSS files for individual blocks
- * - Integrates with the styles service and WordPress block APIs
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for block css component.
 declare( strict_types=1 );
 
-// Declares the namespace for the block css component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the block css component.
 use Aegis\Framework\InlineAssets\Styles;
 use function array_flip;
 use function file_get_contents;

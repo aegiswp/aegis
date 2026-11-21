@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and styling sub-heading content for blocks
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for subheading block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the subheading block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the subheading block setting.
 use Aegis\Framework\Interfaces\Renderable;
 use WP_Block;
 use function str_contains;

@@ -6,7 +6,7 @@ Thank you for your interest in contributing to the Aegis theme. This document pr
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/aegiswp/theme.git
+git clone https://github.com/aegiswp/aegis.git
 cd theme
 ```
 
@@ -42,13 +42,14 @@ npm run dev
 
 - Put disposable probes and migration checks in `tools/scratch/` only (gitignored).
 - Never commit `bin/` at the theme root or one-off scripts in `scripts/`.
-- Promote a script to `tools/` only when it is documented and wired to npm or the Makefile.
+- Promote a script to `tools/` only when it is documented and wired to an npm or composer script.
 
 ### PHP lint and tests
 
 - Theme PHPCS: `composer run standards:check` (or `composer lint`) from this directory.
-- Free plugin and Pro each have their own root `composer.json` / `phpcs.xml` — run `composer lint` inside `wp-content/plugins/aegis` or `wp-content/plugins/aegis-pro`.
-- PHPUnit coverage for the theme is provided by **wpaudit only**: `composer test:wpaudit` (not a separate `tests/Unit` tree in this repo).
+- Free plugin and Pro each have their own root `composer.json` / `phpcs.xml` — run `composer lint` inside `wp-content/plugins/aegis-dash` or `wp-content/plugins/aegis-pro`.
+- PHPUnit coverage for the theme is provided by **wpaudit only**: `composer test:wpaudit` (the theme has no other test suite).
+- Characterization tests for the first-party `vendor/aegis/*` framework packages: `composer run test:framework` (`tests/Framework/`, config `phpunit.framework.xml`).
 
 ### Vendor sync
 
@@ -233,7 +234,7 @@ style: format CSS files according to standards
 - Performance optimizations
 
 ### Documentation
-- Wiki pages under `docs/` (see `docs/development/documentation.md`)
+- Documentation, which is published at https://www.atmostfear-entertainment.com/docs/ (not in this repository)
 - README / DESIGN / INSTRUCTIONS / `readme.txt` updates
 - Code comments (PHPDoc, JSDoc)
 - User guides and developer documentation
@@ -256,11 +257,11 @@ style: format CSS files according to standards
 npm run translate
 ```
 
-Plugin strings belong in `wp-content/plugins/aegis/languages/aegis.pot` (`npm run translate` or `npm run translate:studio` in the plugin directory). Pro uses `aegis-pro.pot`.
+Plugin strings belong in `wp-content/plugins/aegis-dash/languages/aegis-dash.pot` (`npm run translate` or `npm run translate:studio` in the plugin directory). Pro uses `aegis-pro.pot`.
 
 2. **Translation Process**:
    - Theme: `wp-content/themes/aegis/languages/aegis.pot`
-   - Plugin: `wp-content/plugins/aegis/languages/aegis.pot`
+   - Plugin: `wp-content/plugins/aegis-dash/languages/aegis-dash.pot`
    - Pro: `wp-content/plugins/aegis-pro/languages/aegis-pro.pot`
    - Copy the matching `.pot` to create your language file (e.g., `aegis-fr_FR.po` or `aegis-pro-fr_FR.po`)
    - Translate using tools like Poedit or translation software
@@ -305,7 +306,7 @@ Aegis uses [Semantic Versioning](https://semver.org/):
    - ✓ Code reviews
 
 2. **Update version numbers** and changelog:
-   - Update version in `theme.json`
+   - Update version in `style.css`
    - Update version in `package.json`
    - Update `CHANGELOG.md` with release notes
    - Update `readme.txt` (WordPress theme readme)
@@ -404,7 +405,6 @@ This ensures `main` is always in a releasable state.
 ## Getting Help
 
 - **GitHub Issues**: For bug reports and feature requests
-- **GitHub Discussions**: For general questions and discussions
 - **Documentation**: Check README.md and inline code comments
 - **WordPress.org**: For theme-specific questions
 

@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Generates custom CSS properties based on global settings and styles
- * - Integrates with the styles service for frontend delivery
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for custom properties component.
 declare( strict_types=1 );
 
-// Declares the namespace for the custom properties component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the custom properties component.
 use Aegis\Framework\InlineAssets\Styleable;
 use Aegis\Framework\InlineAssets\Styles;
 use Aegis\Dom\CSS;

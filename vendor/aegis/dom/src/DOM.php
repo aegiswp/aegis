@@ -1,12 +1,14 @@
 <?php
+/**
+ * DOM utility helpers.
+ *
+ * @package Aegis\Dom
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for dom utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the dom utility helpers.
 namespace Aegis\Dom;
 
-// Imports classes, interfaces, and functions used by the dom utility helpers.
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
@@ -342,36 +344,6 @@ class DOM {
 		if ( $tokens ) {
 			$link->setAttribute( 'rel', implode( ' ', array_unique( $tokens ) ) );
 		}
-	}
-
-	/**
-	 * Finds all DOMElements that contain the specified text content.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param DOMDocument $dom  The DOMDocument to search within.
-	 * @param string      $text The text content to search for.
-	 * @param string      $tag  Optional. The tag name to limit the search to.
-	 *
-	 * @return DOMElement[] An array of found DOMElements.
-	 */
-	public static function get_elements_by_content( DOMDocument $dom, string $text, string $tag = '*' ): array {
-		$xpath    = new DOMXPath( $dom );
-		$query    = sprintf( "//%s[contains(., '%s')]", $tag, addslashes( $text ) );
-		$nodes    = $xpath->query( $query );
-		$elements = [];
-
-		if ( ! $nodes ) {
-			return $elements;
-		}
-
-		foreach ( $nodes as $node ) {
-			if ( $node instanceof DOMElement ) {
-				$elements[] = $node;
-			}
-		}
-
-		return $elements;
 	}
 
 	/**

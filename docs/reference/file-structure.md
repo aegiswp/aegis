@@ -39,7 +39,7 @@ src/
 ├── NavigationFallback.php   # Short sample menu for empty Navigation blocks (1.0.1)
 ├── PatternDependencies.php  # Hides patterns whose blocks need an inactive plugin (1.0.1)
 ├── Admin/
-│   ├── CompanionNotice.php  # Companion plugin install notice (installs the latest release)
+│   ├── CompanionNotice.php  # Aegis Dash install notice (installs the latest release)
 │   └── GitHubUpdater.php    # Theme updates from GitHub releases (1.0.1)
 └── Blocks/                  # block.json + TSX sources (compiled in place)
     ├── BlockRegistrar.php
@@ -56,7 +56,7 @@ src/
 
 `src/bootstrap.php` starts `CompanionNotice`, `GitHubUpdater`, `BlockRegistrar`, and `NavigationFallback`. Icon collections under `vendor/aegis/icons/public/icons/` (including `payment`) are discovered automatically. `blocks-manifest.php` is written by `tools/generate-blocks-manifest.php` at the end of `npm run build`; `BlockRegistrar` passes it to `wp_register_block_metadata_collection()`. Do not edit it by hand.
 
-Engine PHP (patterns REST, template expander, dynamic parts, navigation overlay, editor overlay fix, Woo breadcrumbs including Store Breadcrumb delimiter wrap) lives in `vendor/aegis/framework`. Admin dashboard, conditionals, and multi-step checkout live in the companion plugin.
+Engine PHP (patterns REST, template expander, dynamic parts, navigation overlay, editor overlay fix, Woo breadcrumbs including Store Breadcrumb delimiter wrap) lives in `vendor/aegis/framework`. Admin dashboard, conditionals, and multi-step checkout live in Aegis Dash.
 
 ### vendor/aegis/
 
@@ -71,23 +71,23 @@ Composer packages:
 
 ### patterns/
 
-**Theme-owned** block patterns by category (`hero/`, `cta/`, `template/`, etc.) — generic sections and marketing layouts using core blocks. WooCommerce block patterns (`wp:woocommerce/*`) and the TI Wishlist pattern live in the **companion plugin**, not here. The theme keeps a Woo-free `header/default` so `parts/header.html` still resolves when WooCommerce is inactive.
+**Theme-owned** block patterns by category (`hero/`, `cta/`, `template/`, etc.) — generic sections and marketing layouts using core blocks. WooCommerce block patterns (`wp:woocommerce/*`) and the TI Wishlist pattern live in the **Aegis Dash**, not here. The theme keeps a Woo-free `header/default` so `parts/header.html` still resolves when WooCommerce is inactive.
 
-Companion plugin pattern directories (see [Plugin File Structure](../../../../plugins/aegis/docs/development/file-structure.md)):
+Aegis Dash pattern directories (see [Aegis Dash File Structure](../../../../plugins/aegis-dash/docs/development/file-structure.md)):
 
-- `wp-content/plugins/aegis/patterns/woocommerce/` — gated on WooCommerce
-- `wp-content/plugins/aegis/patterns/wishlist/` — gated on WooCommerce + TI Wishlist
-- `wp-content/plugins/aegis/patterns/{slider,modal,contact}/` — demo patterns
+- `wp-content/plugins/aegis-dash/patterns/woocommerce/` — gated on WooCommerce
+- `wp-content/plugins/aegis-dash/patterns/wishlist/` — gated on WooCommerce + TI Wishlist
+- `wp-content/plugins/aegis-dash/patterns/{slider,modal,contact}/` — demo patterns
 
 Related Posts layouts (`blog-related-posts-*`) live in the **theme** `patterns/blog/related-posts-*.php`. They are not registered from the plugin.
 
 Pro premium patterns: `wp-content/plugins/aegis-pro/patterns/`.
 
-### Companion Plugins (Separate Repositories)
+### Aegis plugins (Separate Repositories)
 
 | Path | Docs |
 |------|------|
-| `wp-content/plugins/aegis/` | [Plugin docs](../../../../plugins/aegis/docs/home.md) |
+| `wp-content/plugins/aegis-dash/` | [Aegis Dash docs](../../../../plugins/aegis-dash/docs/home.md) |
 | `wp-content/plugins/aegis-pro/` | [Pro docs](../../../../plugins/aegis-pro/docs/home.md) |
 
 ## Generated / Excluded from Dev
@@ -100,4 +100,4 @@ Pro premium patterns: `wp-content/plugins/aegis-pro/patterns/`.
 
 - [[architecture]] — Technical architecture
 - [[building-assets]] — Build commands
-- [Plugin File Structure](../../../../plugins/aegis/docs/development/file-structure.md)
+- [Aegis Dash File Structure](../../../../plugins/aegis-dash/docs/development/file-structure.md)

@@ -8,8 +8,8 @@
 !/clean-build.js
 !/finish-translate.js
 !/generate-blocks-manifest.php
-!/migrate-aegis-video.php
 !/prepare-translate.js
+!/translate-vendor-files.js
 !/wpaudit/
 
 # WPAudit: tracked package, minus local install output and caches.

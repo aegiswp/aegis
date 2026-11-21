@@ -1,69 +1,27 @@
 /**
  * Normalize POT file references after `wp i18n make-pot`.
+ * Rewrites `build/I18nScan/<file>` back to the vendor path listed in
+ * translate-vendor-files.js.
  *
  * @package
  */
 
 const fs = require( 'fs' );
 const path = require( 'path' );
+const vendorFiles = require( './translate-vendor-files' );
 
 const potFile = path.join( path.resolve( __dirname, '..' ), 'languages', 'aegis.pot' );
 
 if ( ! fs.existsSync( potFile ) ) {
-	process.exit( 0 );
+	console.error( `POT file not found: ${ potFile }` );
+	process.exit( 1 );
 }
 
 let content = fs.readFileSync( potFile, 'utf8' );
-content = content.replaceAll(
-	'#: build/I18nScan/Library.php',
-	'#: vendor/aegis/framework/src/Icons/Library.php'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/icon-block-editor.js',
-	'#: vendor/aegis/framework/public/js/icon-block-editor.js'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/marquee-editor.js',
-	'#: vendor/aegis/framework/public/js/marquee-editor.js'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/newsletter-editor.js',
-	'#: vendor/aegis/framework/public/js/newsletter-editor.js'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/svg-editor.js',
-	'#: vendor/aegis/framework/public/js/svg-editor.js'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/Svg.php',
-	'#: vendor/aegis/framework/src/BlockVariations/Svg.php'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/Newsletter.php',
-	'#: vendor/aegis/framework/src/BlockVariations/Newsletter.php'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/AccordionList.php',
-	'#: vendor/aegis/framework/src/BlockVariations/AccordionList.php'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/Navigation.php',
-	'#: vendor/aegis/framework/src/CoreBlocks/Navigation.php'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/visibility-toggles.js',
-	'#: vendor/aegis/framework/public/js/visibility-toggles.js'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/query-enhancements-editor.js',
-	'#: vendor/aegis/framework/public/js/query-enhancements-editor.js'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/QueryEnhancements.php',
-	'#: vendor/aegis/framework/src/BlockSettings/QueryEnhancements.php'
-);
-content = content.replaceAll(
-	'#: build/I18nScan/QueryNoResults.php',
-	'#: vendor/aegis/framework/src/BlockSettings/QueryNoResults.php'
-);
+for ( const file of vendorFiles ) {
+	content = content.replaceAll(
+		`#: build/I18nScan/${ path.basename( file.path ) }`,
+		`#: ${ file.path }`
+	);
+}
 fs.writeFileSync( potFile, content );

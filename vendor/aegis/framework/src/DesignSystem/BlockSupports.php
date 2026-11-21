@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Registers and manages block supports configuration for core and custom blocks
- * - Integrates with the scripts service for editor-side data
  *
  * @package    Aegis\Framework\DesignSystem
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for block supports component.
 declare( strict_types=1 );
 
-// Declares the namespace for the block supports component.
 namespace Aegis\Framework\DesignSystem;
 
-// Imports classes, interfaces, and functions used by the block supports component.
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use function is_admin;

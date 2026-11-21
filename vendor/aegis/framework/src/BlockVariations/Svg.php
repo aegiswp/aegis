@@ -6,7 +6,6 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and manipulating SVG block content
- * - Integrates with utility classes for DOM and CSS
  *
  * @package    Aegis\Framework
  * @since      1.0.0

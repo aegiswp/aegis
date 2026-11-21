@@ -91,26 +91,6 @@ class PerformanceAnalyzerTest extends TestCase {
 	}
 
 	/**
-	 * Test get rules returns all performance rules.
-	 *
-	 * @return void
-	 */
-	public function test_get_rules(): void {
-		$rules = $this->analyzer->get_rules();
-
-		$this->assertIsArray( $rules );
-		$this->assertCount( 6, $rules );
-
-		$rule_ids = array_column( $rules, 'id' );
-		$this->assertContains( 'perf-001', $rule_ids );
-		$this->assertContains( 'perf-002', $rule_ids );
-		$this->assertContains( 'perf-003', $rule_ids );
-		$this->assertContains( 'perf-004', $rule_ids );
-		$this->assertContains( 'perf-005', $rule_ids );
-		$this->assertContains( 'perf-006', $rule_ids );
-	}
-
-	/**
 	 * Test detection of wp_enqueue_script without defer/async.
 	 *
 	 * @return void

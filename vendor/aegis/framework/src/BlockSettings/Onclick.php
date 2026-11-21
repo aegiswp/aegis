@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for processing onclick attributes on blocks
- * - Integrates with the Renderable interface for block output
  *
  * @package    Aegis\Framework\BlockSettings
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for onclick block setting.
 declare( strict_types=1 );
 
-// Declares the namespace for the onclick block setting.
 namespace Aegis\Framework\BlockSettings;
 
-// Imports classes, interfaces, and functions used by the onclick block setting.
 use Aegis\Dom\DOM;
 use Aegis\Dom\JS;
 use Aegis\Framework\Interfaces\Renderable;
@@ -167,7 +160,6 @@ class Onclick implements Renderable {
 		$link = null;
 		$name = $block['blockName'] ?? '';
 
-		// --- Apply onclick to Groups and Buttons ---
 		if ( $on_click && $block_content ) {
 			$dom  = DOM::create( $block_content );
 			$div  = DOM::get_element( 'div', $dom );
@@ -184,7 +176,6 @@ class Onclick implements Renderable {
 			$block_content = $dom->saveHTML();
 		}
 
-		// --- Apply onclick to Images ---
 		// This is a separate check for blocks that might be just an image.
 		if ( $on_click && $block_content && null === $link ) {
 			$dom    = DOM::create( $block_content );

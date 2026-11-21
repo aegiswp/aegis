@@ -16,7 +16,7 @@
   color: "a2eeef"
 
 - name: "[Type] Docs"
-  description: "Documentation or Wiki improvements"
+  description: "Documentation improvements"
   color: "0075ca"
 
 - name: "[Type] Refactor"
@@ -120,7 +120,7 @@
   color: "0075ca"
 
 - name: "[Area] Documentation"
-  description: "README, Wiki, inline docs"
+  description: "README, inline docs"
   color: "0075ca"
 
 - name: "[Area] Developer Experience"

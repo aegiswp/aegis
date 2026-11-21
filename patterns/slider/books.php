@@ -45,15 +45,15 @@ declare(strict_types=1);
 					<p class="has-neutral-500-color has-text-color" style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase"><?php echo esc_html__( 'Design', 'aegis' ); ?></p>
 					<!-- /wp:paragraph -->
 
-					<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"2rem","fontWeight":"600","lineHeight":"1.2"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-					<h3 class="wp-block-heading" style="margin-top:8px;margin-bottom:0;font-size:2rem;font-weight:600;line-height:1.2"><?php echo esc_html__( 'Building With Blocks', 'aegis' ); ?></h3>
+					<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"2rem","fontWeight":"600","lineHeight":"1.2"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+					<h3 class="wp-block-heading" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:2rem;font-weight:600;line-height:1.2"><?php echo esc_html__( 'Building With Blocks', 'aegis' ); ?></h3>
 					<!-- /wp:heading -->
 
 					<!-- wp:paragraph {"style":{"typography":{"fontSize":"1.0625rem","lineHeight":"1.65"},"spacing":{"margin":{"top":"var:preset|spacing|xs","bottom":"0"}}},"textColor":"neutral-500"} -->
 					<p class="has-neutral-500-color has-text-color" style="margin-top:var(--wp--preset--spacing--xs);margin-bottom:0;font-size:1.0625rem;line-height:1.65"><?php echo esc_html__( 'A practical guide to crafting fast, accessible WordPress sites with the block editor—patterns, theme.json, and modern design systems included.', 'aegis' ); ?></p>
 					<!-- /wp:paragraph -->
 
-					<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":{"left":"12px"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+					<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":{"left":"var:preset|spacing|2xs"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
 					<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--md)">
 						<!-- wp:button {"className":"is-style-fill"} -->
 						<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button"><?php echo esc_html__( 'Read More', 'aegis' ); ?></a></div>
@@ -87,15 +87,15 @@ declare(strict_types=1);
 					<p class="has-neutral-500-color has-text-color" style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase"><?php echo esc_html__( 'Strategy', 'aegis' ); ?></p>
 					<!-- /wp:paragraph -->
 
-					<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"2rem","fontWeight":"600","lineHeight":"1.2"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-					<h3 class="wp-block-heading" style="margin-top:8px;margin-bottom:0;font-size:2rem;font-weight:600;line-height:1.2"><?php echo esc_html__( 'Content That Converts', 'aegis' ); ?></h3>
+					<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"2rem","fontWeight":"600","lineHeight":"1.2"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+					<h3 class="wp-block-heading" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:2rem;font-weight:600;line-height:1.2"><?php echo esc_html__( 'Content That Converts', 'aegis' ); ?></h3>
 					<!-- /wp:heading -->
 
 					<!-- wp:paragraph {"style":{"typography":{"fontSize":"1.0625rem","lineHeight":"1.65"},"spacing":{"margin":{"top":"var:preset|spacing|xs","bottom":"0"}}},"textColor":"neutral-500"} -->
 					<p class="has-neutral-500-color has-text-color" style="margin-top:var(--wp--preset--spacing--xs);margin-bottom:0;font-size:1.0625rem;line-height:1.65"><?php echo esc_html__( 'Learn how to structure landing pages, CTAs, and storytelling so every visit moves readers closer to action—without sacrificing brand clarity.', 'aegis' ); ?></p>
 					<!-- /wp:paragraph -->
 
-					<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":{"left":"12px"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+					<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":{"left":"var:preset|spacing|2xs"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
 					<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--md)">
 						<!-- wp:button {"className":"is-style-fill"} -->
 						<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button"><?php echo esc_html__( 'Read More', 'aegis' ); ?></a></div>
@@ -129,15 +129,15 @@ declare(strict_types=1);
 					<p class="has-neutral-500-color has-text-color" style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase"><?php echo esc_html__( 'Performance', 'aegis' ); ?></p>
 					<!-- /wp:paragraph -->
 
-					<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"2rem","fontWeight":"600","lineHeight":"1.2"},"spacing":{"margin":{"top":"8px","bottom":"0"}}}} -->
-					<h3 class="wp-block-heading" style="margin-top:8px;margin-bottom:0;font-size:2rem;font-weight:600;line-height:1.2"><?php echo esc_html__( 'Speed Without Compromise', 'aegis' ); ?></h3>
+					<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"2rem","fontWeight":"600","lineHeight":"1.2"},"spacing":{"margin":{"top":"var:preset|spacing|xxs","bottom":"0"}}}} -->
+					<h3 class="wp-block-heading" style="margin-top:var(--wp--preset--spacing--xxs);margin-bottom:0;font-size:2rem;font-weight:600;line-height:1.2"><?php echo esc_html__( 'Speed Without Compromise', 'aegis' ); ?></h3>
 					<!-- /wp:heading -->
 
 					<!-- wp:paragraph {"style":{"typography":{"fontSize":"1.0625rem","lineHeight":"1.65"},"spacing":{"margin":{"top":"var:preset|spacing|xs","bottom":"0"}}},"textColor":"neutral-500"} -->
 					<p class="has-neutral-500-color has-text-color" style="margin-top:var(--wp--preset--spacing--xs);margin-bottom:0;font-size:1.0625rem;line-height:1.65"><?php echo esc_html__( 'Techniques for lean assets, smart loading, and Core Web Vitals—so your site feels instant on every device.', 'aegis' ); ?></p>
 					<!-- /wp:paragraph -->
 
-					<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":{"left":"12px"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+					<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|md"},"blockGap":{"left":"var:preset|spacing|2xs"}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
 					<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--md)">
 						<!-- wp:button {"className":"is-style-fill"} -->
 						<div class="wp-block-button is-style-fill"><a class="wp-block-button__link wp-element-button"><?php echo esc_html__( 'Read More', 'aegis' ); ?></a></div>

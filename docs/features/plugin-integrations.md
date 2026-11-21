@@ -1,6 +1,6 @@
 # Plugin Integrations (Framework Styling)
 
-The Aegis **framework** (`vendor/aegis/framework`) loads compatibility CSS for supported third-party plugins when the **Aegis plugin** integration toggle is enabled.
+The Aegis **framework** (`vendor/aegis/framework`) loads compatibility CSS for supported third-party plugins when the **Aegis Dash** integration toggle is enabled.
 
 Integration styles use design tokens and adapt to style variations and dark mode. Styles load only when the plugin is active **and** its integration is enabled in **Aegis → Integrations**.
 
@@ -18,30 +18,30 @@ Integration styles use design tokens and adapt to style variations and dark mode
 | Sensei LMS | Course, lesson, quiz, and progress styling (`plugins/sensei-lms.css`) adapting to theme design tokens and dark mode; registers theme support (`sensei`, `sensei-lms`), disables default plugin styles (`sensei_disable_styles`), and adds `aegis-sensei-page` body class on Sensei courses, lessons, quizzes, questions, messages, archives, and taxonomies. Pattern control (`sensei_keep_patterns`) unregisters plugin patterns at `init` priority 11 when enabled in Pro. Detection is `Sensei_Main`, `Sensei()`, `Sensei`, `SENSEI_VERSION`, or `SENSEI_PLUGIN_FILE`. Snippet locations `aegis_before/after_sensei_course`, `aegis_before/after_sensei_lesson`, and `aegis_before/after_sensei_quiz`. |
 | Easy Digital Downloads | Download, checkout, cart, and purchase-form styling (`plugins/edd/edd.css`). Detection is `Easy_Digital_Downloads`, `EDD()`, or `EDD_VERSION`. Snippet locations `aegis_before_edd_download` / `aegis_after_edd_download`. |
 | AffiliateWP | Affiliate Area and login/register form styling (`plugins/affiliate-wp.css`). Detection is `Affiliate_WP`, `affiliate_wp()`, or `AFFILIATEWP_VERSION`. Skips bundled `affwp-forms` CSS on the frontend (admin keeps it). Snippet locations `aegis_before_affwp_dashboard` / `aegis_after_affwp_dashboard`. |
-| Co-Authors Plus | Multi-author `core/post-author*` replace when the Aegis plugin is absent. With the plugin active, the plugin owns guest URLs, CSS (`public/css/co-authors-plus.css`), and the optional **Author Schema** extra. The framework class does not emit JSON-LD. |
+| Co-Authors Plus | Multi-author `core/post-author*` replace when the Aegis Dash is absent. With the plugin active, the plugin owns guest URLs, CSS (`public/css/co-authors-plus.css`), and the optional **Author Schema** extra. The framework class does not emit JSON-LD. |
 | Meta Box | Field UI / frontend form styling (`plugins/meta-box.css`). Detection is `RWMB_Loader` or `rwmb_meta()` (including AIO). Also registers `aegis/metabox` block bindings and theme color palettes for Meta Box color pickers. |
 | bbPress | Forum styling (new in 1.0.1) (`plugins/bbpress.css`, dequeues bbPress default CSS): circular avatars, content-scale type, theme form/editor controls, grid topic rows, tokenized posts, My Account–style member sidebar; FSE **Page** wrap via `locate_block_template( $template, 'page', array( 'page.php' ) )`. Since 1.0.1, empty Navigation blocks show a short sample menu instead of listing every page (theme `NavigationFallback`). |
 | Syntax Highlighting Code Block | Radius/padding/line-number overlay (`plugins/syntax-highlighting-code-block.css`) when Weston Ruter’s plugin is present. Detection is `Syntax_Highlighting_Code_Block\PLUGIN_VERSION` or `boot()`. Overlay injects on `hljs` / `shcb-` markup, not a plain `wp-block-code`. Optional `settings.custom.highlightJs` in theme.json locks the Highlight.js stylesheet and hides the plugin Customizer picker. |
 | Code Block Pro | Radius/typography overlay (`plugins/code-block-pro.css`) when `kevinbatdorf/code-block-pro` is present. Detection is `CBPRouter` or the registered block — not `CODE_BLOCK_PRO_VERSION`. |
 | BunnyCDN | Stream player embed styling (`plugins/bunnycdn.css`) when **Aegis → Connectors → BunnyCDN** is on (SaaS connector, not a WordPress plugin). Snippet locations `aegis_before_video_block` / `aegis_after_video_block`. Pro Stream API and editor panels live in Aegis Pro. |
 
-## Integrations Dashboard (free plugin)
+## Integrations Dashboard (Aegis Dash)
 
-Toggle state and credentials are owned by the free plugin (**Aegis → Integrations** / **Connectors**). This theme page only documents framework CSS that ships with the theme.
+Toggle state and credentials are owned by Aegis Dash (**Aegis → Integrations** / **Connectors**). This theme page only documents framework CSS that ships with the theme.
 
 ![Aegis → Integrations in WordPress admin, listing supported plugins with their detection status and styling toggles.](../screenshots/integrations.png)
 
 *Aegis → Integrations shows which plugins the theme styles.*
 
-See [Integrations Dashboard](../../../../plugins/aegis/docs/features/integrations-dashboard.md).
+See [Integrations Dashboard](../../../../plugins/aegis-dash/docs/features/integrations-dashboard.md).
 
 ## SEO Plugins
 
-Visual breadcrumbs use `core/breadcrumbs` styled to theme tokens; Rank Math / SEOPress / Yoast trails share the same breadcrumbs stylesheet when present. Schema delegation and Pro video sitemaps are documented in the free plugin / Pro: [SEO Schema Delegation](../../../../plugins/aegis/docs/features/seo-schema-delegation.md).
+Visual breadcrumbs use `core/breadcrumbs` styled to theme tokens; Rank Math / SEOPress / Yoast trails share the same breadcrumbs stylesheet when present. Schema delegation and Pro video sitemaps are documented in Aegis Dash / Pro: [SEO Schema Delegation](../../../../plugins/aegis-dash/docs/features/seo-schema-delegation.md).
 
 ## How Integration Styles Load
 
-1. The free plugin stores integration toggle state.
+1. The Aegis Dash stores integration toggle state.
 2. The framework `ServiceProvider` checks toggles via `Settings\Repository`.
 3. Integration CSS loads inline only when both the third-party plugin and integration toggle are active.
 
@@ -49,18 +49,18 @@ See [[performance]] for conditional asset loading.
 
 ## Plugins Without Framework CSS
 
-Plugins not listed above may still work with default styling. Apply custom CSS via Global Styles or child theme overrides. Request an integration through the [Aegis documentation site](https://www.atmostfear-entertainment.com/docs/aegis/).
+Plugins not listed above may still work with default styling. Apply custom CSS via Global Styles or child theme overrides. Request an integration through [Getting Support](../troubleshooting/support.md).
 
 | Plugin | Theme integration |
 |--------|-------------------|
-| [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/) | **Wishlist** FSE template (theme) + **wishlist block pattern** (companion plugin, gated on WC + TI). No framework CSS. See [[woocommerce-integration#wishlist-ti-woocommerce-wishlist]]. |
-| WooCommerce block patterns | Registered by **Aegis companion plugin** when WooCommerce is active — not in theme `patterns/`. See [Plugin Patterns](../../../../plugins/aegis/docs/features/plugin-patterns.md). |
+| [TI WooCommerce Wishlist](https://wordpress.org/plugins/ti-woocommerce-wishlist/) | **Wishlist** FSE template (theme) + **wishlist block pattern** (Aegis Dash, gated on WC + TI). No framework CSS. See [[woocommerce-integration#wishlist-ti-woocommerce-wishlist]]. |
+| WooCommerce block patterns | Registered by **Aegis Dash** when WooCommerce is active — not in theme `patterns/`. See [Aegis Dash Patterns](../../../../plugins/aegis-dash/docs/features/plugin-patterns.md). |
 | FluentCRM / WP Fusion | **Aegis → Integrations → CRM**. FluentCRM video events are Pro (`core/video`). WP Fusion owns tag, list, and CRM logged-in conditions (catalog pickers; Lite counts as installed). No framework CSS. |
 | Advanced Custom Fields / Secure Custom Fields | **Aegis → Integrations → Developer**. Field visibility, Query Loop pickers, featured-image sources, and Pro video Dynamic Source. No framework CSS. |
 
 ## Next Steps
 
 - [[woocommerce-integration]] — WooCommerce templates
-- [Integrations Dashboard](../../../../plugins/aegis/docs/features/integrations-dashboard.md)
+- [Integrations Dashboard](../../../../plugins/aegis-dash/docs/features/integrations-dashboard.md)
 - [Pro docs](../../../../plugins/aegis-pro/docs/home.md)
 - [[performance]] — Conditional loading

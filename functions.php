@@ -6,20 +6,14 @@
  * bootstrapping the theme by loading necessary files and initializing the
  * Aegis Framework.
  *
- * Responsibilities:
- * - Loads the Composer autoloader to make all dependencies available.
- * - Initializes the Aegis Framework by calling `Aegis::register()`.
- *
  * @package    Aegis
  * @since      1.0.0
  * @author     Atmostfear Entertainment
- * @link       https://github.com/aegiswp/theme
+ * @link       https://github.com/aegiswp/aegis
  */
 
-// Enforces strict type checking for all code in this file.
 declare(strict_types=1);
 
-// Includes the Composer-generated autoloader to make all dependencies available.
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Pattern files call these helpers during registration on `init`.

@@ -22,7 +22,7 @@ $aegis_sidebar_users  = get_users(
 if ( ! empty( $aegis_sidebar_users[0] ) ) {
 	$aegis_sidebar_author = $aegis_sidebar_users[0];
 } else {
-	$aegis_sidebar_users = get_users(
+	$aegis_sidebar_users  = get_users(
 		array(
 			'number'  => 1,
 			'orderby' => 'ID',
@@ -68,7 +68,7 @@ $aegis_sidebar_author_url = $aegis_sidebar_author_id ? get_author_posts_url( $ae
 		<p class="has-text-align-center has-neutral-600-color has-text-color has-14-font-size"><?php echo esc_html( $aegis_sidebar_author_bio ); ?></p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:social-links {"iconColor":"neutral-600","size":"has-small-icon-size","className":"is-style-logos-only","style":{"spacing":{"blockGap":{"left":"12px"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
+		<!-- wp:social-links {"iconColor":"neutral-600","size":"has-small-icon-size","className":"is-style-logos-only","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|2xs"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
 		<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only">
 			<!-- wp:social-link {"url":"#","service":"facebook"} /-->
 			<!-- wp:social-link {"url":"#","service":"instagram"} /-->

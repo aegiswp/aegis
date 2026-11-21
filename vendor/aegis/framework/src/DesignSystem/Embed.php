@@ -13,6 +13,7 @@ declare( strict_types=1 );
 
 namespace Aegis\Framework\DesignSystem;
 
+use Aegis\Framework\Companions;
 use Aegis\Framework\InlineAssets\Scriptable;
 use Aegis\Framework\InlineAssets\Scripts;
 use Aegis\Framework\InlineAssets\Styleable;
@@ -127,11 +128,7 @@ class Embed implements Renderable, Scriptable, Styleable {
 	 * @return bool
 	 */
 	private function is_facade_enabled(): bool {
-		if ( class_exists( '\Aegis\Plugin\Blocks\Settings' ) ) {
-			return \Aegis\Plugin\Blocks\Settings::is_enabled( 'embed_facades' );
-		}
-
-		return true;
+		return Companions::get()->is_embed_facade_enabled();
 	}
 
 	/**

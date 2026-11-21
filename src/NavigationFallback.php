@@ -25,9 +25,7 @@ use function is_array;
 final class NavigationFallback {
 
 	/**
-	 * Registers the fallback filter.
-	 *
-	 * @return void
+	 * Hooks the page-list fallback limit.
 	 */
 	public static function init(): void {
 		add_filter( 'block_core_navigation_render_fallback', array( self::class, 'limit_page_list_fallback' ) );
@@ -40,7 +38,7 @@ final class NavigationFallback {
 	 * @return array<int, array<string, mixed>>|false|null
 	 */
 	public static function limit_page_list_fallback( $fallback ) {
-		if ( ! is_array( $fallback ) || $fallback === array() ) {
+		if ( ! is_array( $fallback ) || array() === $fallback ) {
 			return $fallback;
 		}
 
@@ -82,9 +80,9 @@ final class NavigationFallback {
 			$blocks[] = array(
 				'blockName'    => 'core/navigation-link',
 				'attrs'        => array(
-					'label' => $link['label'],
-					'url'   => $link['url'],
-					'kind'  => 'custom',
+					'label'          => $link['label'],
+					'url'            => $link['url'],
+					'kind'           => 'custom',
 					'isTopLevelLink' => true,
 				),
 				'innerBlocks'  => array(),

@@ -6,24 +6,17 @@
  *
  * Responsibilities:
  * - Handles the logic for displaying and manipulating calendar block content
- * - Integrates with utility classes for DOM and string manipulation
  *
  * @package    Aegis\Framework\CoreBlocks
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
- *
- * For developer documentation and onboarding. No logic changes in this
- * documentation update.
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for calendar block.
 declare( strict_types=1 );
 
-// Declares the namespace for the calendar block.
 namespace Aegis\Framework\CoreBlocks;
 
-// Imports classes, interfaces, and functions used by the calendar block.
 use Aegis\Dom\DOM;
 use Aegis\Framework\Interfaces\Renderable;
 use Aegis\Utilities\Str;
@@ -63,7 +56,6 @@ class Calendar implements Renderable {
 	 * @return string The modified block content with corrected class placements.
 	 */
 	public function render( string $block_content, array $block, WP_Block $instance ): string {
-		// Create a DOM object from the block content.
 		$dom   = DOM::create( $block_content );
 		$div   = DOM::get_element( 'div', $dom );
 		$table = DOM::get_element( 'table', $div );
@@ -73,7 +65,6 @@ class Calendar implements Renderable {
 			return $block_content;
 		}
 
-		// Get the class lists from both the wrapper and the table.
 		$div_classes   = explode( ' ', $div->getAttribute( 'class' ) );
 		$table_classes = explode( ' ', $table->getAttribute( 'class' ) );
 
@@ -88,11 +79,9 @@ class Calendar implements Renderable {
 			}
 		}
 
-		// Apply the updated class lists back to the elements.
 		$div->setAttribute( 'class', implode( ' ', $div_classes ) );
 		$table->setAttribute( 'class', implode( ' ', $table_classes ) );
 
-		// Return the modified HTML.
 		return $dom->saveHTML();
 	}
 }

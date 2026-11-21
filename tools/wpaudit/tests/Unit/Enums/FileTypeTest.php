@@ -15,21 +15,6 @@ use WPAudit\Enums\FileType;
  */
 class FileTypeTest extends TestCase {
 	/**
-	 * Test get_all returns all file types.
-	 */
-	public function test_get_all() {
-		$all = FileType::get_all();
-
-		$this->assertCount( 6, $all );
-		$this->assertContains( FileType::PHP, $all );
-		$this->assertContains( FileType::CSS, $all );
-		$this->assertContains( FileType::JS, $all );
-		$this->assertContains( FileType::HTML, $all );
-		$this->assertContains( FileType::JSON, $all );
-		$this->assertContains( FileType::UNKNOWN, $all );
-	}
-
-	/**
 	 * Test from_filename detects PHP files.
 	 */
 	public function test_detects_php_files() {

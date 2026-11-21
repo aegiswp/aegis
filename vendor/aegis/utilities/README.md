@@ -12,13 +12,12 @@ composer require aegis/utilities
 
 The library is organized into the following utility classes:
 
-- **`Arr`**: Provides helper methods for array manipulation, such as checking if an array contains any of a given set of values and recursively converting array keys to camel case.
 
 - **`Block`**: A utility class for handling WordPress block-related operations, including searching for blocks of a specific type and generating HTML from block data.
 
 - **`Color`**: Provides helpers for color palettes, shade scales, and system color keywords.
 
-- **`Data`**, **`DataAwareInterface`**, **`DataTrait`**: A set of classes for creating a unified data object for WordPress plugins and themes, allowing easy access to metadata like name, version, and author.
+- **`Data`**: A class for creating a unified data object for WordPress plugins and themes, allowing easy access to metadata like name, version, and author.
 
 - **`Debug`**: A simple utility for logging data to the browser console, which is only active when a WordPress debug constant is enabled.
 

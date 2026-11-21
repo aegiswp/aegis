@@ -1,18 +1,18 @@
 <?php
+/**
+ * Block utility helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for block utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the block utility helpers.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the block utility helpers.
 use Aegis\Dom\CSS;
 use WP;
 use function implode;
 use function is_admin;
-use function parse_blocks;
-use function render_block;
 use function serialize_block;
 use function str_contains;
 use function strip_core_block_namespace;
@@ -89,20 +89,18 @@ class Block {
 	}
 
 	/**
-	 * Generates HTML from a block array, with an option to fully render it.
+	 * Generates serialized HTML from a block array.
 	 *
 	 * This method reconstructs the block's HTML from its attributes and inner
-	 * blocks. It can return either the serialized block comment or the fully
-	 * rendered HTML.
+	 * blocks.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $block  The block array.
-	 * @param bool  $render If true, the block will be rendered using `render_block`.
+	 * @param array $block The block array.
 	 *
-	 * @return string The serialized or rendered block HTML.
+	 * @return string The serialized block HTML.
 	 */
-	public static function get_html( array $block, bool $render = false ): string {
+	public static function get_html( array $block ): string {
 		// Ensure required block structure keys exist.
 		$block['innerContent'] = $block['innerContent'] ?? [];
 		$block['innerHTML']    = $block['innerHTML'] ?? '';
@@ -148,10 +146,6 @@ class Block {
 		$block['innerContent'] = $inner_content;
 		$block['innerHTML']    = implode( '', $inner_content );
 
-		// Optionally render the block through WordPress.
-		$serialized   = serialize_block( $block );
-		$parsed_block = parse_blocks( $serialized )[0];
-
-		return $render ? render_block( $parsed_block ) : $serialized;
+		return serialize_block( $block );
 	}
 }

@@ -26,7 +26,7 @@ The Global Styles panel contains the following sections:
 
 ## Typography Settings
 
-![The Typography panel listing Text, Links, Headings, Captions, and Buttons, with the font family and size controls for Text open. Numbered callouts: 1 Font family for body text; 2 Font size presets.](../screenshots/typography-text.png)
+![Styles → Typography → Text with the font family and font size controls.](../screenshots/typography-text.png)
 
 *Set site-wide typography for each element.*
 
@@ -62,7 +62,7 @@ See [[typography]] for the full type scale and font details.
 
 Aegis provides a comprehensive color palette based on the Tailwind CSS v3 scale:
 
-![The Colors → Palette screen showing the Aegis theme palette swatches and the custom colors section. Numbered callouts: 1 The Aegis theme palette; 2 Add your own custom colors.](../screenshots/palette.png)
+![The Colors → Palette screen showing the Aegis theme palette swatches and the custom colors section.](../screenshots/palette.png)
 
 *The Aegis color palette in Global Styles.*
 
@@ -114,7 +114,7 @@ See [[layout]] for detailed layout configuration.
 
 Global Styles allows you to set default styles for specific block types:
 
-![The Styles → Blocks list with the Button block selected, showing its typography, color, and border controls. Numbered callouts: 1 Typography for every Button; 2 Color, then border and more below.](../screenshots/styles-button-block.png)
+![The Styles → Blocks list with the Button block selected, showing its typography, color, and border controls.](../screenshots/styles-button-block.png)
 
 *Style every instance of a block from Styles → Blocks.*
 

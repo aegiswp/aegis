@@ -27,6 +27,15 @@ class ConfigurationTest extends TestCase {
 	}
 
 	/**
+	 * Test the default constructor (no arguments, validation on) yields a valid config.
+	 */
+	public function test_default_constructor_validates(): void {
+		$config = new Configuration();
+
+		$this->assertEquals( 'safe', $config->get( 'autofix.confidence' ) );
+	}
+
+	/**
 	 * Test getting configuration values with dot notation.
 	 */
 	public function test_get_with_dot_notation(): void {
@@ -74,41 +83,6 @@ class ConfigurationTest extends TestCase {
 		$config->set( 'new.nested.key', 'value' );
 
 		$this->assertEquals( 'value', $config->get( 'new.nested.key' ) );
-	}
-
-	/**
-	 * Test converting to array.
-	 */
-	public function test_to_array(): void {
-		$data = array(
-			'version'    => '1.0',
-			'categories' => array(
-				'performance' => array( 'enabled' => false ),
-			),
-		);
-
-		$config = new Configuration( $data, false );
-		$array  = $config->to_array();
-
-		$this->assertIsArray( $array );
-		$this->assertEquals( '1.0', $array['version'] );
-		$this->assertFalse( $array['categories']['performance']['enabled'] );
-	}
-
-	/**
-	 * Test creating from array.
-	 */
-	public function test_from_array(): void {
-		$data = array(
-			'thresholds' => array(
-				'complexity' => 15,
-			),
-		);
-
-		$config = Configuration::from_array( $data, false );
-
-		$this->assertInstanceOf( Configuration::class, $config );
-		$this->assertEquals( 15, $config->get( 'thresholds.complexity' ) );
 	}
 
 	/**

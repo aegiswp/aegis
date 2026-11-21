@@ -2,20 +2,17 @@
 /**
  * Icon Utilities
  *
- * Provides utility functions and classes for SVG icon management, sanitization, and REST API integration.
- *
- * Responsibilities:
- * - Loads and sanitizes SVG icons from the filesystem
- * - Exposes icon management endpoints via the WordPress REST API
- * - Integrates with DOM and CSS utilities for icon manipulation
- * - Ensures security and proper permissions for icon access
+ * Public facade of the icons package: renders SVG icons from the filesystem and
+ * delegates set discovery (IconSets), registry ids (IconRegistryId), the core
+ * manifest and version gates (IconSupport), the REST route (IconRest) and SVG
+ * sanitising (IconSanitizer) to their own classes.
  *
  * @package    Aegis\Icons
  * @since      1.0.0
  * @author     Atmostfear Entertainment
  * @link       https://github.com/aegiswp/theme
  *
- * For developer documentation and onboarding. No logic changes in this doc update.
+ * Public static methods are unchanged; see the package classes for the logic.
  */
 
 // Enforces strict type checking for all code in this file, ensuring type safety for icon utilities.
@@ -32,40 +29,21 @@ use Aegis\Utilities\Str;
 use DOMDocument;
 use DOMElement;
 
-use enshrined\svgSanitize\Sanitizer;
-
 use WP_REST_Request;
-use WP_REST_Server;
 
-use function add_action;
-use function add_filter;
 use function apply_filters;
-use function basename;
-use function class_exists;
-use function current_user_can;
-use function defined;
 use function explode;
 use function esc_html__;
-use function file_exists;
 use function file_get_contents;
 use function function_exists;
-use function get_stylesheet_directory;
-use function get_template_directory;
-use function glob;
 use function implode;
 use function in_array;
-use function is_array;
-use function is_dir;
 use function is_numeric;
-use function is_null;
-use function is_readable;
 use function is_string;
 use function str_replace;
 use function strtolower;
 use function trim;
 use function uniqid;
-
-use const GLOB_ONLYDIR;
 
 /**
  * Icon utility class.
@@ -74,7 +52,7 @@ use const GLOB_ONLYDIR;
  */
 class Icon {
 
-	const FILTER = 'aegis_icon_sets';
+	const FILTER = IconSets::FILTER;
 
 	/**
 	 * Returns array of all icon sets and their directory path.
@@ -84,65 +62,8 @@ class Icon {
 	 * @return array <string, string>
 	 */
 	public static function get_icon_sets(): array {
-		$utility_dir    = dirname( __DIR__ ) . '/public/icons/';
-		$template_dir   = get_template_directory() . '/assets/icons/';
-		$stylesheet_dir = get_stylesheet_directory() . '/assets/icons/';
-
-		$dirs = [
-			...glob( $utility_dir . '*', GLOB_ONLYDIR ),
-			...glob( $template_dir . '*', GLOB_ONLYDIR ),
-			...glob( $stylesheet_dir . '*', GLOB_ONLYDIR ),
-		];
-
-		$found = [];
-
-		foreach ( $dirs as $dir ) {
-			$slug = basename( $dir );
-
-			$found[] = [
-				'label' => Str::title_case( $slug ),
-				'value' => $slug,
-			];
-		}
-
-		$db_option = get_option( 'aegis' )['iconSets'] ?? null;
-		$options   = $db_option ?: $found;
-		$icon_sets = [];
-
-		foreach ( $options as $option ) {
-			$value = $option['value'] ?? null;
-
-			if ( is_null( $value ) ) {
-				continue;
-			}
-
-			$utility = $utility_dir . $value;
-			$parent  = $template_dir . $value;
-			$child   = $stylesheet_dir . $value;
-
-			if ( is_dir( $utility ) ) {
-				$icon_sets[ $value ] = $utility;
-			}
-
-			if ( is_dir( $parent ) ) {
-				$icon_sets[ $value ] = $parent;
-			}
-
-			if ( is_dir( $child ) ) {
-				$icon_sets[ $value ] = $child;
-			}
-		}
-
-		/**
-		 * Filters the icon sets.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array $icon_sets <string, string> Set name, set path.
-		 */
-		return apply_filters( static::FILTER, $icon_sets );
+		return IconSets::all();
 	}
-
 	/**
 	 * Returns SVG string for given icon.
 	 *
@@ -184,7 +105,7 @@ class Icon {
 		$safe = $real && $root && str_starts_with( $real, $root . DIRECTORY_SEPARATOR );
 
 		if ( ! $safe ) {
-			if ( $set === 'wordpress' && function_exists( 'wp_get_icon' ) ) {
+			if ( IconSets::is_wordpress( $set ) && function_exists( 'wp_get_icon' ) ) {
 				$core = wp_get_icon(
 					'core/' . $name,
 					[
@@ -326,64 +247,9 @@ class Icon {
 	 *
 	 * @return void
 	 */
-	public static function register_rest_route( string $namespace = 'aegis/v1', string $route = '/icons/' ): void {
-		static $registered = [];
-
-		if ( isset( $registered[ $namespace ] ) ) {
-			return;
-		}
-
-		$registered[ $namespace ] = $route;
-
-		$args = [
-			'permission_callback' => static fn() => current_user_can( 'edit_posts' ),
-			'callback'            => static fn( WP_REST_Request $request ): array => static::get_icon_data( $request ),
-			'methods'             => WP_REST_Server::READABLE,
-			'args'                => [
-				'sets' => [
-					'required'          => false,
-					'type'              => 'string',
-					'description'       => 'When set, return only icon set slugs.',
-					'sanitize_callback' => 'sanitize_text_field',
-				],
-				'set'  => [
-					'required'          => false,
-					'type'              => 'string',
-					'description'       => 'Load one set with full SVG markup (lazy picker).',
-					'sanitize_callback' => 'sanitize_text_field',
-				],
-				'full' => [
-					'required'    => false,
-					'type'        => 'boolean',
-					'description' => 'Load every set with SVGs (heavy; avoid in the editor).',
-					'default'     => false,
-				],
-			],
-		];
-
-		add_action(
-			'rest_api_init',
-			static fn() => register_rest_route( $namespace, $route, $args )
-		);
+	public static function register_rest_route( string $namespace = IconRest::REST_NAMESPACE, string $route = IconRest::ROUTE ): void {
+		IconRest::register( $namespace, $route );
 	}
-
-	/**
-	 * Registers icon set.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $name Icon set name.
-	 * @param string $path Icon set path.
-	 *
-	 * @return void
-	 */
-	public static function register_icon_set( string $name, string $path ): void {
-		add_filter(
-			static::FILTER,
-			static fn( array $icon_sets ) => array_merge( $icon_sets, [ $name => $path ] )
-		);
-	}
-
 	/**
 	 * Returns placeholder icon dom element.
 	 *
@@ -432,49 +298,10 @@ HTML;
 	}
 
 	/**
-	 * Max SVG count loaded eagerly for the default catalog (button/tab picker).
-	 * Larger Pro packs load on demand via ?set=.
-	 */
-	private const EAGER_SET_ICON_LIMIT = 80;
-
-	/**
 	 * Normalizes icon set slugs (legacy "WordPress" → wordpress).
 	 */
 	public static function normalize_set_slug( string $set ): string {
-		$set = strtolower( trim( $set ) );
-
-		return $set === '' ? 'wordpress' : $set;
-	}
-
-	/**
-	 * Whether a set should ship full SVGs in the default catalog response.
-	 *
-	 * @param string               $set  Set slug.
-	 * @param array<string,string> $dirs Icon set directories.
-	 */
-	private static function is_eager_icon_set( string $set, array $dirs ): bool {
-		$always = [ 'wordpress', 'social', 'payment', 'brand' ];
-
-		if ( in_array( $set, $always, true ) ) {
-			return true;
-		}
-
-		// Known large Pro packs — stub without globbing (glob is slow on WASM).
-		$lazy = [ 'feather', 'hand-drawn', 'heroicons', 'phosphor-duotone', 'remixicon', 'lucide', 'tabler' ];
-
-		if ( in_array( $set, $lazy, true ) ) {
-			return false;
-		}
-
-		$dir = $dirs[ $set ] ?? '';
-
-		if ( $dir === '' || ! is_dir( $dir ) ) {
-			return $set === 'wordpress';
-		}
-
-		$files = glob( $dir . '/*.svg' );
-
-		return is_array( $files ) && count( $files ) <= self::EAGER_SET_ICON_LIMIT;
+		return IconSets::normalize( $set );
 	}
 
 	/**
@@ -483,30 +310,7 @@ HTML;
 	 * @return list<string>
 	 */
 	public static function get_set_icon_names( string $set ): array {
-		$set       = static::normalize_set_slug( $set );
-		$icon_sets = static::get_icon_sets();
-		$names     = [];
-
-		if ( isset( $icon_sets[ $set ] ) && is_string( $icon_sets[ $set ] ) ) {
-			$files = glob( $icon_sets[ $set ] . '/*.svg' );
-
-			if ( is_array( $files ) ) {
-				foreach ( $files as $file ) {
-					$names[] = basename( (string) $file, '.svg' );
-				}
-			}
-		}
-
-		if ( $set === 'wordpress' ) {
-			foreach ( array_keys( static::get_core_library_slugs() ) as $core_slug ) {
-				$names[] = (string) $core_slug;
-			}
-		}
-
-		$names = array_values( array_unique( $names ) );
-		sort( $names );
-
-		return $names;
+		return IconSets::names( $set );
 	}
 
 	/**
@@ -515,43 +319,7 @@ HTML;
 	 * @return array<string, string> name => svg
 	 */
 	public static function get_set_icons( string $set ): array {
-		$set = static::normalize_set_slug( $set );
-
-		$cache_key = 'aegis_icon_set_v1_' . $set;
-		$cached    = get_transient( $cache_key );
-
-		if ( is_array( $cached ) ) {
-			return $cached;
-		}
-
-		$icon_sets = static::get_icon_sets();
-		$icons     = [];
-
-		if ( isset( $icon_sets[ $set ] ) && is_string( $icon_sets[ $set ] ) ) {
-			$files = glob( $icon_sets[ $set ] . '/*.svg' );
-
-			if ( is_array( $files ) ) {
-				foreach ( $files as $file ) {
-					$name           = basename( (string) $file, '.svg' );
-					$icons[ $name ] = static::get_svg( $set, $name, 24, null );
-				}
-			}
-		}
-
-		if ( $set === 'wordpress' ) {
-			foreach ( array_keys( static::get_core_library_slugs() ) as $core_slug ) {
-				if ( ! isset( $icons[ $core_slug ] ) ) {
-					$icons[ $core_slug ] = static::get_svg( 'wordpress', $core_slug, 24, null );
-				}
-			}
-		}
-
-		// Only cache real sets, so a made-up ?set= value cannot add database rows.
-		if ( isset( $icon_sets[ $set ] ) || $set === 'wordpress' ) {
-			set_transient( $cache_key, $icons, DAY_IN_SECONDS );
-		}
-
-		return $icons;
+		return IconRest::set_icons( $set );
 	}
 
 	/**
@@ -570,36 +338,7 @@ HTML;
 	 * @return array<string, mixed>
 	 */
 	public static function get_icon_data( ?WP_REST_Request $request ) {
-		$icon_sets = static::get_icon_sets();
-
-		if ( ! isset( $icon_sets['wordpress'] ) ) {
-			$icon_sets['wordpress'] = '';
-		}
-
-		if ( $request && $request->get_param( 'sets' ) ) {
-			return array_keys( $icon_sets );
-		}
-
-		if ( $request && $request->get_param( 'set' ) ) {
-			return static::get_set_icons( (string) $request->get_param( 'set' ) );
-		}
-
-		$force_full = $request && $request->get_param( 'full' );
-
-		$icon_data = [];
-
-		foreach ( array_keys( $icon_sets ) as $icon_set ) {
-			$set = static::normalize_set_slug( (string) $icon_set );
-
-			if ( $force_full || static::is_eager_icon_set( $set, $icon_sets ) ) {
-				$icon_data[ $set ] = static::get_set_icons( $set );
-			} else {
-				// Stub: set appears in Select Icon Set; SVGs load via ?set=.
-				$icon_data[ $set ] = [];
-			}
-		}
-
-		return $icon_data;
+		return IconRest::data( $request );
 	}
 
 	/**
@@ -613,14 +352,7 @@ HTML;
 	 * @return string e.g. social/facebook or core/plus
 	 */
 	public static function to_registry_id( string $set, string $name ): string {
-		$set  = strtolower( $set );
-		$name = strtolower( $name );
-
-		if ( $set === 'wordpress' && isset( static::get_core_library_slugs()[ $name ] ) ) {
-			return 'core/' . $name;
-		}
-
-		return $set . '/' . $name;
+		return IconRegistryId::build( $set, $name );
 	}
 
 	/**
@@ -633,43 +365,7 @@ HTML;
 	 * @return array{namespace: string, set: string, name: string}|null
 	 */
 	public static function from_registry_id( string $id ): ?array {
-		$id = strtolower( trim( $id ) );
-
-		if ( $id === '' ) {
-			return null;
-		}
-
-		$parts = explode( '/', $id );
-
-		if ( ( $parts[1] ?? '' ) === '' ) {
-			return null;
-		}
-
-		if ( $parts[0] === 'core' && isset( $parts[1] ) && ! isset( $parts[2] ) ) {
-			return [
-				'namespace' => 'core',
-				'set'       => 'wordpress',
-				'name'      => $parts[1],
-			];
-		}
-
-		if ( $parts[0] === 'aegis' && isset( $parts[1], $parts[2] ) && ! isset( $parts[3] ) ) {
-			return [
-				'namespace' => 'aegis',
-				'set'       => $parts[1],
-				'name'      => $parts[2],
-			];
-		}
-
-		if ( isset( $parts[0], $parts[1] ) && ! isset( $parts[2] ) ) {
-			return [
-				'namespace' => 'aegis',
-				'set'       => $parts[0],
-				'name'      => $parts[1],
-			];
-		}
-
-		return null;
+		return IconRegistryId::parse( $id );
 	}
 
 	/**
@@ -678,59 +374,7 @@ HTML;
 	 * @return array<string, true>
 	 */
 	public static function get_core_library_slugs(): array {
-		static $slugs = null;
-
-		if ( $slugs !== null ) {
-			return $slugs;
-		}
-
-		$slugs = [];
-
-		if ( ! defined( 'ABSPATH' ) || ! defined( 'WPINC' ) ) {
-			return $slugs;
-		}
-
-		$manifest = ABSPATH . WPINC . '/assets/icon-library-manifest.php';
-
-		if ( ! is_readable( $manifest ) ) {
-			return $slugs;
-		}
-
-		$collection = include $manifest;
-
-		if ( is_array( $collection ) ) {
-			foreach ( array_keys( $collection ) as $slug ) {
-				$slugs[ (string) $slug ] = true;
-			}
-		}
-
-		return $slugs;
-	}
-
-	/**
-	 * Returns flat picker items for REST/editor merge.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return list<array{name: string, label: string, source: string, set: string}>
-	 */
-	public static function get_picker_items(): array {
-		$items = [];
-
-		foreach ( array_keys( static::get_icon_sets() ) as $set ) {
-			$set = static::normalize_set_slug( (string) $set );
-
-			foreach ( static::get_set_icon_names( $set ) as $name ) {
-				$items[] = [
-					'name'   => static::to_registry_id( $set, (string) $name ),
-					'label'  => Str::title_case( (string) $name ),
-					'source' => 'aegis',
-					'set'    => $set,
-				];
-			}
-		}
-
-		return $items;
+		return IconSupport::core_slugs();
 	}
 
 	/**
@@ -743,68 +387,6 @@ HTML;
 	 * @return string
 	 */
 	public static function sanitize_svg( string $svg ): string {
-		$svg = self::decode_svg_string( $svg );
-
-		// Sanitize SVG. Without the sanitizer nothing is output (fail closed).
-		if ( ! class_exists( 'enshrined\svgSanitize\Sanitizer' ) ) {
-			return '';
-		}
-
-		static $sanitizer = null;
-
-		if ( is_null( $sanitizer ) ) {
-			$sanitizer = new Sanitizer();
-
-			$sanitizer->minify( true );
-			$sanitizer->removeXMLTag( true );
-		}
-
-		$svg = $sanitizer->sanitize( $svg ) ?: '';
-
-		// Remove comments.
-		$svg = preg_replace( '/<!--(.|\s)*?-->/', '', $svg );
-
-		// Remove new lines.
-		$svg = preg_replace( '/\s+/', ' ', $svg );
-
-		// Remove tabs.
-		$svg = preg_replace( '/\t+/', '', $svg );
-
-		// Remove spaces between tags.
-		$svg = preg_replace( '/>\s+</', '><', $svg );
-
-		// Correct viewBox.
-		$svg = str_replace( 'viewbox=', 'viewBox=', $svg );
-
-		return trim( $svg );
-	}
-
-	/**
-	 * Normalize SVG markup that was JSON-hex-escaped without backslashes.
-	 *
-	 * Some editors persist `svgString` as `u003csvg…u0022…` instead of `<svg…"…`.
-	 * Decode those sequences (and standard `\uXXXX` escapes) before sanitizing.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $svg Raw SVG attribute value.
-	 */
-	private static function decode_svg_string( string $svg ): string {
-		$svg = trim( $svg );
-
-		if ( $svg === '' || str_contains( $svg, '<svg' ) || str_contains( $svg, '<SVG' ) ) {
-			return $svg;
-		}
-
-		// Bare JSON hex escapes (backslash stripped): u003c → <, u0022 → ".
-		if ( preg_match( '/u00[0-9a-fA-F]{2}/', $svg ) ) {
-			$svg = (string) preg_replace_callback(
-				'/u00([0-9a-fA-F]{2})/',
-				static fn( array $matches ): string => chr( (int) hexdec( $matches[1] ) ),
-				$svg
-			);
-		}
-
-		return $svg;
+		return IconSanitizer::sanitize( $svg );
 	}
 }

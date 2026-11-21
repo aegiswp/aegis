@@ -1,13 +1,13 @@
 <?php
+/**
+ * Color utility helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for color utility helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the color utility helpers.
 namespace Aegis\Utilities;
-
-// Imports classes, interfaces, and functions used by the color utility helpers.
-use function explode;
 
 /**
  * Color utility class for handling color-related operations.
@@ -41,29 +41,6 @@ class Color {
 	 */
 	public static function get_system_colors(): array {
 		return self::SYSTEM_COLORS;
-	}
-
-	/**
-	 * Reverses a color shade based on a predefined scale.
-	 *
-	 * For example, given a slug like 'primary-100', this might return 'primary-900'.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $slug The color slug to reverse (e.g., 'primary-100').
-	 *
-	 * @return string The reversed color slug, or an empty string if not found.
-	 */
-	public static function reverse_color_shade( string $slug ): string {
-		// Split the slug into color name and shade number.
-		$explode = explode( '-', $slug );
-		$color   = $explode[0] ?? '';
-		$shade   = $explode[1] ?? '';
-		// Look up the reversed shade from the scale map.
-		$scale   = self::get_shade_scales( $color );
-		$reverse = $scale[ (int) $shade ] ?? '';
-
-		return $reverse ? "{$color}-{$reverse}" : '';
 	}
 
 	/**

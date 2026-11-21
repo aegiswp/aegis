@@ -8,7 +8,6 @@ A simple, lightweight, and PSR-11 compliant dependency injection container with 
 - **Auto-Wiring**: Automatically resolves and injects class dependencies, so you do not have to manually configure them.
 - **Conditional Loading**: Includes a `Conditional` interface to allow services to be loaded only when specific conditions are met.
 - **Modular Registration**: Use the `Registerable` interface to create self-contained service providers that handle their own setup logic.
-- **Singleton Management**: The `ContainerFactory` ensures that container instances are treated as singletons, preventing duplicate instantiations.
 
 ## Installation
 
@@ -22,15 +21,12 @@ composer require aegis/container
 
 ### Creating a Container
 
-It is recommended to use the `ContainerFactory` to create or retrieve a singleton instance of the container. This ensures you always work with the same container instance throughout your application.
-
 ```php
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Aegis\Container\ContainerFactory;
+use Aegis\Container\Container;
 
-// Get a singleton instance of the container
-$container = ContainerFactory::create( 'my-app-container' );
+$container = new Container();
 ```
 
 ### Basic Dependency Resolution

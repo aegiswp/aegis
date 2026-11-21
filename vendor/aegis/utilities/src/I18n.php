@@ -1,12 +1,14 @@
 <?php
+/**
+ * Internationalization helpers.
+ *
+ * @package Aegis\Utilities
+ */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for internationalization helpers.
 declare( strict_types=1 );
 
-// Declares the namespace for the internationalization helpers.
 namespace Aegis\Utilities;
 
-// Imports classes, interfaces, and functions used by the internationalization helpers.
 use Aegis\Hooks\Hook;
 use function load_plugin_textdomain;
 use function load_theme_textdomain;
@@ -58,7 +60,6 @@ class I18n {
 			Hook::annotations( $instances[ $data->slug ] );
 		}
 
-		// Return the existing or newly created instance.
 		return $instances[ $data->slug ];
 	}
 
@@ -80,7 +81,7 @@ class I18n {
 			return;
 		}
 
-		if ( str_contains( $this->data->file, 'content/themes' ) ) {
+		if ( str_contains( Path::normalize( $this->data->file ), 'content/themes' ) ) {
 			$path = $this->data->dir . ltrim( $this->data->domain_path, '/' );
 			load_theme_textdomain( $domain, $path );
 

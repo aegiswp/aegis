@@ -2,7 +2,7 @@
 
 The Aegis **framework** (`vendor/aegis/framework`) registers block variations that extend WordPress core blocks. Variations appear as distinct entries in the block inserter.
 
-When the **Aegis plugin** is active, enable or disable variations and sub-features at **Aegis → Blocks**. See [Plugin Block Variations](../../../../plugins/aegis/docs/blocks/block-variations.md).
+When the **Aegis Dash** is active, enable or disable variations and sub-features at **Aegis → Blocks**. See [Aegis Dash Block Variations](../../../../plugins/aegis-dash/docs/blocks/block-variations.md).
 
 ## Understanding Block Variations
 
@@ -20,6 +20,7 @@ A block variation is a preconfigured version of an existing block with specific 
 | Newsletter | `core/search` | Search form styled as an email signup (`is-style-newsletter`). |
 | SVG | `core/image` | Inline SVG markup on an Image block (`is-style-svg`). Decorative icons use `core/icon` instead — see [[svg-icons]]. |
 
+> [!TIP]
 > **Related posts:** Use the **`aegis/related-posts`** theme block (see [[custom-blocks]]). The former `core/query` Related Posts variation was removed. For advanced related-post querying on Query Loop, enable **`aegisProRelatedPosts`** on `core/query` with [Aegis Pro](../../../../plugins/aegis-pro/docs/features/query-loop-pro.md).
 
 ## Accordion List
@@ -96,7 +97,7 @@ An animated number that counts up from zero to a target value when the element s
 
 Text rendered along a circular or curved SVG path for decorative headings and badges.
 
-![The Curved Text variation selected in the editor, with its content and the container and path size settings in the sidebar. Numbered callouts: 1 Curved Text bends the paragraph along a circle; 2 Curve settings for the selected text.](../screenshots/curved-text-editor.png)
+![The Curved Text variation selected in the editor, with its content and the container and path size settings in the sidebar.](../screenshots/curved-text-editor.png)
 
 *Curved Text and its settings.*
 
@@ -157,7 +158,7 @@ A CSS Grid container that arranges child blocks into a configurable grid layout.
 
 A continuously scrolling horizontal band of content that loops infinitely.
 
-Enable extras at **Aegis → Blocks → Marquee**. See [Plugin Marquee](../../../../plugins/aegis/docs/blocks/marquee.md).
+Enable extras at **Aegis → Blocks → Marquee**. See [Aegis Dash Marquee](../../../../plugins/aegis-dash/docs/blocks/marquee.md).
 
 ### Base Block
 
@@ -193,7 +194,7 @@ Theme **Feature Banner** (`patterns/cta/banner.php`) is a scrolling announcement
 
 A Search block variation that turns the search form into an email signup field.
 
-Enable extras at **Aegis → Blocks → Newsletter**. See [Plugin Newsletter](../../../../plugins/aegis/docs/blocks/newsletter.md).
+Enable extras at **Aegis → Blocks → Newsletter**. See [Aegis Dash Newsletter](../../../../plugins/aegis-dash/docs/blocks/newsletter.md).
 
 ### Base Block
 
@@ -278,6 +279,6 @@ Some variations also appear under their parent block in the inserter hierarchy.
 - [[custom-blocks]] — Theme custom blocks.
 - [[enhanced-core-blocks]] — Framework core block enhancements.
 - [[block-patterns]] — Pre-built layouts using variations.
-- [Block variation toggles (Plugin)](../../../../plugins/aegis/docs/blocks/block-variations.md)
-- [Plugin Newsletter](../../../../plugins/aegis/docs/blocks/newsletter.md)
+- [Block variation toggles (Plugin)](../../../../plugins/aegis-dash/docs/blocks/block-variations.md)
+- [Aegis Dash Newsletter](../../../../plugins/aegis-dash/docs/blocks/newsletter.md)
 - [[svg-icons]] — Using SVGs with the icon system.

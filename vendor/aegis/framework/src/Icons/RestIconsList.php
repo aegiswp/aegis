@@ -6,13 +6,10 @@
  * @since   1.0.2
  */
 
-// Enforces strict type checking for all code in this file, ensuring type safety for the fast wp/v2/icons listing.
 declare( strict_types=1 );
 
-// Declares the namespace for the fast wp/v2/icons listing.
 namespace Aegis\Framework\Icons;
 
-// Imports classes, interfaces, and functions used by the fast wp/v2/icons listing.
 use Aegis\Icons\Icon;
 use Closure;
 use WP_Icon_Collections_Registry;

@@ -49,7 +49,7 @@ Logged-in users always see the live site so your team can work during an outage 
 
 ## Advanced: Add the Hook
 
-Add the filter through a plugin: a **Functions (PHP)** snippet in [Aegis → Code Snippets](../../../../plugins/aegis/docs/features/code-snippets.md) or a site-specific plugin. See [Where to Put Snippets](../reference/code-snippets.md#where-to-put-snippets). Do not edit the Aegis theme files — updates would overwrite your changes.
+Add the filter through a plugin: a **Functions (PHP)** snippet in [Aegis → Code Snippets](../../../../plugins/aegis-dash/docs/features/code-snippets.md) or a site-specific plugin. See [Where to Put Snippets](../reference/code-snippets.md#where-to-put-snippets). Do not edit the Aegis theme files — updates would overwrite your changes.
 
 ### Minimal approach
 

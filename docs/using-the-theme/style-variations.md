@@ -10,7 +10,7 @@ Style variations do not alter your content or layout — they only change the vi
 
 ## Applying a Style Variation
 
-![The Site Editor Styles panel with Browse styles open, one color variation selected, and the Save control in the sidebar. Numbered callouts: 1 The selected variation; 2 Save keeps the variation.](../screenshots/apply-variation.png)
+![The Site Editor Styles panel with Browse styles open, one color variation selected, and the Save control in the sidebar.](../screenshots/apply-variation.png)
 
 *Click a variation to preview it, then Save to apply it.*
 
@@ -114,7 +114,7 @@ Your customizations layer on top of the variation. If you later switch to a diff
 
 You can preview any variation without committing to it:
 
-![The site preview restyled live with a selected color variation while the variation list stays open. Numbered callouts: 1 The preview shows the variation's colors right away; 2 The variation list stays open.](../screenshots/preview-variation.png)
+![The site preview restyled live with a selected color variation while the variation list stays open.](../screenshots/preview-variation.png)
 
 *Variations preview live in the canvas before you save.*
 

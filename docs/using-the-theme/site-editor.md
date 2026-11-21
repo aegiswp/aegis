@@ -13,7 +13,7 @@ The Site Editor opens with a full preview of your site. From here, you can edit 
 
 ## Site Editor Interface
 
-![The Site Editor interface: the left navigation sidebar, the site title and Save area, and the canvas. Numbered callouts: 1 Left: navigation sidebar; 2 Right: the canvas. Click it to edit.](../screenshots/site-editor-interface.png)
+![The Site Editor interface: the left navigation sidebar, the site title and Save area, and the canvas.](../screenshots/site-editor-interface.png)
 
 *The main areas of the Site Editor.*
 
@@ -34,7 +34,7 @@ The Site Editor opens with a full preview of your site. From here, you can edit 
 
 The left sidebar provides access to all editable components:
 
-![The Site Editor left sidebar listing Identity, Styles, Pages, Navigation, Patterns, and Templates. Numbered callouts: 1 Navigation menus; 2 Global styles and style variations; 3 Pages; 4 Templates and template parts; 5 Patterns.](../screenshots/site-editor-sidebar.png)
+![The Site Editor left sidebar listing Identity, Styles, Pages, Navigation, Patterns, and Templates.](../screenshots/site-editor-sidebar.png)
 
 *Each sidebar item opens a different part of your site's design.*
 
@@ -106,7 +106,7 @@ See [[dark-mode]] for details.
 
 ## Adding Content with Patterns
 
-Aegis provides **232 theme block patterns** in **28 category folders** (plus companion plugin and Pro patterns):
+Aegis provides **230 theme block patterns** in **28 category folders** (plus Aegis Dash and Pro patterns):
 
 1. Click the **Block Inserter** (+) in the top toolbar.
 2. Switch to the **Patterns** tab.

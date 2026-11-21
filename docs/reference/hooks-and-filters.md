@@ -1,6 +1,6 @@
 # Hooks and Filters
 
-This page documents verified WordPress hooks and filters in the Aegis theme, framework, and companion plugins.
+This page documents verified WordPress hooks and filters in the Aegis theme, framework, and Aegis plugins.
 
 ## Framework Injection Actions
 
@@ -17,7 +17,7 @@ See [[hook-patterns]] for usage examples.
 
 ## Plugin Integration Actions
 
-Fired when integrations are enabled (free plugin `IntegrationInjector`):
+Fired when integrations are enabled (Aegis Dash `IntegrationInjector`):
 
 | Hook | Context |
 |------|---------|
@@ -45,14 +45,14 @@ Fired when integrations are enabled (free plugin `IntegrationInjector`):
 
 ### Theme Integration Actions
 
-Fired by the theme framework itself (`vendor/aegis/framework/src/Integrations/LearnDash.php`), not by the companion plugin. Each fires once per request.
+Fired by the theme framework itself (`vendor/aegis/framework/src/Integrations/LearnDash.php`), not by Aegis Dash. Each fires once per request.
 
 | Hook | Arguments | Context |
 |------|-----------|---------|
 | `aegis_learndash_focus_header` | `int $course_id` | Top of the LearnDash Focus Mode layout |
 | `aegis_learndash_focus_footer` | `int $course_id` | Bottom of the LearnDash Focus Mode layout |
 
-Full catalog: [Plugin Hook Patterns](../../../../plugins/aegis/docs/features/hook-patterns.md).
+Full catalog: [Aegis Dash Hook Patterns](../../../../plugins/aegis-dash/docs/features/hook-patterns.md).
 
 ## Admin Actions (Plugin)
 
@@ -119,8 +119,8 @@ Full catalog: [Plugin Hook Patterns](../../../../plugins/aegis/docs/features/hoo
 | Filter | Description |
 |--------|-------------|
 | `aegis_dynamic_template_part_slug` | Swap a `core/template-part` slug at render time when an alternate `parts/{slug}.html` exists. See [[dynamic-template-parts]]. |
-| `aegis_theme_update_repository` | GitHub repository (`owner/name`) the theme checks for updates. Default `aegiswp/theme`. Argument: `string $repository` (`src/Admin/GitHubUpdater.php`). See [[updating]]. |
-| `aegis_companion_package_url` | Zip URL the companion plugin notice installs from. Default: the `aegis.zip` package of the latest plugin release. Argument: `string $package` (`src/Admin/CompanionNotice.php`). Use it to pin a release or a mirror. |
+| `aegis_theme_update_repository` | GitHub repository (`owner/name`) the theme checks for updates. Default `aegiswp/aegis`. Argument: `string $repository` (`src/Admin/GitHubUpdater.php`). See [[updating]]. |
+| `aegis_companion_package_url` | Zip URL Aegis Dash notice installs from. Default: the `aegis-dash.zip` package of the latest Aegis Dash release. Argument: `string $package` (`src/Admin/CompanionNotice.php`). Use it to pin a release or a mirror. |
 
 ## Pro Filters
 
@@ -153,5 +153,5 @@ add_action( 'aegis_after_content', function () {
 
 - [[hook-patterns]] — Injection hook guide
 - [[dynamic-template-parts]] — Contextual template part slug swaps
-- [Plugin Architecture](../../../../plugins/aegis/docs/development/architecture.md)
+- [Aegis Dash Architecture](../../../../plugins/aegis-dash/docs/development/architecture.md)
 - [[architecture]] — Theme architecture

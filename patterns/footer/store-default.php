@@ -115,7 +115,7 @@
 
 	<!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group alignwide">
-		<!-- wp:group {"style":{"spacing":{"blockGap":"4px"}},"layout":{"type":"flex","flexWrap":"nowrap"},"fontSize":"14"} -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|xxxs"}},"layout":{"type":"flex","flexWrap":"nowrap"},"fontSize":"14"} -->
 		<div class="wp-block-group has-14-font-size">
 			<!-- wp:paragraph {"textColor":"neutral-600"} -->
 			<p class="has-neutral-600-color has-text-color"><?php echo esc_html__( '© Copyright {year}', 'aegis' ); ?></p>
